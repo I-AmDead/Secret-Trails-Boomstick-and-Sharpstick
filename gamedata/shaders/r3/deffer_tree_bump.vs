@@ -43,7 +43,12 @@ v2p_bumped main(v_tree I)
 #endif
     float4 w_pos = float4(pos.x + wind_result.x, pos.y, pos.z + wind_result.y, 1);
     float2 tc = (I.tc * consts).xy;
+
+#ifdef USE_HIGH_QUALITY
+    float hemi = clamp(I.Nh.w * c_scale.w + c_bias.w, 0.3f, 1.0f); // Limit hemi - SSS Update 14.5
+#else
     float hemi = I.Nh.w * c_scale.w + c_bias.w;
+#endif
 
     // Eye-space pos/normal
     v2p_bumped O;
@@ -61,6 +66,15 @@ v2p_bumped main(v_tree I)
     // TangentToEyeSpace = object2eye * tangent2object
     //		     = object2eye * transpose(object2tangent) (since the inverse of a rotation is its transpose)
     // Normal mapping
+
+#ifdef USE_HIGH_QUALITY
+    // FLORA FIXES & IMPROVEMENTS - SSS Update 14
+    // https://www.moddb.com/mods/stalker-anomaly/addons/screen-space-shaders/
+    // Use real tree Normal, Tangent and Binormal.
+    float3 N = unpack_bx4(I.Nh);
+    float3 T = unpack_bx4(I.T);
+    float3 B = unpack_bx4(I.B);
+#else
     float3 N = unpack_bx2(I.Nh); // just scale (assume normal in the -.5f, .5f)
     float3 sphereOffset = float3(0.1, 1.0, 0.2);
     float3 sphereScale = float3(1.0, 2.0, 1.0);
@@ -82,12 +96,9 @@ v2p_bumped main(v_tree I)
 
     // foliage
     float foliageMat = 0.5; // foliage
-    // float foliageMask = saturate(abs(xmaterial-foliageMat)-0.02); //foliage
     float foliageMask = (abs(xmaterial - foliageMat) >= 0.2) ? 1 : 0; // foliage
-    // float foliageMask = 1; //foliage
     N = normalize(lerp(N, sphereN, foliageMask)); // blend to foliage normals
-    // B = normalize(lerp(B, flatB, foliageMask)); //blend to foliage normals
-    // T = normalize(lerp(T, flatT, foliageMask)); //blend to foliage normals
+#endif
 
     float3x3 xform = mul((float3x3)m_xform_v, float3x3(T.x, B.x, N.x, T.y, B.y, N.y, T.z, B.z, N.z));
 
