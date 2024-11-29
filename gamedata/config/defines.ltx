@@ -14,9 +14,6 @@ gl_hud_offset_rot					=  0,0,0
 lean_hud_offset_pos					=  0,0,0
 lean_hud_offset_rot					=  0,0,0
 
-lookout_transition_time = 0.15
-
-
 shells_3d_dir = 0,0,0 
 shells_3d_dir_disp = 0, 0, 0
 shells_3d_vel = 4, 4, 3
@@ -77,7 +74,7 @@ scope_zoom_factor		= 1
 ; следующий параметр в общем случае должен быть равен scope_zoom_factor
 ; избыточен для некоторых типов оружия, но и вреда от него в этом случае тоже не будет
 ironsight_zoom_factor	= 1.0
-scope_zoom_hud_fov	    = 0.78
+scope_zoom_hud_fov	    = 0.65
 
 snd_fire_modes  = weapons\firemode_switch, 0.1 ;звук переключения режимов огня
 snd_zoom_change = weapons\zoom_change, 0.2 ;звук при изменении зума
@@ -95,6 +92,7 @@ snd_lowered_start = weapons\hide
 snd_lowered_end = weapons\draw
 
 snd_throw = weapons\bolt_throw
+snd_mag_shot = weapons\mag_shot
 
 inv_show_condition = true
 
@@ -115,28 +113,32 @@ scope_name = wpn_addon_scope
 scope_x = 100
 scope_y = 100
 
+silencer_status = 0
+
 grenade_launcher_status = 0
 grenade_class = ammo_vog-25, ammo_vog-25p
 grenade_launcher_name = wpn_addon_grenade_launcher
 grenade_launcher_x = 0
 grenade_launcher_y = 0
 
-jump_hud_offset_pos = 0.0, 0.06, -0.09
-jump_hud_offset_rot = 0.0, -10.0, -10.0
+lookout_transition_time = 0.2
+
+;jump_hud_offset_pos = 0.0, 0.06, -0.09
+;jump_hud_offset_rot = 0.0, -10.0, -10.0
 
 jump_aim_hud_offset_pos = 0.0, -0.03, 0.01
 jump_aim_hud_offset_rot = 0.0, 2.5, -3.0
 
-fall_hud_offset_pos = 0.0, -0.03, 0.03
-fall_hud_offset_rot = 0.0, 6.0, 6.0
+;fall_hud_offset_pos = 0.0, -0.03, 0.03
+;fall_hud_offset_rot = 0.0, 6.0, 6.0
 
 fall_aim_hud_offset_pos = 0.0, 0.03, -0.01
 fall_aim_hud_offset_rot = 0.0, -2.5, 3.0
 
-jump_transition_time = 0.5
-fall_transition_time = 1.0
+;jump_transition_time = 0.35
+fall_transition_time = 0.5
 
-jump_aim_transition_time = 0.45
+jump_aim_transition_time = 0.5
 fall_aim_transition_time = 0.7
 
 dof_transition_time = 0.3
@@ -159,18 +161,20 @@ device_click_anm = script\misfire.anm
 device_click_anm_speed = 2
 device_click_anm_power = 2
 
-lowered_transition_time = 0.25
-
 safemode_anm = script\to_lower.anm
 safemode_anm_speed = 1.2
-safemode_anm_power = 3.5
+safemode_anm_power = 1.5
 
 safemode_anm2 = script\from_lower.anm
 safemode_anm_speed2 = 1.3
-safemode_anm_power2 = 3.5
+safemode_anm_power2 = 1.2
 
 
 CartridgeInTheChamberEnabled = true
+lowered_enabled = true
+
+forced_particle_hud_mode = true
+
 
 [can_spawner]
 can_spawner = false

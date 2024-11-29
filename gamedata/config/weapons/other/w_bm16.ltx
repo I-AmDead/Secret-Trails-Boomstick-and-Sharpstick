@@ -60,7 +60,7 @@
         upgr_icon_width             = 300
         upgr_icon_height            = 100
         
-        ammo_class                  = ammo_12x70_buck, ammo_12x70_kart, ammo_12x76_dart, ammo_12x76_zhekan
+        ammo_class                  = ammo_12x70_buck, ammo_12x76_dart, ammo_12x76_zhekan
         ammo_elapsed                = 2
         ammo_mag_size               = 2
         startup_ammo                = 10
@@ -135,10 +135,10 @@
 
 	shell_point                 = 0,0,0
 	shell3d_drop_on_reload      = true
-	shell3d_timeout             = 0.9
+	shell3d_timeout             = 1.2
 
 [wpn_bm16_hud]:hud_base
-        item_visual                 = anomaly_weapons\wpn_bm16\wpn_bm16_hud.ogf
+        item_visual                 = dynamics\weapons\wpn_bm16\wpn_bm16_hud.ogf
         attach_place_idx            = 0
         zoom_hide_crosshair         = true
         
@@ -147,15 +147,15 @@
 
 	zoom_rotate_time	    = 0.35
         
-        hands_position                   = -0.003602, -0.006585, -0.03068
-        hands_position_16x9              = -0.003602, -0.006585, -0.03068
-        hands_orientation                = 2.0602, 1.486394, -0.954401
-        hands_orientation_16x9           = 2.0602, 1.486394, -0.954401
+        hands_position              = 0.007700,0.018975,-0.143099
+        hands_position_16x9         = 0.007700,0.018975,-0.143099
+        ;hands_orientation          = 2.0602, 1.486394, -0.954401
+        ;hands_orientation_16x9     = 2.0602, 1.486394, -0.954401
         
-        aim_hud_offset_pos               = -0.05638, 0.030601, -0.052861
-        aim_hud_offset_pos_16x9          = -0.05638, 0.030601, -0.052861
-        aim_hud_offset_rot          = 0.027, 0.035, 0
-        aim_hud_offset_rot_16x9     = 0.027, 0.035, 0
+        aim_hud_offset_pos          = -0.065780,0.038401,-0.052861
+        aim_hud_offset_pos_16x9     = -0.065780,0.038401,-0.052861
+        aim_hud_offset_rot	    = -0.004000,0.001000,0.000000
+        aim_hud_offset_rot_16x9	    = -0.004000,0.001000,0.000000
  
         gl_hud_offset_pos           = 0, 0, 0
         gl_hud_offset_rot           = 0, 0, 0
@@ -163,104 +163,129 @@
         lean_hud_offset_pos         = 0, 0, 0
         lean_hud_offset_rot         = 0, 0, 0
 
-	anm_show_0                    = 66_draw, idle_empty
-	anm_show_1                    = 66_draw, idle_1
-	anm_show_2                    = 66_draw
-	anm_show_jammed_0             = 66_draw, idle_empty
-	anm_show_jammed_1             = 66_draw, idle_empty
-	anm_show_jammed_2             = 66_draw, idle_1
+	lowered_hud_offset_pos	    = 0.172602,0.000000,0.000000
+	lowered_hud_offset_rot	    = 0.140000,-0.939999,0.000000
+	lowered_hud_offset_pos_16x9 = 0.172602,0.000000,0.000000
+	lowered_hud_offset_rot_16x9 = 0.140000,-0.939999,0.000000
 
-	anm_hide_0		      = 66_hide, idle_empty
-	anm_hide_1		      = 66_hide, idle_1
-	anm_hide_2		      = 66_hide
-	anm_hide_jammed_0             = 66_hide, idle_empty
-	anm_hide_jammed_1	      = 66_hide, idle_empty
-	anm_hide_jammed_2	      = 66_hide, idle_1
+	anm_show_0                    = toz66_draw, idle_empty
+	anm_show_1                    = toz66_draw, idle_one
+	anm_show_2                    = toz66_draw
+	anm_show_jammed_0             = toz66_draw, idle_empty
+	anm_show_jammed_1             = toz66_draw, idle_empty
+	anm_show_jammed_2             = toz66_draw, idle_one
+
+	anm_hide_0		      = toz66_holster, idle_empty
+	anm_hide_1		      = toz66_holster, idle_one
+	anm_hide_2		      = toz66_holster
+	anm_hide_jammed_0             = toz66_holster, idle_empty
+	anm_hide_jammed_1	      = toz66_holster, idle_empty
+	anm_hide_jammed_2	      = toz66_holster, idle_one
 
 
-	anm_idle_0		      = 66_idle, idle_empty
-	anm_idle_1		      = 66_idle, idle_1
-	anm_idle_2		      = 66_idle
-	anm_idle_jammed_0	      = 66_idle, idle_empty
-	anm_idle_jammed_1	      = 66_idle, idle_empty
-	anm_idle_jammed_2	      = 66_idle, idle_1
-	anm_idle_crouch_0             = 66_idle, idle_empty
-	anm_idle_crouch_slow_0        = 66_idle, idle_empty
-	anm_idle_slow_0               = 66_idle, idle_empty
-	anm_idle_crouch_1             = 66_idle, idle_1
-	anm_idle_crouch_slow_1        = 66_idle, idle_1
-	anm_idle_slow_1               = 66_idle, idle_1
-	anm_idle_crouch_2             = 66_idle
-	anm_idle_crouch_slow_2        = 66_idle
-	anm_idle_slow_2               = 66_idle
-	anm_idle_crouch_jammed_0      = 66_idle, idle_empty
-	anm_idle_crouch_slow_jammed_0 = 66_idle, idle_empty
-	anm_idle_slow_jammed_0        = 66_idle, idle_empty
-	anm_idle_crouch_jammed_1      = 66_idle, idle_empty
-	anm_idle_crouch_slow_jammed_1 = 66_idle, idle_empty
-	anm_idle_slow_jammed_1        = 66_idle, idle_empty
-	anm_idle_crouch_jammed_2      = 66_idle, idle_1
-	anm_idle_crouch_slow_jammed_2 = 66_idle, idle_1
-	anm_idle_slow_jammed_2        = 66_idle, idle_1
+	anm_idle_0		      = toz66_idle, idle_empty
+	anm_idle_one		      = toz66_idle, idle_one
+	anm_idle_2		      = toz66_idle
+	anm_idle_jammed_0	      = toz66_idle, idle_empty
+	anm_idle_jammed_1	      = toz66_idle, idle_empty
+	anm_idle_jammed_2	      = toz66_idle, idle_one
 
-	anm_idle_aim_0	              = 66_aim, idle_empty
-	anm_idle_aim_1		      = 66_aim, idle_1
-	anm_idle_aim_2		      = 66_aim
-	anm_idle_aim_jammed_0	      = 66_aim, idle_empty
-	anm_idle_aim_jammed_1         = 66_aim, idle_empty
-	anm_idle_aim_jammed_2	      = 66_aim, idle_1
+	anm_idle_slow_0               = toz66_idle, idle_empty
+	anm_idle_slow_1               = toz66_idle, idle_one
+	anm_idle_slow_2               = toz66_idle
+	anm_idle_slow_jammed_0        = toz66_idle, idle_empty
+	anm_idle_slow_jammed_1        = toz66_idle, idle_empty
+	anm_idle_slow_jammed_2        = toz66_idle, idle_one
 
-	anm_idle_moving_0		     = 66_walk, idle_empty
-	anm_idle_moving_1		     = 66_walk, idle_1
-	anm_idle_moving_2		     = 66_walk
-	anm_idle_moving_jammed_0             = 66_walk, idle_empty
-	anm_idle_moving_jammed_1             = 66_walk, idle_empty
-	anm_idle_moving_jammed_2	     = 66_walk, idle_1
-	anm_idle_moving_crouch_0             = 66_walk, idle_empty
-	anm_idle_moving_crouch_slow_0        = 66_walk, idle_empty
-	anm_idle_moving_slow_0               = 66_walk, idle_empty
-	anm_idle_moving_crouch_1             = 66_walk, idle_1
-	anm_idle_moving_crouch_slow_1        = 66_walk, idle_1
-	anm_idle_moving_slow_1               = 66_walk, idle_1
-	anm_idle_moving_crouch_2             = 66_walk
-	anm_idle_moving_crouch_slow_2        = 66_walk
-	anm_idle_moving_slow_2               = 66_walk
-	anm_idle_moving_crouch_jammed_0      = 66_walk, idle_empty
-	anm_idle_moving_crouch_slow_jammed_0 = 66_walk, idle_empty
-	anm_idle_moving_slow_jammed_0        = 66_walk, idle_empty
-	anm_idle_moving_crouch_jammed_1      = 66_walk, idle_empty
-	anm_idle_moving_crouch_slow_jammed_1 = 66_walk, idle_empty
-	anm_idle_moving_slow_jammed_1        = 66_walk, idle_empty
-	anm_idle_moving_crouch_jammed_2      = 66_walk, idle_1
-	anm_idle_moving_crouch_slow_jammed_2 = 66_walk, idle_1
-	anm_idle_moving_slow_jammed_2        = 66_walk, idle_1
+	anm_idle_crouch_0             = toz66_idle, idle_empty
+	anm_idle_crouch_1             = toz66_idle, idle_one
+	anm_idle_crouch_2             = toz66_idle
+	anm_idle_crouch_jammed_0      = toz66_idle, idle_empty
+	anm_idle_crouch_jammed_1      = toz66_idle, idle_empty
+	anm_idle_crouch_jammed_2      = toz66_idle, idle_one
 
-	anm_idle_sprint_0	       = 66_sprint, idle_empty
-	anm_idle_sprint_1	       = 66_sprint, idle_1
-	anm_idle_sprint_2	       = 66_sprint
-	anm_idle_sprint_jammed_0       = 66_sprint, idle_empty
-	anm_idle_sprint_jammed_1       = 66_sprint, idle_empty
-	anm_idle_sprint_jammed_2       = 66_sprint, idle_1
+	anm_idle_crouch_slow_0        = toz66_idle, idle_empty
+	anm_idle_crouch_slow_1        = toz66_idle, idle_one
+	anm_idle_crouch_slow_2        = toz66_idle
+	anm_idle_crouch_slow_jammed_0 = toz66_idle, idle_empty
+	anm_idle_crouch_slow_jammed_1 = toz66_idle, idle_empty
+	anm_idle_crouch_slow_jammed_2 = toz66_idle, idle_one
 
-	anm_reload_1				= 66_reload, toz66_reload
-	anm_reload_2				= 66_reload_full, toz66_reload_full
-	anm_reload_2_ammo_last		        = 66_reload, toz66_reload_last
-	anm_reload_jammed_1			= 66_misfire_last, toz66_revival_last
-	anm_reload_jammed_2			= 66_misfire, toz66_revival
+	anm_idle_aim_0	              = toz66_idle_aim, idle_empty
+	anm_idle_aim_1		      = toz66_idle_aim, idle_one
+	anm_idle_aim_2		      = toz66_idle_aim
+	anm_idle_aim_jammed_0	      = toz66_idle_aim, idle_empty
+	anm_idle_aim_jammed_1         = toz66_idle_aim, idle_empty
+	anm_idle_aim_jammed_2	      = toz66_idle_aim, idle_one
 
-	anm_shoot_1				= 66_shoot, toz66_shoot_last
-	anm_shoot_2				= 66_shoot, toz66_shoot
-	anm_shoot_jammed_1		        = 66_shoot, toz66_shoot_last
-	anm_shoot_jammed_2			= 66_shoot, toz66_shoot
+	anm_idle_moving_0		     = toz66_moving, idle_empty
+	anm_idle_moving_1		     = toz66_moving, idle_one
+	anm_idle_moving_2		     = toz66_moving
+	anm_idle_moving_jammed_0             = toz66_moving, idle_empty
+	anm_idle_moving_jammed_1             = toz66_moving, idle_empty
+	anm_idle_moving_jammed_2	     = toz66_moving, idle_one
 
-	anm_shoot_aim_1				= 66_shoot, toz66_shoot_last
-	anm_shoot_aim_2				= 66_shoot, toz66_shoot
-	anm_shoot_aim_jammed_1		        = 66_shoot, toz66_shoot_last
-	anm_shoot_aim_jammed_2			= 66_shoot, toz66_shoot
+	anm_idle_moving_slow_0               = toz66_moving, idle_empty
+	anm_idle_moving_slow_1               = toz66_moving, idle_one
+	anm_idle_moving_slow_2               = toz66_moving
+	anm_idle_moving_slow_jammed_0        = toz66_moving, idle_empty
+	anm_idle_moving_slow_jammed_1        = toz66_moving, idle_empty
+	anm_idle_moving_slow_jammed_2        = toz66_moving, idle_one
 
-	anm_bore_0		      = 66_reload
-	anm_bore_1		      = 66_reload
-	anm_bore_2                    = 66_reload
+	anm_idle_moving_crouch_0             = toz66_moving, idle_empty
+	anm_idle_moving_crouch_1             = toz66_moving, idle_one
+	anm_idle_moving_crouch_2             = toz66_moving
+	anm_idle_moving_crouch_jammed_0      = toz66_moving, idle_empty
+	anm_idle_moving_crouch_jammed_1      = toz66_moving, idle_empty
+	anm_idle_moving_crouch_jammed_2      = toz66_moving, idle_one
+
+	anm_idle_moving_crouch_slow_0        = toz66_moving, idle_empty
+	anm_idle_moving_crouch_slow_1        = toz66_moving, idle_one
+	anm_idle_moving_crouch_slow_2        = toz66_moving
+	anm_idle_moving_crouch_slow_jammed_0 = toz66_moving, idle_empty
+	anm_idle_moving_crouch_slow_jammed_1 = toz66_moving, idle_empty
+	anm_idle_moving_crouch_slow_jammed_2 = toz66_moving, idle_one
+
+	anm_idle_sprint_start_0		     = toz66_sprint_start, idle_empty
+	anm_idle_sprint_start_1		     = toz66_sprint_start, idle_one
+	anm_idle_sprint_start_2		     = toz66_sprint_start
+	anm_idle_sprint_start_jammed_0	     = toz66_sprint_start, idle_empty
+	anm_idle_sprint_start_jammed_1	     = toz66_sprint_start, idle_empty
+	anm_idle_sprint_start_jammed_2	     = toz66_sprint_start, idle_one
+
+	anm_idle_sprint_0		     = toz66_sprint, idle_empty
+	anm_idle_sprint_1		     = toz66_sprint, idle_one
+	anm_idle_sprint_2		     = toz66_sprint
+	anm_idle_sprint_jammed_0	     = toz66_sprint, idle_empty
+	anm_idle_sprint_jammed_1	     = toz66_sprint, idle_empty
+	anm_idle_sprint_jammed_2	     = toz66_sprint, idle_one
+
+	anm_idle_sprint_end_0		     = toz66_sprint_end, idle_empty
+	anm_idle_sprint_end_1		     = toz66_sprint_end, idle_one
+	anm_idle_sprint_end_2		     = toz66_sprint_end
+	anm_idle_sprint_end_jammed_0	     = toz66_sprint_end, idle_empty
+	anm_idle_sprint_end_jammed_1	     = toz66_sprint_end, idle_empty
+	anm_idle_sprint_end_jammed_2	     = toz66_sprint_end, idle_one
+
+	anm_reload_1			     = toz66_reload, reload
+	anm_reload_2			     = toz66_reload_empty, reload_empty
+	anm_reload_2_ammo_last		     = toz66_reload, reload
+	anm_reload_jammed_1		     = toz66_misfire, misfire_empty
+	anm_reload_jammed_2		     = toz66_misfire, misfire
+
+	anm_shoot_1			     = toz66_shoot_last, shoot_last
+	anm_shoot_2			     = toz66_shoot, shoot
+	anm_shoot_jammed_1		     = toz66_shoot_last, shoot_last
+	anm_shoot_jammed_2		     = toz66_shoot, shoot
+
+	anm_shoot_aim_1			     = toz66_shoot_last, shoot_last
+	anm_shoot_aim_2			     = toz66_shoot, shoot
+	anm_shoot_aim_jammed_1		     = toz66_shoot_last, shoot_last
+	anm_shoot_aim_jammed_2		     = toz66_shoot, shoot
+
+	anm_bore_0			     = toz66_idle_aim
+	anm_bore_1			     = toz66_idle_aim
+	anm_bore_2			     = toz66_idle_aim
 
 	anm_idle_moving_slow_0_speed_k         	    = 0.8
 	anm_idle_moving_slow_1_speed_k         	    = 0.8
@@ -285,7 +310,12 @@
        
         shell_bone                  = wpn_body
         shell_dir                   = 0, 1, 0
-        shell_point                 = 0, 0, 0
+        shell_point                 = 0.000000,-0.604188,-0.480273
+
+        shells_3d_dir		    = 0, 0, 0 
+        shells_3d_dir_disp	    = 0, 0, 0
+        shells_3d_vel		    = 0, 0, 0
+        shells_3d_vel_disp	    = 0, 0, 0
         
         fire_bone                   = wpn_body
         fire_point                  = -0.004, 0.011, 0.128
@@ -307,7 +337,7 @@
 		slot                        = 2
         
         inv_weight                  = 3.4
-        cost                        = 15480
+        cost                        = 1500
         
         hud                         = wpn_bm16_full_hud
         visual                      = dynamics\weapons\wpn_bm16\wpn_bm16_full.ogf
@@ -316,7 +346,7 @@
         installed_upgrades          =
         upgrade_scheme              = upgrade_scheme_bm16
         
-        ammo_class                  = ammo_12x70_buck, ammo_12x70_kart, ammo_12x76_dart, ammo_12x76_zhekan
+        ammo_class                  = ammo_12x70_buck, ammo_12x76_dart, ammo_12x76_zhekan
         ammo_elapsed                = 2
         ammo_mag_size               = 2
         startup_ammo                = 10
@@ -367,8 +397,13 @@ control_inertion_factor = 1.0f
         zoom_cam_relax_speed_ai     = 120.75
 
 [wpn_bm16_full_hud]:wpn_bm16_hud
-        item_visual                 = anomaly_weapons\wpn_bm16\wpn_bm16_full_hud.ogf
+        item_visual                 = dynamics\weapons\wpn_bm16\wpn_bm16_full_hud.ogf
         attach_place_idx            = 0
         zoom_hide_crosshair         = true
 	fire_point                      = 0, 0, 0.7
 	shoot_point  				    = 0, 0, 0.0
+
+	lowered_hud_offset_pos	    = 0.151702,-0.004400,0.014000
+	lowered_hud_offset_rot	    = 0.160000,-0.909999,0.000000
+	lowered_hud_offset_pos_16x9 = 0.151702,-0.004400,0.014000
+	lowered_hud_offset_rot_16x9 = 0.160000,-0.909999,0.000000

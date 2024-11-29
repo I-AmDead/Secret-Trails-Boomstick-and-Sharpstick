@@ -1,42 +1,53 @@
-
 ----------------------------------------------------------------------------------------------------
 -- mob_trader
 ----------------------------------------------------------------------------------------------------
 global_animations = {
-    desk_idle = {"idle", "idle_1", "palci", "zatylok"},
-    desk_talk = {"idle", "idle_1"},
-    desk_to_chair_hack = {"idle_spinka"},
-    desk_to_listen = {"idle_chitaet"},
-    desk_to_diagonal = {"perehod_0"},
+    desk_idle                = { "idle", "idle_1", "palci", "zatylok" },
+    desk_talk                = { "idle", "idle_1" },
+    desk_to_chair_hack       = { "idle_spinka" },
+    desk_to_listen           = { "idle_chitaet" },
+    desk_to_diagonal         = { "perehod_0" },
 
-    chair_hack_idle = {"idle_2", "idle_2_def_0"},
-    chair_hack_talk = {"idle_2_talk_0", "idle_2_talk_1", "idle_2_talk_2", "idle_2_talk_3"},
-    chair_hack_to_diagonal = {"idle_2_to_idle_0"},
-    chair_hack_to_desk = {"spinka_idle"},
+    chair_hack_idle          = { "idle_2", "idle_2_def_0" },
+    chair_hack_talk          = { "idle_2_talk_0", "idle_2_talk_1", "idle_2_talk_2", "idle_2_talk_3" },
+    chair_hack_to_diagonal   = { "idle_2_to_idle_0" },
+    chair_hack_to_desk       = { "spinka_idle" },
 
-    compute_idle = {"idle_1_spec_think_0", "idle_1_spec_think_1"},
-    compute_idle_to_diagonal = {"idle_1_to_idle_0"},
+    compute_idle             = { "idle_1_spec_think_0", "idle_1_spec_think_1" },
+    compute_idle_to_diagonal = { "idle_1_to_idle_0" },
 
-    diagonal_idle = {"idle_0_def_0", "idle_0_spec_click_0", "idle_0_spec_scratch_0"},
-    diagonal_idle_short = {"idle_0_def_0"},
-    diagonal_talk = {"idle_0_talk_0", "idle_0_talk_1", "idle_0_talk_2", "idle_0_talk_3"},
-    diagonal_to_chair_hack = {"idle_0_to_idle_2"},
-    diagonal_to_compute = {"idle_0_to_idle_1"},
-    diagonal_to_desk = {"perehod_1"},
+    diagonal_idle            = { "idle_0_def_0", "idle_0_spec_click_0", "idle_0_spec_scratch_0" },
+    diagonal_idle_short      = { "idle_0_def_0" },
+    diagonal_talk            = { "idle_0_talk_0", "idle_0_talk_1", "idle_0_talk_2", "idle_0_talk_3" },
+    diagonal_to_chair_hack   = { "idle_0_to_idle_2" },
+    diagonal_to_compute      = { "idle_0_to_idle_1" },
+    diagonal_to_desk         = { "perehod_1" },
 
-    first_phrase = {"vstuplenie"},
+    first_phrase             = { "vstuplenie" },
 
-    listen_idle = {"chitaet"},
-    listen_to_desk = {"chitaet_idle"},
+    listen_idle              = { "chitaet" },
+    listen_to_desk           = { "chitaet_idle" },
 
-    hello = {"hello"}
+    hello                    = { "hello" },
+
+    forester_sit             = { "sit" },
+    forester_beard           = { "beard_in", "beard", "beard_out" },
+    forester_reaction        = { "reaction_in", "reaction", "reaction_out" },
+    forester_see             = { "see_in", "see", "see_out" },
+    forester_talk_1          = { "sit_talk_1_in", "sit_talk_1", "sit_talk_1_out" },
+    forester_talk_2          = { "sit_talk_2_in", "sit_talk_2", "sit_talk_2_out" },
+    forester_talk_3          = { "sit_talk_3_in", "sit_talk_3", "sit_talk_3_out" }
 }
 
 head_animations = {
-    normal = {"talk_0", "talk_1", "talk_4"},
-    angry = {"talk_3", "talk_2", "talk_1"},
-    good = {"talk_glad_0"},
-    first_phrase = {"vstuplenie_head"}
+    forester_talk_1   = { "sit_talk_1_in", "sit_talk_1", "sit_talk_1_out" },
+    forester_talk_2   = { "sit_talk_2_in", "sit_talk_2", "sit_talk_2_out" },
+    forester_talk_3   = { "sit_talk_3_in", "sit_talk_3", "sit_talk_3_out" },
+    forester_reaction = { "reaction_in", "reaction", "reaction_out" },
+    normal            = { "talk_0", "talk_1", "talk_4" },
+    angry             = { "talk_3", "talk_2", "talk_1" },
+    good              = { "talk_glad_0" },
+    first_phrase      = { "vstuplenie_head" }
 }
 
 ----------------------------------------------------------------------------------------------------
@@ -54,6 +65,7 @@ function on_stop_tutorial_item()
     end
     db.trader:external_sound_stop()
 end
+
 ----------------------------------------------------------------------------------------------------
 
 class "mob_trader"
@@ -102,7 +114,7 @@ function mob_trader:select_global_animation()
 end
 
 function mob_trader:select_head_animation()
-    -- random select 
+    -- random select
     local anim_set = head_animations[self.st.anim_head]
     local r = math.random(1, table.getn(anim_set))
     return anim_set[r]
@@ -129,6 +141,7 @@ end
 function mob_trader:on_sound_end()
     self.st.signals["sound_phrase_end"] = true
 end
+
 ---------------------------------------------------------------------------------------------------------------------
 function mob_trader:deactivate()
     self.object:set_callback(callback.trader_global_anim_request, nil)
@@ -181,5 +194,4 @@ function set_scheme(npc, ini, scheme, section, gulag_name)
     else
         npc:disable_talk()
     end
-
 end

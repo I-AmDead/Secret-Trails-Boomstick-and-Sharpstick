@@ -6,9 +6,9 @@ function del_mervin_first()
 end
 
 function spawn_mervin2()
-    local sobj = alife():create("esc_mervin2", vector():set(9.693, 56.273, 48.022), 5205, 2417)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin2.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_mervin2)
+    local obj = spawn_patrol("esc_mervin2", "mervin_sar_spot")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin2.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_mervin2)
 end
 
 function del_mervin2()
@@ -19,9 +19,9 @@ function del_mervin2()
 end
 
 function spawn_mervin3()
-    local sobj = alife():create("esc_mervin3", vector():set(101.323, 4.005, 123.453), 215814, 2182)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin3.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_mervin3)
+    local obj = spawn_patrol("esc_mervin3", "mervin_prip_spot")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin3.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_mervin3)
 end
 
 function del_mervin3()
@@ -32,9 +32,11 @@ function del_mervin3()
 end
 
 function spawn_mervin_last()
-    local sobj = alife():create("esc_mervin_last", vector():set(185.645, 30.786, 8.163), 216613, 2182)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin_last.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_mervin_last)
+    db.actor:stop_talk()
+    dsh.wait_condition(function() return not db.actor:is_talking() end, 
+    function()
+        alife():teleport_object(id_by_sid(story_ids.esc_mervin3), vector():set(185.683,30.780,8.400), dsh.find_random_lvid_in_radius(214337, 2))
+    end)
 end
 
 function del_mervin_last()
@@ -45,107 +47,107 @@ function del_mervin_last()
 end
 
 function spawn_svitok1()
-    braad_test.spawn_ai_location("svitok_1", vector():set(554.542, 152.252, 201.912), 210301, 2641)
-    braad_test.spawn_ai_location("medkit", vector():set(485.878, 29.081, 358.485), 178968, 2618)
+    braad_test.spawn_ai_location("svitok_1", vector():set(554.542, 152.252, 201.912), "l12_stancia_2")
+    braad_test.spawn_ai_location("medkit", vector():set(485.878, 29.081, 358.485), "l12_stancia_2")
 end
 
 function spawn_dogs1()
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.092, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.092, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.092, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.092, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.092, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.001, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.001, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.001, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.001, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.001, 335.582), 188620, 2619)
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
 end
 
 function spawn_svitok2()
-    braad_test.spawn_ai_location("svitok_2", vector():set(407.891, 36.905, 121.240), 138729, 2600)
+    braad_test.spawn_ai_location("svitok_2", vector():set(407.891, 36.905, 121.240), "l12_stancia_2")
 end
 
 function spawn_fantom()
-    local obj = alife():create("esc_fantom", vector():set(227.512, 16.756, 376.825), 82822, 2580)
-    local obj = alife():create("esc_fantom", vector():set(236.093, 16.755, 386.798), 84414, 2580)
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(227.512, 16.756, 376.825))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(236.093, 16.755, 386.798))
 end
 
 function spawn_svitok3()
-    braad_test.spawn_ai_location("svitok_3", vector():set(130.973, 32.590, 206.152), 155893, 2263)
+    braad_test.spawn_ai_location("svitok_3", vector():set(130.973, 32.590, 206.152), "l11_pripyat")
 end
 
 function spawn_snork_svitok3()
-    local obj = alife():create("snork_svitok3", vector():set(98.055, -0.533, 199.893), 208919, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(98.055, -0.533, 199.893), 208919, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(98.055, -0.533, 199.893), 208919, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(98.055, -0.533, 199.893), 208919, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(128.900, 0.106, 202.768), 233376, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(128.900, 0.106, 202.768), 233376, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(128.900, 0.106, 202.768), 233376, 2163)
-    local obj = alife():create("snork_svitok3", vector():set(128.900, 0.106, 202.768), 233376, 2163)
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
+    spawn_patrol("snork_svitok3", "snork_svitok")
 end
 
 function spawn_svitok4()
-    braad_test.spawn_ai_location("svitok_4", vector():set(-21.239, 15.595, -147.626), 80698, 2119)
-    local obj = alife():create("esc_fantom", vector():set(-21.490, 15.564, -167.654), 80694, 2119)
-    local obj = alife():create("esc_fantom", vector():set(-21.253, 15.564, -152.054), 80698, 2119)
+    braad_test.spawn_ai_location("svitok_4", vector():set(-21.239, 15.595, -147.626), "l11_pripyat")
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-21.490, 15.564, -167.654))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-21.253, 15.564, -152.054))
 end
 
 function spawn_svitok5()
-    braad_test.spawn_ai_location("svitok_5", vector():set(136.189, 17.995, 42.936), 155121, 2263)
-    local obj = alife():create("medkit_army", vector():set(172.658, 17.963, 47.460), 216613, 2182)
+    braad_test.spawn_ai_location("svitok_5", vector():set(136.189, 17.995, 42.936), "l11_pripyat")
+    braad_test.spawn_ai_location("medkit_army", vector():set(172.658, 17.963, 47.460), "l11_pripyat")
 end
 
 function spawn_naem_svitok5()
-    local obj = alife():create("esc_fantom", vector():set(-118.344, 1.703, 45.072), 7341, 2253)
-    local obj = alife():create("esc_fantom", vector():set(-122.752, 1.703, 29.733), 6306, 2253)
-    local obj = alife():create("esc_fantom", vector():set(-109.683, 1.709, 29.673), 11559, 2253)
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-118.344, 1.703, 45.072))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-122.752, 1.703, 29.733))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-109.683, 1.709, 29.673))
 end
 
 function spawn_monsters_x16()
-    local obj = alife():create("poltergeist_my", vector():set(-56.707, 0.821, 29.693), 19230, 1526)
-    local obj = alife():create("poltergeist_my", vector():set(-56.707, 0.821, 29.693), 19230, 1526)
-    local obj = alife():create("poltergeist_my", vector():set(-72.965, 0.813, 46.945), 17079, 1526)
-    local obj = alife():create("poltergeist_my", vector():set(-72.965, 0.813, 46.945), 17079, 1526)
-    local obj = alife():create("poltergeist_my", vector():set(-60.323, 1.031, 9.478), 21248, 1527)
-    local obj = alife():create("poltergeist_my", vector():set(-60.323, 1.031, 9.478), 21248, 1527)
+    spawn_patrol("poltergeist_my", "yan_nechist")
+    spawn_patrol("poltergeist_my", "yan_nechist")
+    spawn_patrol("poltergeist_my", "yan_nechist")
+    spawn_patrol("poltergeist_my", "yan_nechist")
+    spawn_patrol("poltergeist_my", "yan_nechist")
+    spawn_patrol("poltergeist_my", "yan_nechist")
 end
 
 function spawn_esc_graf()
-    local sobj = alife():create("esc_graf", vector():set(149.23672485352, 0.450, 68.957916259766), 39928, 1180)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_graf.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_graf)
+    local obj = spawn_patrol("esc_graf", "graf_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_graf.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_graf)
 end
 
 function spawn_esc_prince()
-    local sobj = alife():create("esc_prince", vector():set(659.836, -43.850, 168.970), 227063, 1915)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_prince.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_prince)
+    local obj = spawn_patrol("esc_prince", "prince_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_prince.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_prince)
 end
 
 function spawn_esc_tsezar()
-    local sobj = alife():create("esc_tsezar", vector():set(29.068, -11.653, -280.074), 54978, 1480)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_tsezar.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_tsezar)
+    local obj = alife_create("esc_tsezar", "l08_yantar", vector():set(29.068, -11.653, -280.074))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_tsezar.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_tsezar)
 end
 
 function spawn_esc_antikvar()
-    local sobj = alife():create("esc_antikvar", vector():set(207.609, 0.450, 60.231), 50435, 1203)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_antikvar.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_antikvar)
+    local obj = spawn_patrol("esc_antikvar", "antikvar_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_antikvar.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_antikvar)
 end
 
 function spawn_esc_sledopyt()
-    local sobj = alife():create("esc_sledopyt", vector():set(135.009, -4.805, 19.388), 36702, 1237)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_sledopyt.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_sledopyt)
+    local obj = spawn_patrol("esc_sledopyt", "sledopyt_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_sledopyt.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_sledopyt)
 end
 
 function spawn_doctor_und()
-    local sobj = alife():create("doctor_und", vector():set(-69.100, -6.853, -71.317), 3490, 717)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\doctor_und.ltx"
-    alife():assign_story_id(sobj.id, story_ids.doctor_und)
+    local obj = alife_create("doctor_und", "l03u_agr_underground", vector():set(-69.100, -6.853, -71.317))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\doctor_und.ltx"
+    alife():assign_story_id(obj.id, story_ids.doctor_und)
 end
 
 function doctor_und_delete()
@@ -156,170 +158,170 @@ function doctor_und_delete()
 end
 
 function spawn_esc_gromov()
-    local obj = alife():create("esc_gromov", vector():set(9.355, -34.305, 13.147), 2414, 2513)
+    local obj = alife_create("esc_gromov", "l12u_control_monolith", vector():set(9.355, -34.305, 13.147))
     alife():assign_story_id(obj.id, story_ids.esc_gromov)
-    local obj = alife():create("esc_osoz1", vector():set(12.393, -34.482, 11.700), 2596, 2513)
-    local obj = alife():create("esc_osoz2", vector():set(18.666, -34.486, 11.701), 3020, 2514)
-    local obj = alife():create("esc_osoz3", vector():set(12.627, -34.487, 14.684), 2555, 2513)
-    local obj = alife():create("esc_osoz4", vector():set(18.655, -34.484, 14.681), 3022, 2514)
+    alife_create("esc_osoz1", "l12u_control_monolith", vector():set(12.393, -34.482, 11.700))
+    alife_create("esc_osoz2", "l12u_control_monolith", vector():set(18.666, -34.486, 11.701))
+    alife_create("esc_osoz3", "l12u_control_monolith", vector():set(12.627, -34.487, 14.684))
+    alife_create("esc_osoz4", "l12u_control_monolith", vector():set(18.655, -34.484, 14.681))
 end
 
 function spawn_esc_pekar()
-    local sobj = alife():create("esc_pekar", vector():set(77.875, -0.905, 90.865), 1066583, 2948)
-    level.map_add_object_spot_ser(sobj.id, "crlc_small", "metka_pekar")
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_pekar.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_pekar)
+    local obj = spawn_patrol("esc_pekar", "pekar_walk")
+    level_tasks.add_location_by_id(obj.id, "crlc_small", "metka_pekar")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_pekar.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_pekar)
 
-    local obj = alife():create("mir_krovosos1", vector():set(53.869, 2.598, 57.299), 1028131, 2947)
-    local obj = alife():create("mir_krovosos2", vector():set(53.869, 2.598, 57.299), 1028131, 2947)
+    spawn_patrol("mir_krovosos1", "krovosos_mir")
+    spawn_patrol("mir_krovosos2", "krovosos_mir")
 end
 
 function spawn_esc_semecky()
-    local sobj = alife():create("esc_semecky", vector():set(16.416, 55.046, 31.370), 5178, 2417)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_semecky.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_semecky)
+    local obj = spawn_patrol("esc_semecky", "mervin_sar_spot")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_semecky.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_semecky)
 end
 
 function spawn_muka()
-    braad_test.spawn_ai_location("muka", vector():set(-231.770, -21.710, 202.461), 99850, 1765)
-    braad_test.spawn_ai_location("muka", vector():set(-242.384, -22.075, 229.921), 91597, 1764)
-    braad_test.spawn_ai_location("muka", vector():set(-214.597, -20.405, 240.297), 113857, 1765)
-    braad_test.spawn_ai_location("muka", vector():set(-271.925, -27.485, 243.798), 66349, 1786)
-    braad_test.spawn_ai_location("muka", vector():set(-328.536, -22.455, 195.573), 20335, 1839)
+    braad_test.spawn_ai_location("muka", vector():set(-231.770, -21.710, 202.461), "l07_military")
+    braad_test.spawn_ai_location("muka", vector():set(-242.384, -22.075, 229.921), "l07_military")
+    braad_test.spawn_ai_location("muka", vector():set(-214.597, -20.405, 240.297), "l07_military")
+    braad_test.spawn_ai_location("muka", vector():set(-271.925, -27.485, 243.798), "l07_military")
+    braad_test.spawn_ai_location("muka", vector():set(-328.536, -22.455, 195.573), "l07_military")
 end
 
 function spawn_fantom_pekar()
-    local obj = alife():create("esc_fantom", vector():set(-267.432, -22.553, 230.389), 70368, 1787)
-    local obj = alife():create("esc_fantom", vector():set(-262.464, -22.583, 211.420), 74263, 1789)
+    alife_create("esc_fantom", "l07_military", vector():set(-267.432, -22.553, 230.389))
+    alife_create("esc_fantom", "l07_military", vector():set(-262.464, -22.583, 211.420))
 end
 
 function spawn_box_pekar()
-    braad_test.spawn_ai_location("box_pekar", vector():set(-195.627, 1.744, 116.248), 41682, 673)
+    braad_test.spawn_ai_location("box_pekar", vector():set(-195.627, 1.744, 116.248), "l03_agroprom")
 end
 
 function spawn_diplomat_skryaga()
-    braad_test.spawn_ai_location("diplomat_skryaga", vector():set(-255.392, -5.830, 89.860), 7909, 1382)
-    braad_test.spawn_ai_location("pda_chelnok", vector():set(-253.421, -5.830, 87.799), 8568, 1382)
+    braad_test.spawn_ai_location("diplomat_skryaga", vector():set(-255.392, -5.830, 89.860), "l06_rostok")
+    braad_test.spawn_ai_location("pda_chelnok", vector():set(-253.421, -5.830, 87.799), "l06_rostok")
 end
 
 function spawn_tushkano()
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-282.481, 0.794, 171.721), 1282, 1341)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-228.957, -0.001, 163.467), 18788, 1346)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
-    local obj = alife():create("tushkano_my", vector():set(-195.767, -0.001, 162.397), 27645, 1363)
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
+    spawn_patrol("tushkano_my", "rostok_nechist")
 end
 
 function spawn_nechist()
-    local obj = alife():create("chimera_chaes2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("chimera_chaes2", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("izlom_chaes2", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my1", vector():set(497.616, -0.093, 246.652), 156656, 2617)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("pseudodog_my2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("bloodsucker_chaes2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("bloodsucker_chaes2", vector():set(635.701, -0.002, 335.582), 188620, 2619)
-    local obj = alife():create("snork_chaes2", vector():set(414.493, -0.109, 288.679), 137418, 2586)
-    local obj = alife():create("snork_chaes2", vector():set(414.493, -0.109, 288.679), 137418, 2586)
-    local obj = alife():create("snork_chaes2", vector():set(414.493, -0.109, 288.679), 137418, 2586)
-    local obj = alife():create("snork_chaes2", vector():set(414.493, -0.109, 288.679), 137418, 2586)
-    local obj = alife():create("izlom_chaes2", vector():set(414.493, -0.109, 288.679), 137418, 2586)
-    local obj = alife():create("chimera_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("izlom_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("pseudodog_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("pseudodog_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("pseudodog_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("pseudodog_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("bloodsucker_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("bloodsucker_chaes2", vector():set(512.639, -1.687, 203.597), 161353, 2622)
-    local obj = alife():create("vypolzen_chaes2", vector():set(701.386, -0.008, 248.061), 195748, 2621)
-    local obj = alife():create("vypolzen_chaes2", vector():set(701.386, -0.008, 248.061), 195748, 2621)
-    local obj = alife():create("vypolzen_chaes2", vector():set(723.500, -0.080, 209.080), 197689, 2621)
-    local obj = alife():create("pseudodog_pda", vector():set(857.565, -0.000, 247.427), 222068, 2640)
-    local obj = alife():create("pseudodog_pda", vector():set(857.565, -0.000, 247.427), 222068, 2640)
-    local obj = alife():create("pseudodog_pda", vector():set(873.074, -0.103, 226.587), 227261, 2644)
-    local obj = alife():create("pseudodog_pda", vector():set(873.074, -0.103, 226.587), 227261, 2644)
-    local obj = alife():create("pseudodog_pda", vector():set(857.756, -0.101, 229.376), 222043, 2640)
-    local obj = alife():create("chimera_pda", vector():set(857.756, -0.101, 229.376), 222043, 2640)
-    local obj = alife():create("chimera_pda", vector():set(857.565, -0.000, 247.427), 222068, 2640)
-    local obj = alife():create("snork_pda", vector():set(859.059, -0.001, 217.321), 222703, 2640)
-    local obj = alife():create("snork_pda", vector():set(859.059, -0.001, 217.321), 222703, 2640)
-    local obj = alife():create("snork_pda", vector():set(859.059, -0.001, 217.321), 222703, 2640)
-    local obj = alife():create("snork_pda", vector():set(859.059, -0.001, 217.321), 222703, 2640)
-    local obj = alife():create("superkaban_pda", vector():set(838.510, -0.001, 247.087), 212333, 2642)
-    local obj = alife():create("superkaban_pda", vector():set(868.843, -0.000, 235.933), 225963, 2644)
-    braad_test.spawn_ai_location("pda_solomon", vector():set(857.756, -0.093, 229.376), 222043, 2640)
+    spawn_patrol("chimera_chaes2", "chaes2_nechist")
+    spawn_patrol("chimera_chaes2", "chaes2_nechist")
+    spawn_patrol("izlom_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my1", "chaes2_dogs1")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("pseudodog_my2", "chaes2_dogs2")
+    spawn_patrol("bloodsucker_chaes2", "chaes2_nechist")
+    spawn_patrol("bloodsucker_chaes2", "chaes2_nechist")
+    spawn_patrol("snork_chaes2", "chaes2_nechist")
+    spawn_patrol("snork_chaes2", "chaes2_nechist")
+    spawn_patrol("snork_chaes2", "chaes2_nechist")
+    spawn_patrol("snork_chaes2", "chaes2_nechist")
+    spawn_patrol("izlom_chaes2", "chaes2_nechist")
+    spawn_patrol("chimera_chaes2", "chaes2_nechist")
+    spawn_patrol("izlom_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_chaes2", "chaes2_nechist")
+    spawn_patrol("bloodsucker_chaes2", "chaes2_nechist")
+    spawn_patrol("bloodsucker_chaes2", "chaes2_nechist")
+    spawn_patrol("vypolzen_chaes2", "chaes2_nechist")
+    spawn_patrol("vypolzen_chaes2", "chaes2_nechist")
+    spawn_patrol("vypolzen_chaes2", "chaes2_nechist")
+    spawn_patrol("pseudodog_pda", "chaes2_pda")
+    spawn_patrol("pseudodog_pda", "chaes2_pda")
+    spawn_patrol("pseudodog_pda", "chaes2_pda")
+    spawn_patrol("pseudodog_pda", "chaes2_pda")
+    spawn_patrol("pseudodog_pda", "chaes2_pda")
+    spawn_patrol("chimera_pda", "chaes2_pda")
+    spawn_patrol("chimera_pda", "chaes2_pda")
+    spawn_patrol("snork_pda", "chaes2_pda")
+    spawn_patrol("snork_pda", "chaes2_pda")
+    spawn_patrol("snork_pda", "chaes2_pda")
+    spawn_patrol("snork_pda", "chaes2_pda")
+    spawn_patrol("superkaban_pda", "chaes2_pda")
+    spawn_patrol("superkaban_pda", "chaes2_pda")
+    spawn_patrol("pda_solomon", "chaes2_pda")
 end
 
 function doroga_monstry()
-    local obj = alife():create("snork_my", vector():set(421.933, 14.322, -419.946), 99002, 1289)
-    local obj = alife():create("snork_my", vector():set(421.933, 14.322, -419.946), 99002, 1289)
-    local obj = alife():create("snork_my", vector():set(421.933, 14.322, -419.946), 99002, 1289)
-    local obj = alife():create("snork_my", vector():set(421.933, 14.322, -419.946), 99002, 1289)
-    local obj = alife():create("snork_my", vector():set(421.933, 14.322, -419.946), 99002, 1289)
-    local obj = alife():create("snork_my", vector():set(411.292, 14.353, -426.609), 97199, 1289)
-    local obj = alife():create("snork_my", vector():set(411.292, 14.353, -426.609), 97199, 1289)
-    local obj = alife():create("snork_my", vector():set(411.292, 14.353, -426.609), 97199, 1289)
-    local obj = alife():create("snork_my", vector():set(411.292, 14.353, -426.609), 97199, 1289)
-    local obj = alife():create("snork_my", vector():set(411.292, 14.353, -426.609), 97199, 1289)
-    local obj = alife():create("snork_my", vector():set(393.292, 11.318, -408.061), 89726, 1289)
-    local obj = alife():create("snork_my", vector():set(393.292, 11.318, -408.061), 89726, 1289)
-    local obj = alife():create("snork_my", vector():set(393.292, 11.318, -408.061), 89726, 1289)
-    local obj = alife():create("snork_my", vector():set(393.292, 11.318, -408.061), 89726, 1289)
-    local obj = alife():create("snork_my", vector():set(393.292, 11.318, -408.061), 89726, 1289)
-    local obj = alife():create("snork_my", vector():set(381.173, 14.331, -411.724), 88814, 1289)
-    local obj = alife():create("snork_my", vector():set(381.173, 14.331, -411.724), 88814, 1289)
-    local obj = alife():create("snork_my", vector():set(381.173, 14.331, -411.724), 88814, 1289)
-    local obj = alife():create("snork_my", vector():set(381.173, 14.331, -411.724), 88814, 1289)
-    local obj = alife():create("snork_my", vector():set(381.173, 14.331, -411.724), 88814, 1289)
-    local obj = alife():create("snork_my", vector():set(392.525, 12.130, -367.162), 89436, 1290)
-    local obj = alife():create("snork_my", vector():set(392.525, 12.130, -367.162), 89436, 1290)
-    local obj = alife():create("snork_my", vector():set(392.525, 12.130, -367.162), 89436, 1290)
-    local obj = alife():create("snork_my", vector():set(392.525, 12.130, -367.162), 89436, 1290)
-    local obj = alife():create("snork_my", vector():set(392.525, 12.130, -367.162), 89436, 1290)
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
+    spawn_patrol("snork_my", "bar_nechist")
 end
 
 function bloodsuckers()
-    local obj = alife():create("bloodsucker_my", vector():set(-164.258, -2.392, -330.538), 10164, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-164.258, -2.392, -330.538), 10164, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-164.258, -2.392, -330.538), 10164, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-153.616, -4.568, -366.116), 10780, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-153.616, -4.568, -366.116), 10780, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-156.533, -4.650, -364.814), 10780, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-167.475, -1.766, -322.215), 10057, 1296)
-    local obj = alife():create("bloodsucker_my", vector():set(-167.475, -1.766, -322.215), 10057, 1296)
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
+    spawn_patrol("bloodsucker_my", "bar_krovosos")
 end
 
 function first_urok_dialog_have(task, objective)
@@ -384,9 +386,9 @@ function prince_first_dialog_have(task, objective)
 end
 
 function naem_prince_spawn()
-    local obj = alife():create("esc_fantom", vector():set(617.248, -43.817, 182.357), 223016, 1910)
-    local obj = alife():create("esc_fantom", vector():set(623.225, -43.852, 196.247), 223606, 1908)
-    local obj = alife():create("esc_fantom", vector():set(636.205, -43.858, 197.300), 225836, 1909)
+    alife_create("esc_fantom", "l10_radar", vector():set(617.248, -43.817, 182.357))
+    alife_create("esc_fantom", "l10_radar", vector():set(623.225, -43.852, 196.247))
+    alife_create("esc_fantom", "l10_radar", vector():set(636.205, -43.858, 197.300))
 end
 
 function prince_first_dialog_done()
@@ -524,92 +526,92 @@ end
 ---------------------------------------lektor-------------------------------------
 
 function spawn_lektor()
-    local obj = alife():create("esc_lektor", vector():set(-175.053, -0.002, 28.525), 22407, 1385)
+    local obj = alife_create("esc_lektor", "l06_rostok", vector():set(-237.637, 9.363, 57.635))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_lektor.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_lektor)
 end
 
 function spawn_kanibal1()
-    local obj = alife():create("esc_kanibal1", vector():set(-165.673, -0.001, 17.831), 3537, 1392)
+    local obj = alife_create("esc_kanibal1", "l06_rostok", vector():set(-241.764, 9.361, 57.235))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal_vodka.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal1)
 end
 
 function spawn_kanibal2()
-    local obj = alife():create("esc_kanibal2", vector():set(-167.935, -0.002, 14.176), 3537, 1392)
+    local obj = alife_create("esc_kanibal2", "l06_rostok", vector():set(-243.606, 9.360, 57.290))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal_vodka.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal2)
 end
 
 function spawn_kanibal3()
-    local obj = alife():create("esc_kanibal3", vector():set(-165.572, -0.002, 16.019), 3537, 1392)
+    local obj = alife_create("esc_kanibal3", "l06_rostok", vector():set(-240.982, 9.363, 60.190))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal_mono.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal3)
 end
 
 function spawn_kanibal4()
-    local obj = alife():create("esc_kanibal4", vector():set(-172.260, -0.002, 10.983), 3537, 1392)
+    local obj = alife_create("esc_kanibal4", "l06_rostok", vector():set(-230.792, 9.363, 55.866))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal4)
 end
 
 function spawn_kanibal5()
-    local obj = alife():create("esc_kanibal5", vector():set(-159.633, -0.002, 26.103), 3537, 1392)
+    local obj = alife_create("esc_kanibal5", "l06_rostok", vector():set(-238.426, 9.362, 43.416))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal5)
 end
 
 function spawn_kanibal6()
-    local obj = alife():create("esc_kanibal6", vector():set(-175.624, -0.004, 13.002), 3537, 1392)
+    local obj = alife_create("esc_kanibal6", "l06_rostok", vector():set(-247.702, 9.362, 49.177))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_kanibal.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_kanibal6)
 end
 
 function spawn_zveroboy()
-    local obj = alife():create("esc_zveroboy", vector():set(-163.734, -0.001, 21.274), 3537, 1392)
+    local obj = alife_create("esc_zveroboy", "l06_rostok", vector():set(-226.681, 9.362, 50.766))
     obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_zveroboy.ltx"
     alife():assign_story_id(obj.id, story_ids.esc_zveroboy)
 end
 
 function spawn_trupak()
-    local obj = alife():create("esc_trupak", vector():set(-168.462, 0.055, 17.821), 1737, 1392)
+    local obj = alife_create("esc_trupak", "l06_rostok", vector():set(-240.336, 9.363, 59.240))
     alife():assign_story_id(obj.id, story_ids.esc_trupak)
     obj:set_health(0)
 end
 
 function spawn_trupak1()
-    local obj = alife():create("esc_trupak1", vector():set(-25.914, 3.175, -77.323), 3537, 1392)
+    local obj = alife_create("esc_trupak1", "l06_rostok", vector():set(-113.284, 6.863, -286.480))
     alife():assign_story_id(obj.id, story_ids.esc_trupak1)
     obj:set_health(0)
 end
 
 function spawn_trupak2()
-    local obj = alife():create("esc_trupak2", vector():set(83.219, 1.785, -123.123), 3537, 1392)
+    local obj = alife_create("esc_trupak2", "l06_rostok", vector():set(-147.777, -13.093, -258.669))
     alife():assign_story_id(obj.id, story_ids.esc_trupak2)
     obj:set_health(0)
 end
 
 function spawn_kuvalda()
-    local obj = alife():create("esc_kuvalda", vector():set(52.042, 1.315, -197.798), 3537, 1392)
+    local obj = alife_create("esc_kuvalda", "l06_rostok", vector():set(-127.645, 4.424, -303.316))
     alife():assign_story_id(obj.id, story_ids.esc_kuvalda)
     obj:set_health(0)
 end
 
 function spawn_likvidator()
-    braad_test.spawn_ai_location("anom_remover", vector():set(-221.932, 1.965, 89.839), 27594, 1368)
-    braad_test.spawn_ai_location("anom_remover", vector():set(-214.312, 1.965, 94.711), 27594, 1368)
+    spawn_patrol("anom_remover", "ros_house_z1")
+    spawn_patrol("anom_remover", "ros_house_z3")
 end
 
 function spawn_shlem()
-    braad_test.spawn_ai_location("helmet_new", vector():set(115.476, 1.875, -0.197), 101032, 1518)
-    braad_test.spawn_ai_location("helmet_new", vector():set(118.740, 0.055, 49.771), 105222, 1520)
-    braad_test.spawn_ai_location("helmet_new", vector():set(134.810, -0.985, 65.032), 113589, 1521)
+    braad_test.spawn_ai_location("helmet_new", vector():set(115.476, 1.875, -0.197), "l08_yantar")
+    braad_test.spawn_ai_location("helmet_new", vector():set(118.740, 0.055, 49.771), "l08_yantar")
+    braad_test.spawn_ai_location("helmet_new", vector():set(134.810, -0.985, 65.032), "l08_yantar")
 end
 
 function spawn_superkaban()
-    local obj = alife():create("superkaban", vector():set(-252.833, -0.001, -39.223), 8686, 1400)
-    local obj = alife():create("superkaban", vector():set(-245.996, -0.001, -26.045), 11221, 1399)
-    local obj = alife():create("superkaban", vector():set(-221.465, -0.018, -49.553), 21453, 1401)
+    spawn_patrol("superkaban", "superkaban_dt")
+    spawn_patrol("superkaban", "superkaban_dt")
+    spawn_patrol("superkaban", "superkaban_dt")
 end
 
 function lektor_dialog_have(task, objective)
@@ -627,7 +629,7 @@ end
 
 function lektor_first_dialog_done(first_speaker, second_speaker)
     dialogs.relocate_item_section(second_speaker, "antizombin", "out", 10)
-    dialogs.relocate_item_section(second_speaker, "antizombin", "out", 1)
+    dialogs.relocate_item_section(second_speaker, "pribor_new", "out", 1)
 end
 
 function zveroboy_first_dialog_dal(first_speaker, second_speaker)
@@ -650,200 +652,91 @@ end
 
 function zveroboy_second_dialog_done(first_speaker, second_speaker)
     dialogs.relocate_item_section(second_speaker, "helmet_new", "out", 3)
-    dialogs.relocate_item_section(second_speaker, "wpn_ak12_bas", "in", 1)
-    dialogs.relocate_item_section(second_speaker, "ammo_7.62x39_ap", "in", 3)
+    dialogs.relocate_item_section(second_speaker, "wpn_ak12_m1", "in", 1)
+    dialogs.relocate_item_section(second_speaker, "ammo_5.45x39_ap", "in", 3)
 end
 
 ------------------------------mehanik_potapov-----------------------------------
-local mini2 = {{
-    position = {
-        x = -47.522,
-        y = -3.980,
-        z = -29.540
-    },
-    gv = 718,
-    lv = 4323
-}, {
-    position = {
-        x = -79.509,
-        y = -16.370,
-        z = -116.470
-    },
-    gv = 787,
-    lv = 2773
-}, {
-    position = {
-        x = -131.457,
-        y = -3.930,
-        z = -138.850
-    },
-    gv = 810,
-    lv = 2
-}}
+local mini2 = 
+{
+    [1] = {x = -47.522, y = -3.980, z = -29.540},
+    [2] = {x = -79.509, y = -16.370, z = -116.470},
+    [3] = {x = -131.457, y = -3.930, z = -138.850}
+}
 
-local mini3 = {{
-    position = {
-        x = -251.369,
-        y = -18.930,
-        z = -42.782
-    },
-    gv = 1458,
-    lv = 77
-}, {
-    position = {
-        x = -66.766,
-        y = -19.088,
-        z = -97.731
-    },
-    gv = 1456,
-    lv = 15442
-}, {
-    position = {
-        x = -24.975,
-        y = -18.369,
-        z = -83.338
-    },
-    gv = 1492,
-    lv = 29746
-}}
+local mini3 = 
+{
+    [1] = {x = -251.369,y = -18.930,z = -42.782},
+    [2] = {x = -66.766, y = -19.088, z = -97.731},
+    [3] = {x = -24.975, y = -18.369, z = -83.338}
+}
 
-local mini4 = {{
-    position = {
-        x = -41.236,
-        y = -10.850,
-        z = 12.926
-    },
-    gv = 1148,
-    lv = 220
-}, {
-    position = {
-        x = -3.216,
-        y = -16.344,
-        z = 35.305
-    },
-    gv = 1159,
-    lv = 3321
-}, {
-    position = {
-        x = -15.771,
-        y = 4.190,
-        z = 16.235
-    },
-    gv = 1126,
-    lv = 1119
-}}
+local mini4 = 
+{
+    [1] = {x = -41.236, y = -10.850, z = 12.926},
+    [2] = {x = -3.216, y = -16.344, z = 35.305},
+    [3] = {x = -15.771, y = 4.190, z = 16.235}
+}
 
-local mini5 = {{
-    position = {
-        x = 432.151,
-        y = -47.950,
-        z = -316.347
-    },
-    gv = 2064,
-    lv = 139836
-}, {
-    position = {
-        x = 426.945,
-        y = -52.570,
-        z = -105.279
-    },
-    gv = 2053,
-    lv = 128752
-}, {
-    position = {
-        x = 281.999,
-        y = -50.280,
-        z = -68.105
-    },
-    gv = 2090,
-    lv = 59366
-}}
+local mini5 = 
+{
+    [1] = {x = 432.151, y = -47.950, z = -316.347},
+    [2] = {x = 426.945, y = -52.570, z = -105.279},
+    [3] = {x = 281.999, y = -50.280, z = -68.105}
+}
 
-local mini6 = {{
-    position = {
-        x = 96.815,
-        y = 4.045,
-        z = 130.553
-    },
-    gv = 2182,
-    lv = 209469
-}, {
-    position = {
-        x = 111.227,
-        y = 4.015,
-        z = 115.617
-    },
-    gv = 2180,
-    lv = 222181
-}, {
-    position = {
-        x = 124.297,
-        y = 0.015,
-        z = 120.542
-    },
-    gv = 2173,
-    lv = 231982
-}, {
-    position = {
-        x = 99.849,
-        y = 0.410,
-        z = 149.500
-    },
-    gv = 2185,
-    lv = 211716
-}, {
-    position = {
-        x = 68.932,
-        y = -3.720,
-        z = 126.341
-    },
-    gv = 2168,
-    lv = 180870
-}}
+local mini6 = 
+{
+    [1] = {x = 96.815, y = 4.045, z = 130.553},
+    [2] = {x = 111.227, y = 4.015, z = 115.617},
+    [3] = {x = 124.297, y = 0.015, z = 120.542},
+    [4] = {x = 99.849,  y = 0.410, z = 149.500},
+    [5] = {x = 68.932, y = -3.720, z = 126.341}
+}
 
 function spawn_potapov()
-    local sobj = alife():create("esc_potapov", vector():set(126.431, -4.820, 23.655), 35569, 1236)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_potapov.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_potapov)
+    local obj = alife_create("esc_potapov", "l05_bar", vector():set(126.431, -4.820, 23.655))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_potapov.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_potapov)
 end
 
 function spawn_minitrup1()
-    local obj = alife():create("esc_minitrup1", vector():set(262.223, -9.750, -133.428), 373933, 404)
+    local obj = alife_create("esc_minitrup1", "l02_garbage", vector():set(262.223, -9.750, -133.428))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup1)
     obj:set_health(0)
 end
 
 function spawn_minitrup2()
-    local a = mini2[math.random(table.getn(mini2))]
-    local obj = alife():create("esc_minitrup2", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = mini2[math.random(1, 3)]
+    local obj = alife_create("esc_minitrup2", "l03u_agr_underground", vector():set(a.x, a.y, a.z))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup2)
     obj:set_health(0)
 end
 
 function spawn_minitrup3()
-    local a = mini3[math.random(table.getn(mini3))]
-    local obj = alife():create("esc_minitrup3", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = mini3[math.random(1, 3)]
+    local obj = alife_create("esc_minitrup3", "l08_yantar", vector():set(a.x, a.y, a.z))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup3)
     obj:set_health(0)
 end
 
 function spawn_minitrup4()
-    local a = mini4[math.random(table.getn(mini4))]
-    local obj = alife():create("esc_minitrup4", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = mini4[math.random(1, 3)]
+    local obj = alife_create("esc_minitrup4", "l04u_labx18", vector():set(a.x, a.y, a.z))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup4)
     obj:set_health(0)
 end
 
 function spawn_minitrup5()
-    local a = mini5[math.random(table.getn(mini5))]
-    local obj = alife():create("esc_minitrup5", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = mini5[math.random(1, 3)]
+    local obj = alife_create("esc_minitrup5", "l10_radar", vector():set(a.x, a.y, a.z))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup5)
     obj:set_health(0)
 end
 
 function spawn_minitrup6()
-    local a = mini6[math.random(table.getn(mini6))]
-    local obj = alife():create("esc_minitrup6", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = mini6[math.random(1, 5)]
+    local obj = alife_create("esc_minitrup6", "l11_pripyat", vector():set(a.x, a.y, a.z))
     alife():assign_story_id(obj.id, story_ids.esc_minitrup6)
     obj:set_health(0)
 end
@@ -864,10 +757,10 @@ end
 ------------------------------tropy----------------------------------------------
 
 function af_provodnik_spawn()
-    braad_test.spawn_ai_location("af_rostok", vector():set(-282.968, 0.015, 202.224), 1315, 1340)
-    braad_test.spawn_ai_location("af_sklady", vector():set(-36.697, -20.405, 366.067), 271807, 1816)
-    braad_test.spawn_ai_location("af_kordon", vector():set(-137.500, 4.835, 226.258), 114167, 167)
-    braad_test.spawn_ai_location("af_agro", vector():set(153.240, -0.095, -261.835), 381773, 684)
+    spawn_patrol("af_rostok", "lc_rostok_ac")
+    spawn_patrol("af_sklady", "lc_ac_darkvalley")
+    spawn_patrol("af_kordon", "lc_escape_agroprom")
+    spawn_patrol("af_agro", "lc_agroprom_escape")
 end
 
 function af_rostok_have(task, objective)
@@ -909,9 +802,9 @@ function doctor_stvol_dal(first_speaker, second_speaker)
 end
 
 function naem_doctor_spawn()
-    local obj = alife():create("esc_fantom", vector():set(193.855, -3.474, 206.798), 260916, 2219)
-    local obj = alife():create("esc_fantom", vector():set(193.855, -3.474, 206.798), 260916, 2219)
-    local obj = alife():create("esc_fantom", vector():set(193.855, -3.474, 206.798), 260916, 2219)
+    alife_create("esc_fantom", "l11_pripyat", vector():set(193.855, -3.474, 206.798))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(193.855, -3.474, 206.798))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(193.855, -3.474, 206.798))
 end
 
 function solomon_final_dialog_otdal(first_speaker, second_speaker)
@@ -929,21 +822,21 @@ function solomon_final_dialog_done(first_speaker, second_speaker)
 end
 
 function spawn_killer_attak()
-    local obj = alife():create("esc_killer_attak1", vector():set(210.178, -0.010, -26.217), 51168, 1265)
-    local obj = alife():create("esc_killer_attak2", vector():set(210.178, -0.010, -26.217), 51168, 1265)
-    local obj = alife():create("esc_killer_attak3", vector():set(224.825, -0.011, 6.590), 56564, 1175)
-    local obj = alife():create("esc_killer_attak4", vector():set(233.006, 0.321, -48.274), 59665, 1174)
-    local obj = alife():create("esc_killer_attak5", vector():set(233.006, 0.321, -48.274), 59665, 1174)
-    local obj = alife():create("esc_killer_attak6", vector():set(243.649, -0.011, -25.703), 62267, 1266)
-    local obj = alife():create("esc_killer_attak7", vector():set(243.649, -0.011, -25.703), 62267, 1266)
-    local obj = alife():create("esc_killer_attak8", vector():set(247.754, -0.010, -45.204), 63283, 1267)
-    local obj = alife():create("esc_killer_attak9", vector():set(247.754, -0.010, -45.204), 63283, 1267)
-    local obj = alife():create("esc_killer_attak10", vector():set(204.621, -0.001, -19.587), 49197, 1265)
-    local obj = alife():create("esc_killer_attak11", vector():set(204.621, -0.001, -19.587), 49197, 1265)
-    local obj = alife():create("esc_killer_attak12", vector():set(231.718, -0.011, 4.701), 59268, 1262)
-    local obj = alife():create("esc_killer_attak13", vector():set(231.718, -0.011, 4.701), 59268, 1262)
-    local obj = alife():create("esc_killer_attak14", vector():set(218.702, -0.007, 14.062), 54111, 1175)
-    local obj = alife():create("esc_killer_attak15", vector():set(218.702, -0.007, 14.062), 54111, 1175)
+    spawn_patrol("esc_killer_attak1", "dolg_attak_walk1")
+    spawn_patrol("esc_killer_attak2", "dolg_attak_walk2")
+    spawn_patrol("esc_killer_attak3", "dolg_attak_walk3")
+    spawn_patrol("esc_killer_attak4", "dolg_attak_walk1")
+    spawn_patrol("esc_killer_attak5", "dolg_attak_walk2")
+    spawn_patrol("esc_killer_attak6", "dolg_attak_walk3")
+    spawn_patrol("esc_killer_attak7", "dolg_attak_walk1")
+    spawn_patrol("esc_killer_attak8", "dolg_attak_walk2")
+    spawn_patrol("esc_killer_attak9", "dolg_attak_walk3")
+    spawn_patrol("esc_killer_attak10", "dolg_attak_walk1")
+    spawn_patrol("esc_killer_attak11", "dolg_attak_walk2")
+    spawn_patrol("esc_killer_attak12", "dolg_attak_walk3")
+    spawn_patrol("esc_killer_attak13", "dolg_attak_walk1")
+    spawn_patrol("esc_killer_attak14", "dolg_attak_walk2")
+    spawn_patrol("esc_killer_attak15", "dolg_attak_walk3")
     news_manager.send_tip(db.actor, game.translate_string("spawn_killer_attak"))
 end
 
@@ -966,12 +859,12 @@ function bar_help_done(first_speaker, second_speaker)
 end
 
 function spawn_prizrak_fantom()
-    local obj = alife():create("esc_fantom", vector():set(-7.126, -2.224, -88.322), 93087, 2124)
-    local obj = alife():create("esc_fantom", vector():set(22.714, -2.393, -96.356), 130130, 2123)
-    local obj = alife():create("esc_fantom", vector():set(28.023, -2.224, -76.962), 136835, 2123)
-    local obj = alife():create("esc_killer_new3", vector():set(-6.938, -2.220, -161.990), 92999, 2118)
-    local obj = alife():create("esc_killer_new3", vector():set(-0.610, -2.403, -146.986), 101090, 2119)
-    local obj = alife():create("esc_killer_new3", vector():set(21.690, -2.393, -158.951), 128337, 2120)
+    alife_create("esc_fantom", "l11_pripyat", vector():set(-7.126, -2.224, -88.322))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(22.714, -2.393, -96.356))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(28.023, -2.224, -76.962))
+    alife_create("esc_killer_new3", "l11_pripyat", vector():set(-6.938, -2.220, -161.990))
+    alife_create("esc_killer_new3", "l11_pripyat", vector():set(-0.610, -2.403, -146.986))
+    alife_create("esc_killer_new3", "l11_pripyat", vector():set(21.690, -2.393, -158.951))
 end
 
 function del_semecky()
@@ -982,36 +875,36 @@ function del_semecky()
 end
 
 function spawn_chaes_final()
-    local obj = alife():create("tushkano_final", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("tushkano_final", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("tushkano_final", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("tushkano_final", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("tushkano_final", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("izlom_chaes", vector():set(889.688, -0.101, -83.217), 387804, 2290)
-    local obj = alife():create("tushkano_final", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("tushkano_final", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("tushkano_final", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("tushkano_final", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("tushkano_final", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("izlom_chaes", vector():set(919.194, -0.101, -92.114), 405183, 2275)
-    local obj = alife():create("tushkano_final", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("tushkano_final", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("tushkano_final", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("tushkano_final", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("tushkano_final", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("izlom_chaes", vector():set(880.116, -0.001, -51.338), 382910, 2293)
-    local obj = alife():create("pseudodog_final", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("pseudodog_final", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("pseudodog_final", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("pseudodog_final", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("pseudodog_final", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("izlom_dogs", vector():set(493.930, -0.002, -51.241), 218953, 2330)
-    local obj = alife():create("pseudodog_final", vector():set(452.709, -0.010, -41.648), 199250, 2305)
-    local obj = alife():create("pseudodog_final", vector():set(452.709, -0.010, -41.648), 199250, 2305)
-    local obj = alife():create("pseudodog_final", vector():set(452.709, -0.010, -41.648), 199250, 2305)
-    local obj = alife():create("pseudodog_final", vector():set(452.709, -0.010, -41.648), 199250, 2305)
-    local obj = alife():create("pseudodog_final", vector():set(452.709, -0.010, -41.648), 199250, 2305)
-    local obj = alife():create("izlom_dogs", vector():set(452.709, -0.010, -41.648), 199250, 2305)
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("izlom_chaes", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("izlom_chaes", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("tushkano_final", "chaes_final1")
+    spawn_patrol("izlom_chaes", "chaes_final1")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("izlom_dogs", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("pseudodog_final", "chaes_final2")
+    spawn_patrol("izlom_dogs", "chaes_final2")
 end
 
 function del_mad()
@@ -1022,62 +915,62 @@ function del_mad()
 end
 
 function fantoms_stadion()
-    local obj = alife():create("esc_fantom", vector():set(45.534, 1.033, 304.121), 157435, 2263)
-    local obj = alife():create("esc_killer_new1", vector():set(45.534, 1.033, 304.121), 157435, 2263)
-    local obj = alife():create("esc_fantom", vector():set(12.714, 1.034, 306.278), 117320, 2261)
-    local obj = alife():create("esc_killer_new2", vector():set(12.714, 1.034, 306.278), 117320, 2261)
-    local obj = alife():create("esc_fantom", vector():set(30.855, 1.138, 287.441), 140926, 2150)
-    local obj = alife():create("esc_killer_new1", vector():set(30.855, 1.138, 287.441), 140926, 2150)
-    local obj = alife():create("esc_fantom", vector():set(30.855, 1.138, 287.441), 140926, 2150)
-    local obj = alife():create("esc_killer_new2", vector():set(43.366, 1.180, 269.355), 155115, 2150)
-    local obj = alife():create("esc_fantom", vector():set(43.366, 1.180, 269.355), 155115, 2150)
-    local obj = alife():create("esc_killer_new1", vector():set(18.934, 1.570, 272.763), 125273, 2150)
-    local obj = alife():create("esc_fantom", vector():set(18.934, 1.570, 272.763), 125273, 2150)
+    alife_create("esc_fantom", "l11_pripyat", vector():set(45.534, 1.033, 304.121))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(12.714, 1.034, 306.278))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(30.855, 1.138, 287.441))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(30.855, 1.138, 287.441))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(43.366, 1.180, 269.355))
+    alife_create("esc_fantom", "l11_pripyat", vector():set(18.934, 1.570, 272.763))
+    alife_create("esc_killer_new1", "l11_pripyat", vector():set(45.534, 1.033, 304.121))
+    alife_create("esc_killer_new2", "l11_pripyat", vector():set(12.714, 1.034, 306.278))
+    alife_create("esc_killer_new1", "l11_pripyat", vector():set(30.855, 1.138, 287.441))
+    alife_create("esc_killer_new2", "l11_pripyat", vector():set(43.366, 1.180, 269.355))
+    alife_create("esc_killer_new1", "l11_pripyat", vector():set(18.934, 1.570, 272.763))
 end
 
 function final_fantoms()
-    local obj = alife():create("esc_fantom", vector():set(376.192, -0.006, 17.886), 162099, 2384)
-    local obj = alife():create("esc_fantom", vector():set(376.192, -0.006, 17.886), 162099, 2384)
-    local obj = alife():create("esc_fantom", vector():set(376.192, -0.006, 17.886), 162099, 2384)
-    local obj = alife():create("esc_fantom", vector():set(377.565, -0.007, 1.012), 162895, 2383)
-    local obj = alife():create("esc_fantom", vector():set(377.565, -0.007, 1.012), 162895, 2383)
-    local obj = alife():create("esc_fantom", vector():set(395.521, -0.004, 2.077), 172744, 2383)
-    local obj = alife():create("esc_fantom", vector():set(395.521, -0.004, 2.077), 172744, 2383)
-    local obj = alife():create("esc_fantom", vector():set(392.277, -0.002, 36.963), 171015, 2384)
-    local obj = alife():create("esc_fantom", vector():set(392.277, -0.002, 36.963), 171015, 2384)
-    local obj = alife():create("esc_fantom", vector():set(392.277, -0.002, 36.963), 171015, 2384)
-    local obj = alife():create("esc_fantom", vector():set(377.091, -0.003, 53.436), 162969, 2385)
-    local obj = alife():create("esc_fantom", vector():set(377.091, -0.003, 53.436), 162969, 2385)
-    local obj = alife():create("esc_fantom", vector():set(377.091, -0.003, 53.436), 162969, 2385)
-    local obj = alife():create("esc_fantom", vector():set(377.091, -0.003, 53.436), 162969, 2385)
-    local obj = alife():create("esc_fantom", vector():set(377.091, -0.003, 53.436), 162969, 2385)
+    alife_create("esc_fantom", "l12_stancia", vector():set(376.192, -0.006, 17.886))
+    alife_create("esc_fantom", "l12_stancia", vector():set(376.192, -0.006, 17.886))
+    alife_create("esc_fantom", "l12_stancia", vector():set(376.192, -0.006, 17.886))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.565, -0.007, 1.012))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.565, -0.007, 1.012))
+    alife_create("esc_fantom", "l12_stancia", vector():set(395.521, -0.004, 2.077))
+    alife_create("esc_fantom", "l12_stancia", vector():set(395.521, -0.004, 2.077))
+    alife_create("esc_fantom", "l12_stancia", vector():set(392.277, -0.002, 36.963))
+    alife_create("esc_fantom", "l12_stancia", vector():set(392.277, -0.002, 36.963))
+    alife_create("esc_fantom", "l12_stancia", vector():set(392.277, -0.002, 36.963))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.091, -0.003, 53.436))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.091, -0.003, 53.436))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.091, -0.003, 53.436))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.091, -0.003, 53.436))
+    alife_create("esc_fantom", "l12_stancia", vector():set(377.091, -0.003, 53.436))
 end
 
 function fantoms_last()
-    local obj = alife():create("esc_killer_new1", vector():set(494.982, -0.067, 220.548), 157852, 2622)
-    local obj = alife():create("esc_killer_new2", vector():set(494.982, -0.067, 220.548), 157852, 2622)
-    local obj = alife():create("esc_killer_new3", vector():set(494.982, -0.067, 220.548), 157852, 2622)
-    local obj = alife():create("esc_killer_new2", vector():set(601.544, -0.003, 262.470), 182201, 2620)
-    local obj = alife():create("esc_killer_new1", vector():set(601.544, -0.003, 262.470), 182201, 2620)
-    local obj = alife():create("esc_killer_new2", vector():set(601.544, -0.003, 262.470), 182201, 2620)
-    local obj = alife():create("esc_killer_new3", vector():set(622.268, -0.001, 192.813), 186273, 2620)
-    local obj = alife():create("esc_killer_new2", vector():set(622.268, -0.001, 192.813), 186273, 2620)
-    local obj = alife():create("esc_killer_new1", vector():set(622.268, -0.001, 192.813), 186273, 2620)
-    local obj = alife():create("esc_killer_new2", vector():set(360.772, -0.001, 252.848), 117499, 2583)
-    local obj = alife():create("esc_killer_new3", vector():set(360.772, -0.001, 252.848), 117499, 2583)
-    local obj = alife():create("esc_killer_new2", vector():set(360.772, -0.001, 252.848), 117499, 2583)
-    local obj = alife():create("esc_killer_new1", vector():set(362.738, -0.001, 162.287), 118222, 2588)
-    local obj = alife():create("esc_killer_new2", vector():set(362.738, -0.001, 162.287), 118222, 2588)
-    local obj = alife():create("esc_killer_new3", vector():set(362.738, -0.001, 162.287), 118222, 2588)
-    local obj = alife():create("esc_killer_new2", vector():set(504.459, -0.001, 180.896), 160133, 2603)
-    local obj = alife():create("esc_killer_new1", vector():set(504.459, -0.001, 180.896), 160133, 2603)
-    local obj = alife():create("esc_killer_new2", vector():set(504.459, -0.001, 180.896), 160133, 2603)
-    local obj = alife():create("esc_fantom", vector():set(689.843, 0.344, 243.181), 194762, 2621)
-    local obj = alife():create("esc_fantom", vector():set(689.843, 0.344, 243.181), 194762, 2621)
-    local obj = alife():create("esc_fantom", vector():set(689.843, 0.344, 243.181), 194762, 2621)
-    local obj = alife():create("esc_fantom", vector():set(725.650, -0.046, 205.601), 196306, 2621)
-    local obj = alife():create("esc_fantom", vector():set(725.650, -0.046, 205.601), 196306, 2621)
-    local obj = alife():create("esc_fantom", vector():set(725.650, -0.046, 205.601), 196306, 2621)
+    alife_create("esc_killer_new1", "l12_stancia_2", vector():set(494.982, -0.067, 220.548))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(494.982, -0.067, 220.548))
+    alife_create("esc_killer_new3", "l12_stancia_2", vector():set(494.982, -0.067, 220.548))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(601.544, -0.003, 262.470))
+    alife_create("esc_killer_new1", "l12_stancia_2", vector():set(601.544, -0.003, 262.470))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(601.544, -0.003, 262.470))
+    alife_create("esc_killer_new3", "l12_stancia_2", vector():set(622.268, -0.001, 192.813))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(622.268, -0.001, 192.813))
+    alife_create("esc_killer_new1", "l12_stancia_2", vector():set(622.268, -0.001, 192.813))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(360.772, -0.001, 252.848))
+    alife_create("esc_killer_new3", "l12_stancia_2", vector():set(360.772, -0.001, 252.848))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(360.772, -0.001, 252.848))
+    alife_create("esc_killer_new1", "l12_stancia_2", vector():set(362.738, -0.001, 162.287))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(362.738, -0.001, 162.287))
+    alife_create("esc_killer_new3", "l12_stancia_2", vector():set(362.738, -0.001, 162.287))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(504.459, -0.001, 180.896))
+    alife_create("esc_killer_new1", "l12_stancia_2", vector():set(504.459, -0.001, 180.896))
+    alife_create("esc_killer_new2", "l12_stancia_2", vector():set(504.459, -0.001, 180.896))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(689.843, 0.344, 243.181))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(689.843, 0.344, 243.181))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(689.843, 0.344, 243.181))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(725.650, -0.046, 205.601))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(725.650, -0.046, 205.601))
+    alife_create("esc_fantom", "l12_stancia_2", vector():set(725.650, -0.046, 205.601))
 end
 
 ----------------------------music_new--------------------------------
@@ -1265,89 +1158,84 @@ end
 -----------------------------------izlom--------------------------------------
 
 function izlom_minigun()
-    local obj = alife():create("izlom_mini", vector():set(260.015, -9.443, -141.040), 372746, 404)
-    local obj = alife():create("izlom_mini", vector():set(263.395, -9.145, -154.870), 374206, 403)
-    local obj = alife():create("izlom_mini", vector():set(207.800, -0.972, -152.620), 348150, 400)
+    spawn_patrol("izlom_mini", "svalka_lesok")
+    spawn_patrol("izlom_mini", "svalka_lesok")
+    spawn_patrol("izlom_mini", "svalka_lesok")
 end
 
 function izlom_stoyanka()
-    local obj = alife():create("izlom_stoyanka1", vector():set(-351.797, -13.864, 391.912), 6015, 1847)
-    local obj = alife():create("izlom_stoyanka2", vector():set(-363.699, -13.667, 383.335), 2362, 1848)
-    local obj = alife():create("izlom_stoyanka3", vector():set(-377.084, -13.893, 391.522), 585, 1848)
-    local obj = alife():create("izlom_stoyanka4", vector():set(-357.105, -13.536, 402.171), 3950, 1848)
+    spawn_patrol("izlom_stoyanka1", "izlom_stoyanka")
+    spawn_patrol("izlom_stoyanka2", "izlom_stoyanka")
+    spawn_patrol("izlom_stoyanka3", "izlom_stoyanka")
+    spawn_patrol("izlom_stoyanka4", "izlom_stoyanka")
 end
 
 function izlom_agroprom()
-    local obj = alife():create("izlom_agro", vector():set(-130.957, 13.839, 183.171), 108959, 522)
-    local obj = alife():create("izlom_agro", vector():set(-107.686, 11.207, 173.026), 132572, 520)
-    local obj = alife():create("izlom_agro", vector():set(-104.185, 15.050, 189.896), 136165, 520)
+    spawn_patrol("izlom_agro", "agro_izlom")
+    spawn_patrol("izlom_agro", "agro_izlom")
+    spawn_patrol("izlom_agro", "agro_izlom")
 end
 
 function izlom_radar()
-    local obj = alife():create("izlom_rad", vector():set(345.025, -45.555, -193.453), 89994, 2099)
-    local obj = alife():create("izlom_rad", vector():set(363.216, -47.311, -172.405), 99991, 2099)
-    local obj = alife():create("izlom_rad", vector():set(379.088, -49.904, -199.959), 110277, 1872)
-end
-
-function izlom_x18()
-    -- local obj = alife():create("izlom_td",vector():set(-6.985,4.188,-2.907),1894,1112)
-    -- local obj = alife():create("izlom_td",vector():set(-0.387,-10.820,-7.000),2682,1134)
+    spawn_patrol("izlom_rad", "rad_izlom")
+    spawn_patrol("izlom_rad", "rad_izlom")
+    spawn_patrol("izlom_rad", "rad_izlom")
 end
 
 function izlom_x16()
-    local obj = alife():create("izlom_yantar", vector():set(-86.698, -17.096, -193.608), 9308, 1489)
+    spawn_patrol("izlom_yantar", "x16_izlom")
 end
 
 -----------------------------------vypolzen---------------------------------------
 
 function vypolzen_agroprom()
-    local obj = alife():create("vypolzen_agro", vector():set(-159.547, 1.788, 48.670), 77948, 531)
-    local obj = alife():create("vypolzen_agro", vector():set(-159.547, 1.788, 48.670), 77948, 531)
-    local obj = alife():create("vypolzen_agro", vector():set(-200.519, 6.464, 17.533), 36689, 537)
-    local obj = alife():create("vypolzen_agro", vector():set(-200.519, 6.464, 17.533), 36689, 537)
-    local obj = alife():create("vypolzen_agro", vector():set(-196.218, 2.546, 89.596), 40279, 678)
-    local obj = alife():create("vypolzen_agro", vector():set(-196.218, 2.546, 89.596), 40279, 678)
-    local obj = alife():create("vypolzen_agro", vector():set(-197.101, 2.476, 95.134), 39592, 678)
-    local obj = alife():create("vypolzen_agro", vector():set(-197.101, 2.476, 95.134), 39592, 678)
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
+    spawn_patrol("vypolzen_agro", "agro_vypolzen")
 end
 
 function vypolzen_svalka_boloto()
-    local obj = alife():create("vypolzen_svalka1", vector():set(-129.219, -0.875, -160.975), 289704, 398)
-    local obj = alife():create("vypolzen_svalka1", vector():set(-129.219, -0.875, -160.975), 289704, 398)
-    local obj = alife():create("vypolzen_svalka1", vector():set(117.273, -1.123, -110.276), 279903, 396)
-    local obj = alife():create("vypolzen_svalka1", vector():set(117.273, -1.123, -110.276), 279903, 396)
+    spawn_patrol("vypolzen_svalka1", "svalka_boloto")
+    spawn_patrol("vypolzen_svalka1", "svalka_boloto")
+    spawn_patrol("vypolzen_svalka1", "svalka_boloto")
+    spawn_patrol("vypolzen_svalka1", "svalka_boloto")
 end
 
 function vypolzen_svalka_vorota()
-    local obj = alife():create("vypolzen_svalka2", vector():set(32.327, 0.663, -297.362), 205376, 253)
-    local obj = alife():create("vypolzen_svalka2", vector():set(32.327, 0.663, -297.362), 205376, 253)
-    local obj = alife():create("vypolzen_svalka2", vector():set(57.676, -0.216, -280.530), 229394, 262)
-    local obj = alife():create("vypolzen_svalka2", vector():set(57.676, -0.216, -280.530), 229394, 262)
+    spawn_patrol("vypolzen_svalka2", "svalka_vorota")
+    spawn_patrol("vypolzen_svalka2", "svalka_vorota")
+    spawn_patrol("vypolzen_svalka2", "svalka_vorota")
+    spawn_patrol("vypolzen_svalka2", "svalka_vorota")
 end
 
 function vypolzen_yantar_boloto()
-    local obj = alife():create("vypolzen_yantar", vector():set(-88.651, -11.218, -217.097), 8675, 1485)
-    local obj = alife():create("vypolzen_yantar", vector():set(-88.651, -11.218, -217.097), 8675, 1485)
-    local obj = alife():create("vypolzen_yantar", vector():set(-94.224, -12.377, -241.820), 7534, 1485)
-    local obj = alife():create("vypolzen_yantar", vector():set(-94.224, -12.377, -241.820), 7534, 1485)
-    local obj = alife():create("vypolzen_yantar", vector():set(-26.301, -12.343, -304.372), 29087, 1453)
-    local obj = alife():create("vypolzen_yantar", vector():set(-26.301, -12.343, -304.372), 29087, 1453)
-    local obj = alife():create("vypolzen_yantar", vector():set(-26.301, -12.343, -304.372), 29087, 1453)
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
+    spawn_patrol("vypolzen_yantar", "yan_vypolzen")
 end
 
 function vypolzen_td()
-    local obj = alife():create("vypolzen_dol1", vector():set(4.450, -4.450, -299.211), 178724, 842)
-    local obj = alife():create("vypolzen_dol2", vector():set(4.450, -4.450, -299.211), 178724, 842)
-    local obj = alife():create("vypolzen_dol3", vector():set(4.450, -4.450, -299.211), 178724, 842)
-    local obj = alife():create("vypolzen_dol4", vector():set(-35.312, -4.482, -264.325), 133803, 853)
-    local obj = alife():create("vypolzen_dol5", vector():set(-35.312, -4.482, -264.325), 133803, 853)
-    local obj = alife():create("vypolzen_dol6", vector():set(-35.312, -4.482, -264.325), 133803, 853)
+    spawn_patrol("vypolzen_dol1", "vypolzen_dolina")
+    spawn_patrol("vypolzen_dol2", "vypolzen_dolina")
+    spawn_patrol("vypolzen_dol3", "vypolzen_dolina")
+    spawn_patrol("vypolzen_dol4", "vypolzen_dolina")
+    spawn_patrol("vypolzen_dol5", "vypolzen_dolina")
+    spawn_patrol("vypolzen_dol6", "vypolzen_dolina")
 end
 
 ----------------------------------------------------------------------------------------------
 
 function spawn_lazarev()
-    local obj = alife():create("esc_lazarev", vector():set(-197.101, 2.535, 95.134), 39592, 678)
+    local obj = spawn_patrol("esc_lazarev", "agro_vypolzen")
     alife():assign_story_id(obj.id, story_ids.esc_lazarev)
     obj:set_health(0)
 end
@@ -1388,90 +1276,88 @@ function izlom_dialog_done(first_speaker, second_speaker)
 end
 
 function izlom_blue()
-    local obj = alife():create("izlom_radar", vector():set(591.140, -52.055, -363.587), 209981, 1879)
-    local obj = alife():create("izlom_radar", vector():set(596.411, -51.273, -350.179), 212658, 1880)
-    local obj = alife():create("izlom_radar", vector():set(574.052, -53.722, -260.404), 202389, 1863)
+    spawn_patrol("izlom_radar", "radar_izlom")
+    spawn_patrol("izlom_radar", "radar_izlom")
+    spawn_patrol("izlom_radar", "radar_izlom")
 end
 
 function zombie_pripyat()
-    local obj = alife():create("zombie1", vector():set(9.436, -2.223, -131.952), 112726, 2130)
-    local obj = alife():create("zombie1", vector():set(9.436, -2.223, -131.952), 112726, 2130)
-    local obj = alife():create("zombie3", vector():set(9.436, -2.223, -131.952), 112726, 2130)
-    local obj = alife():create("zombie1", vector():set(20.335, -2.391, -90.027), 126659, 2123)
-    local obj = alife():create("zombie1", vector():set(20.335, -2.391, -90.027), 126659, 2123)
-    local obj = alife():create("zombie4", vector():set(20.335, -2.391, -90.027), 126659, 2123)
-    local obj = alife():create("zombie2", vector():set(-21.111, -2.392, -62.583), 77789, 2132)
-    local obj = alife():create("zombie4", vector():set(-21.111, -2.392, -62.583), 77789, 2132)
-    local obj = alife():create("zombie2", vector():set(-21.111, -2.392, -62.583), 77789, 2132)
-    local obj = alife():create("zombie1", vector():set(53.969, -2.392, -62.672), 166009, 2137)
-    local obj = alife():create("zombie3", vector():set(53.969, -2.392, -62.672), 166009, 2137)
-    local obj = alife():create("zombie1", vector():set(53.969, -2.392, -62.672), 166009, 2137)
-    local obj = alife():create("zombie2", vector():set(77.608, -2.392, -17.903), 189042, 2144)
-    local obj = alife():create("zombie4", vector():set(77.608, -2.392, -17.903), 189042, 2144)
-    local obj = alife():create("zombie2", vector():set(77.608, -2.392, -17.903), 189042, 2144)
-    local obj = alife():create("zombie1", vector():set(14.304, -2.397, 66.351), 118685, 2142)
-    local obj = alife():create("zombie1", vector():set(14.304, -2.397, 66.351), 118685, 2142)
-    local obj = alife():create("zombie3", vector():set(14.304, -2.397, 66.351), 118685, 2142)
-    local obj = alife():create("zombie2", vector():set(52.179, -0.650, 92.672), 164712, 2166)
-    local obj = alife():create("zombie4", vector():set(52.179, -0.650, 92.672), 164712, 2166)
-    local obj = alife():create("zombie4", vector():set(52.179, -0.650, 92.672), 164712, 2166)
-    local obj = alife():create("zombie1", vector():set(-1.728, -0.671, 110.850), 100480, 2142)
-    local obj = alife():create("zombie1", vector():set(-1.728, -0.671, 110.850), 100480, 2142)
-    local obj = alife():create("zombie1", vector():set(-1.728, -0.671, 110.850), 100480, 2142)
-    local obj = alife():create("zombie2", vector():set(-84.625, -2.392, 57.518), 25358, 2140)
-    local obj = alife():create("zombie2", vector():set(-84.625, -2.392, 57.518), 25358, 2140)
-    local obj = alife():create("zombie2", vector():set(-84.625, -2.392, 57.518), 25358, 2140)
-    local obj = alife():create("zombie1", vector():set(-95.477, -2.210, 119.081), 19808, 2211)
-    local obj = alife():create("zombie3", vector():set(-95.477, -2.210, 119.081), 19808, 2211)
-    local obj = alife():create("zombie1", vector():set(-95.477, -2.210, 119.081), 19808, 2211)
-    local obj = alife():create("zombie2", vector():set(-51.540, -2.206, 195.688), 48062, 2153)
-    local obj = alife():create("zombie4", vector():set(-51.540, -2.206, 195.688), 48062, 2153)
-    local obj = alife():create("zombie2", vector():set(-51.540, -2.206, 195.688), 48062, 2153)
-    local obj = alife():create("zombie1", vector():set(-22.072, -0.555, 241.378), 76752, 2164)
-    local obj = alife():create("zombie1", vector():set(-22.072, -0.555, 241.378), 76752, 2164)
-    local obj = alife():create("zombie3", vector():set(-22.072, -0.555, 241.378), 76752, 2164)
-    local obj = alife():create("zombie2", vector():set(103.996, -0.581, 225.112), 215217, 2163)
-    local obj = alife():create("zombie4", vector():set(103.996, -0.581, 225.112), 215217, 2163)
-    local obj = alife():create("zombie2", vector():set(103.996, -0.581, 225.112), 215217, 2163)
-    local obj = alife():create("zombie1", vector():set(174.120, -2.218, 161.105), 254833, 2146)
-    local obj = alife():create("zombie1", vector():set(174.120, -2.218, 161.105), 254833, 2146)
-    local obj = alife():create("zombie3", vector():set(174.120, -2.218, 161.105), 254833, 2146)
-    local obj = alife():create("zombie2", vector():set(155.998, -2.224, 81.190), 247343, 2145)
-    local obj = alife():create("zombie2", vector():set(155.998, -2.224, 81.190), 247343, 2145)
-    local obj = alife():create("zombie4", vector():set(155.998, -2.224, 81.190), 247343, 2145)
-    local obj = alife():create("zombie1", vector():set(108.200, -0.004, 111.561), 219579, 2180)
-    local obj = alife():create("zombie4", vector():set(108.200, -0.004, 111.561), 219579, 2180)
-    local obj = alife():create("zombie4", vector():set(108.200, -0.004, 111.561), 219579, 2180)
-    local obj = alife():create("zombie3", vector():set(63.518, -0.684, 152.405), 175562, 2187)
-    local obj = alife():create("zombie3", vector():set(63.518, -0.684, 152.405), 175562, 2187)
-    local obj = alife():create("zombie2", vector():set(63.518, -0.684, 152.405), 175562, 2187)
-    local obj = alife():create("zombie4", vector():set(9.742, -1.218, -103.828), 113597, 2130)
-    local obj = alife():create("zombie3", vector():set(9.742, -1.218, -103.828), 113597, 2130)
-    local obj = alife():create("zombie3", vector():set(9.742, -1.218, -103.828), 113597, 2130)
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie1", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie2", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie4", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
+    spawn_patrol("zombie3", "monolith_lenin_lenin1_look")
 end
 
 function spawn_naem_td()
-    local obj = alife():create("esc_killer_td", vector():set(132.021, 0.233, -239.431), 329600, 957)
-    local obj = alife():create("esc_killer_td", vector():set(150.686, 0.230, -238.427), 349912, 958)
-    local obj = alife():create("esc_killer_td", vector():set(128.645, 0.233, -236.390), 325925, 957)
-    local obj = alife():create("esc_killer_td", vector():set(143.486, 0.231, -225.372), 341969, 958)
-    local obj = alife():create("esc_killer_td", vector():set(127.565, 0.152, -242.893), 324508, 956)
-    local obj = alife():create("esc_killer_td", vector():set(115.105, 0.152, -241.982), 311521, 957)
-    local obj = alife():create("esc_killer_td", vector():set(112.388, 0.120, -250.827), 309203, 955)
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(132.021, 0.233, -239.431))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(150.686, 0.230, -238.427))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(128.645, 0.233, -236.390))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(143.486, 0.231, -225.372))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(127.565, 0.152, -242.893))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(115.105, 0.152, -241.982))
+    alife_create("esc_killer_td", "l04_darkvalley", vector():set(112.388, 0.120, -250.827))
 end
 
 function spawn_vodka()
-    local obj = alife():create("vodka", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(),
-        db.actor:id())
+    alife():create("vodka", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(), db.actor:id())
 end
 
 function spawn_adulin()
-    local obj = alife():create("adulin", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(),
-        db.actor:id())
+    alife():create("adulin", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(), db.actor:id())
 end
 
 function spawn_rukzak()
-    local obj = alife():create("rukzak_adulin", vector():set(-25.120, -2.095, 122.820), 75295, 2147)
+    alife_create("rukzak_adulin", "l11_pripyat", vector():set(-25.120, -2.095, 122.820))
 end
 
 function rukzak_dialog_have(task, objective)
@@ -1488,11 +1374,11 @@ function snork_start_dal(first_speaker, second_speaker)
 end
 
 function spawn_snork_start()
-    local obj = alife():create("snork_start1", vector():set(98.055, -0.532, 199.893), 208919, 2163)
-    local obj = alife():create("snork_start2", vector():set(98.055, -0.532, 199.893), 208919, 2163)
-    local obj = alife():create("snork_start3", vector():set(98.055, -0.532, 199.893), 208919, 2163)
-    local obj = alife():create("snork_start4", vector():set(128.900, 0.106, 202.768), 233376, 2163)
-    local obj = alife():create("snork_start5", vector():set(128.900, 0.106, 202.768), 233376, 2163)
+    spawn_patrol("snork_start1", "snork_svitok")
+    spawn_patrol("snork_start2", "snork_svitok")
+    spawn_patrol("snork_start3", "snork_svitok")
+    spawn_patrol("snork_start4", "snork_svitok")
+    spawn_patrol("snork_start5", "snork_svitok")
 end
 
 function snork_start_have(task, info)
@@ -1509,9 +1395,9 @@ function snork_start_done(first_speaker, second_speaker)
 end
 
 function spawn_mervin_new()
-    local sobj = alife():create("esc_mervin_new", vector():set(-36.418, -2.175, -184.871), 29504, 2258)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin_new.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_mervin_new)
+    local obj = spawn_patrol("esc_mervin_new", "mervin_prip_spot")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin_new.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_mervin_new)
 end
 
 function mervin_zadan_dal(first_speaker, second_speaker)
@@ -1523,51 +1409,17 @@ function doctor_give_obrez(first_speaker, second_speaker)
     dialogs.relocate_item_section(second_speaker, "wpn_obrez", "in", 1)
 end
 
-local prizd = {{
-    position = {
-        x = -18.375,
-        y = 0.015,
-        z = 157.467
-    },
-    gv = 2190,
-    lv = 78726
-}, {
-    position = {
-        x = 22.921,
-        y = 0.025,
-        z = 156.916
-    },
-    gv = 2188,
-    lv = 132381
-}, {
-    position = {
-        x = 27.027,
-        y = 5.150,
-        z = 163.399
-    },
-    gv = 2199,
-    lv = 136155
-}, {
-    position = {
-        x = -29.130,
-        y = 4.350,
-        z = 204.451
-    },
-    gv = 2197,
-    lv = 70146
-}, {
-    position = {
-        x = 12.600,
-        y = 5.350,
-        z = 155.837
-    },
-    gv = 2199,
-    lv = 117171
-}}
+local prizd = {
+    [1] = {x = -18.375, y = 0.015, z = 157.467},
+    [2] = {x = 22.921, y = 0.025, z = 156.916},
+    [3] = {x = 27.027, y = 5.150, z = 163.399},
+    [4] = {x = -29.130, y = 4.350, z = 204.451},
+    [5] = {x = 12.600, y = 5.350, z = 155.837}
+}
 
 function spawn_dynamite()
-    local a = prizd[math.random(table.getn(prizd))]
-    braad_test.spawn_ai_location("dynamite_prizrak", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = prizd[math.random(1, 5)]
+    alife_create("dynamite_prizrak", "l11_pripyat", vector():set(a.x, a.y, a.z))
 end
 
 function vozvrat_dialog_have(task, objective)
@@ -1586,9 +1438,9 @@ function prizrak_dal(first_speaker, second_speaker)
 end
 
 function spawn_disk()
-    braad_test.spawn_ai_location("cd_disk", vector():set(-225.221, -2.218, 166.468), 16627, 343)
-    braad_test.spawn_ai_location("cd_disk", vector():set(-241.815, 2.120, 174.803), 13329, 343)
-    braad_test.spawn_ai_location("cd_disk", vector():set(-211.765, -4.280, 151.077), 23423, 342)
+    braad_test.spawn_ai_location("cd_disk", vector():set(-225.221, -2.218, 166.468), "l02_garbage")
+    braad_test.spawn_ai_location("cd_disk", vector():set(-241.815, 2.120, 174.803), "l02_garbage")
+    braad_test.spawn_ai_location("cd_disk", vector():set(-211.765, -4.280, 151.077), "l02_garbage")
 end
 
 function disk_dialog_have(task, objective)
@@ -1602,131 +1454,131 @@ function disk_dialog_done(first_speaker, second_speaker)
 end
 
 function spawn_artefact_new()
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(158.091, -2.090, -53.302), 248881, 2246)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-275.637, -17.950, -26.245), 63093, 1684)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(67.884, -0.750, 65.344), 33443, 2004)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(290.507, -51.330, -313.238), 61315, 2075)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-187.292, 1.280, 203.683), 38099, 345)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(132.807, -0.730, 42.030), 331199, 913)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-135.254, -1.740, -307.108), 103823, 658)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(100.873, 0.185, 98.796), 92489, 1520)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-45.563, 11.650, 9.223), 2354, 1532)
-    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(38.377, -10.735, 4.912), 7348, 1136)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-117.914, -2.050, -32.026), 7460, 2256)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-305.438, -27.990, 208.428), 38211, 1788)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(282.084, -49.950, -73.492), 59836, 2090)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(669.056, -45.630, -39.645), 227187, 1896)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-140.199, 1.090, -283.147), 76491, 275)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(114.633, 7.070, 147.910), 348916, 578)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(15.954, 0.470, -118.254), 42379, 1446)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(92.750, 0.150, -62.094), 77592, 1516)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-242.752, -5.910, 88.937), 12576, 1382)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-134.642, 1.080, 169.555), 41001, 1318)
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(158.091, -2.090, -53.302), "l11_pripyat")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-275.637, -17.950, -26.245), "l07_military")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(67.884, -0.750, 65.344), "l10_radar")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(290.507, -51.330, -313.238), "l10_radar")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-187.292, 1.280, 203.683), "l02_garbage")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(132.807, -0.730, 42.030), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-135.254, -1.740, -307.108), "l03_agroprom")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(100.873, 0.185, 98.796), "l08_yantar")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(-45.563, 11.650, 9.223), "l08u_brainlab")
+    braad_test.spawn_ai_location("af_dummy_spring_red", vector():set(38.377, -10.735, 4.912), "l04u_labx18")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-117.914, -2.050, -32.026), "l11_pripyat")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-305.438, -27.990, 208.428), "l07_military")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(282.084, -49.950, -73.492), "l10_radar")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(669.056, -45.630, -39.645), "l10_radar")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-140.199, 1.090, -283.147), "l02_garbage")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(114.633, 7.070, 147.910), "l03_agroprom")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(15.954, 0.470, -118.254), "l08_yantar")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(92.750, 0.150, -62.094), "l08_yantar")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-242.752, -5.910, 88.937), "l06_rostok")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(-134.642, 1.080, 169.555), "l06_rostok")
 end
 
 function spawn_fantom_bunker()
-    local obj = alife():create("esc_fantom", vector():set(-7.076, -34.479, 15.786), 1582, 2481)
-    local obj = alife():create("esc_fantom", vector():set(8.326, -34.237, 8.353), 2344, 2513)
-    local obj = alife():create("esc_fantom", vector():set(-7.202, -34.473, 29.339), 1600, 2512)
-    local obj = alife():create("esc_fantom", vector():set(-7.202, -34.473, 29.339), 1600, 2512)
-    local obj = alife():create("esc_fantom", vector():set(-20.013, -34.444, 26.258), 951, 2482)
-    local obj = alife():create("esc_fantom", vector():set(-10.963, -34.410, 31.747), 1454, 2482)
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(-7.076, -34.479, 15.786))
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(8.326, -34.237, 8.353))
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(-7.202, -34.473, 29.339))
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(-7.202, -34.473, 29.339))
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(-20.013, -34.444, 26.258))
+    alife_create("esc_fantom", "l12u_control_monolith", vector():set(-10.963, -34.410, 31.747))
 end
 
 function spawn_fantom_x10()
-    local obj = alife():create("esc_killer_new3", vector():set(-2.847, -7.451, -64.387), 5158, 2662)
-    local obj = alife():create("esc_killer_new3", vector():set(3.489, -7.453, -77.799), 6847, 2661)
-    local obj = alife():create("esc_killer_new3", vector():set(-18.147, -9.550, -46.046), 3672, 2664)
-    local obj = alife():create("esc_killer_new3", vector():set(-21.679, -9.551, -9.885), 3283, 2666)
-    local obj = alife():create("esc_killer_new3", vector():set(-41.685, -9.430, 1.257), 1266, 2669)
-    local obj = alife():create("esc_killer_new3", vector():set(-24.498, -8.995, 17.586), 2778, 2672)
-    local obj = alife():create("esc_killer_new3", vector():set(-24.588, -8.187, 36.711), 2797, 2678)
-    local obj = alife():create("esc_killer_new3", vector():set(8.839, -9.975, 19.692), 7920, 2683)
-    local obj = alife():create("esc_killer_new3", vector():set(16.386, -8.990, 6.250), 8347, 2688)
-    local obj = alife():create("esc_killer_new3", vector():set(9.606, -8.989, -4.340), 7883, 2691)
-    local obj = alife():create("esc_killer_new3", vector():set(12.133, -23.569, -1.709), 8128, 2700)
-    local obj = alife():create("esc_killer_new3", vector():set(-1.643, -23.695, -2.651), 5545, 2703)
-    local obj = alife():create("esc_killer_new3", vector():set(-42.027, -23.521, -4.917), 1212, 2709)
-    local obj = alife():create("esc_fantom", vector():set(-55.520, -23.493, 13.023), 605, 2719)
-    local obj = alife():create("esc_fantom", vector():set(-54.951, -21.892, 30.658), 626, 2778)
-    local obj = alife():create("esc_fantom", vector():set(-54.951, -21.892, 30.658), 626, 2778)
-    local obj = alife():create("esc_fantom", vector():set(-53.517, -23.497, 56.833), 760, 2735)
-    local obj = alife():create("esc_fantom", vector():set(-28.241, -21.837, 41.092), 2478, 2747)
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-2.847, -7.451, -64.387))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(3.489, -7.453, -77.799))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-18.147, -9.550, -46.046))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-21.679, -9.551, -9.885))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-41.685, -9.430, 1.257))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-24.498, -8.995, 17.586))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-24.588, -8.187, 36.711))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(8.839, -9.975, 19.692))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(16.386, -8.990, 6.250))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(9.606, -8.989, -4.340))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(12.133, -23.569, -1.709))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-1.643, -23.695, -2.651))
+    alife_create("esc_killer_new3", "l10u_bunker", vector():set(-42.027, -23.521, -4.917))
+    alife_create("esc_fantom", "l10u_bunker", vector():set(-55.520, -23.493, 13.023))
+    alife_create("esc_fantom", "l10u_bunker", vector():set(-54.951, -21.892, 30.658))
+    alife_create("esc_fantom", "l10u_bunker", vector():set(-54.951, -21.892, 30.658))
+    alife_create("esc_fantom", "l10u_bunker", vector():set(-53.517, -23.497, 56.833))
+    alife_create("esc_fantom", "l10u_bunker", vector():set(-28.241, -21.837, 41.092))
 end
 
 function spawn_fantom_radar1()
-    local obj = alife():create("esc_killer_new3", vector():set(575.419, -53.243, -401.214), 203053, 1868)
-    local obj = alife():create("esc_killer_new3", vector():set(567.830, -50.071, -379.744), 199180, 1878)
-    local obj = alife():create("esc_killer_new3", vector():set(592.320, -51.629, -388.732), 210580, 1878)
-    local obj = alife():create("esc_killer_new3", vector():set(592.320, -51.629, -388.732), 210580, 1878)
-    local obj = alife():create("esc_killer_new3", vector():set(585.196, -52.528, -372.515), 207548, 1879)
-    local obj = alife():create("esc_killer_new3", vector():set(601.492, -51.469, -346.827), 215064, 1880)
+    alife_create("esc_killer_new3", "l10_radar", vector():set(575.419, -53.243, -401.214))
+    alife_create("esc_killer_new3", "l10_radar", vector():set(567.830, -50.071, -379.744))
+    alife_create("esc_killer_new3", "l10_radar", vector():set(592.320, -51.629, -388.732))
+    alife_create("esc_killer_new3", "l10_radar", vector():set(592.320, -51.629, -388.732))
+    alife_create("esc_killer_new3", "l10_radar", vector():set(585.196, -52.528, -372.515))
+    alife_create("esc_killer_new3", "l10_radar", vector():set(601.492, -51.469, -346.827))
 end
 
 function spawn_fantom_bar()
-    local obj = alife():create("esc_killer_td", vector():set(370.172, 11.744, -429.410), 84170, 1289)
-    local obj = alife():create("esc_killer_td", vector():set(370.172, 11.744, -429.410), 84170, 1289)
-    local obj = alife():create("esc_killer_td", vector():set(397.370, 11.343, -443.480), 91443, 1289)
-    local obj = alife():create("esc_maroder", vector():set(397.370, 11.343, -443.480), 91443, 1289)
-    local obj = alife():create("esc_killer_td", vector():set(415.350, 14.354, -438.139), 98096, 1289)
-    local obj = alife():create("esc_maroder", vector():set(415.350, 14.354, -438.139), 98096, 1289)
+    alife_create("esc_killer_td", "l05_bar", vector():set(370.172, 11.744, -429.410))
+    alife_create("esc_killer_td", "l05_bar", vector():set(370.172, 11.744, -429.410))
+    alife_create("esc_killer_td", "l05_bar", vector():set(397.370, 11.343, -443.480))
+    alife_create("esc_maroder", "l05_bar", vector():set(397.370, 11.343, -443.480))
+    alife_create("esc_killer_td", "l05_bar", vector():set(415.350, 14.354, -438.139))
+    alife_create("esc_maroder", "l05_bar", vector():set(415.350, 14.354, -438.139))
 end
 
 function spawn_fantom_svalka1()
-    local obj = alife():create("esc_maroder", vector():set(-261.285, 0.737, -7.440), 6076, 311)
-    local obj = alife():create("esc_killer_td", vector():set(-244.157, 0.565, -10.336), 10604, 309)
-    local obj = alife():create("esc_killer_td", vector():set(-250.991, 2.441, -26.360), 8574, 309)
-    local obj = alife():create("esc_killer_td", vector():set(-244.157, 0.565, -10.336), 10604, 309)
-    local obj = alife():create("esc_killer_td", vector():set(-250.991, 2.441, -26.360), 8574, 309)
+    alife_create("esc_maroder", "l02_garbage", vector():set(-261.285, 0.737, -7.440))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-244.157, 0.565, -10.336))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-250.991, 2.441, -26.360))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-244.157, 0.565, -10.336))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-250.991, 2.441, -26.360))
 end
 
 function spawn_fantom_svalka2()
-    local obj = alife():create("esc_maroder", vector():set(20.953, 0.487, -254.714), 193499, 262)
-    local obj = alife():create("esc_killer_td", vector():set(-13.161, 0.433, -225.296), 164832, 265)
-    local obj = alife():create("esc_killer_td", vector():set(12.533, 1.700, -220.172), 185605, 265)
-    local obj = alife():create("esc_killer_td", vector():set(-13.161, 0.433, -225.296), 164832, 265)
-    local obj = alife():create("esc_killer_td", vector():set(12.533, 1.700, -220.172), 185605, 265)
+    alife_create("esc_maroder", "l02_garbage", vector():set(20.953, 0.487, -254.714))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-13.161, 0.433, -225.296))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(12.533, 1.700, -220.172))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(-13.161, 0.433, -225.296))
+    alife_create("esc_killer_td", "l02_garbage", vector():set(12.533, 1.700, -220.172))
 end
 
 function spawn_fantom_rostok1()
-    local obj = alife():create("esc_killer_new1", vector():set(-137.238, -6.001, -107.104), 40595, 1407)
-    local obj = alife():create("esc_killer_new2", vector():set(-137.238, -6.001, -107.104), 40595, 1407)
-    local obj = alife():create("esc_killer_old", vector():set(-213.101, 0.045, -45.737), 23859, 1401)
-    local obj = alife():create("esc_killer_new1", vector():set(-227.321, -0.001, -60.125), 19107, 1401)
-    local obj = alife():create("esc_killer_old", vector():set(-213.101, 0.045, -45.737), 23859, 1401)
-    local obj = alife():create("esc_killer_new2", vector():set(-227.321, -0.001, -60.125), 19107, 1401)
+    alife_create("esc_killer_old", "l06_rostok", vector():set(-213.101, 0.045, -45.737))
+    alife_create("esc_killer_old", "l06_rostok", vector():set(-213.101, 0.045, -45.737))
+    alife_create("esc_killer_new1", "l06_rostok", vector():set(-137.238, -6.001, -107.104))
+    alife_create("esc_killer_new2", "l06_rostok", vector():set(-137.238, -6.001, -107.104))
+    alife_create("esc_killer_new1", "l06_rostok", vector():set(-227.321, -0.001, -60.125))
+    alife_create("esc_killer_new2", "l06_rostok", vector():set(-227.321, -0.001, -60.125))
 end
 
 function spawn_fantom_ac()
-    local obj = alife():create("esc_killer_new3", vector():set(-332.692, -25.536, 46.571), 17713, 1546)
-    local obj = alife():create("esc_killer_new3", vector():set(-327.868, -25.287, 56.147), 21107, 1546)
-    local obj = alife():create("esc_killer_new3", vector():set(-332.692, -25.536, 46.571), 17713, 1546)
-    local obj = alife():create("esc_killer_new3", vector():set(-327.868, -25.287, 56.147), 21107, 1546)
+    alife_create("esc_killer_new3", "l07_military", vector():set(-332.692, -25.536, 46.571))
+    alife_create("esc_killer_new3", "l07_military", vector():set(-327.868, -25.287, 56.147))
+    alife_create("esc_killer_new3", "l07_military", vector():set(-332.692, -25.536, 46.571))
+    alife_create("esc_killer_new3", "l07_military", vector():set(-327.868, -25.287, 56.147))
 end
 
 function spawn_fantom_radar2()
-    local obj = alife():create("esc_fantom", vector():set(592.240, -52.143, -283.345), 210665, 1883)
-    local obj = alife():create("esc_fantom", vector():set(600.153, -53.850, -255.437), 214474, 1863)
-    local obj = alife():create("esc_fantom", vector():set(575.257, -54.286, -259.467), 203089, 1863)
-    local obj = alife():create("esc_fantom", vector():set(592.240, -52.143, -283.345), 210665, 1883)
-    local obj = alife():create("esc_fantom", vector():set(600.153, -53.850, -255.437), 214474, 1863)
-    local obj = alife():create("esc_fantom", vector():set(575.257, -54.286, -259.467), 203089, 1863)
+    alife_create("esc_fantom", "l10_radar", vector():set(592.240, -52.143, -283.345))
+    alife_create("esc_fantom", "l10_radar", vector():set(600.153, -53.850, -255.437))
+    alife_create("esc_fantom", "l10_radar", vector():set(575.257, -54.286, -259.467))
+    alife_create("esc_fantom", "l10_radar", vector():set(592.240, -52.143, -283.345))
+    alife_create("esc_fantom", "l10_radar", vector():set(600.153, -53.850, -255.437))
+    alife_create("esc_fantom", "l10_radar", vector():set(575.257, -54.286, -259.467))
 end
 
 function spawn_fantom_yantar()
-    local obj = alife():create("esc_fantom", vector():set(119.267, 0.666, 81.000), 104341, 1521)
-    local obj = alife():create("esc_fantom", vector():set(100.044, 0.236, 19.811), 91966, 1518)
-    local obj = alife():create("esc_fantom", vector():set(123.804, 2.320, -2.160), 107354, 1524)
-    local obj = alife():create("esc_fantom", vector():set(100.044, 0.236, 19.811), 91966, 1518)
-    local obj = alife():create("esc_fantom", vector():set(123.804, 2.320, -2.160), 107354, 1524)
+    alife_create("esc_fantom", "l08_yantar", vector():set(119.267, 0.666, 81.000))
+    alife_create("esc_fantom", "l08_yantar", vector():set(100.044, 0.236, 19.811))
+    alife_create("esc_fantom", "l08_yantar", vector():set(123.804, 2.320, -2.160))
+    alife_create("esc_fantom", "l08_yantar", vector():set(100.044, 0.236, 19.811))
+    alife_create("esc_fantom", "l08_yantar", vector():set(123.804, 2.320, -2.160))
 end
 
 function spawn_fantom_rostok2()
-    local obj = alife():create("esc_maroder", vector():set(2.308, -0.652, 139.217), 65909, 1415)
-    local obj = alife():create("esc_maroder", vector():set(24.592, -0.012, 127.313), 66949, 1414)
-    local obj = alife():create("esc_killer_td", vector():set(2.308, -0.652, 139.217), 65909, 1415)
-    local obj = alife():create("esc_killer_td", vector():set(24.592, -0.012, 127.313), 66949, 1414)
-    local obj = alife():create("esc_killer_td", vector():set(2.308, -0.652, 139.217), 65909, 1415)
+    alife_create("esc_maroder", "l10_radar", vector():set(2.308, -0.652, 139.217))
+    alife_create("esc_maroder", "l10_radar", vector():set(24.592, -0.012, 127.313))
+    alife_create("esc_killer_td", "l10_radar", vector():set(2.308, -0.652, 139.217))
+    alife_create("esc_killer_td", "l10_radar", vector():set(24.592, -0.012, 127.313))
+    alife_create("esc_killer_td", "l10_radar", vector():set(2.308, -0.652, 139.217))
 end
 
 function klondayk_dialog_have(task, objective)
@@ -1738,55 +1590,55 @@ function klondayk_dialog_done(first_speaker, second_speaker)
 end
 
 function spawn_snake_eye()
-    braad_test.spawn_ai_location("af_snake_eye", vector():set(552.751, -50.520, -36.600), 192189, 2043)
+    braad_test.spawn_ai_location("af_snake_eye", vector():set(552.751, -50.520, -36.600), "l10_radar")
 end
 
 function spawn_klondayk()
-    braad_test.spawn_ai_location("af_cristall", vector():set(190.526, 5.345, -359.187), 387916, 938)
-    braad_test.spawn_ai_location("af_spirit_1", vector():set(191.481, 5.093, -360.930), 388539, 938)
-    braad_test.spawn_ai_location("af_armor_2", vector():set(189.628, 4.896, -362.038), 387561, 938)
-    braad_test.spawn_ai_location("af_dik_3", vector():set(185.816, 4.948, -363.462), 384913, 938)
-    braad_test.spawn_ai_location("af_babka_1", vector():set(191.187, 4.745, -368.528), 388230, 938)
-    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(190.758, 4.786, -374.357), 388221, 938)
-    braad_test.spawn_ai_location("af_electra_moonlight", vector():set(189.895, 5.193, -379.251), 387536, 938)
-    braad_test.spawn_ai_location("gold_art", vector():set(191.046, 4.733, -369.546), 388228, 938)
-    braad_test.spawn_ai_location("af_fireball", vector():set(190.978, 4.709, -368.628), 388229, 938)
-    braad_test.spawn_ai_location("af_soul", vector():set(182.695, 6.618, -378.693), 382819, 938)
-    braad_test.spawn_ai_location("af_kol_3", vector():set(179.378, 6.95, -358.228), 379612, 938)
+    braad_test.spawn_ai_location("af_cristall", vector():set(190.526, 5.345, -359.187), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_spirit_1", vector():set(191.481, 5.093, -360.930), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_armor_2", vector():set(189.628, 4.896, -362.038), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_dik_3", vector():set(185.816, 4.948, -363.462), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_babka_1", vector():set(191.187, 4.745, -368.528), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_dummy_battery_red", vector():set(190.758, 4.786, -374.357), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_electra_moonlight", vector():set(189.895, 5.193, -379.251), "l04_darkvalley")
+    braad_test.spawn_ai_location("gold_art", vector():set(191.046, 4.733, -369.546), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_fireball", vector():set(190.978, 4.709, -368.628), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_soul", vector():set(182.695, 6.618, -378.693), "l04_darkvalley")
+    braad_test.spawn_ai_location("af_kol_3", vector():set(179.378, 6.95, -358.228), "l04_darkvalley")
 end
 
 ---------------------------------spiders-------------------------------------
 
 function spawn_spider1()
-    local obj = alife():create("spider_agro", vector():set(128.924, 3.230, -206.777), 361811, 431)
+    spawn_patrol("spider_agro", "pauk_agro")
 end
 
 function spawn_spider2()
-    local obj = alife():create("spider_les", vector():set(373.856, -49.730, -237.446), 106112, 2080)
-    local obj = alife():create("spider_les", vector():set(413.670, -48.803, -227.824), 131172, 2108)
-    local obj = alife():create("spider_les", vector():set(334.717, -47.901, -125.067), 84263, 2093)
-    local obj = alife():create("wolk_radar", vector():set(413.670, -48.803, -227.824), 131172, 2108)
-    local obj = alife():create("wolk_radar", vector():set(334.717, -47.901, -125.067), 84263, 2093)
+    spawn_patrol("spider_les", "pauk_les")
+    spawn_patrol("spider_les", "pauk_les")
+    spawn_patrol("spider_les", "pauk_les")
+    spawn_patrol("wolk_radar", "pauk_les")
+    spawn_patrol("wolk_radar", "pauk_les")
 end
 
 function spawn_spider3()
-    local obj = alife():create("spider_x10", vector():set(-1.941, -7.430, -78.968), 5274, 2661)
+    spawn_patrol("spider_x10", "pauk_x10")
 end
 
 function spawn_spider33()
-    local obj = alife():create("spider_mini_x10", vector():set(-1.941, -7.350, -78.968), 5274, 2661)
+    spawn_patrol("spider_mini_x10", "pauk_x10")
 end
 
 function spawn_spider4()
-    local obj = alife():create("spider_final", vector():set(824.188, -0.003, -32.871), 357644, 2296)
-    local obj = alife():create("spider_final", vector():set(813.678, -0.011, -16.927), 353048, 2296)
-    local obj = alife():create("spider_final", vector():set(832.321, 0.001, -81.274), 361337, 2308)
+    spawn_patrol("spider_final", "pauk_final")
+    spawn_patrol("spider_final", "pauk_final")
+    spawn_patrol("spider_final", "pauk_final")
 end
 
 --------------------------------amulets--------------------------------------
 
 function spawn_almaz()
-    local obj = alife():create("almaz", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(), db.actor:id())
+    alife():create("almaz", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(), db.actor:id())
 end
 
 function amulet_dialog_done()
@@ -1799,96 +1651,45 @@ function amulet_dialog_done()
 end
 
 function spawn_strannik()
-    local sobj = alife():create("esc_strannik", vector():set(30.836, -3.372, -47.197), 20741, 1997)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_strannik.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_strannik)
+    local obj = alife_create("esc_strannik", "l10_radar", vector():set(30.836, -3.372, -47.197))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_strannik.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_strannik)
 end
 
-local amulac = {{
-    position = {
-        x = -317.235,
-        y = -21.579,
-        z = 238.755
-    },
-    gv = 1787,
-    lv = 28958
-}, {
-    position = {
-        x = -248.432,
-        y = -20.432,
-        z = 226.1154
-    },
-    gv = 1764,
-    lv = 85854
-}, {
-    position = {
-        x = -282.210,
-        y = -22.027,
-        z = 202.414
-    },
-    gv = 1789,
-    lv = 59967
-}}
+local amulac = 
+{
+    [1] = {x = -317.235, y = -21.579, z = 238.755},
+    [2] = {x = -248.432, y = -20.432, z = 226.1154},
+    [3] = {x = -282.210, y = -22.027, z = 202.414}
+}
 
 function spawn_amulet_2()
-    local a = amulac[math.random(table.getn(amulac))]
-    braad_test.spawn_ai_location("amulet_2", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = amulac[math.random(1, 3)]
+    braad_test.spawn_ai_location("amulet_2", vector():set(a.x, a.y, a.z), "l07_military")
 end
 
-local amulx = {{
-    position = {
-        x = -94.025,
-        y = 21.870,
-        z = -32.926
-    },
-    gv = 1529,
-    lv = 597
-}, {
-    position = {
-        x = -132.756,
-        y = 19.085,
-        z = -21.006
-    },
-    gv = 1529,
-    lv = 2
-}, {
-    position = {
-        x = -54.398,
-        y = 11.595,
-        z = -11.302
-    },
-    gv = 1530,
-    lv = 1942
-}, {
-    position = {
-        x = -255.149,
-        y = -18.730,
-        z = -44.537
-    },
-    gv = 1458,
-    lv = 50
-}, {
-    position = {
-        x = -125.762,
-        y = 21.585,
-        z = -19.418
-    },
-    gv = 1529,
-    lv = 84
-}}
+local amulx = 
+{
+    [1] = {x = -94.025, y = 21.870, z = -32.926},
+    [2] = {x = -132.756, y = 19.085, z = -21.006},
+    [3] = {x = -54.398, y = 11.595, z = -11.302},
+    [4] = {x = -125.762, y = 21.585, z = -19.418}
+}
 
 function spawn_amulet_4()
-    local a = amulx[math.random(table.getn(amulx))]
-    braad_test.spawn_ai_location("amulet_4", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = amulx[math.random(1, 4)]
+    braad_test.spawn_ai_location("amulet_4", vector():set(a.x, a.y, a.z), "l08u_brainlab")
 end
 
 function spawn_gromov1()
-    local obj = alife():create("esc_gromov1", vector():set(9.355, -34.317, 13.147), 2414, 2513)
+    local obj = alife_create("esc_gromov1", "l12u_control_monolith", vector():set(9.355, -34.317, 13.147))
     alife():assign_story_id(obj.id, story_ids.esc_gromov1)
 end
 
 function delete_gromov()
-    dsh.timeout(100, function()
+    db.actor:stop_talk()
+    dsh.wait_condition(function() return not db.actor:is_talking() end, 
+    function()
         local obj = alife():story_object(story_ids.esc_gromov)
         if obj then
             alife():release(obj, true)
@@ -1906,17 +1707,17 @@ function delete_osoz()
 end
 
 function spawn_osoznanny1()
-    local obj = alife():create("esc_osoznanny1", vector():set(12.393, -34.482, 11.700), 2596, 2513)
-    local obj = alife():create("esc_osoznanny1", vector():set(18.666, -34.486, 11.701), 3020, 2514)
-    local obj = alife():create("esc_osoznanny1", vector():set(12.627, -34.487, 14.684), 2555, 2513)
-    local obj = alife():create("esc_osoznanny1", vector():set(18.655, -34.484, 14.681), 3022, 2514)
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(12.393, -34.482, 11.700))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(18.666, -34.486, 11.701))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(12.627, -34.487, 14.684))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(18.655, -34.484, 14.681))
 end
 
 function spawn_osoznanny2()
-    local obj = alife():create("esc_osoznanny1", vector():set(7.863, -34.472, 27.492), 2372, 2512)
-    local obj = alife():create("esc_osoznanny1", vector():set(7.416, -34.463, 8.589), 2345, 2513)
-    local obj = alife():create("esc_osoznanny1", vector():set(0.030, -34.480, 8.142), 1977, 2481)
-    local obj = alife():create("esc_osoznanny1", vector():set(-0.047, -34.479, 27.739), 1993, 2512)
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(7.863, -34.472, 27.492))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(7.416, -34.463, 8.589))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(0.030, -34.480, 8.142))
+    alife_create("esc_osoznanny1", "l12u_control_monolith", vector():set(-0.047, -34.479, 27.739))
 end
 
 function delete_osoznanny1()
@@ -1929,7 +1730,7 @@ function delete_osoznanny1()
 end
 
 function spawn_spider5()
-    local obj = alife():create("spider_x16", vector():set(-55.576, -19.088, -104.992), 19947, 1456)
+    spawn_patrol("spider_x16", "x16_izlom")
 end
 
 function del_sledopyt()
@@ -1947,9 +1748,9 @@ function del_graf()
 end
 
 function spawn_sled()
-    local sobj = alife():create("esc_sled", vector():set(16.455, 0.928, 65.988), 26199, 2659)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_sled.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_sled)
+    local obj = alife_create("esc_sled", "l12_stancia_2", vector():set(16.455, 0.928, 65.988))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_sled.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_sled)
 end
 
 function delete_sled()
@@ -1960,9 +1761,9 @@ function delete_sled()
 end
 
 function spawn_spider_sar()
-    local obj = alife():create("spider_sar1", vector():set(12.366, 13.315, -20.156), 3859, 2451)
-    local obj = alife():create("spider_sar1", vector():set(-0.388, 12.280, 12.374), 1627, 2445)
-    local obj = alife():create("spider_sar2", vector():set(57.747, 12.030, 8.228), 9607, 2437)
-    local obj = alife():create("spider_sar2", vector():set(42.169, 11.885, 29.167), 7569, 2440)
-    local obj = alife():create("spider_sar3", vector():set(46.647, 16.973, 26.513), 8249, 2462)
+    spawn_patrol("spider_sar1", "pauk_sar1")
+    spawn_patrol("spider_sar1", "pauk_sar1")
+    spawn_patrol("spider_sar2", "pauk_sar2")
+    spawn_patrol("spider_sar2", "pauk_sar2")
+    spawn_patrol("spider_sar3", "pauk_sar3")
 end

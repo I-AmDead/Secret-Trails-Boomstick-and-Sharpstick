@@ -1,0 +1,116 @@
+[_effect]
+version                          = 1
+max_particles                    = 73
+flags                            = 300033
+action_count                     = 7
+ 
+[sprite]
+shader                           = particles\alpha_add
+texture                          = pfx\pfx_ani-fire01.bmp
+ 
+[frame]
+tex_size                         = 0.090820, 0.142578
+reserved                         = 93.000000, 146.000000
+dim_x                            = 11
+frame_count                      = 77
+speed                            = 30.000000
+ 
+[velocity_scale]
+value                            = 0.000000, 0.020000, 0.000000
+ 
+[align_to_path]
+default_rotation                 = 0.000000, 0.000000, 0.000000
+ 
+[action_0000]
+action_type                      = 21
+version                          = 1
+action_name                      = source
+flags                            = 1
+flt_0000                         = 0.000000
+flt_0001                         = 1.000000
+flt_0002                         = 0.000000
+flt_0003                         = 37.000000
+flt_0004                         = 0.000000
+bool_0000                        = true
+bool_0001                        = true
+ 
+[domain_action_0000_0000]
+type                             = 0
+v0                               = 1.000000, 1.000000, 1.000000
+v1                               = 0.000000, 0.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0000_0001]
+type                             = 5
+v0                               = 0.000000, 2.000000, 0.000000
+v1                               = 0.000000, 0.100000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0000_0002]
+type                             = 0
+v0                               = 0.000000, 0.000000, 0.000000
+v1                               = 0.000000, 0.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0000_0003]
+type                             = 1
+v0                               = 0.030000, 0.030000, 1.000000
+v1                               = 0.010000, 0.010000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0000_0004]
+type                             = 5
+v0                               = 0.000000, 2.000000, 0.000000
+v1                               = 7.000000, 10.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[action_0001]
+action_type                      = 10
+version                          = 1
+action_name                      = killold
+flags                            = 1
+flt_0000                         = 2.000000
+bool_0000                        = false
+ 
+[action_0002]
+action_type                      = 23
+version                          = 1
+action_name                      = targetcolor
+flags                            = 1
+flt_0000                         = 0.000000
+flt_0001                         = 2.000000
+flt_0002                         = 0.000000
+flt_0003                         = 1.000000
+vec_0000                         = 1.000000, 0.500000, 0.500000
+ 
+[action_0003]
+action_type                      = 24
+version                          = 1
+action_name                      = targetsize
+flags                            = 1
+vec_0000                         = 3.000000, 3.000000, 0.400000
+vec_0001                         = 0.100000, 0.100000, 1.000000
+ 
+[action_0004]
+action_type                      = 27
+version                          = 1
+action_name                      = targetvelocity
+flags                            = 1
+flt_0000                         = 2.000000
+vec_0000                         = 0.000000, 0.000000, 0.000000
+bool_0000                        = true
+ 
+[action_0005]
+action_type                      = 8
+version                          = 1
+action_name                      = gravity
+flags                            = 1
+vec_0000                         = 0.000000, -7.000000, 0.000000
+bool_0000                        = false
+ 
+[action_0006]
+action_type                      = 12
+version                          = 1
+action_name                      = move
+flags                            = 1
+ 

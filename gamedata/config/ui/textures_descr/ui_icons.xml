@@ -419,4 +419,9 @@
         <texture id="ui_npc_maroder_exo" x="1485" y="216" width="165" height="108" />
         <texture id="ui_npc_maroder_mask" x="1485" y="432" width="165" height="108" />
     </file>
+
+    <file name="ui\pda\target">
+        <texture id="target_icon" x="0" y="0" width="128" height="128" />
+    </file>
+
 </w>

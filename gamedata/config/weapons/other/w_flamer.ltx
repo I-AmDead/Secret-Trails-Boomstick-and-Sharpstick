@@ -1,7 +1,9 @@
-[wpn_flame]:identity_immunities,base_wpn_zoom
-class					= WP_LR300				; Класс оружия
+[wpn_flame]:identity_immunities,base_wpn_zoom				; Класс оружия
 $spawn					= "sm\wpn\Heavy\Flamer"	; Название оружия в СДК
-weapon_class			= assault_rifle			; Раздел для магазина мультиплеера
+scheduled                               = off
+cform                                   = skeleton
+class					= WP_LR300
+weapon_class				= assault_rifle			; Раздел для магазина мультиплеера
 cost					= 30000					
 
 ;******[Описание, иконки]******;
@@ -9,15 +11,12 @@ inv_name				= wpn-flame_name
 inv_name_short			= wpn-flame_name
 description				= wpn-flame_readme
 
+inv_weight				= 7.5
+
 inv_grid_width     = 5
 inv_grid_height    = 2
 inv_grid_x         = 11
 inv_grid_y         = 79
-
-upgr_icon_x			= 295
-upgr_icon_y			= 220
-upgr_icon_width		= 295
-upgr_icon_height   	= 110
 
 scope_x					= 0
 scope_y					= 0
@@ -41,16 +40,12 @@ hand_dependence			= 2
 single_handed			= 0
 animation_slot			= 2
 
-;******[Аддоны и апгрейды]******;
-silencer_status			= 0		; 1 - встроенный
-
 
 ;******[Характеристики оружия]******;
 sprint_allowed			= true
 slot					= 2
 single_handed			= 0				; Одноручное\Двуручное
 
-inv_weight				= 7.5
 control_inertion_factor	= 3.8f			; Коэфицент чувствительности мышки
 crosshair_inertion   	= 9
 
@@ -127,11 +122,6 @@ rpm_empty_click 	 	= 200
 zoom_enabled			= false	; Можно целиться
 zoom_rotate_time		= 0.4	; Скорость зума
 
-;******[Визуальная часть]******;
-; DoF
-zoom_dof				= 0.2, 1.0, 180
-reload_dof				= 0.0, 0.5, 5, 9.0
-
 ; Visual
 visual                  = dynamics\weapons\wpn_flamer\wpn_flamer.ogf
 hud						= wpn_flamer_hud
@@ -167,13 +157,6 @@ light_var_color         = 0.05
 light_var_range         = 0.8
 light_time              = 2
 
-silencer_light_color	= 0.6,0.5,0.3
-silencer_light_range	= 0.01
-silencer_light_var_color= 0.05
-silencer_light_var_range= 0.5
-silencer_light_time		= 0.2
-
-;******[Звуковая часть]******;
 snd_draw				= weapons\flamer\draw
 snd_holster				= weapons\flamer\holster
 snd_shoot				= weapons\flamer\flamer_shoot
@@ -181,9 +164,10 @@ snd_shoot1				= weapons\flamer\flamer_shoot1
 snd_shoot2				= weapons\flamer\flamer_shoot2
 snd_shoot3				= weapons\flamer\flamer_shoot3
 snd_empty				= weapons\gen_empty, 0.5
-snd_reload				= weapons\flamer\flamer_reload, 0.7	
+snd_reload				= weapons\flamer\flamer_reload, 0.7
+snd_mag_shot				= $silent
 
-[wpn_flamer_hud]
+[wpn_flamer_hud]:hud_base
 zoom_hide_crosshair        = false
 attach_place_idx        = 0
 item_visual                = dynamics\weapons\wpn_flamer\wpn_flamer_hud
@@ -273,6 +257,3 @@ impair		= 1
 buck_shot		= 16
 tracer		= off
 wm_size         = 0.05
-
-
-[wpn_rg10_ognemet]:wpn_flame

@@ -1,65 +1,44 @@
 #include "common.h"
 #include "DX11\tess.h"
 
-// if you use ccw then corresponding coefs are w, v, u
-// if you use cw then corresponding coefs are u, v, w
-[domain("tri")] v2p_bumped main(HS_CONSTANT_DATA_OUTPUT input, float3 uvw
-                                : SV_DomainLocation, const OutputPatch<p_bumped, 3> bp) {
+[domain("tri")]
+v2p_bumped main(HS_CONSTANT_DATA_OUTPUT input, float3 uvw : SV_DomainLocation, const OutputPatch<p_bumped, 3> bp) 
+{
     v2p_bumped output;
 
-    // interpolate in screen space
-    // uvw = uvw*input.www/dot(uvw,input.www);
-
     float minc = min(uvw.x, min(uvw.y, uvw.z));
-    // if the vertex is not on an edge of the original triangle
-    [flatten] if (minc != 0.0f)
-    {
-        // if we are at not the centre of the triangle
-        [flatten] if (((1.0f / 3.0f) - minc) > 0.01f)
-        {
-            // solving for making the smallest uvw component 0.0f as this means the bigger ones sum to 1.0f and
-            // are on the edge of the triangle
-            // if vertex gets too close to the edge move it on to the edge to replace to old edge vertex
-            // otherwise keep fK at 1.0f to restore the old uvw position
-
-            float fK = (1.0f / 3.0f) / ((1.0f / 3.0f) - minc);
-            fK = minc < 0.1 ? fK : 1.0f;
-            // update uvw
+    if (minc != 0.0f) {
+        float threshold = (1.0f / 3.0f) - minc;
+        if (threshold > 0.01f) {
+            float fK = (1.0f / 3.0f) / threshold;
+            fK = minc < 0.1f ? fK : 1.0f;
             uvw = lerp((1.0f / 3.0f).xxx, uvw, fK);
         }
     }
 
-    float u = uvw.x;
-    float v = uvw.y;
-    float w = uvw.z;
+    float3 weights = uvw;
+    output.tcdh = weights.x * bp[2].tcdh + weights.y * bp[1].tcdh + weights.z * bp[0].tcdh;
+    output.position = weights.x * bp[2].position + weights.y * bp[1].position + weights.z * bp[0].position;
 
-    output.tcdh = bp[0].tcdh * w + bp[1].tcdh * v + bp[2].tcdh * u;
-    output.position = bp[0].position * w + bp[1].position * v + bp[2].position * u;
+    output.M1 = weights.x * bp[2].M1 + weights.y * bp[1].M1 + weights.z * bp[0].M1;
+    output.M2 = weights.x * bp[2].M2 + weights.y * bp[1].M2 + weights.z * bp[0].M2;
+    output.M3 = weights.x * bp[2].M3 + weights.y * bp[1].M3 + weights.z * bp[0].M3;
+    float3 Normal = normalize(float3(output.M1.z, output.M2.z, output.M3.z));
 
-    float3 M1 = bp[0].M1 * w + bp[1].M1 * v + bp[2].M1 * u;
-    output.M1 = M1;
-    float3 M2 = bp[0].M2 * w + bp[1].M2 * v + bp[2].M2 * u;
-    output.M2 = M2;
-    float3 M3 = bp[0].M3 * w + bp[1].M3 * v + bp[2].M3 * u;
-    output.M3 = M3;
-    float3 Normal = normalize(float3(M1.z, M2.z, M3.z));
-
-    output.RDrops = bp[0].RDrops * w + bp[1].RDrops * v + bp[2].RDrops * u;
+    output.RDrops = weights.x * bp[2].RDrops + weights.y * bp[1].RDrops + weights.z * bp[0].RDrops;
 
     float3 triPos = output.position.xyz;
 
 #ifdef USE_TDETAIL
-    output.tcdbump = bp[0].tcdbump * w + bp[1].tcdbump * v + bp[2].tcdbump * u;
+    output.tcdbump = weights.x * bp[2].tcdbump + weights.y * bp[1].tcdbump + weights.z * bp[0].tcdbump;
 #endif
 #ifdef USE_LM_HEMI
-    output.lmh = bp[0].lmh * w + bp[1].lmh * v + bp[2].lmh * u;
+    output.lmh = weights.x * bp[2].lmh + weights.y * bp[1].lmh + weights.z * bp[0].lmh;
 #endif
 
 #if TESS_PN
     float3 N[3] = {float3(bp[0].M1.z, bp[0].M2.z, bp[0].M3.z), float3(bp[1].M1.z, bp[1].M2.z, bp[1].M3.z), float3(bp[2].M1.z, bp[2].M2.z, bp[2].M3.z)};
-
     float3 P[3] = {bp[0].position.xyz, bp[1].position.xyz, bp[2].position.xyz};
-
     ComputePatchVertex(P, N, uvw, input.patch, output.position.xyz, Normal);
 #endif
 
@@ -71,12 +50,13 @@
 #endif
 #endif
 
-    [flatten] if (minc == 0) output.position.xyz = triPos;
+    if (minc == 0) output.position.xyz = triPos;
 
-    // output.M1.z = Normal.x;
-    // output.M2.z = Normal.y;
-    // output.M3.z = Normal.z;
     output.hpos = mul(m_P, float4(output.position.xyz, 1));
+    output.hpos_curr = weights.x * bp[2].hpos_curr + weights.y * bp[1].hpos_curr + weights.z * bp[0].hpos_curr;
+    output.hpos_old = weights.x * bp[2].hpos_old + weights.y * bp[1].hpos_old + weights.z * bp[0].hpos_old;
+
+    output.hpos.xy = get_taa_jitter(output.hpos);
 
     return output;
 }

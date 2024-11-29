@@ -3,7 +3,6 @@ opt_breath = true
 -- новое сохранение настроек
 local file_name = "secret_trails_settings.ltx" -- имя файла
 local full_name = getFS():update_path("$app_data_root$", file_name)
-
 log1("full_name=" .. full_name)
 
 function read_if_exists(setting_ini, section, p, def)
@@ -16,9 +15,7 @@ end
 
 function init()
     local setting_ini = ini_file(full_name, false) -- false тут нужен, значит файл будет искать как указано, без привязки к configs
-
     opt_breath = read_if_exists(setting_ini, "setting", "option_breath", opt_breath)
-    log3("init() opt breath %s", opt_breath)
 end
 
 function save()
@@ -27,8 +24,5 @@ function save()
 
     -- пишем как обычно для ini
     setting_ini:w_bool("setting", "option_breath", opt_breath)
-
-    log3("save() opt breath %s", opt_breath)
-
     setting_ini:save() -- сохраняем
 end

@@ -1,11 +1,11 @@
 /*
-	=====================================================================
-	Addon      : Parallax Reflex Sights
-	Link       : https://www.moddb.com/mods/stalker-anomaly/addons/parallax-reflex-sights
-	Authors    : LVutner, party_50
-	Date       : 06.02.2024
-	Last Edit  : 06.02.2024
-	=====================================================================
+    =====================================================================
+    Addon      : Parallax Reflex Sights
+    Link       : https://www.moddb.com/mods/stalker-anomaly/addons/parallax-reflex-sights
+    Authors    : LVutner, party_50
+    Date       : 06.02.2024
+    Last Edit  : 06.02.2024
+    =====================================================================
 */
 
 #include "common.h"
@@ -21,14 +21,15 @@
 // Then you will have to adjust models so that mark texture point is exactly in center
 // and edit aim position in configs.
 
-#define OFFSET_X 0.005			// (default 0.004) Normal vector x coordinate max absolute value which is considered 0
-#define OFFSET_Y 0.005			// (default 0.05) Normal vector y coordinate max absolute value which is considered 0
-#define PROJECT_DISTANCE 1000.0	// (default 20.0) Distance to projected mark
-#define SIZE_FACTOR 100.0			// (default 4.0) Mark size factor
+#define OFFSET_X 0.005 // (default 0.004) Normal vector x coordinate max absolute value which is considered 0
+#define OFFSET_Y 0.005 // (default 0.05) Normal vector y coordinate max absolute value which is considered 0
+#define PROJECT_DISTANCE 350.0 // (default 20.0) Distance to projected mark
+#define SIZE_FACTOR 100.0 // (default 4.0) Mark size factor
 
 uniform float4 m_affects;
 uniform float4 mark_number;
 uniform float4 mark_color;
+uniform float4 m_hud_params;
 
 // Vertex to Pixel struct
 struct vf
@@ -51,12 +52,12 @@ float get_noise(float2 co) { return (frac(sin(dot(co.xy, float2(12.9898, 78.233)
 
 float2 mark_adjust(float2 pos)
 {
-	int current_mark = int(mark_number.x);
-	int mark_count = int(mark_number.y);
-	
-	int sides = 1;
-	while (sides * sides < mark_count)
-		sides += 1;
+    int current_mark = int(mark_number.x);
+    int mark_count = int(mark_number.y);
+
+    int sides = 1;
+    while (sides * sides < mark_count)
+        sides += 1;
 
     float2 d = float2(current_mark % sides, current_mark / sides);
     float2 p = clamp(d + pos, d, d + 1) / sides;
@@ -89,29 +90,29 @@ float3x3 cotangent_frame(float3 N, float3 P, float2 uv)
 // If N.xy vector is close to zero, make it zero
 float3 offset_normal(float3 N)
 {
-	if (N.x > 0)
-		N.x = max(N.x, OFFSET_X) - OFFSET_X;
-	else
-		N.x = min(N.x, -OFFSET_X) + OFFSET_X;
-	
-	if (N.y > 0)
-		N.y = max(N.y, OFFSET_Y) - OFFSET_Y;
-	else
-		N.y = min(N.y, -OFFSET_Y) + OFFSET_Y;
-		
-	return N;
+    if (N.x > 0)
+        N.x = max(N.x, OFFSET_X) - OFFSET_X;
+    else
+        N.x = min(N.x, -OFFSET_X) + OFFSET_X;
+
+    if (N.y > 0)
+        N.y = max(N.y, OFFSET_Y) - OFFSET_Y;
+    else
+        N.y = min(N.y, -OFFSET_Y) + OFFSET_Y;
+
+    return N;
 }
 
-float4 main(vf I): SV_Target
+float4 main(vf I) : SV_Target
 {
     // Derive view direction from view space position
     float3 V = -I.v_pos;
-    //V.x = -V.x;
+    // V.x = -V.x;
 
     // Build cotangent frame
     // Important: In theory, you don't need to do this. It should be possible to pass TBN straight from VS
     float3x3 TBN = cotangent_frame(offset_normal(I.v_nrm), I.v_pos, I.tc0.xy);
-    
+
     // Transform view direction to tangent space, and normalize (Just in case)
     float3 V_tangent = normalize(float3(dot(V, TBN[0]), dot(V, TBN[1]), dot(V, TBN[2])));
 
@@ -119,10 +120,13 @@ float4 main(vf I): SV_Target
     // Important: PROJECT_DISTANCE can be positive or negative, 0 = no projection at all
     float2 parallax_tc = I.tc0 - V_tangent.xy * PROJECT_DISTANCE;
 
+    float factor = screen_res.y / 2160.0;
+    factor = factor * (1.0 / (m_hud_params.z / 0.45));
+
     // Upscaling the texture
     parallax_tc.xy = (parallax_tc.xy + SIZE_FACTOR * 0.5) / SIZE_FACTOR;
-    parallax_tc.x = resize(parallax_tc.x, screen_res.x / screen_res.y, 0);
-    parallax_tc.x = resize(parallax_tc.x, 0.75, 0);
+    parallax_tc.x = resize(parallax_tc.x, factor, 0);
+    parallax_tc.y = resize(parallax_tc.y, factor, 0);
 
     if (mark_number.y > 0)
     {
@@ -137,8 +141,7 @@ float4 main(vf I): SV_Target
     mark_texture.rgb += mark_color.rgb;
 
     // Noise
-    mark_texture.rgb = mark_texture.rgb * 0.9;
-    float noise = get_noise(I.tc0 * timers.z) * 1.1;
+    float noise = get_noise(I.tc0 * timers.z) * 0.9;
     mark_texture.r += noise;
     mark_texture.g += noise;
     mark_texture.b += noise;

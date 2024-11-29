@@ -34,14 +34,11 @@ local function on_actor_update(delta)
     db.actor.radiation = add_rad - d
 
     if d > 0.000001 then
-        if cur_rad_protection == 0 and d > 0.005 then
+        if d > 0.005 then
             anom_rad = d / (1 - cur_rad_protection)
             last_anom_hit_time = 0
         else
-            table.insert(art_hits, 1, {
-                time_since_hit = 0,
-                hit_power = d
-            })
+            table.insert(art_hits, 1, {time_since_hit = 0, hit_power = d})
         end
     end
 
@@ -139,6 +136,10 @@ end
 
 function get_radiation_dose()
     return RAD_DOSE / 100
+end
+
+function get_rad_level()
+	return anom_rad
 end
 
 function attach(sm)

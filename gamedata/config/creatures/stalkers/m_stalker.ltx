@@ -27,7 +27,6 @@ dmg_norm_turn_right_0   = 1,    0.2,      0.2,   0.65,     0.2
 
 norm_escape_0       = 1,    0.2,      1.3,   0.65,     1.3
 norm_escape_00        = 1,    0.2,      1.3,   0.65,     1.3
-norm_escape_00				=	1,	  0.2,	    1.3,   0.65,     1.3
 
 norm_walk_fwd_1       = 1,    0.2,      0.2,   0.65,     0.2
 norm_jump_end       = 1,    0.2,      1.3,   0.21,     1.3
@@ -408,7 +407,7 @@ $spawn              = "stalkers\stalker"      ; option for Level Editor
 $npc              = on              ; option for Level Editor
 visual              = actors\hero\stalker_novice.ogf; option for Level Editor
 corpse_visual         = equipments\item_rukzak.ogf  ;actors\hero\stalker_novice.ogf; option for Level Editor
-custom_data           = stalker_custom_data.ltx   ; option for Level Editor
+;custom_data           = stalker_custom_data.ltx   ; option for Level Editor
 character_profile       = default           ; option for Level Editor
 use_single_item_rule			= off	; AI Additions
 
@@ -465,25 +464,38 @@ self_decrease_quant       = 250 ; in milliseconds
 self_decrease_factor      = 0.95  ; fading factor
 killer_clsids         = Z_MINCER,Z_GALANT,ZS_BFUZZ,ZS_MBALD,ZS_GALAN,ZS_MINCE
 sound_perceive_section      = stalker_sound_perceive
+max_hear_dist = 60
+
+;---SELECTORS---------------------------------------------------------
+; fSearchRange,fEnemySurround,fTotalCover,fTravelWeight,fLightWeight,fLaziness,fTotalViewVectorWeight,fCoverFromMemberWeight,fOptMemberDistance,fOptMemberDistanceWeight,fMinMemberDistance,fMinMemberDistanceWeight,fMaxMemberDistance,fMaxMemberDistanceWeight,fMemberViewDeviationWeight,fCoverFromEnemyWeight,fOptEnemyDistance,fOptEnemyDistanceWeight,fMinEnemyDistance,fMinEnemyDistanceWeight,fMaxEnemyDistance,fMaxEnemyDistanceWeight,fEnemyViewDeviationWeight
+selector_attack = 20.0, 300.0, 50.0, 0.0, 10.0, 200.0, 100.0, 40.0, 40.0, 10.0, 10.0, 450.0, 80.0, 150.0, 1000.0, 300.0, 10.0, 1000.0, 10.0, 500.0, 120.0, 100.0, 2000.0
+; fSearchRange,fOptEnemyDistance,fOptEnemyDistanceWeight,fMinEnemyDistance,fMinEnemyDistanceWeight,fMaxEnemyDistance,fMaxEnemyDistanceWeight
+selector_free_hunting = 20.0, 20.0, 1000.0, 0.0, 10000.0, 1000.0, 10000.0, 
+; fSearchRange,fCoverFromEnemyWeight
+selector_reload = 20.0, -2000.0,
+; fSearchRange,fCoverFromEnemyWeight,fOptMemberDistance,fOptMemberDistanceWeight,fMinEnemyDistance,fMinEnemyDistanceWeight,fMaxEnemyDistance,fMaxEnemyDistanceWeight,fOptEnemyDistance,fOptEnemyDistanceWeight,fMinEnemyDistance,fMinEnemyDistanceWeight,fMaxEnemyDistance,fMaxEnemyDistanceWeight
+selector_cover = 20.0, -1000.0, 30.0, 0.0, 0.0, 100000.0, 100000.0, 1000.0,
+; fSearchRange,fCoverFromEnemyWeight,fOptEnemyDistance,fOptEnemyDistanceWeight,fMinEnemyDistance,fMinEnemyDistanceWeight,fMaxEnemyDistance,fMaxEnemyDistanceWeight,fEnemyViewDeviationWeight
+selector_retreat = 20.0, -100.0, 1000.0, 1000.0, 0.0, 0.0, 100000.0, 0.0, 000.0
 
 ;---VISIBILITY--------------------------------------------------------
 vision_danger_section		= stalker_vision_danger
 vision_free_section			= stalker_vision_free
-eye_fov						= 100  ;угол обзора НПС
-eye_range					= 80 ;расстояние зрения НПС	
+eye_fov					= 100  ;угол обзора НПС
+eye_range				= 80 ;расстояние зрения НПС	
 far_plane_factor			= 1.0 ; фактор дальности тумана
 fog_density_factor			= 0.1 ; 0.05 ; фактор плотности тумана
 
 ;---MEMORY------------------------------------------------------------
-DynamicObjectsCount       = 32
-DynamicSoundsCount        = 32
-DynamicHitCount         = 32
+DynamicObjectsCount			= 32
+DynamicSoundsCount			= 32
+DynamicHitCount				= 32
 
 ;---ENEMY------------------------------------------------------------
-ignore_monster_threshold	= 0.3 ;0.0
-max_ignore_distance			= 30 ;15 ;10
-panic_threshold				= 0 ;0.02 ;0.1
-retreat_threshold	 		= 0.2  ;0.1
+ignore_monster_threshold		= 0.0
+max_ignore_distance			= 15
+panic_threshold				= 0.02
+retreat_threshold	 		= 0.2
 DamagedThreshold	 		= 0.3
 
 ;---SOUND PLAYER------------------------------------------------------
@@ -544,30 +556,30 @@ crouch_type					= -1 ; 0 - crouch a little, 1 - crouch full; -1 - random crouch
 
 ;---FIRE DISPERSIONS--------------------------------------------------
 
-disp_walk_stand         = 7
-disp_walk_crouch        = 3
-disp_run_stand          = 10
-disp_run_crouch         = 5
-disp_stand_stand        = 4
-disp_stand_crouch       = 2
-disp_stand_stand_zoom     = 0.5
-disp_stand_crouch_zoom      = 0.25
+disp_walk_stand				= 7
+disp_walk_crouch			= 4
+disp_run_stand				= 7
+disp_run_crouch				= 4
+disp_stand_stand			= 3.5
+disp_stand_crouch			= 1.5
+disp_stand_stand_zoom			= 1.1 ;1
+disp_stand_crouch_zoom			= 1.25;1
 
 ;---FIRE QUEUE PARAMETERS
-weapon_min_queue_size_far   = 1
-weapon_max_queue_size_far   = 6
-weapon_min_queue_interval_far = 500
-weapon_max_queue_interval_far = 700
+weapon_min_queue_size_far		= 1
+weapon_max_queue_size_far		= 8
+weapon_min_queue_interval_far		= 500
+weapon_max_queue_interval_far		= 800
 
-weapon_min_queue_size_medium  = 4
-weapon_max_queue_size_medium  = 6
-weapon_min_queue_interval_medium = 400
-weapon_max_queue_interval_medium = 600
+weapon_min_queue_size_medium		= 2
+weapon_max_queue_size_medium		= 10
+weapon_min_queue_interval_medium	= 400
+weapon_max_queue_interval_medium	= 650
 
-weapon_min_queue_size_close   = 4
-weapon_max_queue_size_close   = 10
-weapon_min_queue_interval_close = 300
-weapon_max_queue_interval_close = 500
+weapon_min_queue_size_close		= 4
+weapon_max_queue_size_close		= 15
+weapon_min_queue_interval_close		= 300
+weapon_max_queue_interval_close		= 400
 
 
 ;---CRITICAL WOUND------------------------------------------------------------------
@@ -643,31 +655,6 @@ spec_rank            = veteran
 [stalker_sakharov]:stalker_trader
 $spawn              = "stalkers\stalker_sakharov"
 immunities_sect         = stalker_immunities_sakharov
-condition_sect          = my_stalker_condition
-
-[my_stalker_condition]
-satiety_v					= 0.0				;скорость уменьшения сытости со временем
-radiation_v					= 1.0				;скорость уменьшения радиации
-satiety_power_v				= 1.0				;увеличение силы при уменьшении сытости 
-satiety_health_v			= 1.0				;увеличение здоровья при уменьшении сытости 
-satiety_critical			= 0.0				;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
-radiation_health_v			= 0.0				;уменьшение здоровья при воздействии радиации
-morale_v					= 0.0				;скорость восстановления морали 						
-health_hit_part				= 0.0				;процент хита, уходящий на отнимание здоровья
-power_hit_part				= 0.1				;процент хита, уходящий на отнимание силы
-psy_health_v				= 0.1				;скорость восстановления psy-здоровья
-
-;открытые раны
-bleeding_v					= 0.0				;потеря крови при номинальной ране в секунду
-wound_incarnation_v			= 1.0				;крутизна кривой заживления (какой процент раны заживет в игровую секунду)
-min_wound_size				= 1.0				;минимальный размер раны, после которого она считается зажившей
-
-sleep_health				= 1.0		;1.5				;коэффициенты скоростей изменения параметров во время сна
-sleep_power					= 1.0		;1.5
-sleep_satiety				= 1.0		;0.8
-sleep_radiation				= 1.0		;1.1
-sleep_psy_health			= 1.0
-
 
 [stalker_immunities_sakharov]
 burn_immunity         = 0.0       ;коэффициенты иммунитета
@@ -684,37 +671,7 @@ wound_2_immunity        = 0.0
 ----------------------------stalker_new-------------------------------
 
 [stalker_new]:stalker
-$spawn              = "stalkers\stalker_new"
 immunities_sect         = stalker_immunities_new
-condition_sect          = new_stalker_condition
-
-[new_stalker_condition]
-satiety_v         = 0.00001       ;скорость уменьшения сытости со временем
-radiation_v         = 0.0001        ;скорость уменьшения радиации
-satiety_power_v       = 0.0005        ;увеличение силы при уменьшении сытости
-satiety_health_v      = 0.0 ;0.0001       ;увеличение здоровья при уменьшении сытости
-satiety_critical      = 0.0         ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
-radiation_health_v      = 0.000         ;уменьшение здоровья при воздействии радиации
-morale_v          = 0.0001        ;скорость восстановления морали
-health_hit_part       = 0.05        ;процент хита, уходящий на отнимание здоровья
-power_hit_part        = 0.0        ;процент хита, уходящий на отнимание силы
-psy_health_v        = 0.01          ; скорость восстановления psy-здоровья
-health_restore_v                        = 0.00001                                        ;скорость восстановления здоровья
-
-sleep_health        = 1.0         ;коэффициенты скоростей изменения параметров во время сна
-sleep_power         = 1.0
-sleep_satiety       = 1.0
-sleep_radiation       = 1.0
-sleep_psy_health      = 1.0
-
-;---LIMPING STATE-----------------------------------------------------
-use_limping_state     = off
-limping_threshold     = 0.5
-
-;открытые раны
-bleeding_v          = 0.0           ;потеря крови при номинальной ране в секунду
-wound_incarnation_v     = 0.001         ;крутизна кривой заживления (какой процент раны останется после заживления в игровую секунду)
-min_wound_size        = 0.01
 
 [stalker_immunities_new]
 burn_immunity			= 0.02		   ;коэффициенты иммунитета 
@@ -731,99 +688,35 @@ wound_2_immunity                = 0.01
 ------------------------------new_trader---------------------------------
 
 [new_trader]:stalker
-$spawn = "stalkers\new_trader"      ; option for Level Editor
-use_single_item_rule = off
-can_select_items   = off
 immunities_sect         = new_trader_immunities
-condition_sect          = new_trader_condition
-
-
-[new_trader_condition]
-satiety_v         = 0.00001       ;скорость уменьшения сытости со временем
-radiation_v         = 0.0001        ;скорость уменьшения радиации
-satiety_power_v       = 0.0005        ;увеличение силы при уменьшении сытости
-satiety_health_v      = 0.0 ;0.0001       ;увеличение здоровья при уменьшении сытости
-satiety_critical      = 0.0         ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
-radiation_health_v      = 0.000         ;уменьшение здоровья при воздействии радиации
-morale_v          = 0.0001        ;скорость восстановления морали
-health_hit_part       = 0.05        ;процент хита, уходящий на отнимание здоровья
-power_hit_part        = 0.05        ;процент хита, уходящий на отнимание силы
-psy_health_v        = 0.01          ; скорость восстановления psy-здоровья
-health_restore_v                        = 0.00001                                        ;скорость восстановления здоровья
-
-sleep_health        = 1.0         ;коэффициенты скоростей изменения параметров во время сна
-sleep_power         = 1.0
-sleep_satiety       = 1.0
-sleep_radiation       = 1.0
-sleep_psy_health      = 1.0
-
-;---LIMPING STATE-----------------------------------------------------
-use_limping_state     = off
-limping_threshold     = 0.5
-
-;открытые раны
-bleeding_v          = 0.0           ;потеря крови при номинальной ране в секунду
-wound_incarnation_v     = 0.001         ;крутизна кривой заживления (какой процент раны останется после заживления в игровую секунду)
-min_wound_size        = 0.01
 
 [new_trader_immunities]
-burn_immunity			= 0.05								;коэффициенты иммунитета 
+burn_immunity			= 0.05
 strike_immunity			= 0.05
 shock_immunity			= 0.05
 wound_immunity			= 0.05
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
-chemical_burn_immunity	= 0.05
+chemical_burn_immunity		= 0.05
 explosion_immunity		= 1.0
 fire_wound_immunity		= 0.00000000001
-wound_2_immunity        = 0.0000000001
+wound_2_immunity		= 0.0000000001
 
 
 ----------------------------stalker_mervin-------------------------------
 
 [stalker_mervin]:stalker
-$spawn              = "stalkers\stalker_mervin"
 immunities_sect         = stalker_immunities_mervin
-condition_sect          = mervin_stalker_condition
-
-
-[mervin_stalker_condition]
-satiety_v         = 0.00001       ;скорость уменьшения сытости со временем
-radiation_v         = 0.0001        ;скорость уменьшения радиации
-satiety_power_v       = 0.0005        ;увеличение силы при уменьшении сытости
-satiety_health_v      = 0.0 ;0.0001       ;увеличение здоровья при уменьшении сытости
-satiety_critical      = 0.0         ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
-radiation_health_v      = 0.000         ;уменьшение здоровья при воздействии радиации
-morale_v          = 0.0001        ;скорость восстановления морали
-health_hit_part       = 0.0005         ;процент хита, уходящий на отнимание здоровья
-power_hit_part        = 0.0        ;процент хита, уходящий на отнимание силы
-psy_health_v        = 0.01          ; скорость восстановления psy-здоровья
-health_restore_v                        = 0.00001                                        ;скорость восстановления здоровья
-
-sleep_health        = 1.0         ;коэффициенты скоростей изменения параметров во время сна
-sleep_power         = 1.0
-sleep_satiety       = 1.0
-sleep_radiation       = 1.0
-sleep_psy_health      = 1.0
-
-;---LIMPING STATE-----------------------------------------------------
-use_limping_state     = off
-limping_threshold     = 0.5
-
-;открытые раны
-bleeding_v          = 0.0           ;потеря крови при номинальной ране в секунду
-wound_incarnation_v     = 0.001         ;крутизна кривой заживления (какой процент раны останется после заживления в игровую секунду)
-min_wound_size        = 0.01
 
 [stalker_immunities_mervin]
-burn_immunity			= 1.0		   ;коэффициенты иммунитета 
+burn_immunity			= 1.0
 strike_immunity			= 0.0
 shock_immunity			= 0.0
 wound_immunity			= 0.0
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
-chemical_burn_immunity	= 0.0
+chemical_burn_immunity		= 0.0
 explosion_immunity		= 0.0
 fire_wound_immunity		= 0.0
-wound_2_immunity        = 0.0
+wound_2_immunity		= 0.0
 

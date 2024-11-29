@@ -32,11 +32,7 @@ function action_abuse_hit:initialize()
     self.object:set_desired_position()
     self.object:set_desired_direction()
 
-    state_mgr.set_state(self.object, "punch", nil, nil, {
-        look_object = db.actor
-    }, {
-        animation = true
-    })
+    state_mgr.set_state(script_name(), self.object, "punch", nil, nil, {look_object = db.actor}, {animation = true})
     xr_sound.set_sound_play(self.object, "use_abuse")
 end
 function action_abuse_hit:execute()
@@ -51,9 +47,9 @@ function CAbuseManager:__init(npc, storage)
     self.npc = npc
     self.a = storage
     self.enable = true
-    self.abuse_rate = 1
-    self.abuse_value = 0
-    self.abuse_threshold = 1
+    self.abuse_rate = 3
+    self.abuse_value = 1
+    self.abuse_threshold = 3
     self.last_update = nil
 end
 function CAbuseManager:SetAbuseRate(rate)

@@ -7,7 +7,6 @@
 #include "zone_includes.ltx"
 
 #include "creatures\actor.ltx"
-#include "creatures\actor_legs.ltx"
 #include "creatures\game_relations.ltx"
 #include "creatures\helicopter.ltx"
 #include "creatures\monster_includes.ltx"
@@ -17,7 +16,6 @@
 #include "dsh\dsh.ltx"
 
 #include "misc\antreg_objects.ltx"
-#include "misc\custom_storage.ltx"
 #include "misc\effectors.ltx"
 #include "misc\item_includes.ltx"
 #include "misc\postprocess.ltx"
@@ -430,10 +428,14 @@ swing_fast_speed		= 0.5	;1
 ; Замена шейдеров в визуалах
 [vis_shaders_replace]
 ; шейдер тесселяции: models\model -> models\model_pn
+anomaly_weapons = models\window,models\transparent, models\lfo_glass_lens_weapons,models\transparent
 anomaly_weapons\hands = models\model,models\model_pn, models\weapons,models\model_pn
-actors   = models\model,models\model_pn, models\weapons,models\model_pn, models\artefact,models\model_pn, models\artefact2,models\model_pn
+dynamics\weapons = models\window,models\transparent, models\lfo_glass_lens_weapons,models\transparent
+actors   = models\model,models\model_pn, models\weapons,models\model_pn
+dynamics\weapons\wpn_eat = models\model,models\model_pn, models\weapons,models\model_pn
 monsters = models\model,models\model_pn
 gwr = models\model,models\model_pn, models\weapons,models\model_pn
+gwr\equipment\energy_drink = ; на энергетике тесселяция раздувает банку
 
 [shader_params_export]
 pnv_color

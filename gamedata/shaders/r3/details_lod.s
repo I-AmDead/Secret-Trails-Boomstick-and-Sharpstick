@@ -16,24 +16,11 @@ function pass_setup_common (shader, t_base, t_second, t_detail)
 end
 
 function l_special	(shader, t_base, t_second, t_detail)
-
 	local	opt = shader:dx10Options()
-
---	pre_pass --
-	if ( opt:dx10_msaa_alphatest_atoc() ) then
-		shader	:begin	("lod","lod_atoc")
-		details_lod.pass_setup_common(shader, t_base, t_second, t_detail)
-		shader  :dx10color_write_enable( false, false, false, false)
-		shader	:dx10atoc( true )
-	end
 
 --	main pass --
 	shader	:begin	("lod","lod")
 	details_lod.pass_setup_common(shader, t_base, t_second, t_detail)	
-	if ( opt:dx10_msaa_alphatest_atoc() ) then
-		shader	:dx10zfunc(cmp_func.equal)
-	end
-
 end
 
 --[[

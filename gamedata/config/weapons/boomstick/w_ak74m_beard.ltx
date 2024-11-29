@@ -76,7 +76,7 @@ ammo_elapsed      = 45
 ammo_mag_size     = 45
 startup_ammo      = 90
 
-scope_names 	      = eot, c-more, 0kp2, ac10632, d0cter, aim_low, e0t2, rmr, kobra, ekp8_02, okp, 1p29, pka, pso2, 1pn93, deltapoint, 1pn93n2_1gs, 1p78gs, compm4s, rakurs, kemper, usp1, 1p76, mepro, ekp8_18
+scope_names 	      = eot, c-more, 0kp2, ac10632, d0cter, aim_low, rmr, kobra, ekp8_02, okp, 1p29, pka, pso2, 1pn93, deltapoint, 1pn93n2_1gs, 1p78gs, compm4s, rakurs, kemper, usp1, 1p76, mepro, ekp8_18
 scope_status      = 2
 
 scope_respawn                         = wpn_ak74m_beard
@@ -86,7 +86,6 @@ scope_respawn_0kp2                    = wpn_ak74m_beard_0kp2
 scope_respawn_ac10632                 = wpn_ak74m_beard_ac10632
 scope_respawn_d0cter                  = wpn_ak74m_beard_d0cter
 scope_respawn_aim_low                = wpn_ak74m_beard_aim_low
-scope_respawn_e0t2                    = wpn_ak74m_beard_e0t2
 scope_respawn_rmr                     = wpn_ak74m_beard_rmr
 scope_respawn_kobra                   = wpn_ak74m_beard_kobra
 scope_respawn_ekp8_02                 = wpn_ak74m_beard_ekp8_02
@@ -706,27 +705,6 @@ aim_hud_offset_rot_16x9  = -0.000138,0.008110,0.000000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_ak74m_beard_e0t2]:wpn_ak74m_beard
-
-visual  = dynamics\weapons\wpn_ak74m_beard\wpn_ak74m_beard_world.ogf
-
-hud  = wpn_ak74m_beard_e0t2_hud
-
-inv_weight  = 3.227
-
-scope_name 	     = e0t2
-scope_x	 = 140
-scope_y	 = -8
-
-[wpn_ak74m_beard_e0t2_hud]:wpn_ak74m_beard_hud
-
-item_visual  = dynamics\weapons\wpn_ak74m_beard\wpn_ak74m_beard_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.057300,-0.010000,-0.039300
-aim_hud_offset_rot_16x9  = 0.000362,0.007610,0.000000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_ak74m_beard_deltapoint]:wpn_ak74m_beard
 
 inv_weight	 = 3.041
@@ -900,9 +878,3 @@ aim_hud_offset_rot_16x9  = 0.005862,0.007610,0.000000
 
 hands_position_16x9  = -0.008201,-0.007951,-0.224080
 hands_orientation_16x9	 = 0.418684,0.339962,0.000000
-
-
-;-----------------------------------------------------------------------------------------------------
-
-
-[wpn_ak75]:wpn_ak74m_beard

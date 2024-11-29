@@ -78,11 +78,10 @@ float4 main(p_screen I) : SV_Target
                                frac(sin(dot(I.tc0 - fmod(I.tc0, float2(3.0, 3.0) / screen_res.xy), float2(12.0, 78.0) + (timers.x))) * 78372.0),
                                frac(sin(dot(I.tc0, float2(12.0, 78.0) + (timers.x))) * 37857.0));
 
-
         if (pnv_param_1.z > 1)
         {
-            gbuffer_data gbd = gbuffer_load_data(I.tc0, I.hpos, 0);
-            image.rgb = infrared(gbd, image, gbd.P.z, I.hpos, I.tc0);
+            gbuffer_data gbd = gbuffer_load_data(I.tc0, I.hpos.xy, 0);
+            image.rgb = infrared(gbd, image, gbd.P.z, I.hpos.xy, I.tc0);
         }
         else
         {

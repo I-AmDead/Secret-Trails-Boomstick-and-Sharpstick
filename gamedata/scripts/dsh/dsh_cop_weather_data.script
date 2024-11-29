@@ -8,6 +8,15 @@
 --
 -- tr_w  - таблица со списком возможных циклов (для перехода с данного)
 -- и их весов
+
+local wind_velocity_settings = {
+    foggy     = function() return math.random(200) end,
+    clear     = function() return math.random(100, 350) end,
+    cloudy    = function() return math.random(250, 600) end,
+    rain      = function() return math.random(500, 850) end,
+    rain_thun = function() return math.random(700, 1000) end,
+}
+
 local default_tr_w = {
     clear = 1,
     clear2 = 1,
@@ -30,42 +39,56 @@ local default_tr_w = {
     veryfoggy = 1
 }
 
-local default_cycle = {
+local clear_cycle = {
+    wind_velocity = wind_velocity_settings.clear,
     end_w = 1,
     tr_w = default_tr_w
 }
 
-local storm_tr_w = {
-    swtc_dark = 1,
-    rain = 1,
-    rain_thun = 1
+local cloudy_cycle = {
+    wind_velocity = wind_velocity_settings.cloudy,
+    end_w = 1,
+    tr_w = default_tr_w
 }
 
-local storm_cycle = {
+local rain_cycle = {
+    wind_velocity = wind_velocity_settings.rain,
     end_w = 1,
-    tr_w = storm_tr_w
+    tr_w = default_tr_w
+}
+
+local rain_thunder_cycle = {
+    wind_velocity = wind_velocity_settings.rain_thun,
+    end_w = 1,
+    tr_w = default_tr_w
+}
+
+local foggy_cycle = {
+    wind_velocity = wind_velocity_settings.foggy,
+    end_w = 1,
+    tr_w = default_tr_w
 }
 
 local weather_transitions_default = {
-    clear = default_cycle,
-    clear2 = default_cycle,
-    clear3 = default_cycle,
-    clear4 = default_cycle,
-    swtc = default_cycle,
+    clear = clear_cycle,
+    clear2 = clear_cycle,
+    clear3 = clear_cycle,
+    clear4 = clear_cycle,
+    swtc = clear_cycle,
 
-    cloudy = default_cycle,
-    cloudy2 = default_cycle,
-    cloudy2rm = default_cycle,
-    cloudy3 = default_cycle,
-    cloudy4 = default_cycle,
-    swtc_dark = default_cycle,
+    cloudy = cloudy_cycle,
+    cloudy2 = cloudy_cycle,
+    cloudy2rm = cloudy_cycle,
+    cloudy3 = cloudy_cycle,
+    cloudy4 = cloudy_cycle,
+    swtc_dark = cloudy_cycle,
 
-    rain = default_cycle,
-    rain_thun = default_cycle,
+    rain = rain_cycle,
+    rain_thun = rain_thunder_cycle,
 
-    foggy = default_cycle,
-    foggy_ns = default_cycle,
-    veryfoggy = default_cycle
+    foggy = foggy_cycle,
+    foggy_ns = foggy_cycle,
+    veryfoggy = foggy_cycle
 }
 
 local weather_transitions = {
@@ -74,4 +97,8 @@ local weather_transitions = {
 
 function get_data()
     return weather_transitions
+end
+
+function get_data_common(data)
+    return weather_transitions_default[data]
 end

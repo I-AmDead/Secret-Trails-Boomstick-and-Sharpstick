@@ -18,19 +18,22 @@ end
 
 local function on_torrid_spawn()
 
-    if not ogse.var_exists("torrid_spawn") then
+    if not ogse.var_exists("torrid_spawn") and level.name() ~= "fake_start" then
+        -- Deep
+        spawn_anomaly("fireball_electric_zone", vector():set(-341.45, 9.54, 513.49), 1201493, 2942, 5.5, "test_provoda_move_1.anm")
+        spawn_anomaly("fireball_electric_zone", vector():set(-341.45, 9.54, 513.49), 1201493, 2942, 5.5, "test_provoda_move_2.anm")
+
         -- Escape
-        spawn_anomaly("fireball_acidic_zone", vector():set(344.510009765625, 18.9400005340576, 244.570007324219), 594270, 0, 2.5, "esc_locomotive_acid_fly.anm")
+        spawn_anomaly("fireball_acidic_zone", vector():set(344.510, 18.940, 244.570), 594270, 0, 2.5, "esc_locomotive_acid_fly.anm")
 
         -- Garbage
 
         -- Agroprom
-        spawn_anomaly("fireball_zone", vector():set(-130.199996948242, 1, -206.990005493164), 425955, 416, 2.5, "agroprom_up_down_fly.anm")
-        spawn_anomaly("fireball_electric_zone", vector():set(27.5014667510986, -1.53132355213165, -220.694671630859), 226060, 416, 2.5, "agroprom_zharka.anm")
+        spawn_anomaly("fireball_zone", vector():set(-130.199, 1, -206.990), 425955, 416, 2.5, "agroprom_up_down_fly.anm")
 
         -- Darkvalley
-        spawn_anomaly("fireball_acidic_zone", vector():set(-10.7600002288818, 2.86999988555908, -179.300003051758), 316473, 811, 2.5, "dar_korridor_swarmfly.anm")
-        spawn_anomaly("fireball_zone", vector():set(-5.28926992416382, 5.61406993865967, -177.418823242188), 282554, 811, 2.5, "val_fireball.anm")
+        spawn_anomaly("fireball_acidic_zone", vector():set(-10.760, 2.869, -179.300), 316473, 811, 2.5, "dar_korridor_swarmfly.anm")
+        spawn_anomaly("fireball_zone", vector():set(-5.289, 5.614, -177.418), 282554, 811, 2.5, "val_fireball.anm")
 
         -- Bar
 
@@ -39,12 +42,11 @@ local function on_torrid_spawn()
         -- Yantar
 
         -- Military
-        spawn_anomaly("fireball_acidic_zone", vector():set(99.5008087158203, -12.0492277145386, 205.726104736328), 272, 1545, 2.5, "lestat_military1.anm")
-        spawn_anomaly("fireball_zone", vector():set(-259.704620361328, -22.5972309112549, 205.726104736328), 272, 1545, 2.5, "military_torrid1.anm")
-        spawn_anomaly("fireball_zone", vector():set(-10.7600002288818, 2.86999988555908, -179.300003051758), 272, 1545, 2.5, "military_fireball1.anm")
+        spawn_anomaly("fireball_acidic_zone", vector():set(99.500, -12.049, 205.726), 272, 1545, 2.5, "lestat_military1.anm")
 
         -- Radar
-        spawn_anomaly("fireball_acidic_zone", vector():set(571.35546875, -54.0999946594238, -251.17936706543), 197671, 1862, 2.5, "rad_mowing_fly.anm")
+        spawn_anomaly("fireball_acidic_zone", vector():set(571.355, -54.099, -251.179), 197671, 1862, 2.5, "rad_mowing_fly.anm")
+
         -- Pripyat
 
         ogse.save_var("torrid_spawn", true)
@@ -52,7 +54,12 @@ local function on_torrid_spawn()
 end
 
 local function on_field_spawn()
-    if not ogse.var_exists("field_spawn") then
+    if not ogse.var_exists("field_spawn") and level.name() ~= "fake_start" then
+        -- Deep
+        spawn_anomaly("zone_field_acidic_strong", vector():set(7.574, 0.537, 402.582), 601448, 2940, 13.5)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(-0.229, 1.193, 409.050), 590585, 2940, 7.5)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(-3.891, 0.383, 417.677), 584592, 2940, 10.5)
+
         -- Escape
 
         -- Garbage
@@ -60,36 +67,31 @@ local function on_field_spawn()
         -- Agroprom
 
         -- Darkvalley
-        spawn_anomaly("zone_field_psychic_average", vector():set(-87.3583602905273, 5.11227798461914, -92.896728515625), 72296, 811, 15)
-        spawn_anomaly("zone_field_thermal_average", vector():set(130.025375366211, 3.06630706787109, -480.447601318359), 309930, 811, 18.7)
+        spawn_anomaly("zone_field_psychic_average", vector():set(-87.358, 5.112, -92.896), 72296, 811, 15)
+        spawn_anomaly("zone_field_thermal_average", vector():set(130.025, 3.066, -480.447), 309930, 811, 18.7)
 
         -- Bar
 
         -- Rostok
 
         -- Yantar
-        spawn_anomaly("zone_field_acidic_average", vector():set(155.025772094727, -0.960178017616272, 82.4550704956055), 144946, 1438, 15)
-        spawn_anomaly("zone_field_acidic_strong", vector():set(-38.2955131530762, -12.9340896606445, -242.421432495117), 50202, 1438, 15)
-        spawn_anomaly("zone_field_acidic_strong", vector():set(-20.7303066253662, -13.2373895645142, -233.176940917969), 57004, 1438, 9.3)
-        spawn_anomaly("zone_field_psychic_weak", vector():set(-143.495956420898, 1.54538404941559, -129.092132568359), 16569, 1438, 17)
-        spawn_anomaly("zone_field_thermal_average", vector():set(-174.881072998047, 2.15163588523865, -145.620483398438), 5463, 1438, 11.8)
+        spawn_anomaly("zone_field_acidic_average", vector():set(115.557, -0.960, 80.461), 122448, 1520, 15)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(-38.295, -12.934, -242.421), 50202, 1438, 15)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(-20.730, -13.237, -233.176), 57004, 1438, 9.3)
+        spawn_anomaly("zone_field_thermal_average", vector():set(-174.800, 2.151, -145.620), 5463, 1438, 11.8)
+        spawn_anomaly("zone_field_psychic_strong", vector():set(-62.588, 0.517, 8.518), 54989, 1480, 30)
 
         -- Military
-        spawn_anomaly("zone_field_acidic_strong", vector():set(87.5686569213867, -12.4162139892578, 144.717971801758), 365604, 1545, 37.2)
-        spawn_anomaly("zone_field_acidic_strong", vector():set(107.347496032715, -12.7217721939087, 198.013366699219), 363829, 1545, 34.68)
-        spawn_anomaly("zone_field_psychic_strong", vector():set(-203.016021728516, 3.83330702781677, 443.755401611328), 117395, 1545, 15)
-        spawn_anomaly("zone_field_psychic_strong", vector():set(-35.4548530578613, -20.3446254730225, 365.325164794922), 259581, 1545, 16.46)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(87.568, -12.416, 144.717), 365604, 1545, 37.2)
+        spawn_anomaly("zone_field_acidic_strong", vector():set(107.347, -12.721, 198.0133), 363829, 1545, 34.68)
+        spawn_anomaly("zone_field_psychic_strong", vector():set(-203.016, 3.833, 443.755), 117395, 1545, 15)
+        spawn_anomaly("zone_field_psychic_strong", vector():set(-35.454, -20.344, 365.325), 259581, 1545, 16.46)
 
         -- Radar
 
         -- Pripyat
 
         ogse.save_var("field_spawn", true)
-    end
-
-    if not ogse.var_exists("yantar_psycho") then
-        spawn_anomaly("zone_field_psychic_strong", vector():set(-62.588707, 0.517456, 8.518841), 54989, 1480, 30)
-        ogse.save_var("yantar_psycho", true)
     end
 end
 

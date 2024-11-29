@@ -52,57 +52,6 @@ function load_job(sj, gname, type, squad, groups)
         }
         table.insert(sj, t)
     end
-    -- ХИМЕРА В ГОСТЯХ У ЛИСА 	
-    if type == "esc_chimera" then
-        t = {
-            section = "logic@chimeras1",
-            idle = 0,
-            prior = 10,
-            state = {0},
-            in_rest = "",
-            out_rest = ""
-        }
-        table.insert(sj, t)
-        t = {
-            section = "logic@chimeras2",
-            idle = 0,
-            prior = 10,
-            state = {0},
-            in_rest = "",
-            out_rest = ""
-        }
-        table.insert(sj, t)
-        t = {
-            section = "logic@chimeras3",
-            idle = 0,
-            prior = 10,
-            state = {0},
-            in_rest = "",
-            out_rest = ""
-        }
-        table.insert(sj, t)
-    end
-    -- ПСЕВДОГИГАНТ НА ПРОГУЛКЕ	
-    if type == "esc_giant" then
-        t = {
-            section = "logic@giants1",
-            idle = 0,
-            prior = 10,
-            state = {0},
-            in_rest = "",
-            out_rest = ""
-        }
-        table.insert(sj, t)
-        t = {
-            section = "logic@giants2",
-            idle = 0,
-            prior = 10,
-            state = {0},
-            in_rest = "",
-            out_rest = ""
-        }
-        table.insert(sj, t)
-    end
     -- СНОРКИ НА БАЗЕ БОРОВА	
     if type == "val_snork_new" then
         t = {
@@ -628,6 +577,36 @@ function load_job(sj, gname, type, squad, groups)
         table.insert(sj, t)
         t = {
             section = "logic@aesmon4",
+            idle = 0,
+            prior = 10,
+            state = {0},
+            online = true,
+            in_rest = "",
+            out_rest = ""
+        }
+        table.insert(sj, t)
+        t = {
+            section = "logic@aesmon5",
+            idle = 0,
+            prior = 10,
+            state = {0},
+            online = true,
+            in_rest = "",
+            out_rest = ""
+        }
+        table.insert(sj, t)
+        t = {
+            section = "logic@aesmon6",
+            idle = 0,
+            prior = 10,
+            state = {0},
+            online = true,
+            in_rest = "",
+            out_rest = ""
+        }
+        table.insert(sj, t)
+        t = {
+            section = "logic@aesmon7",
             idle = 0,
             prior = 10,
             state = {0},
@@ -2405,12 +2384,12 @@ function load_states(gname, type)
     end
     if type == "esc_chimera" then
         return function(gulag)
-            return 0
+            return nil
         end
     end
     if type == "esc_giant" then
         return function(gulag)
-            return 0
+            return nil
         end
     end
     if type == "val_snork_new" then
@@ -2480,7 +2459,6 @@ function load_states(gname, type)
     end
     if type == "prizrak_sad" then
         return function(gulag)
-            local actor = db.actor
             if has_alife_info("actor_na_scladah") then
                 return 1 -- без клыка
             else
@@ -2603,12 +2581,6 @@ function checkMonster(npc_community, gulag_type)
     end
     if gulag_type == "esc_zver_most" then
         return npc_community == "pseudodog"
-    end
-    if gulag_type == "esc_chimera" then
-        return npc_community == "chimera"
-    end
-    if gulag_type == "esc_giant" then
-        return npc_community == "bloodsucker"
     end
     if gulag_type == "val_snork_new" then
         return npc_community == "snork"

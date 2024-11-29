@@ -39,9 +39,19 @@ vf main(v_vert v)
     P = watermove(P);
 
     o.tbase = unpack_tc_base(v.uv, v.T.w, v.B.w); // copy tc
+
+#ifdef RIVER_WATER
+    o.tdist0 = float2(o.tbase.x, o.tbase.y + timers.z * W_RIVER_SPEED_0);
+    o.tdist1 = float2(o.tbase.x, o.tbase.y + timers.z * W_RIVER_SPEED_1);
+    o.tdist0 *= W_RIVER_SCALE;
+    o.tdist1 *= W_RIVER_SCALE;
+#else // RIVER_WATER
     o.tdist0 = watermove_tc(o.tbase * W_DISTORT_BASE_TILE_0, P.xz, W_DISTORT_AMP_0);
     o.tdist1 = watermove_tc(o.tbase * W_DISTORT_BASE_TILE_1, P.xz, W_DISTORT_AMP_1);
+#endif // RIVER_WATER
+
     o.hpos = mul(m_VP, P); // xform, input in world coords
+    o.hpos.xy = get_taa_jitter(o.hpos);
     o.fog = saturate(calc_fogging(v.P)); // Always do this for forward geometry (AMD)
 
 //	Igor: for additional depth dest

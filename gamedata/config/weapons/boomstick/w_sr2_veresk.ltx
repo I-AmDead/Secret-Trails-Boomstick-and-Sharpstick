@@ -301,6 +301,7 @@ anm_idle_moving_crouch_slow_speed_k         = 0.4
 anm_idle_moving_crouch_slow_empty_speed_k   = 0.4
 anm_idle_moving_crouch_slow_jammed_speed_k  = 0.4
 
+shell_point = 0.0083,0.0295,-0.0048
 shell_dir = 0.0, 1.0, 0.0
 shell_bone = wpn_body
 
@@ -309,9 +310,8 @@ freelook_z_offset_mul	  = 0.3
 fire_bone = wpn_body
 
 fire_point = 0.000000,0.037504,0.189238
-shell_point	 = -0.010000,0.000000,0.010000
 shoot_point = 0.000000,0.037504,0.189238
-;-------------------------------------------------------------------------------------Addons-------------------------------------------------------------------------------------
+
 [wpn_sr2_veresk_kp_sr2]:wpn_sr2_veresk 
       ;1
 scope_name       = kp_sr2
@@ -333,46 +333,3 @@ aim_hud_offset_rot_16x9  = -0.000300,0.006550,-0.002000
 
 hands_position_16x9  = 0.060700,-0.075000,-0.121500
 hands_orientation_16x9	 = 0.346998,0.470001,-0.177002
-
-
-;------------------------------------------------------------------------------------------------
-[wpn_sr2_veresk_sr2_upkit]:wpn_sr2_veresk,tactical_torch,red_laser
-      ;1
-inv_grid_width      = 4
-inv_grid_height     = 2
-inv_grid_x  = 68
-inv_grid_y  = 2
-
-parent_section    = wpn_sr2_veresk_sr2_upkit
-
-inv_name  = st_wpn_sr2_veresk_sr2_upkit
-inv_name_short    = st_wpn_sr2_veresk_sr2_upkit
-description       = st_wpn_sr2_veresk_sr2_upkit_descr
-
-inv_weight        = 2.100
-
-hud       = wpn_sr2_veresk_sr2_upkit_hud
-
-visual    = dynamics\weapons\wpn_sr2_veresk\wpn_sr2_veresk_world.ogf
-
-scope_names    = none
-
-dots_number = 6
-
-torch_attach_offset_x = 0.039600
-torch_attach_offset_y = 0.030000
-torch_attach_offset_z = 0.059800
-
-[wpn_sr2_veresk_sr2_upkit_hud]:wpn_sr2_veresk_hud
-
-item_visual       = dynamics\weapons\wpn_sr2_veresk\wpn_sr2_veresk_sr2_upkit_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.044910,-0.000960,-0.034929
-aim_hud_offset_rot_16x9  = -0.000300,0.006550,-0.002000
-
-hands_position_16x9  = 0.060700,-0.075000,-0.121500
-hands_orientation_16x9	 = 0.346998,0.470001,-0.177002
-
-aim_hud_offset_alt_pos_16x9  = 0.002390,0.014640,-0.006030
-aim_hud_offset_alt_rot_16x9  = 0.002100,0.000700,-0.353397
-;------------------------------------------------------------------------------------------------

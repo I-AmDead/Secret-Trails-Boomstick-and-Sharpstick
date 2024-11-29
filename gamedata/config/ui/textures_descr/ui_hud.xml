@@ -65,7 +65,9 @@
         <texture id="ui_hud_frame_voting_dop" x="451" y="306" width="573" height="69" />
         <texture id="ui_hud_frame_voting_dop2" x="451" y="336" width="573" height="39" />
 
-        <texture id="ui_hud_shkala_anim" x="0" y="0" width="200" height="20" />
-        <texture id="ui_hud_shk_anim" x="0" y="20" width="200" height="20" />
+        <texture id="ui_mg_progress_efficiency_empty" x="0" y="10" width="120" height="17" />
+        <texture id="ui_mg_progress_efficiency_full" x="0" y="10" width="120" height="17" />
+        <texture id="ui_mg_progress_empty" x="0" y="50" width="120" height="17" />
+        <texture id="ui_mg_progress_full" x="0" y="50" width="120" height="17" />
     </file>
 </w>

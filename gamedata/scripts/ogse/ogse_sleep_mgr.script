@@ -118,7 +118,7 @@ function begin_sleep2(desired_sleep_time)
     cmd("snd_volume_eff", tostring(snd_volume_eff))
     cmd("snd_volume_music", tostring(snd_volume_music))
 
-    swm_legs.hidden_legs()
+    tt2_fixes.hide_legs()
     level.add_cam_effector("camera_effects\\surge_01.anm", 6666, false, "ogse_sleep_mgr.sleep_finish")
     level.add_pp_effector("surge_fade.ppe", 11, false)
 
@@ -130,6 +130,6 @@ function begin_sleep2(desired_sleep_time)
 end
 
 function sleep_finish()
-    swm_legs.show_legs()
+    tt2_fixes.show_legs()
     xr_effects.enable_ui()
 end

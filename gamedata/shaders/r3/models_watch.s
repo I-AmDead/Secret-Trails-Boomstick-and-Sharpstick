@@ -14,7 +14,7 @@ function normal		(shader, t_base, t_second, t_detail)
 end
 
 function l_special	(shader, t_base, t_second, t_detail)
-	shader:begin	("shadow_direct_model",	"accum_watch")
+	shader:begin	("deffer_model_flat",	"accum_watch")
 			: zb 		(true,false)
 			: fog		(false)
 			: emissive 	(true)

@@ -77,13 +77,12 @@ ammo_elapsed = 10
 ammo_mag_size        = 10
 startup_ammo = 90
 
-scope_names 	 = 1p29, kobra, pso1m21, ps01, okp, specter, pka, ac10632, acog, eot, c-more, gauss_sight, ekp8_02, pso2, d0cter, 1pn93, leupold, aim_low, rmr, aimpoint, point_aimpro, deltapoint, 0kp2, e0t2, pn23, 1pn93n2_1gs, 1p78gs, 1p59, compm4s, rakurs, marchf, kemper, usp1, mepro, ekp8_18, 1p76
+scope_names 	 = 1p29, kobra, ps01, okp, specter, pka, ac10632, acog, eot, c-more, ekp8_02, pso2, d0cter, 1pn93, leupold, aim_low, rmr, aimpoint, point_aimpro, deltapoint, 0kp2, pn23, 1pn93n2_1gs, 1p78gs, 1p59, compm4s, rakurs, marchf, kemper, usp1, mepro, ekp8_18, 1p76
 scope_status = 2
 
 scope_respawn                         = wpn_vintorez_m1
 scope_respawn_1p29                    = wpn_vintorez_m1_1p29
 scope_respawn_kobra                   = wpn_vintorez_m1_kobra
-scope_respawn_pso1m21                 = wpn_vintorez_m1_pso1m21
 scope_respawn_ps01                    = wpn_vintorez_m1_ps01
 scope_respawn_okp                     = wpn_vintorez_m1_okp
 scope_respawn_specter                 = wpn_vintorez_m1_specter
@@ -92,7 +91,6 @@ scope_respawn_ac10632                 = wpn_vintorez_m1_ac10632
 scope_respawn_acog                    = wpn_vintorez_m1_acog
 scope_respawn_eot                     = wpn_vintorez_m1_eot
 scope_respawn_c-more                  = wpn_vintorez_m1_c-more
-scope_respawn_gauss_sight             = wpn_vintorez_m1_gauss_sight
 scope_respawn_ekp8_02                 = wpn_vintorez_m1_ekp8_02
 scope_respawn_pso2                    = wpn_vintorez_m1_pso2
 scope_respawn_d0cter                  = wpn_vintorez_m1_d0cter
@@ -104,7 +102,6 @@ scope_respawn_aimpoint                = wpn_vintorez_m1_aimpoint
 scope_respawn_point_aimpro            = wpn_vintorez_m1_point_aimpro
 scope_respawn_deltapoint              = wpn_vintorez_m1_deltapoint
 scope_respawn_0kp2                    = wpn_vintorez_m1_0kp2
-scope_respawn_e0t2                    = wpn_vintorez_m1_e0t2
 scope_respawn_pn23                    = wpn_vintorez_m1_pn23
 scope_respawn_1pn93n2_1gs             = wpn_vintorez_m1_1pn93n2_1gs
 scope_respawn_1p78gs                  = wpn_vintorez_m1_1p78gs
@@ -371,29 +368,6 @@ fire_bone2	 = muzzle
 ;freelook_z_offset_mul = 0.7
 
 freelook_z_offset_mul	     = 0.6
-;--------------------------------------------------------------------Addons-----------------------------------------------------------------------------
-[wpn_vintorez_m1_pso1m21]:wpn_vintorez_m1
-
-inv_weight	 = 3.920
-
-hud  = wpn_vintorez_m1_pso1m21_hud
-
-scope_name 	 = pso1m21
-scope_x	 = 48
-scope_y	 = -4
-
-[wpn_vintorez_m1_pso1m21_hud]:wpn_vintorez_m1_hud
-
-item_visual  = dynamics\weapons\wpn_vintorez_m1\wpn_vintorez_m1_pso1m21_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.053290,0.011240,-0.043500
-aim_hud_offset_rot_16x9  = 0.003000,0.007482,0.002187
-
-hands_position_16x9  = -0.002400,-0.004000,-0.209700
-hands_orientation_16x9	 = 0.441181,0.474943,0.000000
-
-aim_hud_offset_alt_pos_16x9  = -0.100976,-0.051500,-0.013275
-aim_hud_offset_alt_rot_16x9  = 0.001151,0.014907,0.783423
 
 
 ;----------------------------------------------------------------------------------
@@ -1016,33 +990,6 @@ aim_hud_offset_alt_rot_16x9  = 0.002351,0.014507,0.783423
 
 
 ;----------------------------------------------------------------------------------------
-[wpn_vintorez_m1_e0t2]:wpn_vintorez_m1
-
-inv_weight	 = 3.527
-
-hud  = wpn_vintorez_m1_e0t2_hud
-
-scope_name 	     = e0t2
-scope_x	 = 85
-scope_y	 = -10
-
-visual  = dynamics\weapons\wpn_vintorez_m1\wpn_vintorez_m1_world.ogf
-
-[wpn_vintorez_m1_e0t2_hud]:wpn_vintorez_m1_hud
-
-item_visual	 = dynamics\weapons\wpn_vintorez_m1\wpn_vintorez_m1_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.058190,-0.011360,-0.056200
-aim_hud_offset_rot_16x9  = -0.003700,0.008182,0.002187
-
-hands_position_16x9  = -0.011000,0.002300,-0.240000
-hands_orientation_16x9	 = 0.396182,0.474943,0.000000
-
-aim_hud_offset_alt_pos_16x9  = -0.097175,-0.051500,-0.013275
-aim_hud_offset_alt_rot_16x9  = 0.002351,0.014507,0.783423
-
-
-;----------------------------------------------------------------------------------------
 [wpn_vintorez_m1_pn23]:wpn_vintorez_m1
 
 inv_weight	 = 3.949
@@ -1250,33 +1197,6 @@ aim_hud_offset_rot_16x9  = 0.003000,0.007482,0.002187
 
 hands_position_16x9  = -0.008100,0.002200,-0.240000
 hands_orientation_16x9	 = 0.396182,0.474943,0.000000
-
-aim_hud_offset_alt_pos_16x9  = -0.097175,-0.051500,-0.013275
-aim_hud_offset_alt_rot_16x9  = 0.002351,0.014507,0.783423
-
-
-;-----------------------------------------------------------------------------------------------------
-[wpn_vintorez_m1_gauss_sight]:wpn_vintorez_m1
-
-inv_weight	 = 4.700
-
-hud  = wpn_vintorez_m1_gauss_sight_hud
-
-scope_name 	     = gauss_sight
-scope_x	 = 58
-scope_y	 = 0
-
-visual  = dynamics\weapons\wpn_vintorez_m1\wpn_vintorez_m1_world.ogf
-
-[wpn_vintorez_m1_gauss_sight_hud]:wpn_vintorez_m1_hud
-
-item_visual	 = dynamics\weapons\wpn_vintorez_m1\wpn_vintorez_m1_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.062590,-0.005000,-0.056200
-aim_hud_offset_rot_16x9  = -0.004450,0.008982,0.002187
-
-hands_position_16x9  = -0.006700,-0.001500,-0.240000
-hands_orientation_16x9	 = 0.428182,0.474943,0.000000
 
 aim_hud_offset_alt_pos_16x9  = -0.097175,-0.051500,-0.013275
 aim_hud_offset_alt_rot_16x9  = 0.002351,0.014507,0.783423

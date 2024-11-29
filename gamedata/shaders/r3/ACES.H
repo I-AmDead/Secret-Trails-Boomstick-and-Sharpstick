@@ -2,7 +2,7 @@
 // ACEScg color space and ACEScc log space transformations and Reference Rendering Transform for sRGB monitors
 // Based on code by Stephen Hill (@self_shadow), Unity Technologies and others
 //=================================================================================================
-#define USE_ACES // Use ACES style color management
+//#define USE_ACES // Use ACES style color management
 //=================================================================================================
 static const float PI = 3.14159265;
 static const float HALF_MIN = 6.10352e-5f;

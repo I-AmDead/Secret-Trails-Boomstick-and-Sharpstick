@@ -78,7 +78,7 @@ ammo_elapsed      = 40
 ammo_mag_size     = 40
 startup_ammo      = 90
 
-scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18, 0kp2
+scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, pn23, compm4s, marchf, kemper, mepro, ekp8_18, 0kp2
 scope_status      = 2
 
 scope_respawn                         = wpn_m4_tac
@@ -90,9 +90,7 @@ scope_respawn_c-more                  = wpn_m4_tac_c-more
 scope_respawn_point_aimpro            = wpn_m4_tac_point_aimpro
 scope_respawn_leupold                 = wpn_m4_tac_leupold
 scope_respawn_aimpoint                = wpn_m4_tac_aimpoint
-scope_respawn_e0t2                    = wpn_m4_tac_e0t2
 scope_respawn_pn23                    = wpn_m4_tac_pn23
-scope_respawn_gauss_sight             = wpn_m4_tac_gauss_sight
 scope_respawn_compm4s                 = wpn_m4_tac_compm4s
 scope_respawn_marchf                  = wpn_m4_tac_marchf
 scope_respawn_kemper                  = wpn_m4_tac_kemper
@@ -304,6 +302,7 @@ anm_bore_jammed            = ddm4v5_hand_boring
 
 ;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
 anm_shots		       = ddm4v5_hand_shot, ddm4v5_shoot
+anm_shots_l		       = ddm4v5_hand_shot, ddm4v5_shoot
 
 ;Перезарядка/////////////////////////////////////////////////////////////////////
 anm_reload                           = ddm4v5_hand_reload, ddm4v5_reload
@@ -546,27 +545,6 @@ aim_hud_offset_rot_16x9  = -0.010000,0.002400,0.000000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_tac_e0t2]:wpn_m4_tac
-
-visual	 = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_world.ogf
-
-hud  = wpn_m4_tac_e0t2_hud
-
-inv_weight  = 3.230
-
-scope_name 	     = e0t2
-scope_x	 = 90
-scope_y	 = -14
-
-[wpn_m4_tac_e0t2_hud]:wpn_m4_tac_hud
-
-item_visual  = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.053100,0.008800,-0.040000
-aim_hud_offset_rot_16x9  = -0.010000,0.002400,0.000000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_m4_tac_pn23]:wpn_m4_tac
 
 visual	 = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_world.ogf
@@ -584,27 +562,6 @@ inv_weight  = 3.650
 item_visual  = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.053600,-0.003000,-0.075201
-aim_hud_offset_rot_16x9  = -0.010000,0.002400,0.000000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_tac_gauss_sight]:wpn_m4_tac
-
-visual	 = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_world.ogf
-
-hud	     = wpn_m4_tac_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = -6
-
-inv_weight  = 4.400
-
-[wpn_m4_tac_gauss_sight_hud]:wpn_m4_tac_hud
-
-item_visual  = dynamics\weapons\wpn_m4_tac\wpn_m4_tac_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.053200,0.018200,-0.067400
 aim_hud_offset_rot_16x9  = -0.010000,0.002400,0.000000
 
 

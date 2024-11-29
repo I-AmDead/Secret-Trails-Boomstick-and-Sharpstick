@@ -476,6 +476,8 @@
         <texture id="ui_fakebtn_e" x="1027" y="0" width="1" height="1" />
 
         <texture id="ui_hud_achievement_static" x="1237" y="45" width="337" height="55" />
+        <texture id="ui_hud_ammo_static" x="1237" y="155" width="337" height="55" />
+        <texture id="ui_hud_task_static" x="1237" y="265" width="337" height="55" />
 
         <texture id="ui_btn_02_e" x="999" y="999" width="10" height="10" />
         <texture id="ui_btn_02_d" x="999" y="999" width="10" height="10" />

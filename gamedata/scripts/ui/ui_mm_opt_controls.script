@@ -9,6 +9,10 @@ function opt_controls:__finalize()
 end
 
 function opt_controls:InitControls(xml, handler)
+    xml:InitStatic("option_adv:cap_item_back", self)
+    xml:InitStatic("option_adv:cap_key_back", self)
+    xml:InitStatic("tab_controls:cap_mousesens", self)
+    xml:InitTrackBar("tab_controls:track_mousesens", self)
     xml:InitKeyBinding("tab_controls:key_binding", self)
 
     local btn = xml:Init3tButton("tab_controls:btn_default", self)

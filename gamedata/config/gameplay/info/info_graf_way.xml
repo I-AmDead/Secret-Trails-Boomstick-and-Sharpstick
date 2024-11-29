@@ -76,10 +76,6 @@
 </info_portion>
 <info_portion id="five_urok_dialog_done"></info_portion>
 
-<info_portion id="mervin3_delete">
-    <action>esc_graf.del_mervin3</action>
-</info_portion>
-
 <info_portion id="about_graf_dialog_start">
     <task>about_graf_dialog</task>
 </info_portion>
@@ -386,10 +382,6 @@
 
 ------------------------------------------------------------------------
 
-<info_portion id="izlom_x18_spawn">
-    <action>esc_graf.izlom_x18</action>
-</info_portion>
-
 <info_portion id="izlom_x16_spawn">
     <action>esc_graf.izlom_x16</action>
 </info_portion>
@@ -555,10 +547,6 @@
 <info_portion id="amulet_4_est"></info_portion>
 <info_portion id="amulet_5_est"></info_portion>
 <info_portion id="amulet_6_est"></info_portion>
-
-<info_portion id="strannik_spawn">
-    <action>esc_graf.spawn_strannik</action>
-</info_portion>
 
 <info_portion id="pauk_agro_spawn">
     <action>esc_graf.spawn_spider1</action>

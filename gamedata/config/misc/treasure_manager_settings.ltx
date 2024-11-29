@@ -22,7 +22,6 @@ max = 100
 min = 16
 max = 40
 
-;--
 
 [l02_garbage_arts]
 min = 0
@@ -48,7 +47,6 @@ max = 40
 min = 76
 max = 100
 
-;--
 
 [l03_agroprom_arts]
 min = 0
@@ -74,7 +72,6 @@ max = 80
 min = 81
 max = 100
 
-; --
 
 [l03u_agr_underground_arts]
 min = 0
@@ -100,7 +97,6 @@ max = -1
 min = -1
 max = -1
 
-; --
 
 [l04_darkvalley_arts]
 min = 0
@@ -127,8 +123,6 @@ min = 76
 max = 100
 
 
-; --
-
 [l04u_labx18_arts]:l03u_agr_underground_arts
 
 [l04u_labx18_weapons]:l03u_agr_underground_weapons
@@ -140,34 +134,6 @@ max = 100
 [l04u_labx18_other]:l03u_agr_underground_other
 
 [l04u_labx18_devices]:l04_darkvalley_devices
-
-
-; --
-
-[aver_arts]
-min = 0
-max = 20
-
-[aver_weapons]
-min = 21
-max = 45
-
-[aver_devices]
-min = 21
-max = 45
-
-[aver_outfits]
-min = 46
-max = 65
-
-[aver_ammo]
-min = 66
-max = 85
-
-[aver_other]
-min = 86
-max = 100
-
 
 
 [l05_bar_arts]
@@ -220,7 +186,6 @@ max = 90
 min = 91
 max = 100
 
-; --
 
 [l07_military_arts]
 min = 0
@@ -246,7 +211,6 @@ max = 95
 min = 96
 max = 100
 
-; --
 
 [l08_yantar_arts]
 min = 0
@@ -272,7 +236,6 @@ max = 80
 min = 81
 max = 100
 
-; -- 
 
 [l08u_brainlab_arts]
 min = 0
@@ -298,7 +261,12 @@ max = -1
 min = -1
 max = -1
 
-; --
+[l09_deadcity_arts]:l07_military_arts
+[l09_deadcity_weapons]:l07_military_weapons
+[l09_deadcity_outfits]:l07_military_outfits
+[l09_deadcity_ammo]:l07_military_ammo
+[l09_deadcity_other]:l07_military_other
+[l09_deadcity_devices]:l07_military_devices
 
 [l10_radar_arts]
 min = 0
@@ -324,7 +292,31 @@ max = -1
 min = -1
 max = -1
 
-; --
+
+[l10_red_forest_arts]
+min = 0
+max = 40
+
+[l10_red_forest_weapons]
+min = 41
+max = 70
+
+[l10_red_forest_devices]
+min = 41
+max = 70
+
+[l10_red_forest_outfits]
+min = 71
+max = 100
+
+[l10_red_forest_ammo]
+min = -1
+max = -1
+
+[l10_red_forest_other]
+min = -1
+max = -1
+
 
 [l11_pripyat_arts]
 min = 0
@@ -350,12 +342,6 @@ max = -1
 min = -1
 max = -1
 
-[dead_city_arts]:l07_military_arts
-[dead_city_weapons]:l07_military_weapons
-[dead_city_outfits]:l07_military_outfits
-[dead_city_ammo]:l07_military_ammo
-[dead_city_other]:l07_military_other
-[dead_city_devices]:l07_military_devices
 
 [l10u_bunker_arts]:l08u_brainlab_arts
 [l10u_bunker_weapons]:l08u_brainlab_weapons
@@ -364,12 +350,14 @@ max = -1
 [l10u_bunker_ammo]:l08u_brainlab_ammo
 [l10u_bunker_other]:l08u_brainlab_other
 
+
 [l12_stancia_arts]:l07_military_arts
 [l12_stancia_weapons]:l07_military_weapons
 [l12_stancia_outfits]:l07_military_outfits
 [l12_stancia_ammo]:l07_military_ammo
 [l12_stancia_other]:l07_military_other
 [l12_stancia_devices]:l07_military_devices
+
 
 [l12_stancia_2_arts]:l07_military_arts
 [l12_stancia_2_weapons]:l07_military_weapons
@@ -378,12 +366,14 @@ max = -1
 [l12_stancia_2_other]:l07_military_other
 [l12_stancia_2_devices]:l07_military_devices
 
+
 [l12u_sarcofag_arts]:l07_military_arts
 [l12u_sarcofag_weapons]:l07_military_weapons
 [l12u_sarcofag_outfits]:l07_military_outfits
 [l12u_sarcofag_ammo]:l07_military_ammo
 [l12u_sarcofag_other]:l07_military_other
 [l12u_sarcofag_devices]:l07_military_devices
+
 
 [l12u_control_monolith_arts]:l07_military_arts
 [l12u_control_monolith_weapons]:l07_military_weapons
@@ -392,12 +382,23 @@ max = -1
 [l12u_control_monolith_other]:l07_military_other
 [l12u_control_monolith_devices]:l07_military_devices
 
+
 [swamp_arts]:l01_escape_arts
 [swamp_weapons]:l01_escape_weapons
 [swamp_outfits]:l01_escape_outfits
 [swamp_ammo]:l01_escape_ammo
 [swamp_other]:l01_escape_other
 [swamp_devices]:l01_escape_devices
+
+
+[l13_deep_arts]:l01_escape_arts
+[l13_deep_weapons]:l01_escape_weapons
+[l13_deep_outfits]:l01_escape_outfits
+[l13_deep_ammo]:l01_escape_ammo
+[l13_deep_other]:l01_escape_other
+[l13_deep_devices]:l01_escape_devices
+
+
 
 [level_price]
 l01_escape = 1
@@ -418,9 +419,9 @@ l12_stancia = 7
 l12u_sarcofag = 7
 l12_stancia_2 = 7
 l12u_control_monolith = 7
-aver = 3
-dead_city = 2
-predbannik = 2
+l10_red_forest = 3
+l09_deadcity = 2
+l13_deep = 1
 swamp = 5
 
 [unrandom_treasure]
@@ -535,7 +536,7 @@ val_secret_0010_name
 val_secret_0030_name
 
 [weapons_data]
-weapons = wpn_mp5, wpn_bm16, wpn_toz34, wpn_bm16_full, wpn_ak74u, wpn_bm16_full, wpn_aps_bas, wpn_toz34, wpn_wincheaster1300, wpn_sig552_siber, wpn_abakan_n, wpn_m4a1_siber, wpn_mp133_bas, wpn_saiga12s_m1, wpn_ak105_bas, wpn_groza, wpn_val, wpn_kiparis_m2, wpn_svd_m1, wpn_sks_b, wpn_famas_f1, wpn_famas_felin, wpn_remington_r5, wpn_famas_f1_tactical, wpn_ace52, wpn_mossberg590a1, wpn_mp155
+weapons = wpn_mp5, wpn_bm16, wpn_toz34, wpn_bm16_full, wpn_ak74u, wpn_bm16_full, wpn_aps_bas, wpn_toz34, wpn_wincheaster1300, wpn_sig552_siber, wpn_abakan_n, wpn_m4a1_siber, wpn_mp133_bas, wpn_saiga12s_m1, wpn_groza, wpn_val, wpn_kiparis_m2, wpn_svd_m1, wpn_sks_b, wpn_famas_f1, wpn_remington_r5, wpn_famas_f1_tactical, wpn_mossberg590a1, wpn_mp155
 
 [arts_data]
 arts = af_medusa, af_vyvert, af_drops, af_blood, af_electra_sparkler, af_ameba_slime, af_rusty_thorn, af_gravi, af_fireball, af_mincer_meat, af_electra_flash, af_ameba_slug, af_rusty_kristall, af_night_star, af_gold_fish, af_cristall, af_soul, af_electra_moonlight, af_ameba_mica, af_rusty_sea-urchin, af_dummy_glassbeads, af_dummy_spring, af_dummy_dummy, af_dummy_battery, af_dummy_pellicle, af_dummy_glassbeads, af_fuzz_kolobok, af_simbion, af_spirit_1, af_cry_1, af_babka_1, af_pudd_1, af_dik_1, af_kol_1, af_armor_1, af_spirit_2, af_cry_2, af_babka_2, af_pudd_2, af_dik_2, af_kol_2, af_armor_2
@@ -593,7 +594,5 @@ other = medkit, medkit_army, medkit_scientic, antirad, rad_inject, weight_inject
 [dead_city_data]:all_items_data
 
 [aver_data]:all_items_data
-
-[predbannik_data]:all_items_data
 
 [swamp_data]:l10_radar_data

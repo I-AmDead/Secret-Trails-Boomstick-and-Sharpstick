@@ -521,7 +521,7 @@ function visual_timer:on_hud_show()
     if hud:GetCustomStatic("hud_timer") then
         hud:RemoveCustomStatic("hud_timer")
     end
-    hud:AddCustomStatic("hud_timer", true)
+    --hud:AddCustomStatic("hud_timer", true)
 end
 function visual_timer:_aux_cond()
     savable_timer._aux_cond(self)
@@ -530,18 +530,22 @@ function visual_timer:condition()
     local dt
     if self._game_termination_time then -- Игровое время
         dt = game.CTime(self._game_termination_time):diffSec(game.get_game_time())
-        self.sm:reschedule(1000 / game_time_factor) -- Нет смысла апдейтить таймер чаще раза в секунду.
+        self.sm:reschedule(60 / game_time_factor) -- Нет смысла апдейтить таймер чаще раза в секунду.
     elseif self._residual_time then
         dt = self._residual_time - self._time_from_loading
-        self.sm:reschedule(1000) -- Нет смысла апдейтить таймер чаще раза в секунду.
+        self.sm:reschedule(60) -- Нет смысла апдейтить таймер чаще раза в секунду.
     else
         abort("visual_timer:condition: can not update time visual. Time condition is not set.")
     end
     local h = math.floor(dt / 3600)
     local m = math.floor(dt / 60 - h * 60)
     local s = math.floor(dt - h * 3600 - m * 60)
+    local ms = math.floor((dt - math.floor(dt)) * 1000)
     local txt = string.format("%02d:%02d:%02d", h, m, s)
-    get_hud():GetCustomStatic("hud_timer"):wnd():SetText(txt)
+    --get_hud():GetCustomStatic("hud_timer"):wnd():SetText(txt)
+    if ui_watch.watch_mode == 4 then
+        shader_set_custom_param("game_time", h, m, s, ms)
+    end
     return false
 end
 

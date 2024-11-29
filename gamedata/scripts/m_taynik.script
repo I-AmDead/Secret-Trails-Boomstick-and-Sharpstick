@@ -1,86 +1,60 @@
 function strelok_taynik_spawn()
-    local obj = alife():create("strelok_taynik", vector():set(-71.782, -6.830, -66.728), 3328, 717)
+    braad_test.spawn_ai_location("strelok_taynik", vector():set(-71.782, -6.830, -66.728), "l03u_agr_underground")
 end
 
 function m_taynik1_spawn()
-    local obj = alife():create("m_taynik1", vector():set(413.262, 14.353, -446.058), 97579, 1289)
+    braad_test.spawn_ai_location("m_taynik1", vector():set(413.262, 14.353, -446.058), "l05_bar")
 end
 
 function m_taynik2_spawn()
-    local obj = alife():create("m_taynik2", vector():set(404.641, 13.683, -437.619), 94475, 1289)
+    braad_test.spawn_ai_location("m_taynik2", vector():set(404.641, 13.683, -437.619), "l05_bar")
 end
 
 function m_taynik3_spawn()
-    local obj = alife():create("m_taynik3", vector():set(405.691, 14.123, -434.496), 95090, 1289)
+    braad_test.spawn_ai_location("m_taynik3", vector():set(405.691, 14.123, -434.496), "l05_bar")
 end
 
 function flash_taynik1_spawn()
-    local obj = alife():create("flash_taynik1", vector():set(200.411, 6.254, 81.555), 45462, 1186)
+    braad_test.spawn_ai_location("flash_taynik1", vector():set(200.411, 6.254, 81.555), "l05_bar")
 end
 
 function flash_taynik2_spawn()
-    local obj = alife():create("flash_taynik2", vector():set(156.989, 13.530, 82.445), 34447, 1252)
+    braad_test.spawn_ai_location("flash_taynik2", vector():set(156.850, 11.041, 84.428), "l05_bar")
 end
 
 function flash_taynik3_spawn()
-    local obj = alife():create("flash_taynik3", vector():set(106.001, 0.057, 52.802), 32502, 1224)
+    braad_test.spawn_ai_location("flash_taynik3", vector():set(106.001, 0.057, 52.802), "l05_bar")
 end
 
 function prince_taynik_spawn()
-    local obj = alife():create("prince_taynik", vector():set(-35.908, -20.430, 366.195), 272465, 1816)
+    braad_test.spawn_ai_location("prince_taynik", vector():set(-35.908, -20.430, 366.195), "l07_military")
 end
 
 function doc2_taynik1_spawn()
-    local obj = alife():create("doc2_taynik1", vector():set(-419.246, -13.545, 383.120), 13810, 1847)
+    braad_test.spawn_ai_location("doc2_taynik1", vector():set(-421.055, -13.485, 383.733), "l07_military")
 end
 
 function doc2_taynik2_spawn()
-    local obj = alife():create("doc2_taynik2", vector():set(-423.021, -13.418, 390.098), 13810, 1847)
+    braad_test.spawn_ai_location("doc2_taynik2", vector():set(-423.424, -13.394, 389.144), "l07_military")
 end
 
 function doc2_taynik3_spawn()
-    local obj = alife():create("doc2_taynik3", vector():set(-428.427, -13.117, 381.440), 13810, 1847)
+    braad_test.spawn_ai_location("doc2_taynik3", vector():set(-426.427, -13.234, 384.489), "l07_military")
 end
 
 function doc3_taynik_spawn()
-    local obj = alife():create("doc3_taynik", vector():set(-77.178, 0.935, 20.735), 17061, 1526)
+    braad_test.spawn_ai_location("doc3_taynik", vector():set(-77.178, 0.935, 20.735), "l08_yantar")
 end
 
-local minit = {{
-    position = {
-        x = -113.692,
-        y = -24.150,
-        z = -357.211
-    },
-    gv = 24,
-    lv = 142116
-}, {
-    position = {
-        x = -105.892,
-        y = -30.280,
-        z = -396.456
-    },
-    gv = 16,
-    lv = 151437
-}, {
-    position = {
-        x = -127.026,
-        y = -30.020,
-        z = -380.429
-    },
-    gv = 26,
-    lv = 125968
-}, {
-    position = {
-        x = -111.062,
-        y = -30.070,
-        z = -396.332
-    },
-    gv = 22,
-    lv = 144940
-}}
+local minit = 
+{
+    [1] = {x = -113.692, y = -30.270, z = -357.211},
+    [2] = {x = -105.892, y = -30.280, z = -396.456},
+    [3] = {x = -127.026, y = -30.020, z = -380.429},
+    [4] = {x = -111.062, y = -30.070, z = -396.332}
+}
 
 function mini_taynik_spawn()
-    local a = minit[math.random(table.getn(minit))]
-    local obj = alife():create("mini_taynik", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = minit[math.random(1, 4)]
+    braad_test.spawn_ai_location("mini_taynik", vector():set(a.x, a.y, a.z), "l01_escape")
 end

@@ -4,15 +4,7 @@
 #include "common.h"
 #include "night_vision.h"
 
-#ifdef USE_MSAA
-#ifndef SM_5
-Texture2DMS<float4, MSAA_SAMPLES> s_heat;
-#else
-Texture2DMS<float4> s_heat;
-#endif
-#else
 Texture2D s_heat;
-#endif
 
 uniform float4 heat_vision_steps;
 uniform float4 heat_vision_blurring;
@@ -140,33 +132,33 @@ float3 infrared(gbuffer_data gbd, float3 original, float depth, float2 HPos, flo
     }
     else // only for particle_hard.ps
         if (hotness.z > 0.0)
-    {
-        mixed = lerp(color_background_min, color_gradient_low, hotness.z);
-    }
-    else
-    {
-        float projection = dot(normalize(gbd.N), float3(0.0, 0.0, -1.0));
-
-        float FADE_DISTANCE_START = heat_fade_distance.x; // shader_param_fade_distance.x; // 5.0f;   // 13.0
-        float FADE_DISTANCE_END = heat_fade_distance.y; // shader_param_fade_distance.y; // 10.0f;     // 20.0
-
-        if (depth <= 0)
         {
-            depth = FADE_DISTANCE_END;
-        }
-
-        if (depth < FADE_DISTANCE_START)
-        {
-            mixed = lerp(color_background_min, color_background_max, projection);
+            mixed = lerp(color_background_min, color_gradient_low, hotness.z);
         }
         else
         {
-            float arg = smoothstep(FADE_DISTANCE_START, FADE_DISTANCE_END, clamp(depth, FADE_DISTANCE_START, FADE_DISTANCE_END));
-            float3 min_color = lerp(color_background_min, COLOR_FAR_MIN - heat_mode * float3(0.0, 0.0, 0.03), arg);
-            float3 max_color = lerp(color_background_max, COLOR_FAR_MAX - heat_mode * float3(0.0, 0.0, 0.05), arg);
-            mixed = lerp(min_color, max_color, projection);
+            float projection = dot(normalize(gbd.N), float3(0.0, 0.0, -1.0));
+
+            float FADE_DISTANCE_START = heat_fade_distance.x; // shader_param_fade_distance.x; // 5.0f;   // 13.0
+            float FADE_DISTANCE_END = heat_fade_distance.y; // shader_param_fade_distance.y; // 10.0f;     // 20.0
+
+            if (depth <= 0)
+            {
+                depth = FADE_DISTANCE_END;
+            }
+
+            if (depth < FADE_DISTANCE_START)
+            {
+                mixed = lerp(color_background_min, color_background_max, projection);
+            }
+            else
+            {
+                float arg = smoothstep(FADE_DISTANCE_START, FADE_DISTANCE_END, clamp(depth, FADE_DISTANCE_START, FADE_DISTANCE_END));
+                float3 min_color = lerp(color_background_min, COLOR_FAR_MIN - heat_mode * float3(0.0, 0.0, 0.03), arg);
+                float3 max_color = lerp(color_background_max, COLOR_FAR_MAX - heat_mode * float3(0.0, 0.0, 0.05), arg);
+                mixed = lerp(min_color, max_color, projection);
+            }
         }
-    }
 
     float4 jitter = float4(frac(sin(dot(Tex0, float2(12.0, 78.0) + (timers.x))) * 12345.0), frac(sin(dot(Tex0, float2(12.0, 78.0) + (timers.x))) * 67890.0),
                            frac(sin(dot(Tex0, float2(12.0, 78.0) + (timers.x))) * 78372.0), frac(sin(dot(Tex0, float2(12.0, 78.0) + (timers.x))) * 37857.0));

@@ -3,7 +3,7 @@ function attach(sm)
     sm:subscribe({signal = "on_key_down",           fun = this.on_key_down})
     sm:subscribe({signal = "on_key_up",             fun = this.on_key_up})
     sm:subscribe({signal = "on_item_before_pickup", fun = this.on_item_before_pickup})
-    sm:subscribe({signal = "on_update",             fun = this.on_sprint})
+    --sm:subscribe({signal = "on_update",             fun = this.on_sprint})
 end
 
 --------------------------------------------------------------
@@ -59,7 +59,7 @@ function allow_animation()
 end
 
 function on_key_down(key, bind)
-    if level.main_input_receiver() or not db.actor:alive() or not allow_animation() or get_actor_obj():is_actor_sprinting() then return end
+    if level.main_input_receiver() or not db.actor:alive() or not allow_animation() then return end
 
     local torch = db.actor:item_in_slot(9)
     local pnv = db.actor:item_in_slot(11)
@@ -74,8 +74,11 @@ function on_key_down(key, bind)
     elseif bind == key_bindings.kWATCH then
         key_release = false
         watch_wide()
+        braad_test.create_vasil_restr()
     elseif bind == key_bindings.kBORE then
         hand_wide()
+        --gv_table.gv_table()
+        --log3("lv count %s", level.vertex_count())
     end
 end
 
@@ -109,29 +112,25 @@ function swipe_mask()
     local anm_sec = "anim_mask_clean"
     local anm_name, anm_additional_length = get_anm_settings("script\\gasmask.anm", 0.45, "script\\lower.anm", 0.75)
 
-    local anm_time_1 = game.play_hud_motion(1, anm_sec, "anm_hide_hand", true, hide_hand_speed)
+    --local anm_time_1 = game.play_hud_motion(1, anm_sec, "anm_hide_hand", true, hide_hand_speed)
     local anm_time_2 = game.get_motion_length(anm_sec, "anm_wipe", 0.8)
     game.play_hud_anm(anm_name, 0, 1, 1, false)
-    local new_speed = game.set_hud_anm_time(anm_name, (anm_time_1 + anm_time_2) / 1000 + anm_additional_length)
+    local new_speed = game.set_hud_anm_time(anm_name, (anm_time_2) / 1000 + anm_additional_length)
     animation_on()
-
-    dsh.timeout(anm_time_1, 
+    game.play_hud_motion(db.actor:active_item() and 1 or 2, anm_sec, "anm_wipe", false, 0.8)
+    snd_gasmask:play(db.actor, 0, sound_object.s2d)
+    snd_gasmask.frequency = 0.8
+    level.add_cam_effector("camera_effects\\weapon\\mask.anm", 7538, false, "", 0, false)
+    dsh.timeout(anm_time_2 - 550, 
     function()
-        game.play_hud_motion(db.actor:active_item() and 1 or 2, anm_sec, "anm_wipe", false, 0.8)
-        snd_gasmask:play(db.actor, 0, sound_object.s2d)
-        snd_gasmask.frequency = 0.8
-        level.add_cam_effector("camera_effects\\weapon\\gasmask_swipe1.anm", 7538, false, "", 0, false)
-        dsh.timeout(anm_time_2 - 750, 
-        function()
-            rain_drops_restart()
-        end)
-        dsh.timeout(anm_time_2 - 300, 
-        function()
-            if new_speed then
-                game.play_hud_anm(anm_name, 2, new_speed, 1, false, true)
-            end
-            dsh.timeout(anm_time_2 + anm_additional_length, animation_off)
-        end)
+        rain_drops_restart()
+    end)
+    dsh.timeout(anm_time_2 - 300, 
+    function()
+        if new_speed then
+            game.play_hud_anm(anm_name, 2, new_speed, 1, false, true)
+        end
+        dsh.timeout(anm_time_2 + anm_additional_length, animation_off)
     end)
 end
 
@@ -167,7 +166,7 @@ end
 
 -- EMULATION PICKUP
 function on_item_before_pickup(obj)
-    if not allow_animation() or get_actor_obj():is_actor_sprinting() then return end
+    if not allow_animation() then return end
 
     local pickup_anm_sec = "anim_pickup"
     local cam_pos = device().cam_pos
@@ -189,7 +188,7 @@ end
 
 -- EMULATION HARVEST
 function harvest(on_take)
-    if not allow_animation() or get_actor_obj():is_actor_sprinting() then return end
+    if not allow_animation() then return end
 
     local harvest_anm_sec = "anim_harvest"
     local loot_anm_sec = "anim_loot"
@@ -263,7 +262,7 @@ end
 function animation_off()
     level.only_allow_movekeys(false)
     level.set_actor_allow_ladder(true)
-    sprint_blocked = nil
+    sprint_blocked = false
 end
 
 function on_first_update()
@@ -326,14 +325,14 @@ end
 
 -- EMULATION SWIPE RAIN DROPS
 function watch_wide()
-    if not allow_animation() or get_actor_obj():is_actor_sprinting() then return end
+    if not allow_animation() then return end
 
     local anm_name, anm_additional_length = get_anm_settings("script\\gasmask.anm", 0.45, "script\\gasmask.anm", 0.75)
     local watch_anm_sec = "anim_watch"
     local watch_anm_time = game.play_hud_motion(1, watch_anm_sec, "anm_in", true, 1)
     game.play_hud_anm(anm_name, 0, 0.5, 1, false)
     animation_on()
-    ui_minimap_bioradar.hud_hide()
+    --ui_minimap_bioradar.hud_hide()
     dsh.timeout(watch_anm_time, function()
         game.set_hud_anm_time(anm_name, 10000000)
         game.play_hud_motion(db.actor:active_item() and 1 or 2, watch_anm_sec, "anm_idle", true, 1)
@@ -342,27 +341,23 @@ function watch_wide()
             game.stop_hud_motion()
             watch_anm_time = game.play_hud_motion(db.actor:active_item() and 1 or 2, watch_anm_sec, "anm_out", true, 1)
             game.set_hud_anm_time(anm_name, (watch_anm_time + 200) / 1000)
-            ui_minimap_bioradar.hud_show()
+            --ui_minimap_bioradar.hud_show()
             dsh.timeout(watch_anm_time, function() animation_off() end)
         end)
     end)
 end
 
 function on_sprint()
-    if sprint_blocked then return end
     if not sprint_anim then
-        if not allow_animation or db.actor:active_item() or not get_actor_obj():is_actor_sprinting() then return end
+        if not allow_animation or db.actor:active_item() or not get_actor_obj():is_actor_sprinting() or sprint_blocked then return end
         game.play_hud_motion(2, "anim_sprint_no_hand", "anm_sprint", true, 1)
         --animation_on()
         sprint_anim = true
-        log3("test anim 1")
     else
-        log3("test anim 2")
-        if db.actor:active_item() or not get_actor_obj():is_actor_sprinting() then
+        if sprint_blocked or db.actor:active_item() or not get_actor_obj():is_actor_sprinting() then
             game.stop_hud_motion()
             --animation_off()
             sprint_anim = nil
-            log3("test anim 3")
         end
     end
 end

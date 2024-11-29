@@ -18,4 +18,4 @@
     0.1f // If the intensity of the bounce is lower or equal to this value, discard the sample. ( 1.0f = 100% intensity )
          // The intensity of the bounce will vary depending on the angle of the surfaces and the distance.
 
-//#define G_IL_DEBUG_MODE					// Uncomment if you want to check what the IL is doing
+// #define G_IL_DEBUG_MODE					// Uncomment if you want to check what the IL is doing

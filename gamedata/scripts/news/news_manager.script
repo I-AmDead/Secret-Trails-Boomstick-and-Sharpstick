@@ -280,15 +280,10 @@ function send_task(actor, type, task, objective)
         end
     end
 
-    local main_task_static
-    if type == "new" or type == "complete" or type == "fail" then
-        local snd_fname = "interface\\task_" .. type
-        local snd_task = sound_object(snd_fname)
-        snd_task:play(db.actor, 0, sound_object.s2d)
-        main_task_static = get_hud():AddCustomStatic("main_task_new", true)
-    else    
-        main_task_static = get_hud():AddCustomStatic("main_task", true)
-    end
+    local snd_fname = "interface\\task_" .. type
+    local snd_task = sound_object(snd_fname)
+    snd_task:play(db.actor, 0, sound_object.s2d)
+    local main_task_static = get_hud():AddCustomStatic("main_task_new", true)
 
     if main_task_static then
         --main_task_static:wnd():SetColor(GetARGB(texture_color[1], texture_color[2], texture_color[3], texture_color[4]))

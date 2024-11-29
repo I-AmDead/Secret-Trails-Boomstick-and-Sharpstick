@@ -64,7 +64,6 @@ float4 main(p_screen I) : SV_Target
     float4 glossyTex = s_breath_noise.Sample(smp_rtlinear, circle_tc_pos.xy); // reuse noise texture as regular one
     glossyTex = lerp(glossyTex, float4(1.0, 1.0, 1.0, 1.0), 0.5);
 
-
     image_blur = lerp(image_blur, glossyTex.rgb, .25);
     image = lerp(image, image_blur, circleTex.xyz); // add our blurred area to the main texture
     return float4(image, 1.0);

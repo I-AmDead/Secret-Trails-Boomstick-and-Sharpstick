@@ -1,0 +1,80 @@
+[trash_object]
+class			= O_PHYS_S
+remove_time		= 60
+cform			= skeleton
+script_binding		= bind_trash.init
+
+[conserva_trash]:trash_object
+visual			= dynamics\weapons\wpn_eat\conservi\wpn_eat_tushonka_trash.ogf
+
+throw_dir		= left
+throw_offset_y		= -0.5
+throw_offset_x		= 0.2
+throw_offset_z		= 0.6
+throw_impulse_z		= 1
+
+
+[sweets_trash]:trash_object
+visual			= equipments\konfets.ogf
+
+
+[energy_drink_trash]:trash_object
+visual			= gwr\equipment\energy_drink\energy_hud_trash.ogf
+
+break_particles		= explosions\explosion_bottle
+break_sound		= material\bottle\collide\bottle_break_1
+
+throw_dir		= right
+throw_impulse_z		= 6.0
+
+
+[antirad_trash]:trash_object
+visual          	= gwr\equipment\antirad\antirad_hud_trash.ogf
+
+throw_dir		= right
+throw_offset_y		= -0.6
+throw_offset_x		= -0.2
+throw_offset_z		= -0.6
+throw_impulse_y		= -9
+throw_impulse_z		= 18
+
+
+[medkit_trash]:trash_object
+visual			= gwr\equipment\medkit\medkit_hud_trash.ogf
+
+throw_impulse_y		= -9
+throw_impulse_z		= 18
+
+
+[psy_inject_trash]:trash_object
+visual          	= gwr\equipment\injector\psy_injector_hud_trash
+
+throw_dir = right
+throw_offset_y = -0.6
+throw_offset_x = -0.2
+throw_offset_z =  0.6
+throw_impulse_y = -9
+throw_impulse_z = 18
+
+[rad_inject_trash]:psy_inject_trash
+visual          	= gwr\equipment\injector\rad_injector_hud_trash
+
+[rad_restore_inject_trash]:psy_inject_trash
+visual          	= gwr\equipment\injector\rad_restore_injector_hud_trash
+
+[weight_inject_trash]:psy_inject_trash
+visual          	= gwr\equipment\injector\weight_injector_hud_trash
+
+[health_inject_trash]:psy_inject_trash
+visual          	= gwr\equipment\injector\health_injector_hud_trash
+
+
+[bandage_trash]:trash_object
+visual			= gwr\equipment\bandage\bandage_hud_trash.ogf
+
+throw_dir = right
+throw_offset_y		= -0.6
+throw_offset_x		= -0.2
+throw_offset_z		= -0.6
+throw_impulse_y		= -9
+throw_impulse_z		= 18

@@ -12,9 +12,7 @@ local forbidden_patients = rx_utils.collect_sections(hw_ini, {"forbidden_patient
 local help_distance = rx_utils.read_from_ini(hw_ini, 'main', "help_distance") ^ 2
 local help_distance_story = rx_utils.read_from_ini(hw_ini, 'main', "help_distance_story") ^ 2
 local attchlist = rx_utils.collect_sections(hw_ini, {"attach_sections"}, nil, nil, true)
-table.sort(attchlist, function(a, b)
-    return system_ini():r_float(a, 'eat_health') > system_ini():r_float(b, 'eat_health')
-end)
+table.sort(attchlist, function(a, b) return system_ini():r_float(a, 'eat_health') > system_ini():r_float(b, 'eat_health') end)
 
 ----------------------------------------------------------------------------------------------------------------------
 -- EVALUATORS
@@ -87,7 +85,7 @@ function evaluator_wounded_exist:evaluate()
     local npc_position = npc:position()
     for v in (tg % 2 == 0 and npc:memory_visible_objects() or npc:memory_sound_objects()) do
         local vo = v:object()
-        if vo:alive() and IsStalker(vo) and xr_wounded.is_wounded(vo) and npc:relation(vo) ~= game_object.enemy then
+        if vo and vo:alive() and IsStalker(vo) and xr_wounded.is_wounded(vo) and npc:relation(vo) ~= game_object.enemy then
             local id = vo:id()
             local dbst = db.storage[id]
             if dbst.wounded_already_selected == nil and (vo:wounded() or not xr_wounded.wounded_fight(id)) and
@@ -143,8 +141,7 @@ function action_help_wounded:initialize()
         state_mgr.set_state(npc, "rush")
     else
         local patient = level.object_by_id(self.a.selected_id)
-        if (patient and npc:relation(patient) == game_object.friend) or
-            npc:position():distance_to(self.a.vertex_position) > 8 then
+        if (patient and npc:relation(patient) == game_object.friend) or npc:position():distance_to(self.a.vertex_position) > 8 then
             state_mgr.set_state(npc, "run")
         else
             state_mgr.set_state(npc, "walk")
@@ -192,9 +189,7 @@ function action_help_wounded:execute()
     local patient = level.object_by_id(self.a.selected_id)
     if patient and npc:position():distance_to(patient:position()) < 1.0 or npc:level_vertex_id() == self.a.vertex_id then
         local look_pos = patient:bone_position("bip01_spine1")
-        state_mgr.set_state(npc, "help_wounded", nil, nil, {
-            look_position = look_pos
-        })
+        state_mgr.set_state(npc, "help_wounded", nil, nil, {look_position = look_pos})
         npc:set_movement_type(move.stand)
         if self.attach == true then
             self.attach = time_global() + 5000
@@ -211,13 +206,9 @@ function action_help_wounded:execute()
         end
         --		if state_mgr.get_state(npc) == "help_wounded" then
         if d or not can_strap(npc) then
-            state_mgr.set_state(npc, "rush", nil, nil, nil, {
-                animation = true
-            })
+            state_mgr.set_state(npc, "rush", nil, nil, nil, {animation = true})
         else
-            state_mgr.set_state(npc, "run", nil, nil, nil, {
-                animation = true
-            })
+            state_mgr.set_state(npc, "run", nil, nil, nil, {animation = true})
         end
         --		end
         if npc:animation_count() == 0 then
@@ -246,9 +237,7 @@ function action_help_wounded:finalize()
     end
     self.medkit = nil
     npc:set_movement_type(move.walk)
-    state_mgr.set_state(npc, "idle", nil, nil, nil, {
-        animation = true
-    })
+    state_mgr.set_state(npc, "idle", nil, nil, nil, {animation = true})
     rx_sound.block_alarm_sound(npc)
     rx_ai.process_postponed_setup(npc:id())
     rx_ai.unsubscribe_from_events(npc:id(), self)
@@ -274,8 +263,7 @@ function action_help_wounded:death_callback()
         local item = npc:object(self.medkit)
         if item then
             table.insert(rx_ai.ids_to_remove, item:id())
-            local sobj = alife():create(self.medkit, npc:bone_position("bip01_r_hand"), npc:level_vertex_id(),
-                npc:game_vertex_id())
+            local sobj = alife():create(self.medkit, npc:bone_position("bip01_r_hand"), npc:level_vertex_id(), npc:game_vertex_id())
 
             local pk = get_netpk(sobj, 1)
             ASSERT((pk and pk:isOk()), "can't read netpacket of %s", sobj:name())
@@ -327,8 +315,7 @@ function help_wounded(npc)
                 bst.spawn_time_m = time_global() + rx_bandage.bandage_sets.spawn_mt
             end
         end
-        alife():create(sec, selected_npc:position(), selected_npc:level_vertex_id(), selected_npc:game_vertex_id(),
-            selected_id)
+        alife():create(sec, selected_npc:position(), selected_npc:level_vertex_id(), selected_npc:game_vertex_id(), selected_id)
     end
     xr_wounded.unlock_medkit(selected_npc)
     rx_sound.set_sound_play(selected_id, "help_thanks")
@@ -361,8 +348,7 @@ function add_to_binder(npc, char_ini, scheme, section, st)
     local manager = npc:motivation_action_manager()
 
     -- Evaluators
-    if excluded_communities[npc:character_community()] or excluded_npcs[npc:name()] or excluded_npcs[npc:profile_name()] or
-        not npc:alive() then
+    if excluded_communities[npc:character_community()] or excluded_npcs[npc:name()] or excluded_npcs[npc:profile_name()] or not npc:alive() then
         manager:add_evaluator(evid_wounded_exist, property_evaluator_const(false))
         return
     end
@@ -407,8 +393,7 @@ function reset_help_wounded(npc, scheme, st, section)
     if st.ini:line_exist(section, "help_wounded_enabled") then
         st.help_wounded.help_wounded_enabled = st.ini:r_bool(section, "help_wounded_enabled")
     else
-        st.help_wounded.help_wounded_enabled = rx_utils.read_from_ini(st.ini, st.section_logic, "help_wounded_enabled",
-            true, 0)
+        st.help_wounded.help_wounded_enabled = rx_utils.read_from_ini(st.ini, st.section_logic, "help_wounded_enabled", true, 0)
     end
 end
 

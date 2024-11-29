@@ -1,22 +1,7 @@
 #include "common.h"
-/*
-struct 	v2p
-{
-  float2 tc0: 		TEXCOORD0;	// Central
-  float4 tc1: 		TEXCOORD1;	// -1,+1
-  float4 tc2: 		TEXCOORD2;	// -2,+2
-  float4 tc3: 		TEXCOORD3;	// -3,+3
-  float4 tc4: 		TEXCOORD4;	// -4,+4
-  float4 tc5: 		TEXCOORD5;	// -5,+5
-  float4 tc6: 		TEXCOORD6;	// -6,+6
-  float4 tc7: 		TEXCOORD7;	// -7,+7
-};
-*/
 
-//////////////////////////////////////////////////////////////////////////////////////////
 uniform float4 weight[2];
 
-//////////////////////////////////////////////////////////////////////////////////////////
 // Pixel
 // Separable gauss filter: 	2*7 + 1 + 7*2 = 29 samples
 // Samples:			0-central, -1, -2,..., -7, 1, 2,... 7

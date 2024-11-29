@@ -65,41 +65,6 @@ path_look = karina2_look
 meet = meet@karina
 combat_ignore_cond = always
 danger = danger_condition@karina_plen
-on_info = {+karina_pda_est_start} walker@karina_last
-
-[walker@karina_last]
-path_walk = karina3_walk
-path_look = karina3_look
-meet = no_meet
-def_state_moving1 = run
-def_state_moving2 = run
-def_state_moving3 = run
-combat_ignore_cond = always
-danger = danger_condition@karina_plen
-on_info = {+karina_prishli} remark@kontra
-
-[remark@kontra]
-anim = psy_pain
-meet = no_meet
-target = karina3_look, 0
-combat_ignore_cond = always
-danger = danger_condition@karina_plen
-on_info = {+kontra_les_dead} remark@kontra1
-
-[remark@kontra1]
-anim = psy_pain
-meet = no_meet
-target = karina3_look, 0
-combat_ignore_cond = always
-danger = danger_condition@karina_plen
-on_timer = 6000 | walker@karina_last1
-
-[walker@karina_last1]
-path_walk = karina3_walk
-path_look = karina3_look
-meet = meet@karina
-combat_ignore_cond = always
-danger = danger_condition@karina_plen
 
 [danger_condition@karina_plen]
 ignore_distance = 0

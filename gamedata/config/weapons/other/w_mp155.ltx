@@ -25,7 +25,7 @@
 		        
         kind                        = w_shotgun
         inv_weight                  = 3.5
-        cost                        = 30580
+        cost                        = 15000
         repair_type                 = shotgun
         weapon_class                = shotgun
         
@@ -52,14 +52,14 @@
         
         tri_state_reload            = on
         fire_modes                  = 1
-        ammo_class                  = ammo_12x70_buck, ammo_12x70_kart, ammo_12x76_dart, ammo_12x76_zhekan
+        ammo_class                  = ammo_12x70_buck, ammo_12x76_dart, ammo_12x76_zhekan
         ammo_elapsed                = 8
         ammo_mag_size               = 8
         startup_ammo                = 10
 
 	CartridgeInTheChamberNumber = 8
         
-	scope_names 		    = aim_low, aimpoint, ac10632, acog, c-more, compm4s, deltapoint, d0cter, e0t2, eot, ekp8_18, kemper, mepro, rmr, specter
+	scope_names 		    = aim_low, aimpoint, ac10632, acog, c-more, compm4s, deltapoint, d0cter, eot, ekp8_18, kemper, mepro, rmr, specter
         scope_status                = 2
 	scope_bone_none		    = true
 	
@@ -72,7 +72,6 @@
 	scope_respawn_compm4s                 = wpn_mp155_compm4s
 	scope_respawn_deltapoint              = wpn_mp155_deltapoint
 	scope_respawn_d0cter                  = wpn_mp155_d0cter
-	scope_respawn_e0t2                    = wpn_mp155_e0t2
 	scope_respawn_eot                     = wpn_mp155_eot
 	scope_respawn_ekp8_18                 = wpn_mp155_ekp8_18
 	scope_respawn_kemper                  = wpn_mp155_kemper
@@ -171,6 +170,8 @@ snd_shoot						 	= wpn_mp155_tcwp_snd_shoot
 snd_shoot_actor							= wpn_mp155_tcwp_snd_shoot_actor
 snd_silncer_shot						= wpn_mp155_tcwp_snd_silenced_shoot
 snd_silncer_shot_actor						= wpn_mp155_tcwp_snd_silenced_shoot_actor
+
+snd_mag_shot							= $silent
 
 hud_fov                 = 0.75
 
@@ -486,28 +487,6 @@ aim_hud_offset_rot               = 0, -0.0033, 0.011655
 aim_hud_offset_rot_16x9          = 0, -0.0033, 0.011655
 
 item_visual                	= anomaly_weapons\wpn_mp155\wpn_mp155_deltapoint_hud.ogf
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------;
-[wpn_mp155_e0t2]:wpn_mp155
-
-hud				= wpn_mp155_e0t2_hud
-
-scope_name			    = e0t2
-scope_x			= 112
-scope_y			= -1
-
-inv_weight                  = 3.727
-
-visual                      = anomaly_weapons\wpn_mp155\wpn_mp155_world_reflex.ogf
-
-[wpn_mp155_e0t2_hud]:wpn_mp155_hud
-
-aim_hud_offset_pos               = -0.0542, 0.0, -0.047908
-aim_hud_offset_pos_16x9          = -0.0542, 0.0, -0.047908
-aim_hud_offset_rot               = 0.01, -0.0033, 0.011655
-aim_hud_offset_rot_16x9          = 0.01, -0.0033, 0.011655
-
-item_visual                	= anomaly_weapons\wpn_mp155\wpn_mp155_e0t2_hud.ogf
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------;
 [wpn_mp155_mepro]:wpn_mp155

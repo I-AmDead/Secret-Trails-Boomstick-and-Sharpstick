@@ -1,0 +1,53 @@
+--/ -----------------------------------------------------------------------------------------------
+--/ Trash binder
+--/ -----------------------------------------------------------------------------------------------
+local param_ini = system_ini()
+
+function init(obj)
+	obj:bind_object(trash_binder(obj))
+end
+
+class "trash_binder" (object_binder)
+
+function trash_binder:__init(obj)
+	super(obj)
+	self.throw_dir = get_string(self.object:section(), "throw_dir")
+	self.impulse   = get_float(self.object:section(), "throw_impulse_z")
+	self.impulse_y = get_float(self.object:section(), "throw_impulse_y")
+	self.starttime = get_u32(self.object:section(), "remove_time") * 1000 + time_global()
+	local dir      = device().cam_dir
+	dir.y          = self.impulse_y
+	dir            = transform_dir(dir, self.throw_dir)
+	local h        = hit()
+	h.direction    = dir
+	h.draftsman    = db.actor
+	h.impulse      = self.impulse
+	h.power        = 0
+	h.type         = 2
+	self.object:hit(h)
+end
+
+function trash_binder:update(delta)
+	object_binder.update(self, delta)
+	if self.starttime < time_global() then
+		alife():release(alife():object(self.object:id()), true)
+	end
+end
+
+function trash_binder:net_destroy()
+	object_binder.net_destroy(self)
+end
+
+--/ Обработка дирекции
+function transform_dir(cd, dir)
+	if dir == "left" then
+		local tmp = cd.x
+		cd.x = -cd.z
+		cd.z = tmp
+	elseif dir == "right" then
+		local tmp = cd.x
+		cd.x = cd.z
+		cd.z = -tmp
+	end
+	return cd
+end

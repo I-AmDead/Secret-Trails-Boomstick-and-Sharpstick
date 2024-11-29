@@ -12,7 +12,7 @@ f_deffer main(p_flat I)
     f_deffer O;
 
     // узкая полоска искажений
-    float problems = frac(timers.z * 5 * (1 + 2 * m_affects.x)) *2;
+    float problems = frac(timers.z * 5 * (1 + 2 * m_affects.x)) * 2;
     I.tcdh.x += (m_affects.x > 0.09 && I.tcdh.y > problems - 0.01 && I.tcdh.y < problems) ? sin((I.tcdh.y - problems) * 5 * m_affects.y * 2) : 0;
 
     // широкая полоска искажений
@@ -37,13 +37,13 @@ f_deffer main(p_flat I)
     if (m_affects.x > 0.41)
     {
         D += glitch_cube(I.tcdh);
-        //D = 0.1f;
+        // D = 0.1f;
     }
     else
     {
         if (m_affects.a == 0)
-        {        
-            //D += watch_seconds(I.tcdh);
+        {
+            // D += watch_seconds(I.tcdh);
             if (watch_actor_params.w == 2)
                 D += CardioGraph2(I.tcdh);
             else
@@ -80,6 +80,8 @@ f_deffer main(p_flat I)
     // 2. Standart output
     float4 Ne = float4(normalize((float3)I.N.xyz), h);
     O = pack_gbuffer(Ne, float4(I.position.xyz + Ne.xyz * def_virtualh / 2.h, ms), float4(D.rgb, 1.0)); // OUT: rgb.gloss
+
+    O.Velocity = get_motion_vector(I.hpos_curr, I.hpos_old);
 
     return O;
 }

@@ -217,6 +217,21 @@ function build_cycle_data(weather_name, sect)
     }
 end
 
+local function update_env_descriptors_params(wname1, wname2, forced)
+	local env = level.environment()
+	for idx = forced and 0 or 1, 1 do
+		local wname = idx == 0 and wname1 or wname2
+		local wt = dsh_cop_weather_data.get_data_common(wname)
+		if not wt then goto CONTINUE end
+
+		local env_desc = env:getCurrentWeather( idx )
+		env_desc.wind_velocity = wt.wind_velocity() --Силу ветра берем из таблицы
+		env_desc.wind_direction = utils.deg2rad(math.random(360)) --Угол ветра будет всегда рандомный
+
+		::CONTINUE::
+	end
+end
+
 -- базовый класс прогноза погоды
 
 -- архитектурно класс прогноза предназначен для отделения функционала
@@ -1273,6 +1288,7 @@ function WeatherManager:update_script_weather()
                 local p = afc:get_p_after_surge()
                 local ltx = self:get_final_weather_ltx(afc.cycles[p.cycle].ltx)
                 level.set_weather(ltx, true) -- установили Current[ 0 ] и Current[ 1 ]
+                update_env_descriptors_params(afc.cycles[ p.cycle ].weather_name, afc.cycles[ p.cycle ].weather_name, self.forced) --тут хз какой второй взять, ну не критично. И вообще хз насколько тут вообще надо параметры фрейма обновлять, если это только для выброса юзается.
             end
             if t.data.time_orig > 0 then
                 local dt = t.data.time_orig + game.get_game_time():diffSec(t.time)
@@ -1308,6 +1324,9 @@ function WeatherManager:set_next_weather()
     if ltx ~= level.get_weather() and not t3.surge_frame then
         level.set_weather(ltx)
     end
+
+    local t, t2 = afc:get_first_frame()
+    update_env_descriptors_params(afc.cycles[ t.cycle ].weather_name, afc.cycles[ t2.cycle ].weather_name, self.forced) --тут всё чётко, передаем имя текущей погоды и следующей
 end
 
 function WeatherManager:on_engine_weather_change(sect)

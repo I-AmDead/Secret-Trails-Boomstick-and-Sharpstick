@@ -7,15 +7,17 @@
  */
 
 uniform float4 wind_params;
+uniform float4 wind_params_old;
 
 uniform float4 ssfx_wsetup_grass; // Anim Speed - Turbulence - Push - Wave
 uniform float4 ssfx_wsetup_trees; // Branches Speed - Trunk Speed - Bending - Min Wind Speed
 uniform float4 ssfx_wind_anim;
+uniform float4 ssfx_wind_anim_old;
 
 uniform float is_bugged_flora;
 
 Texture2D s_waves;
-
+sampler smp_linear2;
 
 struct wind_setup
 {
@@ -33,16 +35,16 @@ struct wind_setup
     float grass_wave;
 };
 
-wind_setup ssfx_wind_setup()
+wind_setup ssfx_wind_setup(const bool for_old_frame = false)
 {
     wind_setup wsetup;
 
     // Direction. Radians to Vector
-    float r = -wind_params.x + 1.57079f;
+    float r = -(for_old_frame ? wind_params_old.x : wind_params.x) + 1.57079f;
     wsetup.direction = float2(cos(r), sin(r));
 
     // Wind Speed
-    wsetup.speed = max(ssfx_wsetup_trees.w, saturate(wind_params.y * 0.001));
+    wsetup.speed = max(ssfx_wsetup_trees.w, saturate((for_old_frame ? wind_params_old.y : wind_params.y) * 0.001));
     wsetup.sqrt_speed = saturate(sqrt(wsetup.speed * 1.66f));
 
     // Setup
@@ -62,16 +64,16 @@ wind_setup ssfx_wind_setup()
 
 // Flow Map - X: X-Anim | Y: Z-Anim | Z: Wind Wave | W : Detail
 
-float3 ssfx_wind_grass(float3 pos, float H, wind_setup W)
+float3 ssfx_wind_grass(float3 pos, float H, wind_setup W, const bool for_old_frame = false)
 {
     // Height Limit. ( Add stiffness to tall grass )
     float HLimit = saturate(H * H - 0.01f) * saturate(1.0f - H * 0.1f);
 
     // Offset animation
-    float2 Offset = -ssfx_wind_anim.xy * W.grass_animspeed;
+    float2 Offset = -(for_old_frame ? ssfx_wind_anim_old.xy : ssfx_wind_anim.xy) * W.grass_animspeed;
 
     // Sample ( The scale defines the detail of the motion )
-    float3 Flow = s_waves.SampleLevel(smp_linear, (pos.xz + Offset) * 0.018f, 0);
+    float3 Flow = s_waves.SampleLevel(smp_linear2, (pos.xz + Offset) * 0.018f, 0);
 
     // Grass Motion ( -1.0 ~ 1.0 ). Turbulence.
     float2 GrassMotion = (Flow.xy * 2.0f - 1.0f) * W.grass_turbulence;
@@ -87,10 +89,10 @@ float3 ssfx_wind_grass(float3 pos, float H, wind_setup W)
 
 #else // Non Grass
 
-float3 ssfx_wind_tree_trunk(float3 pos, float Tree_H, wind_setup W)
+float3 ssfx_wind_tree_trunk(float3 pos, float Tree_H, wind_setup W, const bool for_old_frame = false)
 {
     // Phase ( from matrix ) + Offset
-    float Phase = m_xform._24 + ssfx_wind_anim.z * W.trees_trunk_animspeed;
+    float Phase = m_xform._24 + (for_old_frame ? ssfx_wind_anim_old.z : ssfx_wind_anim.z) * W.trees_trunk_animspeed;
 
     // Trunk wave
     float TWave = (cos(Phase) * sin(Phase * 5.0f) + 0.5f) * W.trees_bend;
@@ -110,16 +112,16 @@ float3 ssfx_wind_tree_trunk(float3 pos, float Tree_H, wind_setup W)
     return float3(Final, saturate((TWave + 1.0f) * 0.5));
 }
 
-float3 ssfx_wind_tree_branches(float3 pos, float Tree_H, float tc_y, wind_setup W)
+float3 ssfx_wind_tree_branches(float3 pos, float Tree_H, float tc_y, wind_setup W, const bool for_old_frame = false)
 {
     // UV Offset
-    float2 Offset = -ssfx_wind_anim.xy * W.trees_animspeed;
+    float2 Offset = -(for_old_frame ? ssfx_wind_anim_old.xy : ssfx_wind_anim.xy) * W.trees_animspeed;
 
     // Sample flow map
-    float3 Flow = s_waves.SampleLevel(smp_linear, (pos.xz + Offset) * 0.02f, 0);
+    float3 Flow = s_waves.SampleLevel(smp_linear2, (pos.xz + Offset) * 0.02f, 0);
 
     // Sample 2, slower and detailed
-    float3 Flow2 = s_waves.SampleLevel(smp_linear, (pos.xz + Offset * 0.2f) * 0.1f, 0);
+    float3 Flow2 = s_waves.SampleLevel(smp_linear2, (pos.xz + Offset * 0.2f) * 0.1f, 0);
 
     // Branch motion [ -1.0 ~ 1.0 ]
     float3 branchMotion = 0;
@@ -128,7 +130,7 @@ float3 ssfx_wind_tree_branches(float3 pos, float Tree_H, float tc_y, wind_setup 
         branchMotion = float3(Flow.x, Flow2.y, Flow.y) * 2.0f - 1.0f;
 
     // Trunk position
-    float3 Trunk = ssfx_wind_tree_trunk(pos, Tree_H, W);
+    float3 Trunk = ssfx_wind_tree_trunk(pos, Tree_H, W, for_old_frame);
 
     // Gust from trunk data.
     branchMotion.xz *= Trunk.z * clamp(Tree_H * 0.1f, 1.0f, 2.5f);

@@ -43,14 +43,12 @@ function action_walker_activity:reset_scheme(loading, npc)
         self.st.path_look_info = utils.path_parse_waypoints(self.st.path_look)
     end
 
-    self.move_mgr:reset(self.st.path_walk, self.st.path_walk_info, self.st.path_look, self.st.path_look_info,
-        self.st.team, self.st.suggested_state)
+    self.move_mgr:reset(self.st.path_walk, self.st.path_walk_info, self.st.path_look, self.st.path_look_info, self.st.team, self.st.suggested_state)
     xr_sound.set_sound(npc, self.st.sound_idle)
 end
 
 function action_walker_activity:execute()
     action_base.execute(self)
-
     self.move_mgr:update()
     if xr_logic.try_switch_to_another_section(self.object, self.st, db.actor) then
         return

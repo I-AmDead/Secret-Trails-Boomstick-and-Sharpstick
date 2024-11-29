@@ -69,7 +69,7 @@ ammo_mag_size                            = 6
 CartridgeInTheChamberEnabled		 = false
 
 scope_bone_none 			 = true
-scope_names 			         = aim_low, aimpoint, ac10632, acog, c-more, compm4s, deltapoint, d0cter, e0t2, kemper, leupold, marchf, mepro, rmr, specter
+scope_names 			         = aim_low, aimpoint, ac10632, acog, c-more, compm4s, deltapoint, d0cter, eot, kemper, leupold, marchf, mepro, rmr, specter
 scope_status                             = 2
 
 scope_respawn                            = wpn_revolver357
@@ -81,10 +81,11 @@ scope_respawn_c-more                     = wpn_revolver357_c-more
 scope_respawn_compm4s                    = wpn_revolver357_compm4s
 scope_respawn_deltapoint                 = wpn_revolver357_deltapoint
 scope_respawn_d0cter                     = wpn_revolver357_d0cter
-scope_respawn_e0t2                       = wpn_revolver357_e0t2
+scope_respawn_eot                        = wpn_revolver357_eot
 scope_respawn_kemper                     = wpn_revolver357_kemper
 scope_respawn_leupold                    = wpn_revolver357_leupold
 scope_respawn_marchf                     = wpn_revolver357_marchf
+scope_respawn_mepro                      = wpn_revolver357_mepro
 scope_respawn_rmr                        = wpn_revolver357_rmr
 scope_respawn_specter                    = wpn_revolver357_specter
 
@@ -184,6 +185,8 @@ snd_reload_5										= weapons\357\handling\357_reload_ammo5_tcwp1
 snd_shoot						 					= wpn_357_tcwp_snd_shoot
 snd_shoot_actor										= wpn_357_tcwp_snd_shoot_actor
 
+snd_mag_shot									   	= $silent
+
 shell_point                 = 0,-0.9,0
 
 hud_fov                         = 0.75
@@ -217,10 +220,10 @@ gl_hud_offset_pos_16x9                   = 0, 0, 0
 gl_hud_offset_rot                        = 0, 0, 0
 gl_hud_offset_rot_16x9                   = 0, 0, 0
 
-lowered_hud_offset_pos                   = -0.15, -0.35, 0.2
-lowered_hud_offset_pos_16x9              = -0.15, -0.35, 0.2
-lowered_hud_offset_rot                   = -1.55, 0, 0
-lowered_hud_offset_rot_16x9              = -1.55, 0, 0
+lowered_hud_offset_pos                   = 0.028202,-0.218613,0.040197
+lowered_hud_offset_pos_16x9              = 0.028202,-0.218613,0.040197
+lowered_hud_offset_rot                   = -0.805001,-0.000000,-0.050000
+lowered_hud_offset_rot_16x9              = -0.805001,-0.000000,-0.050000
 
 lean_hud_offset_pos                      = 0, 0, 0
 lean_hud_offset_rot                      = 0, 0, 0
@@ -536,19 +539,19 @@ lowered_hud_offset_rot_16x9              = -1.55, 0, 0
 
 item_visual                	= anomaly_weapons\wpn_revolver357\wpn_revolver357_d0cter_hud.ogf
 ;------------------------------------------------------------------------------------------------------------------------------------------------------;
-[wpn_revolver357_e0t2]:wpn_revolver357
+[wpn_revolver357_eot]:wpn_revolver357
 
 inv_weight              = 1.47
 
-hud						= wpn_revolver357_e0t2_hud
+hud						= wpn_revolver357_eot_hud
 
-scope_name			    = e0t2
+scope_name			    = eot
 scope_x			= 24
 scope_y			= -32
 
 visual                  = anomaly_weapons\wpn_revolver357\wpn_revolver357_world_reflex.ogf
 
-[wpn_revolver357_e0t2_hud]:wpn_revolver357_hud
+[wpn_revolver357_eot_hud]:wpn_revolver357_hud
 
 aim_hud_offset_pos                       = -0.0454, -0.0105, -0.047908
 aim_hud_offset_pos_16x9                  = -0.0454, -0.0105, -0.047908

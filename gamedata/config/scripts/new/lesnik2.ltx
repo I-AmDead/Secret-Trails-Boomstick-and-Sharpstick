@@ -1,38 +1,85 @@
-[smart_terrains]
-none = true
-
-[dont_spawn_loot]
-
 [logic]
-active = walker@lesnik2
-danger = danger_condition@lesnik2
+active =  mob_trader@sit
+on_trade = mob_trade@trade
+trade = misc\trade\trade_generic.ltx
 
-[walker@lesnik2]
-path_walk = lesnik_walk2
-path_look = lesnik_look2
-danger = danger_condition@lesnik2
-def_state_moving = walk
-meet = no_meet
-on_info = {+lesnik2_mesto} remark@lesnik2_2
+[mob_trader@sit]
+anim_global = forester_sit
+on_timer = 1000 | {~50} mob_trader@idle_see, mob_trader@beard
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_le(4) !talking} mob_trader@hello
+;on_info2 = {=actor_out_zone(red_forester_restr)} mob_trader@idle_wait
 
-[remark@lesnik2_2]
-anim = guard
-target = actor
-meet = meet
-danger = danger_condition@lesnik2
-on_timer = 2000 | walker@lesnik_finish
- 
-[walker@lesnik_finish]
-path_walk = lesnik_walk2
-path_look = lesnik_look2
-danger = danger_condition@lesnik2
-meet = meet
+[mob_trader@idle_see]
+anim_global = forester_see
+anim_head = normal
+on_signal = animation_end | {~75} mob_trader@sit, {~25} mob_trader@beard
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_le(4) !talking} mob_trader@hello
 
-[danger_condition@lesnik2]
-ignore_distance = 0
-ignore_distance_corpse = 0
+[mob_trader@beard]
+anim_global = forester_beard
+anim_head = normal
+on_signal = animation_end | {~75} mob_trader@sit, {~25} mob_trader@idle_see, mob_trader@sit
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_le(4) !talking} mob_trader@hello
 
-[meet]
-use = true
-use_wpn = false
-meet_talk_enabled = true
+[mob_trader@hello]
+anim_global = forester_reaction
+anim_head = forester_reaction
+sound_phrase = red_forester_meet
+on_info = mob_trader@sit2
+on_signal = animation_end | mob_trader@sit2
+
+[mob_trader@sit2]
+anim_global = forester_sit
+on_timer = 1000 | {~50} mob_trader@idle_see2, mob_trader@beard2
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_ge(4) !talking} mob_trader@sit
+
+[mob_trader@idle_see2]
+anim_global = forester_see
+anim_head = normal
+on_signal = animation_end | {~75} mob_trader@beard2, mob_trader@sit2
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_ge(4) !talking} mob_trader@sit
+
+[mob_trader@beard2]
+anim_global = forester_beard
+anim_head = normal
+on_signal = animation_end | {~75} mob_trader@idle_see2, mob_trader@sit2
+on_info = {=talking ~35} mob_trader@talk1, {=talking ~35} mob_trader@talk2, {=talking} mob_trader@talk3
+on_info2 = {=dist_to_actor_ge(4) !talking} mob_trader@sit
+
+
+
+[mob_trader@talk1]
+anim_global = forester_talk_1
+anim_head = forester_talk_1
+on_info = {!talking} mob_trader@bye
+
+[mob_trader@talk2]
+anim_global = forester_talk_2
+anim_head = forester_talk_2
+on_info = {!talking} mob_trader@bye
+
+[mob_trader@talk3]
+anim_global = forester_talk_3
+anim_head = forester_talk_3
+on_info = {!talking} mob_trader@bye
+
+[mob_trade@trade]
+anim_global = forester_talk_3
+anim_head = forester_talk_3
+on_info = {!trading} mob_trader@bye
+
+[mob_trader@bye]
+anim_global = forester_talk_1
+anim_head = forester_talk_1
+sound_phrase = red_forester_meet_bye
+on_info = {!talking} mob_trader@sit2
+
+
+[meet@no_trade]
+trade_enable = false
+quest_npc = true

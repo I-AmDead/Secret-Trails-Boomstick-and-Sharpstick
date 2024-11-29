@@ -4,6 +4,7 @@
 
 
 function attach(sm)
+    sm:subscribe({ signal = "on_actor_weapon_fire",		fun = this.actor_on_weapon_fire	       })
     sm:subscribe({ signal = "on_actor_weapon_zoom_out",		fun = this.actor_on_weapon_zoom_out    })
     sm:subscribe({ signal = "on_actor_weapon_zoom_in",  	fun = this.actor_on_weapon_zoom_in     })
     sm:subscribe({ signal = "on_actor_weapon_zoom_switch",	fun = this.actor_on_weapon_zoom_switch })
@@ -14,7 +15,20 @@ local pnv_mode_save
 local scope_radius
 local zooming_t
 
+function actor_on_weapon_fire()
+    local wpn = db.actor:active_item()
+    if not wpn then return end
+
+    local ammo_mag_shot = wpn:get_magazine_size() * 0.2
+    local snd_mag_shot = sound_object(get_string(wpn:section(), "snd_mag_shot"))
+    snd_mag_shot:play(wpn, 0, sound_object.s2d)
+    snd_mag_shot.volume = 0.9 - ((wpn:get_ammo_in_magazine() * 0.5) * 0.1)
+    snd_mag_shot.frequency = math.clamp(0.95 + (wpn:get_ammo_in_magazine() * 0.01), 0.95, 1.0)
+end
+
 function actor_on_weapon_zoom_out()
+    game.play_hud_anm("script\\aim_end_groza.anm", 2, 0.5, 0.3, false)
+
     apply_pnv()
     cmd("scope_params_4 0.0, 1.25, 4.0")
 end
@@ -29,9 +43,7 @@ function actor_on_weapon_zoom_switch()
     end
 
     local wpn = db.actor:active_item()
-    if not (wpn) then
-        return
-    end
+    if not wpn then return end
 
     local wpn_w = wpn:get_weapon()
     if wpn_w and wpn_w:UseScopeTexture() then
@@ -40,6 +52,8 @@ function actor_on_weapon_zoom_switch()
 end
 
 function actor_on_weapon_zoom_in()
+    game.play_hud_anm("script\\aim_start_groza.anm", 2, 0.5, 0.1, false)
+
     pnv_mode_save = get_con_string("r_pnv_mode", 0)
     if (get_con_string("fake_scope_enable") == "off" or get_con_string("fake_scope_enable") == "0") and
         (db.actor and db.actor:alive()) then

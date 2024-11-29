@@ -1,1 +1,1 @@
-#define SSFX_LUT
+#define SSFX_LUT_INUSE

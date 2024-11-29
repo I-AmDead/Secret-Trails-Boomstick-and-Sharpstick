@@ -28,7 +28,7 @@
         
         kind                        = w_shotgun
         inv_weight                  = 3.0
-        cost                        = 39642
+        cost                        = 12000
         repair_type                 = shotgun
         weapon_class                = shotgun
         
@@ -64,7 +64,7 @@
         
         tri_state_reload            = on
         fire_modes                  = 1
-        ammo_class                  = ammo_12x70_buck, ammo_12x70_kart, ammo_12x76_dart, ammo_12x76_zhekan
+        ammo_class                  = ammo_12x70_buck, ammo_12x76_dart, ammo_12x76_zhekan
         ammo_elapsed                = 9
         ammo_mag_size               = 9
         startup_ammo                = 18
@@ -157,12 +157,11 @@ hit_probability_gd_stalker               = 1.00
 hit_probability_gd_veteran               = 1.00
 hit_probability_gd_master                = 1.00
         
-        kill_msg_x                  = 171
-        kill_msg_y                  = 104
-        kill_msg_width              = 75
-        kill_msg_height             = 20
+kill_msg_x                  = 171
+kill_msg_y                  = 104
+kill_msg_width              = 75
+kill_msg_height             = 20
 		
-bas_state_reload                    = true
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------		
 flame_particles = ghost_particles\weapons\flame_eft_shotgun
 smoke_particles = ghost_particles\weapons\flame_eft_sks
@@ -288,7 +287,7 @@ anm_idle_sprint_jammed	   = mossberg590a1_idle_sprint, idle_sprint
 
 ;Стрельба
 anm_shots		    = mossberg590a1_shoot, shoot
-anm_shot_l		    = mossberg590a1_shoot_last, shoot_last
+anm_shots_l		    = mossberg590a1_shoot_last, shoot_last
 	
 ;Скука
 anm_bore		    = mossberg590a1_bore
@@ -498,23 +497,6 @@ item_visual				= anomaly_weapons\wpn_mossberg590a1\wpn_mossberg590a1_ekp8_18_hud
 
         aim_hud_offset_pos               = -0.055334,0.007203,-0.026100
         aim_hud_offset_pos_16x9          = -0.055334,0.007203,-0.026100
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_mossberg590a1_e0t2]:wpn_mossberg590a1
-
-hud						= wpn_mossberg590a1_e0t2_hud
-
-inv_weight                                         = 3.4
-
-scope_name			    = e0t2
-scope_x			= 113
-scope_y			= -34
-
-[wpn_mossberg590a1_e0t2_hud]:wpn_mossberg590a1_hud
-
-item_visual				= anomaly_weapons\wpn_mossberg590a1\wpn_mossberg590a1_e0t2_hud.ogf
-
-        aim_hud_offset_pos               = -0.056882, 0.009095, -0.063012
-        aim_hud_offset_pos_16x9          = -0.056882, 0.009095, -0.063012
 ;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_mossberg590a1_pn23]:wpn_mossberg590a1
 

@@ -71,7 +71,7 @@ ammo_elapsed      = 60
 ammo_mag_size     = 60
 startup_ammo      = 90
 
-scope_names 	  = acog, eot, ac10632, specter, c-more, point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18
+scope_names 	  = acog, eot, ac10632, specter, c-more, point_aimpro, leupold, aimpoint, pn23, compm4s, marchf, kemper, mepro, ekp8_18
 scope_status      = 2
 
 scope_respawn                         = wpn_m4_butcher
@@ -83,9 +83,7 @@ scope_respawn_c-more                  = wpn_m4_butcher_c-more
 scope_respawn_point_aimpro            = wpn_m4_butcher_point_aimpro
 scope_respawn_leupold                 = wpn_m4_butcher_leupold
 scope_respawn_aimpoint                = wpn_m4_butcher_aimpoint
-scope_respawn_e0t2                    = wpn_m4_butcher_e0t2
 scope_respawn_pn23                    = wpn_m4_butcher_pn23
-scope_respawn_gauss_sight             = wpn_m4_butcher_gauss_sight
 scope_respawn_compm4s                 = wpn_m4_butcher_compm4s
 scope_respawn_marchf                  = wpn_m4_butcher_marchf
 scope_respawn_kemper                  = wpn_m4_butcher_kemper
@@ -306,7 +304,7 @@ anm_bore_jammed            = mka_sh_idle_bore_alt
 
 ;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
 anm_shots		       = mka_sh_alt_fire
-anm_shot_l		       = mka_sh_alt_fire, fire_empty
+anm_shots_l		       = mka_sh_alt_fire, fire_empty
 
 ;Перезарядка/////////////////////////////////////////////////////////////////////
 anm_reload                           = mka_sh_tac_reload_drum, mka_tac_reload_drum_zz
@@ -427,28 +425,6 @@ inv_weight  = 3.600
 item_visual  = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.068775,0.016900,-0.069525
-aim_hud_offset_rot_16x9  = 0.037250,0.043436,-0.056187
-
-
--------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_butcher_gauss_sight]:wpn_m4_butcher
-$spawn	 = "weapons\m4_butcher_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_world.ogf
-
-hud	     = wpn_m4_butcher_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = 0
-
-inv_weight  = 4.350
-
-[wpn_m4_butcher_gauss_sight_hud]:wpn_m4_butcher_hud
-
-item_visual  = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.070075,0.042800,-0.082625
 aim_hud_offset_rot_16x9  = 0.037250,0.043436,-0.056187
 
 
@@ -621,27 +597,6 @@ item_visual  = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_ekp8_18_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.063720,0.023150,-0.054825
 aim_hud_offset_rot_16x9  = 0.023937,0.010725,-0.079000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_butcher_e0t2]:wpn_m4_butcher
-
-visual	 = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_world.ogf
-
-hud  = wpn_m4_butcher_e0t2_hud
-
-inv_weight  = 3.177
-
-scope_name 	     = e0t2
-scope_x	 = 84
-scope_y	 = -12
-
-[wpn_m4_butcher_e0t2_hud]:wpn_m4_butcher_hud
-
-item_visual  = dynamics\weapons\wpn_m4_butcher\wpn_m4_butcher_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.062870,0.028650,-0.054825
-aim_hud_offset_rot_16x9  = 0.016937,0.008725,-0.079000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------

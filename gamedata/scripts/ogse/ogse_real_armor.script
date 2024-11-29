@@ -30,6 +30,7 @@ function vis_to_armor(npc)
             if vis == "stalker_do_exoskeleton" then
                 section = "dolg_black_exoskeleton"
             end
+        elseif npc:character_community() == "nebo" then
             -- nebo
             if vis == "stalker_nebo_balon_1" then
                 section = "nebo_heavy_outfit"

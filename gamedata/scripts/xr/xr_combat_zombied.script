@@ -4,8 +4,9 @@
 
 Сделать:
 	- анимация поворота
-------------------------------------------------------------------------------------------------------------]] local 
-    act_shoot = 1
+------------------------------------------------------------------------------------------------------------]] 
+
+local act_shoot = 1
 local act_danger = 2
 
 class "evaluator_combat_zombied"(property_evaluator)
@@ -67,7 +68,7 @@ function action_zombie_shoot:set_state(state, be, pos)
         self.t.look_position = pos
     end
 
-    state_mgr.set_state(self.object, state, nil, nil, self.t)
+    state_mgr.set_state(script_name(), self.object, state, nil, nil, self.t)
 
     self.last_state = state
 end
@@ -89,11 +90,9 @@ function action_zombie_shoot:execute()
         self.valid_path = false
         -- ' Запоминаем позицию, куда нам надо будет идти
         if not self.object:accessible(self.enemy_last_seen_vid) then
-            self.enemy_last_accessible_vid, self.enemy_last_accessible_position =
-                self.object:accessible_nearest(level.vertex_position(self.enemy_last_seen_vid), vector())
+            self.enemy_last_accessible_vid, self.enemy_last_accessible_position = self.object:accessible_nearest(level.vertex_position(self.enemy_last_seen_vid), vector())
         else
-            self.enemy_last_accessible_vid, self.enemy_last_accessible_position = self.enemy_last_seen_vid,
-                self.enemy_last_seen_pos
+            self.enemy_last_accessible_vid, self.enemy_last_accessible_position = self.enemy_last_seen_vid, self.enemy_last_seen_pos
         end
 
     end
@@ -216,7 +215,7 @@ function action_zombie_go_to_danger:set_state(state, be, pos)
     if state ~= self.last_state then
         self.t.look_object = be
         self.t.look_position = pos
-        state_mgr.set_state(self.object, state, nil, nil, self.t)
+        state_mgr.set_state(script_name(), self.object, state, nil, nil, self.t)
         self.last_state = state
     end
 end
@@ -235,6 +234,7 @@ function action_zombie_go_to_danger:execute()
 
     else
         local bd = self.object:best_danger()
+        if not bd then return end
         local bdo = bd:object()
 
         if bdo and bd:type() ~= danger_object.grenade then
@@ -287,8 +287,7 @@ end
 --------------------------------------------------------------------------------------------------------------
 
 function add_to_binder(npc, ini, st, planner)
-    planner:add_evaluator(xr_evaluators_id.combat_zombied_base,
-        evaluator_combat_zombied("combat_zombied", db.storage[npc:id()]))
+    planner:add_evaluator(xr_evaluators_id.combat_zombied_base, evaluator_combat_zombied("combat_zombied", db.storage[npc:id()]))
 
     local action = action_zombie_shoot("action_zombie_shoot", st)
     action:add_precondition(world_property(stalker_ids.property_alive, true))

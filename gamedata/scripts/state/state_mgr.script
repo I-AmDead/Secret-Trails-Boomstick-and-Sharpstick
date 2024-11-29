@@ -424,16 +424,16 @@ end
 
 
 
-function set_state(caller, npc,...)
+function set_state(caller, npc, ...)
 	local caller_is_string = type(caller) == "string"
 	if caller_is_string then caller = npc end
 
 	local stmgr = db.storage[caller:id()].state_mgr
 	if stmgr then
 		if caller_is_string then
-			stmgr:set_state( ... )
+			stmgr:set_state(... )
 		else
-			stmgr:set_state( npc, ... )
+			stmgr:set_state(npc, ...)
 		end
 	end
 end

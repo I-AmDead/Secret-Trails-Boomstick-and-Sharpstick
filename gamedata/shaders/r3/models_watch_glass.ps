@@ -17,15 +17,18 @@ struct v2p
 
 float4 main(v2p I) : SV_Target
 {
-	float4 diffuse_texture = s_glass_distortion.SampleLevel(smp_base, I.tc0, 0).wwww;	//we wanna fetch alpha only
+    float4 diffuse_texture = s_glass_distortion.SampleLevel(smp_nofilter, I.tc0, 0).wwww; // we wanna fetch alpha only
+
+    float2 diffuse_tc = (diffuse_texture.xy * 2.0 - 1.0) * 0.05;
+    float2 refr_tc = I.tc0.xy + diffuse_tc;
 
     // HUD Rain drops - SSS Update 17
     // https://www.moddb.com/mods/stalker-anomaly/addons/screen-space-shaders/
     float extra_col = 0;
     if (ssfx_hud_drops_1.y > 0)
     {
-        float4 Layer0 = s_hud_rain.Sample(smp_base, (I.tc0 + float2(0, -ssfx_hud_drops_1.x * 0.01f)) * float2(0.5f, 0.25f)); // Big drops
-        float4 Layer1 = s_hud_rain.Sample(smp_base, I.tc0 * float2(2.5f, 1.5f)); // Small drops [ Static ]
+        float4 Layer0 = s_hud_rain.Sample(smp_base, (refr_tc + float2(0, -ssfx_hud_drops_1.x * 0.01f)) * float2(0.5f, 0.25f)); // Big drops
+        float4 Layer1 = s_hud_rain.Sample(smp_base, refr_tc * float2(2.5f, 1.5f)); // Small drops [ Static ]
 
         float3 result = ssfx_process_drops(Layer0, 0.8f, 0.9f) + ssfx_process_drops(Layer1, 0.2f, 1.0f);
         result.xy = clamp(result.xy, -1.0f, 1.0f);
@@ -45,7 +48,7 @@ float4 main(v2p I) : SV_Target
 
     I.tc0.x += (m_affects.x > 0.38) ? (m_affects.y - 0.5) * 0.04 : 0;
 
-    float4 t_vp2 = s_base.Sample(smp_base, I.tc0);
+    float4 t_vp2 = s_base.Sample(smp_base, refr_tc);
 
     t_vp2.rgb *= diffuse_texture.w * 4.0;
 

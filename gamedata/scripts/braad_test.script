@@ -78,17 +78,17 @@ local function on_take(obj, sobj)
         and db.actor:object("amulet_4") and db.actor:object("amulet_5") then
             db.actor:give_info_portion("amulet_sobral")
         end
-    elseif level.name() == "aver" then
+    elseif level.name() == "l10_red_forest" then
         if obj:section() == "mandra" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         elseif obj:section() == "zahar_box" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         end
-    elseif level.name() == "predbannik" then
+    elseif level.name() == "l13_deep" then
         if db.actor:has_info("nato_enemy") and not has_alife_info("nato_zasada") then
             db.actor:give_info_portion("nato_zasada")
         elseif obj:section() == "box_vano" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         end
     elseif level.name() == "l03_agroprom" then
         if obj:section() == "af_agro" and not has_alife_info("pauk_agro_spawn") then
@@ -109,7 +109,7 @@ local function on_take(obj, sobj)
             not db.actor:has_info("mil_klyak_help_start") then
             klyak_mil_spawn()
         elseif obj:section() == "new_plan" then
-            level.map_remove_object_spot(obj:id(), "red_location")
+            level_tasks.remove_location_by_id(obj:id(), "red_location")
         end
     elseif level.name() == "l10_radar" then
         if obj:section() == "amulet_5" and not has_alife_info("pauk_les_spawn") then
@@ -128,11 +128,11 @@ local function on_take(obj, sobj)
         end
     elseif level.name() == "l12_stancia_2" then
         if obj:section() == "aes_case1" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         elseif obj:section() == "aes_case2" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         elseif obj:section() == "aes_case3" then
-            level.map_remove_object_spot(obj:id(), "crlc_big")
+            level_tasks.remove_location_by_id(obj:id(), "crlc_big")
         end
     elseif level.name() == "l12u_sarcofag" then
         if obj:section() == "amk_zapiska" then
@@ -140,12 +140,10 @@ local function on_take(obj, sobj)
             alife():release(sobj)
         end
     elseif obj:section() == "flash_ban" and db.actor:has_info("voronin_nychka_jila") then
-        level.map_remove_object_spot(obj:id(), "blue_location")
+        level_tasks.remove_location_by_id(obj:id(), "blue_location")
         alife():release(sobj)
-    elseif obj:section() == "volk_pda" and db.actor:has_info("volk_tainik_have") then
-        level.map_remove_object_spot(obj:id(), "blue_location")
     elseif obj:section() == "doc_peredatchik" then
-        level.map_remove_object_spot(obj:id(), "crlc_big")
+        level_tasks.remove_location_by_id(obj:id(), "crlc_big")
     end
 end
 
@@ -163,11 +161,10 @@ local function on_first_update()
 
     if level.name() == "l02_garbage" then
         if not db.actor:has_info("art_garbage_spawn") then
-            spawn_ai_location("af_electra_flash", vector():set(-12.316145896912, 18.28110504, 117.60050964355), 170444, 354)
-            spawn_ai_location("af_electra_flash", vector():set(-75.99243927002, 20.78828811, 112.10626220703), 170444, 354)
-            spawn_ai_location("af_rusty_kristall", vector():set(-195.3737487793, 3.43506217, 208.96646118164), 32824, 345)
-            spawn_ai_location("af_ameba_slug", vector():set(-255.01333618164, 2.5012269020081, 97.402565002441), 7662, 339)
-            spawn_ai_location("af_rusty_sea-urchin", vector():set(-182.67608642578, 1.77206, -321.47311401367), 53729, 689)
+            spawn_ai_location("af_electra_flash", vector():set(-12.316145896912, 18.28110504, 117.60050964355), "l02_garbage")
+            spawn_ai_location("af_rusty_sea-urchin", vector():set(-75.99243927002, 20.78828811, 112.10626220703), "l02_garbage")
+            spawn_ai_location("af_rusty_kristall", vector():set(-195.3737487793, 3.43506217, 208.96646118164), "l02_garbage")
+            spawn_ai_location("af_ameba_slug", vector():set(-255.01333618164, 2.5012269020081, 97.402565002441), "l02_garbage")
             db.actor:give_info_portion("art_garbage_spawn")
         end
 
@@ -238,22 +235,15 @@ local function on_first_update()
             db.actor:give_info_portion("actor_na_darkvalley")
         end
 
-        if db.actor:has_info("ucen_need_metka_start") then
+        if db.actor:has_info("ucen_need_metka_start") and db.actor:dont_has_info("electro_chimera_ucen_need") then
+            ucen_electro()
             db.actor:give_info_portion("electro_chimera_ucen_need")
-        end
-
-        if has_alife_info("doronin_help_have") and not has_alife_info("naem_td_spawn") then
-            db.actor:give_info_portion("naem_td_spawn")
         end
     end
 
     if level.name() == "l04u_labx18" then
         if db.actor:has_info("mil_klyak_lab_start") and not has_alife_info("mil_klyak_lab_spawn") then
             db.actor:give_info_portion("mil_klyak_lab_spawn")
-        end
-
-        if has_alife_info("potapov_first_dialog_start") and not has_alife_info("izlom_x18_spawn") then
-            db.actor:give_info_portion("izlom_x18_spawn")
         end
     end
 
@@ -270,6 +260,11 @@ local function on_first_update()
             db.actor:give_info_portion("barman_speech_start")
         end
 
+        if has_alife_info("levsha_daet_dobro") and has_alife_info("sidr_nacalo_start") and
+            not has_alife_info("sledopyt_spawn") then
+            db.actor:give_info_portion("sledopyt_spawn")
+        end
+
         if has_alife_info("sidor_poslanie_dialog_start") and not has_alife_info("killer_attak_start") then
             db.actor:give_info_portion("killer_attak_start")
         end
@@ -284,11 +279,6 @@ local function on_first_update()
             db.actor:give_info_portion("lektor_spawn")
         end
 
-        if has_alife_info("levsha_daet_dobro") and has_alife_info("sidr_nacalo_start") and
-            not has_alife_info("sledopyt_spawn") then
-            db.actor:give_info_portion("sledopyt_spawn")
-        end
-
         if level.name() == "l06_rostok" and has_alife_info("ucen_need_metka_start") and
             not has_alife_info("fantom_rostok_spawn") then
             db.actor:give_info_portion("fantom_rostok_spawn")
@@ -301,6 +291,21 @@ local function on_first_update()
 
     if level.name() == "l07_military" then
         if not has_alife_info("actor_na_scladah") then
+            spawn_patrol("add_military", "mil_voen_lager_voen17_walk")
+            spawn_patrol("add_military", "mil_voen_lager_voen17_walk")
+            spawn_patrol("add_military", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_ambush", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_ambush", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_ambush", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_ambush", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_specnaz", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_specnaz", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_specnaz", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_specnaz", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_sniper", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_sniper", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_sniper", "mil_voen_lager_voen17_walk")
+            spawn_patrol("dark_military_sniper", "mil_voen_lager_voen17_walk")
             db.actor:give_info_portion("actor_na_scladah")
         end
 
@@ -310,6 +315,10 @@ local function on_first_update()
     end
 
     if level.name() == "l08_yantar" then
+        if not has_alife_info("vasil2_yantar") then
+            db.actor:give_info_portion("vasil2_yantar")
+        end
+
         if not has_alife_info("actor_na_yantar") then
             db.actor:give_info_portion("actor_na_yantar")
         end
@@ -352,6 +361,12 @@ local function on_first_update()
 
         if has_alife_info("black_box_start") and not has_alife_info("fantom_radar2_spawn") then
             db.actor:give_info_portion("fantom_radar2_spawn")
+        end
+    end
+
+    if level.name() == "l10_red_forest" then
+        if not has_alife_info("lesnik2_mesto") then
+            db.actor:give_info_portion("lesnik2_mesto")
         end
     end
 
@@ -415,6 +430,13 @@ local function on_first_update()
         if has_alife_info("semecky_first_dialog_done") and not has_alife_info("semecky_delete") then
             db.actor:give_info_portion("semecky_delete")
         end
+
+        if has_alife_info("monolit_bunker_doc_start") and not has_alife_info("monolit_bunker_doc_spawn") then
+            solomon_grabs()
+            ograblen()
+            z_teleport.aes_tele()
+            db.actor:give_info_portion("monolit_bunker_doc_spawn")
+        end
     end
 
     if level.name() == "l12u_sarcofag" then
@@ -432,56 +454,28 @@ local function on_first_update()
         end
 
         if not db.actor:has_info("esc_serious_talk") then
-            local obj = alife():create("add_military", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("add_military", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("add_military", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_ambush", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_ambush", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_ambush", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_ambush", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_specnaz", vector():set(-22.787176132202, -7.3171, -28.85), 284068, 1593)
-            local obj = alife():create("dark_military_specnaz", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_specnaz", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_specnaz", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_sniper", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_sniper", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_sniper", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
-            local obj = alife():create("dark_military_sniper", vector():set(-7.9555635452271, -7.31456, 109.538), 299642, 1636)
+            alife_create("sar_zapiska_ruk", "l12u_sarcofag", vector():set(-18.311, 52.612, 10.153))
+            alife_create("rad_zapiska_ruk", "l10u_bunker", vector():set(-18.195, -23.519, -11.307))
 
-            local obj = alife():create("sar_zapiska_ruk", vector():set(-18.628143310547, 52.614501953125, 10.197953224182), 599, 2417)
-            local obj = alife():create("rad_zapiska_ruk", vector():set(-18.395393371582, -23.520460128784, -11.5154476), 3777, 2784)
+            spawn_ai_location("gold_art", vector():set(-234.881, 8.371, 177.889), "l06_rostok")
+            spawn_ai_location("gold_art", vector():set(-234.881, 8.371, 177.889), "l06_rostok")
+            spawn_ai_location("gold_art", vector():set(193.804, 0.0945, 71.867), "l05_bar")
+            spawn_ai_location("gold_art", vector():set(75.452, 16.427, 34.290), "l02_garbage")
+            spawn_ai_location("gold_art", vector():set(270.661, -8.737, -126.349), "l02_garbage")
+            spawn_ai_location("gold_art", vector():set(86.187, 0.054, 49.023), "l08_yantar")
+            spawn_ai_location("gold_art", vector():set(-81.021, -0.925, 157.556), "l01_escape")
 
-            spawn_ai_location("wpn_l85_m1", vector():set(23.551015853882, 54.123477935791, -29.285837173462), 5303, 2417)
-            spawn_ai_location("wpn_sig552_isg_siber", vector():set(-260.10464477539, 0.27300158143044, 92.179977416992), 8348, 1378)
-            spawn_ai_location("wpn_abakan_n_m2", vector():set(-116.20272827148, -1.9442112445831, 122.73686218262), 43368, 1315)
-            spawn_ai_location("wpn_sig550_tac_siber", vector():set(105.34355926514, 0.0050590336322784, 89.765724182129), 95144, 1520)
-            spawn_ai_location("wpn_abakan_n_m1", vector():set(-117.45324707031, 20.803544998169, -36.93675994873), 189, 1529)
-            spawn_ai_location("wpn_svu", vector():set(595.62921142578, -54.139465332031, -96.708854675293), 212521, 1893)
-            spawn_ai_location("wpn_svu", vector():set(422.17352294922, -48.451919555664, 5.1145219802856), 135460, 1921)
-            spawn_ai_location("wpn_svds", vector():set(653.56958007813, -43.883968353271, 179.26545715332), 226824, 1912)
-
-            spawn_ai_location("gold_art", vector():set(-234.88185119629, 8.3708419799805, 177.88945007324), 16236, 1337)
-            spawn_ai_location("gold_art", vector():set(193.80435180664, 0.094538778066635, 71.867), 45644, 1188)
-            spawn_ai_location("gold_art", vector():set(75.451988220215, 16.426797866821, 34.290096), 215114, 294)
-            spawn_ai_location("gold_art", vector():set(270.66116333008, -8.7369184494019, -126.34954), 377173, 405)
-            spawn_ai_location("gold_art", vector():set(-234.88185119629, 8.3708419799805, 177.88945007324), 16236, 1337)
-            spawn_ai_location("gold_art", vector():set(86.18724822998, 0.054149866104126, 49.022884368896), 84502, 1520)
-            spawn_ai_location("gold_art", vector():set(-81.021110534668, -0.9252895116806, 157.55644226074), 186914, 163)
-            spawn_ai_location("af_fuzz_kolobok", vector():set(67.825614929199, -0.37150749, -74.097778320313), 69225, 1516)
-            spawn_ai_location("af_dummy_glassbeads", vector():set(32.647331237793, 5.5799655, -12.673707962036), 4722, 1538)
-            spawn_ai_location("af_rusty_sea-urchin", vector():set(-154.36480712891, -0.286359, 9.8843507766724), 165820, 1628)
-            spawn_ai_location("af_rusty_sea-urchin", vector():set(660.3306274414, -43.8872718, 176.84335327148), 227074, 1914)
-            spawn_ai_location("af_electra_moonlight", vector():set(4.7991132736206, -6.9216456, -72.931411743164), 6850, 2661)
-            spawn_ai_location("af_electra_flash", vector():set(-83.463157653809, 16.93710136, 102.66344451904), 165695, 332)
-            spawn_ai_location("af_electra_flash", vector():set(-43.567665100098, 22.385353, -104.83944702148), 147517, 297)
-            spawn_ai_location("af_dummy_battery", vector():set(119.39251708984, 15.86196517, 26.154205322266), 274810, 391)
-            spawn_ai_location("af_rusty_kristall", vector():set(280.64120483398, -6.46071863, 1.0314919948578), 379939, 390)
-            spawn_ai_location("af_night_star", vector():set(33.511577606201, -4.7631421089172, -361.11657714844), 215278, 841)
-            spawn_ai_location("af_soul", vector():set(-45.467483520508, 3.7723202705383, -12.004273414612), 129993, 1017)
-            spawn_ai_location("af_rusty_kristall", vector():set(59.396793365479, 19.6898231506, 156.72634887695), 358866, 97)
-
-            spawn_ai_location("medkit_army", vector():set(392.71881103516, -34.139106750488, 153.86260986328), 120316, 1865)
-            spawn_ai_location("medkit_army", vector():set(392.71881103516, -34.139106750488, 153.86260986328), 120316, 1865)
+            spawn_ai_location("af_fuzz_kolobok", vector():set(67.825, -0.371, -74.097), "l08_yantar")
+            spawn_ai_location("af_dummy_glassbeads", vector():set(32.647, 5.580, -12.673), "l08u_brainlab")
+            spawn_ai_location("af_rusty_sea-urchin", vector():set(-154.364, -0.286, 9.884), "l07_military")
+            spawn_ai_location("af_rusty_sea-urchin", vector():set(660.325, -43.885, 176.851), "l10_radar")
+            spawn_ai_location("af_electra_flash", vector():set(-83.562, 17.036, 102.596), "l02_garbage")
+            spawn_ai_location("af_electra_flash", vector():set(-43.371, 24.142, -104.865), "l02_garbage")
+            spawn_ai_location("af_dummy_battery", vector():set(119.392, 15.862, 26.154), "l02_garbage")
+            spawn_ai_location("af_rusty_kristall", vector():set(280.641, -6.460, 1.031), "l02_garbage")
+            spawn_ai_location("af_night_star", vector():set(33.511, -4.763, -361.116), "l04_darkvalley")
+            spawn_ai_location("af_soul", vector():set(-45.467, 3.772, -12.004), "l04_darkvalley")
+            spawn_ai_location("af_rusty_kristall", vector():set(59.396, 19.689, 156.726), "l01_escape")
 
             db.actor:give_info_portion("esc_serious_talk")
         end
@@ -500,7 +494,7 @@ end
 
 local function on_info(npc, info_id)
 
-    if level.name() == "aver" then
+    if level.name() == "l10_red_forest" then
         if has_alife_info("babka_dialog_start") and not has_alife_info("babka_del") then
             db.actor:give_info_portion("babka_del")
         end
@@ -523,21 +517,21 @@ local function on_info(npc, info_id)
         end
     end
 
+    if level.name() == "l04_darkvalley" then
+        if has_alife_info("doronin_help_have") and not has_alife_info("naem_td_spawn") then
+            db.actor:give_info_portion("naem_td_spawn")
+        end
+    end
+
     if level.name() == "l05_bar" then
         if has_alife_info("dolg_attak_dialog_start") and not has_alife_info("sledopyt_delete") then
             db.actor:give_info_portion("sledopyt_delete")
         end
     end
 
-    if level.name() == "l10_radar" then
-        if has_alife_info("sveeblov_predatel_done") and not has_alife_info("strannik_spawn") then -- работает
-            db.actor:give_info_portion("strannik_spawn")
-        end
-    end
-
     if level.name() == "l11_pripyat" then
         if has_alife_info("prizrak_kill_speak") and not has_alife_info("mono_prizrak_spawn") then
-            ogse_st_mgr.start_timer("mono_prizrak_spawn", math.random(140, 160), "braad_test.mono_prizrak_spawn")
+            ogse_st_mgr.start_timer("mono_prizrak_spawn", math.random(70, 80), "braad_test.mono_prizrak_spawn")
             db.actor:give_info_portion("mono_prizrak_spawn")
         end
 
@@ -548,10 +542,6 @@ local function on_info(npc, info_id)
         if has_alife_info("prizrak_help_have") and not has_alife_info("haron_sms") then
             ogse_st_mgr.start_timer("sms_new", math.random(100, 120), "braad_test.sms_new")
             db.actor:give_info_portion("haron_sms")
-        end
-
-        if has_alife_info("five_urok_dialog_start") and not has_alife_info("mervin3_delete") then
-            db.actor:give_info_portion("mervin3_delete")
         end
     end
 
@@ -602,20 +592,20 @@ local function on_info(npc, info_id)
     end
 
     if db.actor:has_info("fanat_recept_start") and not db.actor:has_info("art_escape_spawn") then
-        spawn_ai_location("gold_art", vector():set(75.451988220215, 16.426797866821, 34.290096), 215114, 294)
-        spawn_ai_location("gold_art", vector():set(270.66116333008, -8.7369184494019, -126.34954), 377173, 405)
-        spawn_ai_location("gold_art", vector():set(-234.88185119629, 8.3708419799805, 177.88945007324), 16236, 1337)
-        spawn_ai_location("af_rusty_kristall", vector():set(-195.3737487793, 3.43506217, 208.96646118164), 32824, 345)
-        spawn_ai_location("af_ameba_slug", vector():set(-255.01333618164, 2.5012269020081, 97.402565002441), 7662, 339)
-        spawn_ai_location("af_rusty_sea-urchin", vector():set(-182.67608642578, 1.77206, -321.47311401367), 53729, 689)
-        spawn_ai_location("af_electra_moonlight", vector():set(4.7991132736206, -6.9216456, -72.931411743164), 6850, 2661)
-        spawn_ai_location("af_electra_flash", vector():set(-83.463157653809, 16.93710136, 102.66344451904), 165695, 332)
-        spawn_ai_location("af_electra_flash", vector():set(-43.567665100098, 22.385353, -104.83944702148), 147517, 297)
-        spawn_ai_location("af_dummy_battery", vector():set(119.39251708984, 15.86196517, 26.154205322266), 274810, 39)
-        spawn_ai_location("af_rusty_kristall", vector():set(280.64120483398, -6.46071863, 1.0314919948578), 379939, 390)
-        spawn_ai_location("af_night_star", vector():set(33.511577606201, -4.7631421089172, -361.11657714844), 215278, 841)
-        spawn_ai_location("af_soul", vector():set(-45.467483520508, 3.7723202705383, -12.004273414612), 129993, 1017)
-        spawn_ai_location("af_rusty_kristall", vector():set(59.396793365479, 19.6898231506, 156.72634887695), 358866, 97)
+        spawn_ai_location("gold_art", vector():set(75.451988220215, 16.426797866821, 34.290096), "l02_garbage")
+        spawn_ai_location("gold_art", vector():set(270.66116333008, -8.7369184494019, -126.34954), "l02_garbage")
+        spawn_ai_location("gold_art", vector():set(-234.88185119629, 8.3708419799805, 177.88945007324), "l06_rostok")
+        spawn_ai_location("af_rusty_kristall", vector():set(-195.3737487793, 3.43506217, 208.96646118164), "l02_garbage")
+        spawn_ai_location("af_ameba_slug", vector():set(-255.01333618164, 2.5012269020081, 97.402565002441), "l02_garbage")
+        spawn_ai_location("af_rusty_sea-urchin", vector():set(-182.67608642578, 1.77206, -321.47311401367), "l03_agroprom")
+        spawn_ai_location("af_electra_moonlight", vector():set(4.7991132736206, -6.9216456, -72.931411743164), "l10u_bunker")
+        spawn_ai_location("af_electra_flash", vector():set(-83.463157653809, 16.93710136, 102.66344451904), "l02_garbage")
+        spawn_ai_location("af_electra_flash", vector():set(-43.567665100098, 22.385353, -104.83944702148), "l02_garbage")
+        spawn_ai_location("af_dummy_battery", vector():set(119.39251708984, 15.86196517, 26.154205322266), "l01_escape")
+        spawn_ai_location("af_rusty_kristall", vector():set(280.64120483398, -6.46071863, 1.0314919948578), "l02_garbage")
+        spawn_ai_location("af_night_star", vector():set(33.511577606201, -4.7631421089172, -361.11657714844), "l04_darkvalley")
+        spawn_ai_location("af_soul", vector():set(-45.467483520508, 3.7723202705383, -12.004273414612), "l04_darkvalley")
+        spawn_ai_location("af_rusty_kristall", vector():set(59.396793365479, 19.6898231506, 156.72634887695), "l01_escape")
 
         db.actor:give_info_portion("art_escape_spawn")
     end
@@ -623,11 +613,6 @@ local function on_info(npc, info_id)
     if has_alife_info("garbage_stalker_wound_dead") and has_alife_info("knyaz_dolg_start")
     and not has_alife_info("knyaz_dolg_have") then
         db.actor:give_info_portion("knyaz_dolg_have")
-    end
-
-    if has_alife_info("krest_work_begin") and not has_alife_info("krest_work_sms") then
-        ogse_st_mgr.start_timer("spawn_military_tech", math.random(60, 70), "braad_test.spawn_military_tech")
-        db.actor:give_info_portion("krest_work_sms")
     end
 
     if has_alife_info("valet_dead") and has_alife_info("krest_work_start") and not has_alife_info("krest_work_have") then
@@ -665,129 +650,48 @@ local function on_info(npc, info_id)
     and not has_alife_info("ucen_need_metka_bloodsucker_have") then
         db.actor:give_info_portion("ucen_need_metka_fail")
     end
-
-    if has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have") 
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic6_have") and has_alife_info("volk_novic4_have") 
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic4_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic6_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic6_have") and has_alife_info("volk_novic1_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic2_have") and has_alife_info("volk_novic4_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic5_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic6_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic3_have") and has_alife_info("volk_novic4_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic5_have") and has_alife_info("volk_novic6_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic5_have") and has_alife_info("volk_novic4_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    elseif has_alife_info("volk_novic1_have") and has_alife_info("volk_novic2_have")
-    and has_alife_info("volk_novic4_have") and has_alife_info("volk_novic6_have") then
-        db.actor:give_info_portion("volk_can_speak")
-    end
 end
 
-local haronp = {{
-    position = {
-        x = 23.153,
-        y = -4.680,
-        z = 3.578
-    },
-    gv = 2424,
-    lv = 4684
-}, {
-    position = {
-        x = 18.936,
-        y = -0.405,
-        z = 13.346
-    },
-    gv = 2424,
-    lv = 4699
-}, {
-    position = {
-        x = 20.920,
-        y = -3.425,
-        z = 13.356
-    },
-    gv = 2424,
-    lv = 4699
-}}
+local haronp = {
+    [1] = {x = 23.153, y = -4.680, z = 3.578},
+    [2] = {x = 18.936, y = -0.405, z = 13.346},
+    [3] = {x = 20.920, y = -3.425, z = 13.356}
+}
 
 function first_burer()
-    local sobj = alife():create("burer_normal", vector():set(73.2404251098633, -0.0141735374927521, 28.42), 10537, 2430)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer1.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_krovosos_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer1.ltx"
 
-    local sobj = alife():create("burer_normal", vector():set(73.2404251098633, -0.0141735374927521, 28.42), 10537, 2430)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer2.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_krovosos_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer2.ltx"
 
-    local sobj = alife():create("burer_normal", vector():set(-1.82103800773621, -0.136824190616608, 33.927), 1296, 2405)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer3.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_burer2_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer3.ltx"
 
-    local sobj = alife():create("burer_normal", vector():set(-1.82103800773621, -0.136824190616608, 33.927), 1296, 2405)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer4.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_burer2_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer4.ltx"
 
-    local sobj = alife():create("burer_normal", vector():set(-1.82103800773621, -0.136824190616608, 33.927), 1296, 2405)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer5.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_burer2_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer5.ltx"
 
-    local sobj = alife():create("burer_normal", vector():set(-1.82103800773621, -0.136824190616608, 33.927), 1296, 2405)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\burer6.ltx"
+    local obj = spawn_patrol("burer_normal", "sar_burer2_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\burer6.ltx"
 
-    local a = haronp[math.random(table.getn(haronp))]
-    local obj = alife():create("pribor_haron", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = haronp[math.random(1, 3)]
+    spawn_ai_location("pribor_haron", vector():set(a.x, a.y, a.z), "l12u_sarcofag")
 end
 
-function add_new_pripyat()
-    add_new_lc(833, 6188, "На Радар", "info_way_pripyat")
-end
-
-function add_new_radar()
-    add_new_lc(1007, 5240, "На Припять", "info_way_radar")
-end
-
-function add_new_lc(levch, levchn, levchm, info)
-    local obj = alife():story_object(levch)
-    if not obj then
-        alife():create(levchn)
-    end
-
-    if obj then
-        level.map_add_object_spot_ser(obj.id, "level_changer", levchm)
-        db.actor:give_info_portion(info)
-        news_manager.send_tip(db.actor, game.translate_string("new_way"))
-    end
-end
-
-function delete_new_lc(levch, info)
-    if not db.actor:has_info(info) then
-        local obj = alife():story_object(levch)
-        if obj then
-            alife():release(obj)
-        end
-    end
+function foster_controller()
+    alife_create("contr_art1", "l13_deep", vector():set(177.26, 1.738, 590.68))
 end
 
 function spawn_aes()
-    local obj = alife():create("chaes_master1", vector():set(628.906, -0.0335244834423065, 337.13), 187244, 2611)
-    local obj = alife():create("chaes_master2", vector():set(628.906, -0.0335244834423065, 337.13), 187244, 2611)
-    local obj = alife():create("chaes_master3", vector():set(628.906, -0.0335244834423065, 337.13), 187244, 2611)
-    local obj = alife():create("chaes_master4", vector():set(592.286865234375, -0.177, 371.006), 180613, 2611)
-    local obj = alife():create("chaes_master5", vector():set(592.286865234375, -0.177, 371.006), 180613, 2611)
-    local obj = alife():create("chaes_master6", vector():set(592.286865234375, -0.177, 371.006), 180613, 2611)
+    spawn_patrol("chaes_master1", "aes_master1_walk")
+    spawn_patrol("chaes_master2", "aes_master2_walk")
+    spawn_patrol("chaes_master3", "aes_master3_walk")
+    spawn_patrol("chaes_master4", "aes_master4_walk")
+    spawn_patrol("chaes_master5", "aes_master5_walk")
+    spawn_patrol("chaes_master6", "aes_master6_walk")
 end
 
 function set_relation(sid)
@@ -817,109 +721,75 @@ function max_comp(i1, i2) -- возвращает true если i1 меньше 
 end
 
 function spawn_case()
-    local obj = alife():create("aes_case1", vector():set(355.64077, 0.005, 447.625), 123439, 2608)
-    level.map_add_object_spot_ser(obj.id, "crlc_big", "case1")
+    local obj = alife_create("aes_case1", "l12_stancia_2", vector():set(376.254, 0.005, 383.164))
+    level_tasks.add_location_by_id(obj.id, "crlc_big", "case1")
 
-    local obj = alife():create("aes_case2", vector():set(425.37, 8.510, 158.4013), 143120, 2599)
-    level.map_add_object_spot_ser(obj.id, "crlc_big", "case2")
+    local obj = alife_create("aes_case2", "l12_stancia_2", vector():set(429.707, 10.132, 152.705))
+    level_tasks.add_location_by_id(obj.id, "crlc_big", "case2")
 
-    local obj = alife():create("aes_case3", vector():set(243.843, 50.035, 133.903), 89174, 2574)
-    level.map_add_object_spot_ser(obj.id, "crlc_big", "case3")
+    local obj = alife_create("aes_case3", "l12_stancia_2", vector():set(228.192, 50.010, 134.980))
+    level_tasks.add_location_by_id(obj.id, "crlc_big", "case3")
 end
 
 function controller_tubeman()
-    local obj = alife():create("bloodsucker_strong", vector():set(36.4134292602539, -34.488639831543, -36.8335), 3787, 2475)
+    spawn_patrol("bloodsucker_strong", "kon_kontr_strong1_walk")
 end
 
 function naem_baza()
-    local obj = alife():create("naem_haron1", vector():set(-16.622678, -0.00429728627204895, 155.8169), 82500, 2190)
-    local obj = alife():create("naem_haron2", vector():set(-16.622678, -0.00429728627204895, 155.8169), 82500, 2190)
-    local obj = alife():create("naem_haron3", vector():set(-16.622678, -0.00429728627204895, 155.8169), 82500, 2190)
-    local obj = alife():create("naem_haron4", vector():set(-16.622678, -0.00429728627204895, 155.8169), 82500, 2190)
-    local obj = alife():create("naem_haron5", vector():set(-16.622678, -0.00429728627204895, 155.8169), 82500, 2190)
-    local obj = alife():create("naem_haron6", vector():set(24.6308517456055, 5.42022, 163.33), 132391, 2199)
-    local obj = alife():create("naem_haron7", vector():set(24.6308517456055, 5.42022, 163.33), 132391, 2199)
-    local obj = alife():create("naem_haron8", vector():set(24.6308517456055, 5.42022, 163.33), 132391, 2199)
-    local obj = alife():create("naem_haron9", vector():set(24.6308517456055, 5.42022, 163.33), 132391, 2199)
-    local obj = alife():create("naem_haron10", vector():set(24.6308517456055, 5.42022, 163.33), 132391, 2199)
-    local obj = alife():create("naem_haron11", vector():set(-21.9093494415283, -0.00035557, 210.188), 77374, 2198)
-    local obj = alife():create("naem_haron12", vector():set(-21.9093494415283, -0.00035557, 210.188), 77374, 2198)
-    local obj = alife():create("naem_haron13", vector():set(-21.9093494415283, -0.00035557, 210.188), 77374, 2198)
-    local obj = alife():create("naem_haron14", vector():set(-21.9093494415283, -0.00035557, 210.188), 77374, 2198)
-    local obj = alife():create("naem_haron15", vector():set(-21.9093494415283, -0.00035557, 210.188), 77374, 2198)
-    local obj = alife():create("naem_haron16", vector():set(31.2475471496582, 5.08917, 192.047), 141806, 2201)
-    local obj = alife():create("naem_haron17", vector():set(31.2475471496582, 5.08917, 192.047), 141806, 2201)
-    local obj = alife():create("naem_haron18", vector():set(31.2475471496582, 5.08917, 192.047), 141806, 2201)
-    local obj = alife():create("naem_haron19", vector():set(31.2475471496582, 5.08917, 192.047), 141806, 2201)
-    local obj = alife():create("naem_haron20", vector():set(31.2475471496582, 5.08917, 192.047), 141806, 2201)
+    spawn_patrol("naem_haron1", "naem_haron1_walk")
+    spawn_patrol("naem_haron2", "naem_haron2_walk")
+    spawn_patrol("naem_haron3", "naem_haron3_walk")
+    spawn_patrol("naem_haron4", "naem_haron4_walk")
+    spawn_patrol("naem_haron5", "naem_haron5_walk")
+    spawn_patrol("naem_haron6", "naem_haron6_walk")
+    spawn_patrol("naem_haron7", "naem_haron7_walk")
+    spawn_patrol("naem_haron8", "naem_haron8_walk")
+    spawn_patrol("naem_haron9", "naem_haron9_walk")
+    spawn_patrol("naem_haron10", "naem_haron10_walk")
+    spawn_patrol("naem_haron11", "naem_haron11_walk")
+    spawn_patrol("naem_haron12", "naem_haron12_walk")
+    spawn_patrol("naem_haron13", "naem_haron13_walk")
+    spawn_patrol("naem_haron14", "naem_haron14_walk")
+    spawn_patrol("naem_haron15", "naem_haron15_walk")
+    spawn_patrol("naem_haron16", "naem_haron_big")
+    spawn_patrol("naem_haron17", "naem_haron_big")
+    spawn_patrol("naem_haron18", "naem_haron_big")
+    spawn_patrol("naem_haron19", "naem_haron_small")
+    spawn_patrol("naem_haron20", "naem_haron_small")
 end
 
 function naem_len()
-    local obj = alife():create("naem_mathon1", vector():set(52.9615020751953, -1.7326, 42.72), 165393, 2225)
-    local obj = alife():create("naem_mathon2", vector():set(52.9615020751953, -1.7326, 42.72), 165393, 2225)
-    local obj = alife():create("naem_mathon3", vector():set(52.9615020751953, -1.7326, 42.72), 165393, 2225)
-    local obj = alife():create("naem_mathon4", vector():set(52.9615020751953, -1.7326, 42.72), 165393, 2225)
-    local obj = alife():create("naem_mathon5", vector():set(52.9615020751953, -1.7326, 42.72), 165393, 2225)
-    local obj = alife():create("naem_mathon6", vector():set(31.3854713439941, -2.221, 45.587), 141632, 2247)
-    local obj = alife():create("naem_mathon7", vector():set(31.3854713439941, -2.221, 45.587), 141632, 2247)
-    local obj = alife():create("naem_mathon8", vector():set(31.3854713439941, -2.221, 45.587), 141632, 2247)
-    local obj = alife():create("naem_mathon9", vector():set(31.3854713439941, -2.221, 45.587), 141632, 2247)
-    local obj = alife():create("naem_mathon10", vector():set(31.3854713439941, -2.221, 45.587), 141632, 2247)
+    spawn_patrol("naem_mathon1", "naem_mathon1_walk")
+    spawn_patrol("naem_mathon2", "naem_mathon2_walk")
+    spawn_patrol("naem_mathon3", "naem_mathon3_walk")
+    spawn_patrol("naem_mathon4", "naem_mathon4_walk")
+    spawn_patrol("naem_mathon5", "naem_mathon5_walk")
+    spawn_patrol("naem_mathon6", "naem_mathon6_walk")
+    spawn_patrol("naem_mathon7", "naem_mathon7_walk")
+    spawn_patrol("naem_mathon8", "naem_mathon8_walk")
+    spawn_patrol("naem_mathon9", "naem_mathon9_walk")
+    spawn_patrol("naem_mathon10", "naem_mathon10_walk")
 end
 
 function dyak_spawn()
-    local obj = alife():create("dyak_monolit1", vector():set(408.46102905273, -0.10446, -32.680702209473), 178213, 2306)
-    local obj = alife():create("dyak_monolit1", vector():set(408.46102905273, -0.10446, -32.680702209473), 178213, 2306)
-    local obj = alife():create("dyak_monolit2", vector():set(408.46102905273, -0.10446, -32.680702209473), 178213, 2306)
-    local obj = alife():create("dyak_monolit2", vector():set(408.46102905273, -0.10446, -32.680702209473), 178213, 2306)
+    spawn_patrol("dyak_monolit1", "dyak_aes_lager_aesmon1_camp_walk")
+    spawn_patrol("dyak_monolit1", "dyak_aes_lager_aesmon1_camp_walk")
+    spawn_patrol("dyak_monolit2", "dyak_aes_lager_aesmon1_camp_walk")
+    spawn_patrol("dyak_monolit2", "dyak_aes_lager_aesmon1_camp_walk")
 end
 
-local kons = {{
-    position = {
-        x = 190.320,
-        y = -1.830,
-        z = 180.577
-    },
-    gv = 2219,
-    lv = 260446
-}, {
-    position = {
-        x = -115.080,
-        y = -3.450,
-        z = 97.946
-    },
-    gv = 2216,
-    lv = 8639
-}, {
-    position = {
-        x = -121.941,
-        y = -2.500,
-        z = 87.957
-    },
-    gv = 2140,
-    lv = 6490
-}, {
-    position = {
-        x = 200.010,
-        y = -2.500,
-        z = 220.897
-    },
-    gv = 2219,
-    lv = 260936
-}, {
-    position = {
-        x = 206.839,
-        y = -0.350,
-        z = 204.416
-    },
-    gv = 2219,
-    lv = 261202
-}}
+local kons = {
+    [1] = {x = 190.320, y = -1.830, z = 180.577},
+    [2] = {x = -115.080, y = -3.450, z = 97.946},
+    [3] = {x = -121.941, y = -2.500, z = 87.957},
+    [4] = {x = 200.010, y = -2.500, z = 220.897},
+    [5] = {x = 206.839, y = -0.350, z = 204.416}
+}
 
 function food_spawn()
-    local a = kons[math.random(table.getn(kons))]
-    spawn_ai_location("box_food", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
-    spawn_ai_location("box_remont", vector():set(1040.902, 1.530, -28.230), 464796, 2280)
+    local a = kons[math.random(1, 5)]
+    spawn_ai_location("box_food", vector():set(a.x, a.y, a.z), "l11_pripyat")
+    spawn_ai_location("box_remont", vector():set(1040.902, 1.530, -28.230), "l12_stancia")
 end
 
 function doctor_speech()
@@ -997,40 +867,40 @@ function good_shlem()
 end
 
 function mono_prizrak_spawn()
-    local obj = alife():create("mono_prizrak6", vector():set(80.449264526367, -2.22214, -20.570148468018), 191808, 2144)
-    local obj = alife():create("mono_prizrak1", vector():set(83.398750305176, -2.39423, -7.9892024993896), 194761, 2144)
-    local obj = alife():create("mono_prizrak2", vector():set(94.49609375, -2.39215, -6.1620998382568), 205465, 2144)
-    local obj = alife():create("mono_prizrak3", vector():set(132.78782653809, -2.394, -65.896942138672), 235486, 2241)
-    local obj = alife():create("mono_prizrak4", vector():set(125.62390136719, -2.39256, -64.209358215332), 230995, 2241)
-    local obj = alife():create("mono_prizrak5", vector():set(119.00871276855, -2.4050, -68.360877990723), 227330, 2241)
+    spawn_patrol("mono_prizrak1", "mono_prizrak1_walk")
+    spawn_patrol("mono_prizrak2", "mono_prizrak2_walk")
+    spawn_patrol("mono_prizrak3", "mono_prizrak3_walk")
+    spawn_patrol("mono_prizrak4", "mono_prizrak4_walk")
+    spawn_patrol("mono_prizrak5", "mono_prizrak5_walk")
+    spawn_patrol("mono_prizrak6", "mono_prizrak6_walk")
 end
 
 function mono_patrol()
-    local obj = alife():create("mono_patrol1", vector():set(-28.220415115356, -2.256, -136.57357788086), 71287, 2133)
-    local obj = alife():create("mono_patrol2", vector():set(-31.98370552063, -2.395, -134.47309875488), 66861, 2133)
-    local obj = alife():create("mono_patrol3", vector():set(-36.671649932861, -2.39, -130.03471374512), 62154, 2133)
-    local obj = alife():create("mono_patrol4", vector():set(-17.674057006836, -2.302, -133.24459838867), 81429, 2133)
-    local obj = alife():create("mono_patrol5", vector():set(-0.28423526883125, -2.3923, -108.29730224609), 101987, 2125)
-    local obj = alife():create("mono_patrol6", vector():set(9.1660976409912, -1.8119, -79.970878601074), 112798, 2131)
-    local obj = alife():create("mono_patrol7", vector():set(18.495990753174, -2.22009, -38.524749755859), 124041, 2131)
-    local obj = alife():create("mono_patrol8", vector():set(50.08512878418, -2.2202, -38.656524658203), 161629, 2137)
+    spawn_patrol("mono_patrol1", "mono_patrol1_walk")
+    spawn_patrol("mono_patrol2", "mono_patrol2_walk")
+    spawn_patrol("mono_patrol3", "mono_patrol3_walk")
+    spawn_patrol("mono_patrol4", "mono_patrol4_walk")
+    spawn_patrol("mono_patrol5", "mono_patrol5_walk")
+    spawn_patrol("mono_patrol6", "mono_patrol6_walk")
+    spawn_patrol("mono_patrol7", "mono_patrol7_walk")
+    spawn_patrol("mono_patrol8", "mono_patrol8_walk")
 end
 
 function sheme_bunker_spawn()
-    spawn_ai_location("shceme_document_ruk", vector():set(-32.461, -34.430, -21.971), 609, 2479)
+    spawn_ai_location("shceme_document_ruk", vector():set(-32.461, -34.430, -21.971), "l12u_control_monolith")
 end
 
 function solomon_grabs()
-    local sobj = alife():create("solomon_mono1", vector():set(-0.875, 5.010, 66.200), 23984, 2660)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\solomon_mono1.ltx"
-    alife():assign_story_id(sobj.id, story_ids.solomon_mono1)
+    local obj = spawn_patrol("solomon_mono1", "solomon_mono1_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\solomon_mono1.ltx"
+    alife():assign_story_id(obj.id, story_ids.solomon_mono1)
 end
 
 function solomon_mono_spawn()
-    local obj = alife():create("solomon_mono2", vector():set(2.7715966701508, 4.90849, 88.047088623047), 25216, 2530)
-    local obj = alife():create("solomon_mono3", vector():set(25.721918106079, 5.06846, 83.836639404297), 36376, 2530)
-    local obj = alife():create("solomon_mono4", vector():set(33.805053710938, 4.9988, 103.37216186523), 39952, 2529)
-    local obj = alife():create("solomon_mono5", vector():set(-3.7105083465576, 4.10073, 121.14627838135), 22428, 2519)
+    spawn_patrol("solomon_mono2", "solomon_mono2_walk")
+    spawn_patrol("solomon_mono3", "solomon_mono3_walk")
+    spawn_patrol("solomon_mono4", "solomon_mono4_walk")
+    spawn_patrol("solomon_mono5", "solomon_mono5_walk")
 end
 
 local out_object
@@ -1103,8 +973,9 @@ function switch_online(id)
 end
 
 function mervin_vzyal(actor, npc)
-    local sobj = alife():create("mervin_taynik", vector():set(-33.040302, -1.204450, -131.940445), 29504, 2258)
-    alife():assign_story_id(sobj.id, story_ids.mervin_taynik)
+    local obj = alife_create("mervin_taynik", "l11_pripyat", vector():set(107.665, 3.997, 130.162))
+    alife():use_ai_locations(obj, false)
+    alife():assign_story_id(obj.id, story_ids.mervin_taynik)
     dsh.wait_condition(function() return level_object_by_sid(story_ids.mervin_taynik) end, 
     function()
         local inv_box_1 = level_object_by_sid(story_ids.mervin_taynik)
@@ -1127,8 +998,8 @@ function money_out(t1, t2)
 end
 
 function maroder_grab(actor, npc)
-    local sobj = alife():create("mervin_taynik", vector():set(0.365974, 17.918257, 35.545025), 946218, 2942)
-    alife():assign_story_id(sobj.id, story_ids.razuvaev_taynik)
+    local obj = alife_create("mervin_taynik", "l13_deep", vector():set(5.66, 17.42, 521.82))
+    alife():assign_story_id(obj.id, story_ids.razuvaev_taynik)
     dsh.wait_condition(function() return level_object_by_sid(story_ids.razuvaev_taynik) end, 
     function()
         local inv_box_1 = level_object_by_sid(story_ids.razuvaev_taynik)
@@ -1208,60 +1079,26 @@ function bratva_zlitsa(actor, npc)
 end
 
 function winchester_knyaz()
-    spawn_ai_location("wpn_winchester_knyaz", vector():set(112, 5, -11), 297909, 984)
-    spawn_ai_location("af_dummy_spring", vector():set(37.87, 1.65, -219.83), 221298, 856)
+    spawn_ai_location("wpn_winchester_knyaz", vector():set(112, 5, -11), "l04_darkvalley")
+    spawn_ai_location("af_dummy_spring", vector():set(37.87, 1.65, -219.83), "l04_darkvalley")
 end
 
-local docs = {{
-    position = {
-        x = -82.109,
-        y = -12.900,
-        z = 55.553
-    },
-    gv = 1610,
-    lv = 230182
-}, {
-    position = {
-        x = 80.545,
-        y = -12.490,
-        z = 61.700
-    },
-    gv = 1558,
-    lv = 377701
-}, {
-    position = {
-        x = -9.516,
-        y = -11.670,
-        z = 47.759
-    },
-    gv = 1579,
-    lv = 297300
-}, {
-    position = {
-        x = 115.012,
-        y = -9.170,
-        z = 46.951
-    },
-    gv = 1558,
-    lv = 401225
-}, {
-    position = {
-        x = 97.952,
-        y = -4.300,
-        z = 46.210
-    },
-    gv = 1554,
-    lv = 393278
-}}
+local docs = {
+    [1] = {x = -82.109, y = -12.900, z = 55.553},
+    [2] = {x = 80.545, y = -12.490, z = 61.700},
+    [3] = {x = -9.516, y = -11.670, z = 47.759},
+    [4] = {x = 115.012, y = -9.170,z = 46.951},
+    [5] = {x = 97.952, y = -4.300, z = 46.210}
+}
 
 function informator_doc_spawn()
-    local a = docs[math.random(table.getn(docs))]
-    spawn_ai_location("informator_doc", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = docs[math.random(1, 5)]
+    spawn_ai_location("informator_doc", vector():set(a.x, a.y, a.z), "l07_military")
 end
 
 function lab_doc_spawn()
-    spawn_ai_location("labx10_doc_ruk", vector():set(20.045, -23.500, 16.228), 8656, 2772)
-    spawn_ai_location("labx10_computer", vector():set(6.570677280426, -7.800, -15.11957), 7638, 2693)
+    spawn_ai_location("labx10_doc_ruk", vector():set(20.045, -23.500, 16.228), "l10u_bunker")
+    spawn_ai_location("labx10_computer", vector():set(6.570677280426, -7.800, -15.11957), "l10u_bunker")
 end
 
 function actor_na_mest()
@@ -1276,21 +1113,21 @@ end
 
 function voronin_help()
     if level.name() == "l04_darkvalley" and not db.actor:has_info("dolg_leader_help_start") then
-        local obj = alife():create("val_atak_bandit1", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit2", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit3", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit4", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit5", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit6", vector():set(-158.63682556152, 0.983818, -399.34375), 7360, 838)
-        local obj = alife():create("val_atak_bandit7", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit8", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit9", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit10", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit11", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit12", vector():set(-113.79043579102, 2.84767842, -416.207611), 43833, 827)
-        local obj = alife():create("val_atak_bandit13", vector():set(-74.135551452637, 0.4473641, -430.18548), 87132, 826)
-        local obj = alife():create("val_atak_bandit14", vector():set(-74.135551452637, 0.4473641, -430.18548), 87132, 826)
-        local obj = alife():create("val_atak_bandit15", vector():set(-74.135551452637, 0.4473641, -430.18548), 87132, 826)
+        spawn_patrol("val_atak_bandit1", "dark_knyaz_larger_dark_knyaz_look")
+        spawn_patrol("val_atak_bandit2", "dark_knyaz_larger_dark_knyaz_look")
+        spawn_patrol("val_atak_bandit3", "dark_knyaz_larger_dark_knyaz_look")
+        spawn_patrol("val_atak_bandit4", "dark_knyaz_larger_dark_knyaz_look")
+        spawn_patrol("val_atak_bandit5", "dark_knyaz_larger_dark_knyaz_look")
+        spawn_patrol("val_atak_bandit6", "dark_random5")
+        spawn_patrol("val_atak_bandit7", "dark_random5")
+        spawn_patrol("val_atak_bandit8", "dark_random5")
+        spawn_patrol("val_atak_bandit9", "dark_random5")
+        spawn_patrol("val_atak_bandit10", "dark_random5")
+        spawn_patrol("val_atak_bandit11", "dark_random5")
+        spawn_patrol("val_atak_bandit12", "dark_random5")
+        spawn_patrol("val_atak_bandit13", "dark_random5")
+        spawn_patrol("val_atak_bandit14", "dark_random5")
+        spawn_patrol("val_atak_bandit15", "dark_random5")
         local snd_obj = xr_sound.get_safe_sound_object([[characters_voice\scenario\bar\dolg_megafon\megaphone_duty_alarm]])
         snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
         db.actor:give_info_portion("dolg_leader_help_start")
@@ -1313,74 +1150,27 @@ function set_jeka(sid)
     end
 end
 
-local points = {{
-    position = {
-        x = -284.4497,
-        y = -18.2044,
-        z = 193.8524
-    },
-    gv = 1789,
-    lv = 56319
-}, {
-    position = {
-        x = -244.72052,
-        y = -18.2133,
-        z = 228.4244
-    },
-    gv = 1764,
-    lv = 88765
-}, {
-    position = {
-        x = -297.0713,
-        y = -18.0289,
-        z = 291.957
-    },
-    gv = 1833,
-    lv = 45227
-}, {
-    position = {
-        x = -266.4625,
-        y = -5.94375,
-        z = 409.4007
-    },
-    gv = 1851,
-    lv = 71146
-}, {
-    position = {
-        x = -356.2475,
-        y = -13.421,
-        z = 391.9168
-    },
-    gv = 1848,
-    lv = 4177
-}, {
-    position = {
-        x = -359.2898,
-        y = -17.07724,
-        z = 206.545
-    },
-    gv = 1837,
-    lv = 3174
-}, {
-    position = {
-        x = -355.6864,
-        y = -3.100588,
-        z = 151.18237
-    },
-    gv = 1793,
-    lv = 4240
-}}
+local plan_points = 
+{
+    [1] = {x = -284.4497, y = -18.2044, z = 193.8524},
+    [2] = {x = -244.72052, y = -18.2133, z = 228.4244},
+    [3] = {x = -297.0713, y = -18.0289, z = 291.957},
+    [4] = {x = -266.4625, y = -5.94375, z = 409.4007},
+    [5] = {x = -356.2475, y = -13.421, z = 391.9168},
+    [6] = {x = -359.2898, y = -17.07724, z = 206.545},
+    [7] = {x = -355.6864, y = -3.100588, z = 151.18237}
+}
 
 function spawn_plan()
-    local a = points[math.random(table.getn(points))]
-    spawn_ai_location("new_plan", vector():set(a.position.x, a.position.y, a.position.z), a.lv, a.gv)
+    local a = plan_points[math.random(1, 7)]
+    spawn_ai_location("new_plan", vector():set(a.x, a.y, a.z), "l07_military")
 end
 
 function set_metka_ucen()
     local sim = alife()
     for a, obj in alife():objects() do
         if obj:section_name() == "new_plan" then
-            level.map_add_object_spot_ser(obj.id, "red_location", game.translate_string("set_metka_ucen"))
+            level_tasks.add_location_by_id(obj.id, "red_location", game.translate_string("set_metka_ucen"))
             break
         end
     end
@@ -1397,130 +1187,114 @@ function checks_item(item)
         weapon_present = false
     end
 end
---------------------------------------------new_check-------------------------------------------
-
-function check_weapon() -- функция проверки слотов на наличие оружия
-    if db.actor and db.actor:has_info("agro_varayg_one_start") and not db.actor:has_info("agro_varayg_four_done") then
-        local slot = db.actor:active_slot()
-        if slot == 1 or slot == 2 or slot == 3 then
-            db.actor:give_info_portion("agro_varayg_fail")
-        end
-    end
-end
-
-------------------------------------------------------------------------------------------------
 
 function seredina_est()
     news_manager.send_tip(db.actor, game.translate_string("seredina_est"))
 end
 
 function krugone_spawn()
-    local obj = alife():create("zombie_strong_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("zombie_strong_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("zombie_strong_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("zombie_strong_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("zombie_strong_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("zombie_strong_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("zombie_strong_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("zombie_strong_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("zombie_strong_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
-    local obj = alife():create("zombie_strong_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
+    spawn_patrol("zombie_strong_und4", "agr_und_monster1_walk")
+    spawn_patrol("zombie_strong_und4", "agr_und_monster1_walk")
+    spawn_patrol("zombie_strong_und4", "agr_und_monster1_walk")
+    spawn_patrol("zombie_strong_und3", "agr_und_monster2_walk")
+    spawn_patrol("zombie_strong_und3", "agr_und_monster2_walk")
+    spawn_patrol("zombie_strong_und3", "agr_und_monster2_walk")
+    spawn_patrol("zombie_strong_und2", "agr_und_monster3_walk")
+    spawn_patrol("zombie_strong_und2", "agr_und_monster3_walk")
+    spawn_patrol("zombie_strong_und1", "agr_und_monster4_walk")
+    spawn_patrol("zombie_strong_und1", "agr_und_monster4_walk")
     aptec_spawn()
 end
 
 function krugtwo_spawn()
-    local obj = alife():create("snork_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("snork_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("snork_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("snork_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("snork_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("snork_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("snork_normal_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("snork_normal_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("snork_normal_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
-    local obj = alife():create("snork_normal_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
+    spawn_patrol("snork_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("snork_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("snork_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("snork_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("snork_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("snork_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("snork_normal_und2", "agr_und_monster3_walk")
+    spawn_patrol("snork_normal_und2", "agr_und_monster3_walk")
+    spawn_patrol("snork_normal_und1", "agr_und_monster4_walk")
+    spawn_patrol("snork_normal_und1", "agr_und_monster4_walk")
     aptec_spawn()
 end
 
 function krugtri_spawn()
-    local obj = alife():create("bloodsucker_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("bloodsucker_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("bloodsucker_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("bloodsucker_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("bloodsucker_normal_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("bloodsucker_normal_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
+    spawn_patrol("bloodsucker_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("bloodsucker_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("bloodsucker_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("bloodsucker_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("bloodsucker_normal_und2", "agr_und_monster3_walk")
+    spawn_patrol("bloodsucker_normal_und1", "agr_und_monster4_walk")
     aptec_spawn()
 end
 
 function krugfour_spawn()
-    local obj = alife():create("burer_normal_und4", vector():set(-69.267166137695, -4.018285, -134.7328), 3478, 800)
-    local obj = alife():create("burer_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("burer_normal_und3", vector():set(-88.083045959473, -16.4498, -101.61918), 2278, 784)
-    local obj = alife():create("burer_normal_und2", vector():set(-101.89008331299, -16.47135, -46.4786), 1397, 755)
-    local obj = alife():create("burer_normal_und1", vector():set(-98.369873046875, -16.463289260864, -9.4), 1780, 761)
+    spawn_patrol("burer_normal_und4", "agr_und_monster1_walk")
+    spawn_patrol("burer_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("burer_normal_und3", "agr_und_monster2_walk")
+    spawn_patrol("burer_normal_und2", "agr_und_monster3_walk")
+    spawn_patrol("burer_normal_und1", "agr_und_monster4_walk")
     aptec_spawn()
 end
 
 function aptec_spawn()
-    spawn_ai_location("medkit_army", vector():set(-102.1484, -4.4490, -143.855), 1368, 808)
-    spawn_ai_location("bandage", vector():set(-102.1384, -4.4736, -143.7165), 1368, 808)
+    spawn_ai_location("medkit_army", vector():set(-102.1484, -4.4490, -143.855), "l03u_agr_underground")
+    spawn_ai_location("bandage", vector():set(-102.1384, -4.4736, -143.7165), "l03u_agr_underground")
 end
 
 function bes_zasada()
-    local sobj = alife():create("bes_zasada1", vector():set(124.11454772949, -1.5249103307724, 176.197), 286161, 374)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada1.ltx"
+    local obj = spawn_patrol("bes_zasada1", "bes_zasada1_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada1.ltx"
 
-    local sobj = alife():create("bes_zasada2", vector():set(122.42546844482, -0.6895968914032, 183.353), 284599, 374)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada2.ltx"
+    local obj = spawn_patrol("bes_zasada2", "bes_zasada2_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada2.ltx"
 
-    local sobj = alife():create("bes_zasada3", vector():set(174.68170166016, 0.36053732037544, 171.268), 326120, 375)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada3.ltx"
+    local obj = spawn_patrol("bes_zasada3", "bes_zasada3_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada3.ltx"
 
-    local sobj = alife():create("bes_zasada4", vector():set(169.69607543945, -2.9353070259094, 133.623), 322282, 375)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada4.ltx"
+    local obj = spawn_patrol("bes_zasada4", "bes_zasada4_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada4.ltx"
 
-    local sobj = alife():create("bes_zasada5", vector():set(181.30242919922, 0.36302152276039, 153.8099), 330686, 375)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada5.ltx"
+    local obj = spawn_patrol("bes_zasada5", "bes_zasada5_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada5.ltx"
 
-    local sobj = alife():create("bes_zasada6", vector():set(181.72718811035, 0.39258113503456, 155.7977), 331183, 375)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada6.ltx"
+    local obj = spawn_patrol("bes_zasada6", "bes_zasada6_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\bes_zasada6.ltx"
 end
 
 function set_chimera_ucen_prov()
-    local sim = alife()
     for a, obj in alife():objects() do
         if obj:section() == "electro_chimera" then
-            level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_chimera_ucen"))
+            level_tasks.add_location_by_id(obj.id, "blue_location", game.translate_string("set_chimera_ucen"))
             break
         end
     end
 end
 
 function set_chimera_ucen()
-    local sim = alife()
     for a, obj in alife():objects() do
         if obj and obj:name() == "electro_chimera_ucen" then
-            level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_chimera_ucen"))
+            level_tasks.add_location_by_id(obj.id, "blue_location", game.translate_string("set_chimera_ucen"))
             break
         end
     end
 end
 
 function set_gigant_ucen()
-    local sim = alife()
     for a, obj in alife():objects() do
         if obj and obj:name() == "gigant_strong_ucen" then
-            level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_gigant_ucen"))
+            level_tasks.add_location_by_id(obj.id, "blue_location", game.translate_string("set_gigant_ucen"))
             break
         end
     end
 end
 
 function set_bloodsucker_ucen()
-    local sim = alife()
     for a, obj in alife():objects() do
         if obj and obj:name() == "bloodsucker_strong_ucen" then
-            level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_bloodsucker_ucen"))
+            level_tasks.add_location_by_id(obj.id, "blue_location", game.translate_string("set_bloodsucker_ucen"))
             break
         end
     end
@@ -1546,8 +1320,8 @@ end
 
 function controler_zasada()
     if level.name() == "l06_rostok" and not db.actor:has_info("controler_zasada_spawn") then
-        local obj = alife():create("snork_jumper", vector():set(-89.0649261474609, -0.0018038153, 122.017), 46676, 1421)
-        local obj = alife():create("snork_jumper", vector():set(-89.689453125, -0.00023889, 146.79014), 46573, 1422)
+        alife_create("snork_jumper", "l08_yantar", vector():set(-89.0649261474609, -0.0018038153, 122.017))
+        alife_create("snork_jumper", "l08_yantar", vector():set(-89.689453125, -0.00023889, 146.79014))
         local snd_obj = xr_sound.get_safe_sound_object([[monsters\burer\burer_scan_affect_1]])
         snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
         db.actor:give_info_portion("controler_zasada_spawn")
@@ -1570,8 +1344,8 @@ end
 
 function naem_sahar_spawn()
     if level.name() == "l04_darkvalley" and not db.actor:has_info("doronin_help_spawn") then
-        local sobj = alife():create("naem_sahar5", vector():set(147.125, 5.834, -242.918), 346009, 967)
-        local sobj = alife():create("naem_sahar6", vector():set(146.869, 5.833, -250.677), 345992, 967)
+        spawn_patrol("naem_sahar5", "naem_sahar1_walk")
+        spawn_patrol("naem_sahar6", "naem_sahar2_walk")
         db.actor:give_info_portion("doronin_help_spawn")
     end
     yan_wound_ucen()
@@ -1580,31 +1354,35 @@ function naem_sahar_spawn()
 end
 
 function nychka_spawn()
-    local obj = alife():create("new_box_inv", vector():set(34.903102874756, 9.980658531189, -64.443084716797), 218595, 1077)
-    level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_spot_ban"))
+    local obj = level_object_by_sid(story_ids.val_secret_0024)
+    ogse.spawn_item_in_inv("wpn_abakan_n", obj, 10)
+    ogse.spawn_item_in_inv("ammo_5.45x39_ap", obj, 15)
+    ogse.spawn_item_in_inv("ammo_vog-25", obj, 15)
+    ogse.spawn_item_in_inv("flash_ban", obj, 1)
+    level_tasks.add_location_by_id(obj:id(), "blue_location", game.translate_string("set_spot_ban"))
 end
 
 function dan_zombi()
-    local obj = alife():create("dan_zombied1", vector():set(1.89261031150818, 0.316928297281265, 2.56956), 40443, 1525)
-    local obj = alife():create("dan_zombied2", vector():set(1.89261031150818, 0.316928297281265, 2.56956), 40443, 1525)
-    local obj = alife():create("dan_zombied3", vector():set(1.89261031150818, 0.316928297281265, 2.56956), 40443, 1525)
-    local obj = alife():create("dan_zombied4", vector():set(-2.76496338844299, 9.35279846191406, -15.01173), 37920, 1525)
-    local obj = alife():create("dan_zombied5", vector():set(-2.76496338844299, 9.35279846191406, -15.01173), 37920, 1525)
+    spawn_patrol("dan_zombied1", "dan_zombied1_walk")
+    spawn_patrol("dan_zombied2", "dan_zombied2_walk")
+    spawn_patrol("dan_zombied3", "dan_zombied3_walk")
+    spawn_patrol("dan_zombied4", "dan_zombied4_walk")
+    spawn_patrol("dan_zombied5", "dan_zombied5_walk")
 end
 
 function voronin_snork()
-    local obj = alife():create("snork_voronin1", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin2", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin3", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin4", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin5", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin6", vector():set(130.00415039063, 0.2329753, -237.7590637207), 327388, 957)
-    local obj = alife():create("snork_voronin7", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
-    local obj = alife():create("snork_voronin8", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
-    local obj = alife():create("snork_voronin9", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
-    local obj = alife():create("snork_voronin10", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
-    local obj = alife():create("snork_voronin11", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
-    local obj = alife():create("snork_voronin12", vector():set(156.37007141113, 5.8319, -259.7184753418), 355922, 964)
+    spawn_patrol("snork_voronin1", "snork_voronin1_home")
+    spawn_patrol("snork_voronin2", "snork_voronin1_home")
+    spawn_patrol("snork_voronin3", "snork_voronin1_home")
+    spawn_patrol("snork_voronin4", "snork_voronin2_home")
+    spawn_patrol("snork_voronin5", "snork_voronin2_home")
+    spawn_patrol("snork_voronin6", "snork_voronin2_home")
+    spawn_patrol("snork_voronin7", "snork_voronin3_home")
+    spawn_patrol("snork_voronin8", "snork_voronin3_home")
+    spawn_patrol("snork_voronin9", "snork_voronin3_home")
+    spawn_patrol("snork_voronin10", "snork_voronin4_home")
+    spawn_patrol("snork_voronin11", "snork_voronin4_home")
+    spawn_patrol("snork_voronin12", "snork_voronin4_home")
 end
 
 function set_relation_jila(sid)
@@ -1620,11 +1398,11 @@ end
 
 function spawn_caterpillar()
     local position = db.actor:position()
-    position.x = position.x + 5
+    position.x = position.x
     position.y = position.y + 5
     position.z = position.z
     news_manager.send_tip(db.actor, game.translate_string("check_caterpillar"))
-    local obj = alife():create("af_caterpillar", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
+    alife():create("af_caterpillar", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end
 
 function check_caterpillar(actor, npc, info)
@@ -1636,7 +1414,7 @@ end
 
 function contr_art_spawn()
     if level.name() == "l03_agroprom" and db.actor:dont_has_info("kruglov_art_contr") then
-        local obj = alife():create("pseudodog_normal", vector():set(-179.50202941895, 13.36301612, 149.71054077148), 57889, 524)
+        alife_create("pseudodog_normal", "l03_agroprom", vector():set(-179.50202941895, 13.36301612, 149.71054077148))
         local snd_obj = xr_sound.get_safe_sound_object([[monsters\burer\burer_scan_affect_1]])
         snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
         db.actor:give_info_portion("kruglov_art_contr")
@@ -1644,22 +1422,10 @@ function contr_art_spawn()
 end
 
 function volk_ban_spawn()
-    local obj = alife():create("volk_ban1", vector():set(-203.49998474121, -19.899839401245, -157.83840942383), 49107, 53)
-    local obj = alife():create("volk_ban2", vector():set(-220.39071655273, -19.930147171021, -158.34483337402), 33448, 47)
-    local obj = alife():create("volk_ban3", vector():set(-225.10313415527, -19.688373565674, -131.26571655273), 29758, 63)
-    local obj = alife():create("volk_ban4", vector():set(-175.64656066895, -20.016550064087, -131.22229003906), 78664, 55)
-end
-
-function volk_tainik_spawn()
-    local obj = alife():create("volk_inv", vector():set(142.15008544922, 3.3007357120514, 339.77737426758), 447128, 232)
-    level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_volk_tainik"))
-    local obj = alife():create("pseudodog_volk", vector():set(135.34928894043, 0.19664749, 347.77938842773), 439897, 233)
-    local obj = alife():create("pseudodog_volk", vector():set(135.34928894043, 0.19664749, 347.77938842773), 439897, 233)
-    local obj = alife():create("pseudodog_volk", vector():set(135.34928894043, 0.19664749, 347.77938842773), 439897, 233)
-    local obj = alife():create("pseudodog_volk", vector():set(135.34928894043, 0.19664749, 347.77938842773), 439897, 233)
-    local obj = alife():create("psy_dog_volk", vector():set(138.53645324707, -0.22224108874798, 331.59295654297), 443529, 235)
-    local obj = alife():create("psy_dog_volk", vector():set(138.53645324707, -0.22224108874798, 331.59295654297), 443529, 235)
-    set_volk_tainik()
+    spawn_patrol("volk_ban1", "volk_ban1_walk")
+    spawn_patrol("volk_ban2", "volk_ban2_walk")
+    spawn_patrol("volk_ban3", "volk_ban3_walk")
+    spawn_patrol("volk_ban4", "volk_ban4_walk")
 end
 
 function knyaz_razborka()
@@ -1669,7 +1435,7 @@ end
 
 function knyaz_set()
     for a, obj in alife():objects() do
-        local sobj = level.object_by_id(obj)
+        local sobj = level.object_by_id(obj.id)
 	    if sobj and sobj:alive() and string.find(sobj:name(), "razbor_ban") then
             sobj:set_character_community("killer", 0, 0)
         end
@@ -1690,36 +1456,22 @@ function knyaz_set_nazad()
     end
 end
 
-function create_sr_psy()
-    local obj = alife():create("space_restrictor", vector():set(24.538877487183, 14.674140930176, 651.58270263672), 304037, 205)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\vehicle_niva1.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
-
-    local obj = alife():create("space_restrictor", vector():set(20.246423721313, 14.412837982178, 648.74908447266), 299198, 205)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\vehicle_niva2.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
-
-    local obj = alife():create("space_restrictor", vector():set(13.680048942566, 14.867101669312, 651.64483642578), 291989, 205)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\vehicle_niva3.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
-end
-
 function spawn_check_kontr()
     local position = db.actor:position()
-    position.x = position.x + 10
-    local obj = alife():create("m_controller_old", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
+    position.x = position.y + 10
+    alife():create("m_controller_old", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end
 
 function spawn_check_krovosos()
     local position = db.actor:position()
     position.x = position.x + 10
-    local obj = alife():create("bloodsucker_strong", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
+    alife():create("bloodsucker_strong", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end
 
 function spawn_check_burer()
     local position = db.actor:position()
     position.x = position.x + 10
-    local obj = alife():create("burer_strong", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
+    alife():create("burer_strong", position, db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end
 
 function new_logic()
@@ -1728,8 +1480,8 @@ function new_logic()
             alife():release(obj, true)
             level.add_cam_effector("camera_effects\\prison_1.anm", 25, false, "")
             level.add_pp_effector("black.ppe", 2506, false, "")
-            local sobj = alife():create("agr_und_zombi", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
-            local npc = alife():assign_story_id(sobj.id, story_ids.agr_und_zombi)
+            local obj = alife():create("agr_und_zombi", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
+            local npc = alife():assign_story_id(obj.id, story_ids.agr_und_zombi)
             ogse.reset_npc_logic(npc)
             break
         end
@@ -1737,11 +1489,11 @@ function new_logic()
 end
 
 function mayor_yarofeev_spawn()
-    local obj = alife():create("krevoshaev_specnaz1", vector():set(-164.44715881, -30.12526, -358.953), 85056, 31)
-    local obj = alife():create("krevoshaev_specnaz2", vector():set(-164.44715881, -30.12526, -358.953), 85056, 31)
-    local obj = alife():create("krevoshaev_specnaz3", vector():set(-172.62121, -25.4351692, -349.704), 77072, 31)
-    local obj = alife():create("krevoshaev_specnaz4", vector():set(-172.62121, -25.4351692, -349.704), 77072, 31)
-    local obj = alife():create("krevoshaev_specnaz5", vector():set(-172.62121, -25.4351692, -349.704), 77072, 31)
+    spawn_patrol("krevoshaev_specnaz1", "commander_krevoshaev_specnaz1_walk")
+    spawn_patrol("krevoshaev_specnaz2", "commander_krevoshaev_specnaz2_walk")
+    spawn_patrol("krevoshaev_specnaz3", "commander_krevoshaev_specnaz2_walk")
+    spawn_patrol("krevoshaev_specnaz4", "commander_krevoshaev_specnaz2_walk")
+    spawn_patrol("krevoshaev_specnaz5", "commander_krevoshaev_specnaz2_walk")
 end
 
 function sms_sidr()
@@ -1750,51 +1502,51 @@ function sms_sidr()
 end
 
 function sidr_lab_spawn()
-    spawn_ai_location("notebook_x16", vector():set(-57.764, 19.210, -0.122), 1817, 1530)
+    spawn_ai_location("notebook_x16", vector():set(-57.764, 19.210, -0.122), "l08u_brainlab")
 end
 
 function ohranik_spawn()
-    spawn_ai_location("wpn_rg6_m1", vector():set(-24.94743, -5.650, -21.90315), 22, 1545)
+    spawn_ai_location("wpn_m32_mgl", vector():set(-24.94743, -5.650, -21.90315), "l07_military")
 end
 
 function klyak_lab_spawn()
-    local obj = alife():create("lab_zasada1", vector():set(11.875677108765, -16.34425163269, 51.680675506592), 4470, 1161)
-    local obj = alife():create("lab_zasada2", vector():set(7.2743148803711, -16.343746185303, 63.114601135254), 3811, 1162)
-    local obj = alife():create("lab_zasada3", vector():set(16.78125, -16.343832015991, 72.062187194824), 5416, 1163)
-    local obj = alife():create("lab_zasada4", vector():set(0.094684213399887, -16.343086242676, 37.941307067871), 3472, 1160)
-    local obj = alife():create("lab_zasada5", vector():set(22.169794082642, -16.344854354858, 36.643878936768), 5708, 1160)
-    local obj = alife():create("lab_zasada6", vector():set(2.7485866546631, -16.343587875366, 47.253498077393), 3224, 1162)
-    local obj = alife():create("lab_zasada7", vector():set(21.188512802124, -16.343347549438, 61.879402160645), 5906, 1161)
-    local obj = alife():create("lab_zasada8", vector():set(12.884053230286, -16.3480052948, 60.849411010742), 4961, 1161)
+    spawn_patrol("lab_zasada1", "lab_zasada1_walk")
+    spawn_patrol("lab_zasada2", "lab_zasada2_walk")
+    spawn_patrol("lab_zasada3", "lab_zasada3_walk")
+    spawn_patrol("lab_zasada4", "lab_zasada4_walk")
+    spawn_patrol("lab_zasada5", "lab_zasada5_walk")
+    spawn_patrol("lab_zasada6", "lab_zasada6_walk")
+    spawn_patrol("lab_zasada7", "lab_zasada7_walk")
+    spawn_patrol("lab_zasada8", "lab_zasada8_walk")
 end
 
 function ban_kogot_spawn()
-    local obj = alife():create("ban_kogot1", vector():set(48.235336303711, -2.498167514801, -30.495162963867), 235663, 1093)
-    local obj = alife():create("ban_kogot2", vector():set(49.248931884766, -2.498295545578, -49.610511779785), 236513, 1092)
-    local obj = alife():create("ban_kogot3", vector():set(32.045829772949, 1.0196729898453, -36.969398498535), 213840, 1091)
-    local obj = alife():create("ban_kogot4", vector():set(37.592697143555, 1.0220354795456, -25.274175643921), 220721, 1090)
-    local obj = alife():create("ban_kogot5", vector():set(37.592697143555, 1.0220354795456, -25.274175643921), 220721, 1090)
-    local obj = alife():create("ban_kogot6", vector():set(37.592697143555, 1.0220354795456, -25.274175643921), 220721, 1090)
-    local obj = alife():create("ban_kogot7", vector():set(49.248931884766, -2.498295545578, -49.610511779785), 236513, 1092)
-    local obj = alife():create("ban_kogot8", vector():set(49.248931884766, -2.498295545578, -49.610511779785), 236513, 1092)
+    spawn_patrol("ban_kogot1", "ban_kogot1_walk")
+    spawn_patrol("ban_kogot2", "ban_kogot2_walk")
+    spawn_patrol("ban_kogot3", "ban_kogot3_walk")
+    spawn_patrol("ban_kogot4", "ban_kogot4_walk")
+    spawn_patrol("ban_kogot5", "ban_kogot5_walk")
+    spawn_patrol("ban_kogot6", "ban_kogot6_walk")
+    spawn_patrol("ban_kogot7", "ban_kogot_centr")
+    spawn_patrol("ban_kogot8", "ban_kogot_centr")
 end
 
 function klyak_mil_spawn()
     if level.name() == "l07_military" and not db.actor:has_info("mil_klyak_help_start") then
-        local obj = alife():create("mil_naem1", vector():set(-210.11305236816, -12.52025604248, 62.831470489502), 117814, 1657)
-        local obj = alife():create("mil_naem2", vector():set(-190.0546875, -12.653781890869, 66.782318115234), 134296, 1657)
-        local obj = alife():create("mil_naem3", vector():set(-234.45559692383, -12.654229164124, 42.454696655273), 97222, 1680)
-        local obj = alife():create("mil_naem4", vector():set(-234.45559692383, -12.654229164124, 42.454696655273), 97222, 1680)
-        local obj = alife():create("mil_naem5", vector():set(-231.55117797852, -12.658710479736, 56.839199066162), 99652, 1679)
-        local obj = alife():create("mil_naem6", vector():set(-231.55117797852, -12.658710479736, 56.839199066162), 99652, 1679)
-        local obj = alife():create("mil_naem7", vector():set(-231.55117797852, -12.658710479736, 56.839199066162), 99652, 1679)
-        local obj = alife():create("mil_naem8", vector():set(-193.74069213867, -12.718461990356, 52.728500366211), 131372, 1657)
+        spawn_patrol("mil_naem1", "mil_naem1_walk")
+        spawn_patrol("mil_naem2", "mil_naem2_walk")
+        spawn_patrol("mil_naem3", "mil_naem3_walk")
+        spawn_patrol("mil_naem4", "mil_naem4_walk")
+        spawn_patrol("mil_naem5", "mil_naem5_walk")
+        spawn_patrol("mil_naem6", "mil_naem6_walk")
+        spawn_patrol("mil_naem7", "mil_naem7_walk")
+        spawn_patrol("mil_naem8", "mil_naem8_walk")
         db.actor:give_info_portion("mil_klyak_help_start")
     end
 end
 
 function spawn_ammo_shilo()
-    spawn_ai_location("ammo_12x70_buck", vector():set(-254.211, 1.375, 10.877), 8265, 1424)
+    spawn_ai_location("ammo_12x70_buck", vector():set(-254.211, 1.375, 10.877), "l06_rostok")
 end
 
 function clear_npc_inventory(npc)
@@ -1832,13 +1584,13 @@ function friendall(community1, community2)
 end
 
 function levsha_naem()
-    local obj = alife():create("levsha_naem1", vector():set(-149.54443359375, 1.1022896766663, -178.35478210449), 88077, 669)
-    local obj = alife():create("levsha_naem2", vector():set(-156.42997741699, 1.1016038656235, -169.67868041992), 81230, 669)
-    local obj = alife():create("levsha_naem3", vector():set(-149.31867980957, 1.097753405571, -163.98892211914), 88088, 669)
+    spawn_patrol("levsha_naem1", "levsha_naem1_walk")
+    spawn_patrol("levsha_naem2", "levsha_naem2_walk")
+    spawn_patrol("levsha_naem3", "levsha_naem3_walk")
 end
 
 function levsha_bioradar()
-    spawn_ai_location("bioradar", vector():set(-260.860, 0.015, 26.480), 6331, 1395)
+    spawn_ai_location("bioradar", vector():set(-260.860, 0.015, 26.480), "l06_rostok")
 end
 
 function mina_band()
@@ -1883,18 +1635,13 @@ end
 ---------------------------------------------------------РАДИАЦИЯ ARC-----------------------------------------------
 
 function spawn_mervin()
-    local sobj = alife():create("esc_mervin", vector():set(-161.866, -1.748, 67.668), 634, 2141)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin.ltx"
-    alife():assign_story_id(sobj.id, story_ids.esc_mervin)
-end
-
-function kogot_rukzak_spawn()
-    local sobj = alife():create("prov_ruk", vector():set(142.93045043945, 5.8323435783386, -245.087890625), 341121, 966)
-    alife():assign_story_id(sobj.id, story_ids.prov_ruk)
+    local obj = alife_create("esc_mervin", "l11_pripyat", vector():set(-161.866, -1.748, 67.668))
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\esc_mervin.ltx"
+    alife():assign_story_id(obj.id, story_ids.esc_mervin)
 end
 
 function pda_priz_spawn()
-    spawn_ai_location("pda_priz", vector():set(-304.193, -27.575, 205.831), 39356, 1788)
+    spawn_ai_location("pda_priz", vector():set(-304.193, -27.575, 205.831), "l07_military")
 end
 
 function mina_sclad()
@@ -1914,36 +1661,22 @@ function mina_sclad()
     level.add_pp_effector("amk_shoot.ppe", 2011, false)
 end
 
-function spawn_military_tech()
-    if level.name() == "l01_escape" and not db.actor:has_info("krest_work_spawn") then
-        amk_mod.spawn_military_tech_pack(alife():create("helicopter", vector():set(-160.0, -40.0, -610.0), 128298, 11), "vehicle_btr", "scripts\\new\\helicopter1.ltx")
-        db.actor:give_info_portion("krest_work_spawn")
-        news_manager.send_tip(db.actor, "Пипец мужики, Вертолёт")
-    end
-end
-
-function create_car_restr()
-    local obj = alife():create("space_restrictor", vector():set(-302.76281738281, -22.185157775879, 211.21), 40497, 1788)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\monach_restr.ltx"
-    rewrite_restrictor(obj, custom, 12.0)
-end
-
 function spawn_desant()
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil_master", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil_master", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil_master", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
-    local obj = alife():create("valet_mil_master", vector():set(-122.6116, -9.454, -150.264), 130421, 44)
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil", "heli_desant_move")
+    spawn_patrol("valet_mil_master", "heli_desant_move")
+    spawn_patrol("valet_mil_master", "heli_desant_move")
+    spawn_patrol("valet_mil_master", "heli_desant_move")
+    spawn_patrol("valet_mil_master", "heli_desant_move")
 end
 
 function ucen_electro()
-    local sobj = alife():create("electro_chimera", vector():set(-56.7896347045898, 0.25009277, 57.5432243347168), 108090, 899)
-    sobj.custom_data = "[logic]\ncfg = scripts\\new\\electro_chimera_ucen.ltx"
+    local obj = spawn_patrol("electro_chimera", "electro_chimera_ucen_walk")
+    obj.custom_data = "[logic]\ncfg = scripts\\new\\electro_chimera_ucen.ltx"
 end
 
 function mini_time(actor, npc)
@@ -1970,19 +1703,24 @@ function set_lapsha(first_speaker, second_speaker)
     second_speaker:set_relation(game_object.enemy, first_speaker) 
 end
 
+function super_krovosos_spawn()
+    local obj = spawn_patrol("bloodsucker_super_strong", "super_krovosos_walk")
+    alife():assign_story_id(obj.id, story_ids.super_krovosos)
+end
+
 function monach_spawn()
-    local obj = alife():create("monach_flame1", vector():set(-323.86444091797, -22.3211765289, 215.06326293945), 23717, 1795)
-    local obj = alife():create("monach_flame2", vector():set(-303.80130004883, -22.5906143188, 223.89811706543), 39952, 1787)
-    local obj = alife():create("monach_flame3", vector():set(-303.80130004883, -22.5906143188, 223.89811706543), 39952, 1787)
-    local obj = alife():create("monach_flame4", vector():set(-307.34295654297, -22.393926620483, 201.0061340332), 37061, 1795)
-    local obj = alife():create("monach_tele1", vector():set(-307.34295654297, -22.393926620483, 201.0061340332), 37061, 1795)
-    local obj = alife():create("monach_tele2", vector():set(-303.80130004883, -22.590614318848, 223.89811706543), 39952, 1787)
-    local obj = alife():create("monach_tele3", vector():set(-323.86444091797, -22.321176528931, 215.06326293945), 23717, 1795)
-    local obj = alife():create("monach_tele4", vector():set(-323.86444091797, -22.321176528931, 215.06326293945), 23717, 1795)
+    spawn_patrol("monach_flame1", "monach_flame_walk")
+    spawn_patrol("monach_flame2", "monach_flame_walk")
+    spawn_patrol("monach_flame3", "monach_flame_walk")
+    spawn_patrol("monach_flame4", "monach_flame_walk")
+    spawn_patrol("monach_tele1", "monach_tele_walk")
+    spawn_patrol("monach_tele2", "monach_tele_walk")
+    spawn_patrol("monach_tele3", "monach_tele_walk")
+    spawn_patrol("monach_tele4", "monach_tele_walk")
 end
 
 function black_box_spawn()
-    spawn_ai_location("box_black", vector():set(352.86376953125, -45.480, -196.2610168457), 94349, 2081)
+    spawn_ai_location("box_black", vector():set(352.86376953125, -45.480, -196.2610168457), "l10_radar")
 end
 
 function prizrak_pda()
@@ -2019,13 +1757,13 @@ function amulet_effect()
 end
 
 function create_final_restr()
-    local obj = alife():create("space_restrictor", vector():set(0.054, -34.355, 17.672), 1757, 2512)
+    local obj = alife_create("space_restrictor", "l12u_control_monolith", vector():set(0.054, -34.355, 17.672))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\final_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_x16_restr()
-    local obj = alife():create("space_restrictor", vector():set(-66.073, -19.088, -158.844), 15672, 1490)
+    local obj = alife_create("space_restrictor", "l08_yantar", vector():set(-66.073, -19.088, -158.844))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\x16_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
@@ -2034,496 +1772,364 @@ function set_povodyr()
     local sim = alife()
     for a, obj in alife():objects() do
         if obj:section_name() == "dog_povodyr" then
-            level.map_add_object_spot_ser(obj.id, "blue_location", game.translate_string("set_povodyr"))
+            level_tasks.add_location_by_id(obj.id, "blue_location", game.translate_string("set_povodyr"))
             return
         end
     end
 end
 
 function create_lesnik_restr()
-    local sr = alife():create("space_restrictor", vector():set(136.250, 1.228, -123.958), 475965, 3085)
+    local pp = patrol("lesnik_walk1")
+    local obj = alife():create("space_restrictor", pp:point(6), pp:level_vertex_id(6), pp:game_vertex_id(6))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30159|]] .. sr:name() .. [[|nil %+lesnik_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_lesnik2_restr()
-    local sr = alife():create("space_restrictor", vector():set(-347.986, -9.399, -8.740), 271297, 2978)
-    local custom = [[[logic]
-    active = sr_idle
-    [sr_idle]
-    on_npc_in_zone = 30160|]] .. sr:name() .. [[|nil %+lesnik2_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30159|]] .. obj:name() .. [[|nil %+lesnik_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_vasil_restr()
-    local sr = alife():create("space_restrictor", vector():set(-356.713, 51.555, 388.227), 255773, 2976)
+    local pp = patrol("vasil_walk2")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30148|]] .. sr:name() .. [[|nil %+vasil_mesto1%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_vasil_restr1()
-    local sr = alife():create("space_restrictor", vector():set(61.101, -7.051, -123.551), 974192, 2986)
-    local custom = [[[logic] active = sr_idle [sr_idle] on_npc_in_zone = 30148|]] .. sr:name() .. [[|nil %+vasil_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_vasil_restr2()
-    local sr = alife():create("space_restrictor", vector():set(61.362, -9.923, -182.203), 975372, 2986)
-    local custom = [[[logic]
-    active = sr_idle
-    [sr_idle]
-    on_npc_in_zone = 30148|]] .. sr:name() .. [[|nil %+vasil_mesto2%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_vasil2_restr()
-    local obj = alife():create("space_restrictor", vector():set(-48.543, -13.200, -269.102), 22468, 1454)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\vasil2_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
+    on_npc_in_zone = 30148|]] .. obj:name() .. [[|nil %+vasil_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_zombi_restr()
-    local sr = alife():create("space_restrictor", vector():set(-11.410, -11.880, -274.345), 34615, 1482)
+    local pp = patrol("vasil2_walk1")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30161|]] .. sr:name() .. [[|nil %+pomog_zombi%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30161|]] .. obj:name() .. [[|nil %+pomog_zombi%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_vasil2_restr1()
-    local sr = alife():create("space_restrictor", vector():set(0.710, -11.748, -263.896), 39537, 1448)
+    local pp = patrol("vasil2_walk2")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30161|]] .. sr:name() .. [[|nil %+vasil_dovel%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30161|]] .. obj:name() .. [[|nil %+vasil_dovel%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_skit_restr()
-    local sr = alife():create("space_restrictor", vector():set(-66.298, 6.267, -36.346), 280800, 3051)
+    local pp = patrol("postovoy_walk1")
+    local obj = alife():create("space_restrictor", pp:point(7), pp:level_vertex_id(7), pp:game_vertex_id(7))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30162|]] .. sr:name() .. [[|nil %+skit_prishli%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30162|]] .. obj:name() .. [[|nil %+skit_prishli%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_postovoy_restr()
-    local sr = alife():create("space_restrictor", vector():set(135.243, 1.228, -126.111), 474965, 3085)
+    local pp = patrol("postovoy_walk2")
+    local obj = alife():create("space_restrictor", pp:point(6), pp:level_vertex_id(6), pp:game_vertex_id(6))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30162|]] .. sr:name() .. [[|nil %+postovoy_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30162|]] .. obj:name() .. [[|nil %+postovoy_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_pripyat_restr()
-    local obj = alife():create("space_restrictor", vector():set(-163.414, -1.770, 63.461), 581, 2141)
+    local obj = alife_create("space_restrictor", "l09_deadcity", vector():set(181.414, -2.876, -51.635))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\pripyat_restr.ltx"
-    rewrite_restrictor(obj, custom, 12.0)
+    rewrite_restrictor(obj, custom, 3.0)
 end
 
 function bar_attak_restr()
-    local obj = alife():create("space_restrictor", vector():set(40.715, -0.001, 238.610), 23433, 1244)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(40.715, -0.001, 238.610))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\bar_attak.ltx"
     rewrite_restrictor(obj, custom, 8.0)
 end
 
 function create_plichko_restr()
-    local sr = alife():create("space_restrictor", vector():set(224.667, -5.448, 125.996), 56632, 1198)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(224.667, -5.448, 125.996))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30176|]] .. sr:name() .. [[|nil %+plichko_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30176|]] .. obj:name() .. [[|nil %+plichko_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_attak7_restr()
-    local sr = alife():create("space_restrictor", vector():set(136.671, -4.825, 21.034), 36897, 1237)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(136.671, -4.825, 21.034))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30177|]] .. sr:name() .. [[|nil %+dolg_attak7_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30177|]] .. obj:name() .. [[|nil %+dolg_attak7_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_attak8_restr()
-    local sr = alife():create("space_restrictor", vector():set(221.044, -0.011, -7.659), 55112, 1261)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(221.044, -0.011, -7.659))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30178|]] .. sr:name() .. [[|nil %+dolg_attak8_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30178|]] .. obj:name() .. [[|nil %+dolg_attak8_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_voronin_restr()
-    local sr = alife():create("space_restrictor", vector():set(225.696, -5.248, 131.531), 56941, 1198)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(225.696, -5.248, 131.531))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30179|]] .. sr:name() .. [[|nil %+voronin_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_mg_restr1()
-    local obj = alife():create("space_restrictor", vector():set(-154.714, -1.824, 47.426), 243286, 3053)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\mg_restr1.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
-end
-
-function create_mg_restr2()
-    local obj = alife():create("space_restrictor", vector():set(-214.023, -3.068, 75.306), 243286, 3053)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\mg_restr2.ltx"
+    on_npc_in_zone = 30179|]] .. obj:name() .. [[|nil %+voronin_mesto%]]
     rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_vstrecha_restr()
-    local sr = alife():create("space_restrictor", vector():set(-29.943, 1.811, -3.966), 896057, 2926)
+    local pp = patrol("barman_walk2")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30190|]] .. sr:name() .. [[|nil %+barman_strelka_prishel%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30190|]] .. obj:name() .. [[|nil %+barman_strelka_prishel%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_grek_restr()
-    local sr = alife():create("space_restrictor", vector():set(93.115, -5.264, -132.060), 1032152, 2986)
+    local pp = patrol("grek_walk1")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30188|]] .. sr:name() .. [[|nil %+grek_mesto%]]
-    rewrite_restrictor(sr, custom, 2.0)
+    on_npc_in_zone = 30188|]] .. obj:name() .. [[|nil %+grek_mesto%]]
+    rewrite_restrictor(obj, custom, 3.0)
 end
 
 function create_zahar_restr()
-    local sr = alife():create("space_restrictor", vector():set(-398.245, 57.244, 375.462), 183792, 2976)
+    local pp = patrol("zahar_walk2")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30195|]] .. sr:name() .. [[|nil %+zahar_mesto%]]
-    rewrite_restrictor(sr, custom, 2.0)
+    on_npc_in_zone = 30195|]] .. obj:name() .. [[|nil %+zahar_mesto%]]
+    rewrite_restrictor(obj, custom, 2.0)
 end
 
 function create_podmoga_restr()
-    local sr = alife():create("space_restrictor", vector():set(-17.474, 2.480, 64.866), 259615, 88)
+    local obj = alife_create("space_restrictor", "l01_escape", vector():set(-17.474, 2.480, 64.866))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle] 
-    on_npc_in_zone = 30197|]] .. sr:name() .. [[|nil %+podmoga_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30197|]] .. obj:name() .. [[|nil %+podmoga_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_tolik_restr()
-    local sr = alife():create("space_restrictor", vector():set(6.284, 2.381, 63.295), 283083, 89)
+    local obj = alife_create("space_restrictor", "l01_escape", vector():set(6.284, 2.381, 63.295))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 9644|]] .. sr:name() .. [[|nil %+esc_tolik_help_have%]]
-    rewrite_restrictor(sr, custom, 10.0)
-end
-
-function create_kapral_restr()
-    local obj = alife():create("space_restrictor", vector():set(-227.092, 16.793, 237.678), 591550, 2889)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\kapral_restr.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
+    on_npc_in_zone = 9644|]] .. obj:name() .. [[|nil %+esc_tolik_help_have%]]
+    rewrite_restrictor(obj, custom, 10.0)
 end
 
 function create_foster_restr()
-    local sr = alife():create("space_restrictor", vector():set(-447.132, -0.948, -176.802), 257369, 2848)
+    local pp = patrol("foster2_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30186|]] .. sr:name() .. [[|nil %+kapral_mesto%]]
-    rewrite_restrictor(sr, custom, 5.0)
+    on_npc_in_zone = 30186|]] .. obj:name() .. [[|nil %+kapral_mesto%]]
+    rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_brown_restr()
-    local obj = alife():create("space_restrictor", vector():set(-467.794, 0.790, -153.783), 227472, 2839)
+    local pp = patrol("brown1_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\brown_zvuk.ltx"
     rewrite_restrictor(obj, custom, 4.0)
 end
 
 function foster_zvuk_restr()
-    local obj = alife():create("space_restrictor", vector():set(-270.069, 10.707, 220.042), 523335, 2873)
+    local pp = patrol("foster1_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\foster_zvuk.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_rostok_restr()
-    local obj = alife():create("space_restrictor", vector():set(-83.083, -15.536, -201.172), 47811, 1408)
+    local obj = alife_create("space_restrictor", "l06_rostok", vector():set(-83.083, -15.536, -201.172))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\rostok_restr.ltx"
     rewrite_restrictor(obj, custom, 3.0)
 end
 
 function create_karina1_restr()
-    local sr = alife():create("space_restrictor", vector():set(-27.499, -9.033, -173.841), 820635, 2986)
+    local pp = patrol("karina2_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = [[[logic]
     active = sr_idle
     [sr_idle]
-    on_npc_in_zone = 30189|]] .. sr:name() .. [[|nil %+karina_mesto%]]
-    rewrite_restrictor(sr, custom, 1.0)
-end
-
-function create_karina2_restr()
-    local sr = alife():create("space_restrictor", vector():set(-411.336, 0.687, 58.455), 160037, 2978)
-    local custom = [[[logic]
-    active = sr_idle
-    [sr_idle] 
-    on_npc_in_zone = 30189|]] .. sr:name() .. [[|nil %+karina_prishli%]]
-    rewrite_restrictor(sr, custom, 1.0)
+    on_npc_in_zone = 30189|]] .. obj:name() .. [[|nil %+karina_mesto%]]
+    rewrite_restrictor(obj, custom, 1.0)
 end
 
 function create_povodyr_restr()
-    local obj = alife():create("space_restrictor", vector():set(193.017, 2.700, -29.807), 1568901, 3007)
+    local pp = patrol("dog_povodyr1_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\povodyr_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
-function create_skit_trader_restr()
-    local obj = alife():create("space_restrictor", vector():set(-66.447, 2.017, -44.366), 280793, 3059)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\skit_trader_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.1)
-end
-
 function create_antikvar_restr()
-    local obj = alife():create("space_restrictor", vector():set(207.609, 0.430, 60.231), 50435, 1203)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(207.609, 0.430, 60.231))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\antikvar_restr.ltx"
     rewrite_restrictor(obj, custom, 4.0)
 end
 
 function create_cezar_restr()
-    local obj = alife():create("space_restrictor", vector():set(29.068, -11.688, -280.074), 54978, 1480)
+    local obj = alife_create("space_restrictor", "l08_yantar", vector():set(29.068, -11.688, -280.074))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\cezar_restr.ltx"
     rewrite_restrictor(obj, custom, 4.0)
 end
 
 function create_graf_restr()
-    local obj = alife():create("space_restrictor", vector():set(149.237, 0.428, 68.958), 39928, 1180)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(149.237, 0.428, 68.958))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\graf_restr.ltx"
     rewrite_restrictor(obj, custom, 2.1)
 end
 
 function create_mervin1_restr()
-    local obj = alife():create("space_restrictor", vector():set(-162.525, -1.755, 66.612), 581, 2141)
+    local obj = alife_create("space_restrictor", "l11_pripyat", vector():set(-162.525, -1.755, 66.612))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\mervin1_restr.ltx"
     rewrite_restrictor(obj, custom, 12.0)
 end
 
 function create_mervin2_restr()
-    local obj = alife():create("space_restrictor", vector():set(9.693, 56.273, 48.022), 5205, 2417)
+    local obj = alife_create("space_restrictor", "l12u_sarcofag", vector():set(9.693, 56.273, 48.022))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\mervin2_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_mervin3_restr()
-    local obj = alife():create("space_restrictor", vector():set(101.323, 4.003, 123.453), 215814, 2182)
+    local obj = alife_create("space_restrictor", "l11_pripyat", vector():set(101.323, 4.003, 123.453))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\mervin3_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_prince_restr()
-    local obj = alife():create("space_restrictor", vector():set(659.836, -43.877, 168.970), 227063, 1915)
+    local obj = alife_create("space_restrictor", "l10_radar", vector():set(659.836, -43.877, 168.970))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\prince_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
-function create_pekar_restr()
-    local obj = alife():create("space_restrictor", vector():set(109.822, -19.864, -269.886), 1115781, 2961)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\pekar_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
-end
-
 function create_monolit_restr()
-    local obj = alife():create("space_restrictor", vector():set(-25.688, 0.001, 691.280), 178968, 2618)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(-25.688, 0.001, 691.280))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\monolit_restr.ltx"
     rewrite_restrictor(obj, custom, 30.0)
 end
 
 function create_dialog_restr()
-    local obj = alife():create("space_restrictor", vector():set(-25.688, 0.001, 691.280), 178968, 2618)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(-25.688, 0.001, 691.280))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\dialog_restr.ltx"
     rewrite_restrictor(obj, custom, 2.0)
 end
 
 function create_chaes2_restr()
-    local obj = alife():create("space_restrictor", vector():set(116.323, -0.080, 523.742), 178968, 2618)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(116.323, -0.080, 523.742))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\chaes2_restr.ltx"
     rewrite_restrictor(obj, custom, 180.0)
 end
 
 function create_sled2_restr()
-    local obj = alife():create("space_restrictor", vector():set(4.635, 5.119, 70.967), 26518, 2659)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(4.635, 5.119, 70.967))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\sled2_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_kristall_restr()
-    local obj = alife():create("space_restrictor", vector():set(-31.369, 20.150, 646.914), 178968, 2618)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(-31.369, 20.150, 646.914))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\kristall_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_strelok_restr()
-    local obj = alife():create("space_restrictor", vector():set(405.769, 36.877, 122.832), 138164, 2600)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(405.769, 36.877, 122.832))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\strelok_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_ugroza_restr()
-    local obj = alife():create("space_restrictor", vector():set(105.086, 38.402, 144.396), 60577, 2563)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(105.086, 38.402, 144.396))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\ugroza_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_tele9_restr()
-    local obj = alife():create("space_restrictor", vector():set(578.559, 18.205, 294.443), 174619, 2613)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(578.559, 18.205, 294.443))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\tele9_restr.ltx"
     rewrite_restrictor(obj, custom, 8.0)
 end
 
 function create_end_restr()
-    local obj = alife():create("space_restrictor", vector():set(444.978, 10.149, 152.687), 147677, 2599)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(444.978, 10.149, 152.687))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\end_restr.ltx"
     rewrite_restrictor(obj, custom, 8.0)
 end
 
 function create_rule_restr()
-    local obj = alife():create("space_restrictor", vector():set(554.277, 150.700, 202.080), 227423, 2635)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(554.277, 150.700, 202.080))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\rule_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_sarfinal_restr()
-    local obj = alife():create("space_restrictor", vector():set(11.325, 55.594, 28.993), 3729, 2464)
+    local obj = alife_create("space_restrictor", "l12u_sarcofag", vector():set(11.325, 55.594, 28.993))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\sarfinal_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_vano_restr()
-    local obj = alife():create("space_restrictor", vector():set(84.903, -1.135, 74.312), 1076579, 2948)
+    local pp = patrol("vano_walk")
+    local obj = alife():create("space_restrictor", pp:point(0), pp:level_vertex_id(0), pp:game_vertex_id(0))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\vano_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
 function create_superfinal_restr()
-    local obj = alife():create("space_restrictor", vector():set(885.711, 15.099, 123.097), 231729, 2635)
+    local obj = alife_create("space_restrictor", "l12_stancia_2", vector():set(885.711, 15.099, 123.097))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\superfinal_restr.ltx"
     rewrite_restrictor(obj, custom, 3.0)
 end
 
 function create_vhod_restr()
-    local obj = alife():create("space_restrictor", vector():set(49.777, 3.935, 76.576), 1021308, 2947)
+    local obj = alife_create("space_restrictor", "l13_deep", vector():set(-116.79, 1.37, 116.83))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\vhod_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
+    rewrite_restrictor(obj, custom, 30.0)
 end
 
 function create_maroder_restr()
-    local obj = alife():create("space_restrictor", vector():set(2.004, 10.026, 42.733), 946230, 2939)
+    local obj = alife_create("space_restrictor", "l13_deep", vector():set(90.66, 1.67, 545.49))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\maroder_restr.ltx"
     rewrite_restrictor(obj, custom, 3.0)
 end
 
 function create_maroder2_restr()
-    local obj = alife():create("space_restrictor", vector():set(49.777, 3.935, 76.576), 1021308, 2947)
+    local obj = alife_create("space_restrictor", "l13_deep", vector():set(-109.97, 1.44, 112.49))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\maroder2_restr.ltx"
     rewrite_restrictor(obj, custom, 2.0)
 end
 
-function create_nato_restr()
-    local obj = alife():create("space_restrictor", vector():set(-448.229, 1.730, -117.823), 256382, 2844)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato_restr.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
-end
-
-function create_nato1_restr()
-    local obj = alife():create("space_restrictor", vector():set(-525.222, 1.256, -139.308), 140364, 2829)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato1_restr.ltx"
-    rewrite_restrictor(obj, custom, 10.0)
-end
-
-function create_nato2_restr()
-    local obj = alife():create("space_restrictor", vector():set(-460.865, 0.784, -148.654), 237565, 2839)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato2_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
-end
-
-function create_nato3_restr()
-    local obj = alife():create("space_restrictor", vector():set(-460.584, 5.152, -139.673), 237584, 2841)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato3_restr.ltx"
-    rewrite_restrictor(obj, custom, 4.0)
-end
-
-function create_nato4_restr()
-    local obj = alife():create("space_restrictor", vector():set(-520.037, 0.415, -158.050), 147640, 2828)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato4_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
-end
-
-function create_nato5_restr()
-    local obj = alife():create("space_restrictor", vector():set(-528.454, 2.805, -170.965), 135158, 2828)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato5_restr.ltx"
-    rewrite_restrictor(obj, custom, 2.0)
-end
-
-function create_nato6_restr()
-    local obj = alife():create("space_restrictor", vector():set(-517.255, 0.124, -202.396), 151632, 2830)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato6_restr.ltx"
-    rewrite_restrictor(obj, custom, 3.0)
-end
-
-function create_nato7_restr()
-    local obj = alife():create("space_restrictor", vector():set(-518.862, -0.783, -186.421), 149622, 2830)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\nato7_restr.ltx"
-    rewrite_restrictor(obj, custom, 8.0)
-end
-
 function create_antirostok_restr()
-    local obj = alife():create("space_restrictor", vector():set(40.096, -0.567, 140.467), 21496, 1247)
+    local obj = alife_create("space_restrictor", "l05_bar", vector():set(40.096, -0.567, 140.467))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\antirostok_restr.ltx"
     rewrite_restrictor(obj, custom, 5.0)
 end
 
-function create_antiagro_restr()
-    local obj = alife():create("space_restrictor", vector():set(-128.391, -3.960, -139.923), 12, 719)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\antiagro_restr.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
-end
-
 function create_iuda_restr()
-    local obj = alife():create("space_restrictor", vector():set(59.567, 12.359, 7.120), 9808, 2437)
+    local obj = alife_create("space_restrictor", "l12u_sarcofag", vector():set(59.567, 12.359, 7.120))
     local custom = "[logic]\ncfg = scripts\\new\\restr\\iuda_restr.ltx"
     rewrite_restrictor(obj, custom, 1.0)
-end
-
-function create_solomonchik_restr()
-    local obj = alife():create("space_restrictor", vector():set(67.891, 5.041, 97.771), 53648, 2537)
-    local custom = "[logic]\ncfg = scripts\\new\\solomonchik_restr.ltx"
-    rewrite_restrictor(obj, custom, 3.0)
-end
-
-function create_noweapons_restr1()
-    local obj = alife():create("space_restrictor", vector():set(-100.936, -16.466, -46.323), 1544, 755)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\agr_noweapon_newrestr1.ltx"
-    rewrite_restrictor(obj, custom, 80.0)
-end
-
-function create_noweapons_restr2()
-    local obj = alife():create("space_restrictor", vector():set(-71.541, -4.001, -121.858), 3323, 798)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\agr_noweapon_newrestr2.ltx"
-    rewrite_restrictor(obj, custom, 80.0)
-end
-
-function create_mon5_restr()
-    local obj = alife():create("space_restrictor", vector():set(34.138, 13.215, -18.271), 6620, 2453)
-    local custom = "[logic]\ncfg = scripts\\new\\restr\\mon5_restr.ltx"
-    rewrite_restrictor(obj, custom, 5.0)
 end
 
 function assing_cd_and_sid(sobj, cd, sid)
@@ -2533,13 +2139,19 @@ function assing_cd_and_sid(sobj, cd, sid)
     end
 end
 
-function spawn_ai_location(spawn_obj, pos, lvid, gvid)
+function spawn_ai_location(section, pos, lvid_or_lname, gvid)
     if type(pos) == "table" then
         pos = vector():set(unpack(pos))
     end
-    local obj = alife():create(spawn_obj, pos, lvid, gvid)
-    local sobj = alife():object(obj.id)
-    alife():use_ai_locations(sobj, false)
+    local obj
+    if type(lvid_or_lname) == "string" then
+        obj = alife_create(section, lvid_or_lname, pos)
+    else
+        obj = alife():create(section, pos, lvid_or_lname, gvid)
+    end
+    alife():use_ai_locations(obj, false)
+
+    return obj
 end
 
 function give_supplies_to_actor(first_speaker, second_speaker)
@@ -2614,10 +2226,21 @@ function give_money_100000(t1, t2)
     dialogs.relocate_money(npc, 100000, "out")
 end
 
+local function on_item_to_slot(obj, sobj)
+    if db.actor:has_info("agro_varayg_four_done") or not db.actor:has_info("agro_varayg_one_start") then return end
+
+    if not string.find(obj:section(), "wpn_knife")
+    and not string.find(obj:section(), "wpn_binoc")
+    and not string.find(obj:section(), "device_pda")
+    and not string.find(obj:section(), "device_torch") then
+        db.actor:give_info_portion("agro_varayg_fail")
+    end
+end
+
 function attach(sm)
 	sm:subscribe({signal = "on_first_update",  fun = on_first_update})
-	sm:subscribe({signal = "on_first_update",  fun = on_info})
 	sm:subscribe({signal = "on_info",          fun = on_info})
 	sm:subscribe({signal = "on_take",          fun = on_take})
 	sm:subscribe({signal = "on_update",        fun = on_update})
+	sm:subscribe({signal = "on_item_to_slot",  fun = on_item_to_slot})
 end

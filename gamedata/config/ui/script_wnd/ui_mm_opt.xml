@@ -88,6 +88,24 @@
   </option_adv>
 
   <tab_controls>
+    <cap_item_back x="0" y="0" width="249" height="40" stretch="1">
+      <texture>ui_actor_news</texture>
+    </cap_item_back>
+
+    <cap_key_back x="251" y="0" width="248" height="40" stretch="1">
+      <texture>ui_actor_news</texture>
+    </cap_key_back>
+
+    <cap_mousesens x="5" y="10" width="243" height="40">
+      <text vert_align="c" x="5" y="-10" font="letterica16" r="215" g="195" b="170">ui_mm_mouse_sense</text>
+    </cap_mousesens>
+	
+    <track_mousesens x="280" y="20" width="190" height="20" step="0.01">
+      <options_item entry="mouse_sens" group="mm_opt_controls"/>
+      <output_wnd x="0" y="-15" width="190" height="40">
+        <text font="letterica16" align="c" vert_align="t"/>
+      </output_wnd>
+    </track_mousesens>
 
     <key_binding x="0" y="0" width="750" height="900">
       <!-- headers -->
@@ -108,7 +126,7 @@
         <texture></texture>
       </frame>
 
-      <scroll_view x="0" y="30" width="500" height="610" always_show_scroll="1" vert_interval="4">
+      <scroll_view x="0" y="60" width="500" height="580" always_show_scroll="1" vert_interval="4">
         <item_group align="c" x="0" y="0" width="500" height="50" stretch="1">
           <text align="c" vert_align="c" font="letterica18" r="215" g="195" b="170"/>
         </item_group>

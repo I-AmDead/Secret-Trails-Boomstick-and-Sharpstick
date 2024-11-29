@@ -78,7 +78,7 @@ ammo_elapsed      = 20
 ammo_mag_size     = 20
 startup_ammo      = 90
 
-scope_names    = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18
+scope_names    = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, pn23, compm4s, marchf, kemper, mepro, ekp8_18
 scope_status      = 2
 
 scope_respawn                         = wpn_scar_siber_m2
@@ -91,9 +91,7 @@ scope_respawn_ac10632                 = wpn_scar_siber_m2_ac10632
 scope_respawn_leupold                 = wpn_scar_siber_m2_leupold
 scope_respawn_aimpoint                = wpn_scar_siber_m2_aimpoint
 scope_respawn_point_aimpro            = wpn_scar_siber_m2_point_aimpro
-scope_respawn_e0t2                    = wpn_scar_siber_m2_e0t2
 scope_respawn_pn23                    = wpn_scar_siber_m2_pn23
-scope_respawn_gauss_sight             = wpn_scar_siber_m2_gauss_sight
 scope_respawn_compm4s                 = wpn_scar_siber_m2_compm4s
 scope_respawn_marchf                  = wpn_scar_siber_m2_marchf
 scope_respawn_kemper                  = wpn_scar_siber_m2_kemper
@@ -318,6 +316,9 @@ anm_bore_jammed            = scar_hand_boring_grip
 
 ;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
 anm_shots		       = scar_hand_shoot_grip, scar_shoot
+anm_shots_l                    = scar_hand_shoot_grip, scar_idle_empty
+anm_shots_aim		       = scar_hand_shoot_grip, scar_shoot
+anm_shots_aim_last             = scar_hand_shoot_grip, scar_idle_empty
 
 ;Перезарядка/////////////////////////////////////////////////////////////////////
 anm_reload                           = scar_hand_reload_grip, scar_reload
@@ -580,27 +581,6 @@ aim_hud_offset_rot_16x9  = 0.012850,0.009100,-0.080301
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_scar_siber_m2_e0t2]:wpn_scar_siber_m2
-
-visual	 = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_world.ogf
-
-hud  = wpn_scar_siber_m2_e0t2_hud
-
-inv_weight  = 4.227
-
-scope_name 	     = e0t2
-scope_x	 = 105
-scope_y	 = -10
-
-[wpn_scar_siber_m2_e0t2_hud]:wpn_scar_siber_m2_hud
-
-item_visual  = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.044870,0.016670,-0.032146
-aim_hud_offset_rot_16x9  = 0.012850,0.009100,-0.080301
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_scar_siber_m2_pn23]:wpn_scar_siber_m2
 
 visual	 = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_world.ogf
@@ -618,27 +598,6 @@ inv_weight  = 4.650
 item_visual  = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.045270,0.005470,-0.054646
-aim_hud_offset_rot_16x9  = 0.012850,0.009100,-0.080301
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_scar_siber_m2_gauss_sight]:wpn_scar_siber_m2
-
-visual	 = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_world.ogf
-
-hud	 = wpn_scar_siber_m2_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x	 = 60
-scope_y	 = -4
-
-inv_weight  = 5.400
-
-[wpn_scar_siber_m2_gauss_sight_hud]:wpn_scar_siber_m2_hud
-
-item_visual  = dynamics\weapons\wpn_scar_siber_m2\wpn_scar_siber_m2_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.045470,0.025270,-0.039446
 aim_hud_offset_rot_16x9  = 0.012850,0.009100,-0.080301
 
 

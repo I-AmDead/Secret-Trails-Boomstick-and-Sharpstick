@@ -223,6 +223,8 @@ end
 function CRandomTask:save()
     local tasks = {}
     for k, v in pairs(self.task_info) do
+        local last_task_time = v.last_task_time or game.CTime()
+        ogse.save_var("task_manager.last_time", {last_task_time:get()}, "time")
         table.insert(
             tasks,
             {
@@ -230,8 +232,7 @@ function CRandomTask:save()
                 v.enabled,
                 v.enabled_props,
                 v.status,
-                v.selected_target or 4294967295,
-                v.last_task_time or game.CTime()
+                v.selected_target or 4294967295
             }
         )
     end
@@ -260,7 +261,7 @@ function CRandomTask:load()
         if selected_target ~= 4294967295 then
             info.selected_target = selected_target
         end
-        info.last_task_time = table.remove(t, 1)
+        info.last_task_time = dsh.unpack_time(ogse.load_var_safe("task_manager.last_time"))
         -- здесь адский баг. Активный selected_target может быть _только_ у выданных квестов, в остальном случае там -1.
         -- Тут проверяем активность таска. Параллельно правим еще в функции проверки завершенности таска на всякий случай.
         if info.type == "defend_lager" and info.selected_target then
@@ -584,8 +585,7 @@ function CRandomTask:check_task_props(task_id)
     end
 
     -- ' Проверка по таймауту
-    if self.task_info[task_id].last_task_time ~= nil and
-        game.get_game_time():diffSec(self.task_info[task_id].last_task_time) < self.task_info[task_id].idle_time then
+    if self.task_info[task_id].last_task_time and game.get_game_time():diffSec(self.task_info[task_id].last_task_time) < self.task_info[task_id].idle_time then
         self.task_info[task_id].enabled_props = false
         return
     end

@@ -78,7 +78,7 @@ ammo_elapsed      = 30
 ammo_mag_size     = 30
 startup_ammo      = 90
 
-scope_names    = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18
+scope_names    = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, pn23, compm4s, marchf, kemper, mepro, ekp8_18
 scope_status      = 2
 
 scope_respawn                         = wpn_l85_m3
@@ -91,9 +91,7 @@ scope_respawn_ac10632                 = wpn_l85_m3_ac10632
 scope_respawn_leupold                 = wpn_l85_m3_leupold
 scope_respawn_aimpoint                = wpn_l85_m3_aimpoint
 scope_respawn_point_aimpro            = wpn_l85_m3_point_aimpro
-scope_respawn_e0t2                    = wpn_l85_m3_e0t2
 scope_respawn_pn23                    = wpn_l85_m3_pn23
-scope_respawn_gauss_sight             = wpn_l85_m3_gauss_sight
 scope_respawn_compm4s                 = wpn_l85_m3_compm4s
 scope_respawn_marchf                  = wpn_l85_m3_marchf
 scope_respawn_kemper                  = wpn_l85_m3_kemper
@@ -734,27 +732,6 @@ aim_hud_offset_rot_16x9  = 0.007500,0.006250,-0.051000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_l85_m3_e0t2]:wpn_l85_m3
-
-visual	 = dynamics\weapons\wpn_l85_m3\wpn_l85_m3_world.ogf
-
-hud  = wpn_l85_m3_e0t2_hud
-
-inv_weight  = 4.030
-
-scope_name 	     = e0t2
-scope_x	 = 85
-scope_y	 = -10
-
-[wpn_l85_m3_e0t2_hud]:wpn_l85_m3_hud
-
-item_visual  = dynamics\weapons\wpn_l85_m3\wpn_l85_m3_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.047140,0.005410,-0.029800
-aim_hud_offset_rot_16x9  = -0.010500,0.006250,-0.051000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_l85_m3_pn23]:wpn_l85_m3
 
 visual	 = dynamics\weapons\wpn_l85_m3\wpn_l85_m3_world.ogf
@@ -779,27 +756,6 @@ aim_hud_offset_rot_16x9  = -0.010500,0.006250,-0.051000
 
 hands_position_16x9  = -0.008300,-0.004500,0.015000
 hands_orientation_16x9	 = 0.396000,0.430000,0.000000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_l85_m3_gauss_sight]:wpn_l85_m3
-
-visual	 = dynamics\weapons\wpn_l85_m3\wpn_l85_m3_world.ogf
-
-hud	 = wpn_l85_m3_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x	 = 50
-scope_y	 = -4
-
-inv_weight  = 5.200
-
-[wpn_l85_m3_gauss_sight_hud]:wpn_l85_m3_hud
-
-item_visual  = dynamics\weapons\wpn_l85_m3\wpn_l85_m3_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.046840,0.017210,-0.028600
-aim_hud_offset_rot_16x9  = -0.010500,0.006250,-0.051000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------

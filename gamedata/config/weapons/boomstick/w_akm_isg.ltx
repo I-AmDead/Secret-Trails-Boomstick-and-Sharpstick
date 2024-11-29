@@ -78,7 +78,7 @@ ammo_elapsed      = 30
 ammo_mag_size     = 30
 startup_ammo      = 90
 
-scope_names  = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, e0t2, pn23, gauss_sight, rmr, deltapoint, compm4s, rakurs, marchf, kemper, ekp8_18, mepro
+scope_names  = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, pn23, rmr, deltapoint, compm4s, rakurs, marchf, kemper, ekp8_18, mepro
 scope_status      = 2
 
 scope_respawn                         = wpn_akm_isg
@@ -93,9 +93,7 @@ scope_respawn_leupold                 = wpn_akm_isg_leupold
 scope_respawn_aimpoint                = wpn_akm_isg_aimpoint
 scope_respawn_aim_low                = wpn_akm_isg_aim_low
 scope_respawn_point_aimpro            = wpn_akm_isg_point_aimpro
-scope_respawn_e0t2                    = wpn_akm_isg_e0t2
 scope_respawn_pn23                    = wpn_akm_isg_pn23
-scope_respawn_gauss_sight             = wpn_akm_isg_gauss_sight
 scope_respawn_rmr                     = wpn_akm_isg_rmr
 scope_respawn_deltapoint              = wpn_akm_isg_deltapoint
 scope_respawn_compm4s                 = wpn_akm_isg_compm4s
@@ -608,31 +606,6 @@ hands_position_16x9  = 0.064400,-0.054000,-0.018800
 hands_orientation_16x9	 = 0.416182,0.634943,0.000000
 
 
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_akm_isg_gauss_sight]:wpn_akm_isg
-$spawn	 = "weapons\akm_isg_gauss_sight"
-
-visual	      = dynamics\weapons\wpn_akm_isg\wpn_akm_isg_world.ogf
-
-hud	 = wpn_akm_isg_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = 2
-
-inv_weight  = 4.800
-
-[wpn_akm_isg_gauss_sight_hud]:wpn_akm_isg_hud
-
-item_visual  = dynamics\weapons\wpn_akm_isg\wpn_akm_isg_gauss_hud.ogf
-
-hands_position_16x9  = 0.062200,-0.047400,-0.024200
-hands_orientation_16x9	 = 0.416182,0.634943,0.000000
-
-aim_hud_offset_pos_16x9  = -0.062975,0.024875,-0.032275
-aim_hud_offset_rot_16x9  = 0.005438,0.007057,0.002187
-
-
 ;-----------------------------------------------------------------------------------------------------
 [wpn_akm_isg_marchf]:wpn_akm_isg
 scope_name       = marchf
@@ -876,29 +849,6 @@ item_visual  = dynamics\weapons\wpn_akm_isg\wpn_akm_isg_ekp8_18_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.059775,-0.002250,-0.037475
 aim_hud_offset_rot_16x9  = 0.008938,0.008057,0.002187
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_akm_isg_e0t2]:wpn_akm_isg
-
-$spawn	 = "weapons\akm_isg_e0t2"
-
-visual	      = dynamics\weapons\wpn_akm_isg\wpn_akm_isg_world.ogf
-
-hud  = wpn_akm_isg_e0t2_hud
-
-inv_weight  = 3.627
-
-scope_name 	     = e0t2
-scope_x	 = 80
-scope_y	 = -8
-
-[wpn_akm_isg_e0t2_hud]:wpn_akm_isg_hud
-
-item_visual  = dynamics\weapons\wpn_akm_isg\wpn_akm_isg_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.059775,0.005475,-0.037475
-aim_hud_offset_rot_16x9  = -0.000062,0.008057,0.002187
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------

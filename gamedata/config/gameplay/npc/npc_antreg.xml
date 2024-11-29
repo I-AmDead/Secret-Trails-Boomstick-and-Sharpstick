@@ -1,433 +1,244 @@
 <character id="swamp_trader">
     <class>swamp_trader</class>
 </character>
-<character id="swamp_trader_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="swamp_grig">
     <class>swamp_grig</class>
-</character>
-<character id="swamp_grig_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="swamp_doctor">
     <class>swamp_doctor</class>
 </character>
-<character id="swamp_doctor_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="skit_trader">
     <class>skit_trader</class>
-</character>
-<character id="skit_trader_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="skit_postovoy">
     <class>skit_postovoy</class>
 </character>
-<character id="skit_postovoy_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="skit_demon">
     <class>skit_demon</class>
-</character>
-<character id="skit_demon_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="leila">
     <class>leila</class>
 </character>
-<character id="leila_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="karina">
     <class>karina</class>
-</character>
-<character id="karina_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="skit_nauch">
     <class>skit_nauch</class>
 </character>
-<character id="skit_nauch_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="skit_balon">
     <class>skit_balon</class>
-</character>
-<character id="skit_balon_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="skit_kent">
     <class>skit_kent</class>
 </character>
-<character id="skit_kent_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="skit_rukzak">
     <class>skit_rukzak</class>
-</character>
-<character id="skit_rukzak_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="skit_exo">
     <class>skit_exo</class>
 </character>
-<character id="skit_exo_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="grig">
     <class>grig</class>
-</character>
-<character id="grig_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="lesnik">
     <class>lesnik</class>
 </character>
-<character id="lesnik_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="lesnik2">
     <class>lesnik2</class>
-</character>
-<character id="lesnik2_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="vasil2">
     <class>vasil2</class>
 </character>
-<character id="vasil2_zombi">
-    <class>cit_doctor</class>
-</character>
 
-<character id="nychka_man">
-    <class>nychka_man</class>
-</character>
-<character id="nychka_man_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="sidor">
     <class>sidor</class>
-</character>
-<character id="sidor_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="plichko">
     <class>plichko</class>
 </character>
-<character id="plichko_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="voronin">
     <class>voronin</class>
-</character>
-<character id="voronin_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="dolg_specnaz">
     <class>dolg_specnaz</class>
 </character>
-<character id="dolg_specnaz_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="dolg_exo">
     <class>dolg_exo</class>
-</character>
-<character id="dolg_exo_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="dolg_mask">
     <class>dolg_mask</class>
 </character>
-<character id="dolg_mask_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="dolg_nauch">
     <class>dolg_nauch</class>
-</character>
-<character id="dolg_nauch_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="voronin_bratok">
     <class>voronin_bratok</class>
 </character>
-<character id="voronin_bratok_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="dolg_sobolev">
     <class>dolg_sobolev</class>
-</character>
-<character id="dolg_sobolev_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="tankist">
     <class>tankist</class>
 </character>
-<character id="tankist_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="sidor_old">
     <class>sidor_old</class>
-</character>
-<character id="sidor_old_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="barman_old">
     <class>barman_old</class>
 </character>
-<character id="barman_old_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="sidor_stalker">
     <class>sidor_stalker</class>
-</character>
-<character id="sidor_stalker_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="barman_stalker">
     <class>barman_stalker</class>
 </character>
-<character id="barman_stalker_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="barman_dolg">
     <class>barman_dolg</class>
-</character>
-<character id="barman_dolg_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="bookmaker">
     <class>bookmaker</class>
 </character>
-<character id="bookmaker_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="zahar">
     <class>zahar</class>
-</character>
-<character id="zahar_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="zahar2">
     <class>zahar2</class>
 </character>
-<character id="zahar2_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="lesnik3">
     <class>lesnik3</class>
-</character>
-<character id="lesnik3_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="lesnik4">
     <class>lesnik4</class>
 </character>
-<character id="lesnik4_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="uchen_zombak">
     <class>uchen_zombak</class>
-</character>
-<character id="uchen_zombak_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="uchen_zombik">
     <class>uchen_zombik</class>
 </character>
-<character id="uchen_zombik_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="exo_flame">
     <class>exo_flame</class>
-</character>
-<character id="exo_flame_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="magomet">
     <class>magomet</class>
 </character>
-<character id="magomet_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="nebo_provodnik">
     <class>nebo_provodnik</class>
-</character>
-<character id="nebo_provodnik_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="oso_mono">
     <class>oso_mono</class>
 </character>
-<character id="oso_mono_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="esc_fantom1">
     <class>esc_fantom1</class>
-</character>
-<character id="esc_fantom1_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="exo_gun">
     <class>exo_gun</class>
 </character>
-<character id="exo_gun_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="klyk_new">
     <class>klyk_new</class>
-</character>
-<character id="klyk_new_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="vano_new">
     <class>vano_new</class>
 </character>
-<character id="vano_new_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="koldun">
     <class>koldun</class>
-</character>
-<character id="koldun_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="contra_var">
     <class>contra_var</class>
 </character>
-<character id="contra_var_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="sviblov">
     <class>sviblov</class>
-</character>
-<character id="sviblov_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="maroder_stalk">
     <class>maroder_stalk</class>
 </character>
-<character id="maroder_stalk_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="maroder_boss">
     <class>maroder_boss</class>
-</character>
-<character id="maroder_boss_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="maroder_exo">
     <class>maroder_exo</class>
 </character>
-<character id="maroder_exo_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="maroder_gena">
     <class>maroder_gena</class>
-</character>
-<character id="maroder_gena_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="maroderka_stalk">
     <class>maroderka_stalk</class>
 </character>
-<character id="maroderka_stalk_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="maroderka_exo">
     <class>maroderka_exo</class>
-</character>
-<character id="maroderka_exo_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="david">
     <class>david</class>
 </character>
-<character id="david_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="iuda">
     <class>iuda</class>
-</character>
-<character id="iuda_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="mil_rpg">
     <class>mil_rpg</class>
 </character>
-<character id="mil_rpg_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="maroder_yang">
     <class>maroder_yang</class>
 </character>
-<character id="maroder_yang_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="monolit_grab">
     <class>monolit_grab</class>
-</character>
-<character id="monolit_grab_zombi">
-    <class>cit_doctor</class>
 </character>

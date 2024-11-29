@@ -38,7 +38,7 @@ function on_npc_use(obj)
 
         if string.find(obj:name(), "maroder_boss") then
             local treasure = alife():story_object(story_ids.razuvaev_taynik)
-            level.map_add_object_spot_ser(treasure.id, "red_location", game.translate_string("raz_treasure"))
+            level_tasks.add_location_by_id(treasure.id, "red_location", game.translate_string("raz_treasure"))
             news_manager.send_tip(db.actor, "%c[255,255,0,0]" .. game.translate_string("raz_treasure_news"))
         end
     end
@@ -90,9 +90,7 @@ function give_money(npc)
         --
         npc:give_money(-deadmoney)
         --
-        db.actor:give_game_news(game.translate_string("money_recieved") .. " " .. deadmoney .. " " ..
-                                    game.translate_string("currency_type"), "ui\\ui_iconsTotal",
-            Frect():set(0, 0, 83, 47), 0, 3000)
+        db.actor:give_game_news(game.translate_string("money_recieved") .. " " .. deadmoney .. " " .. game.translate_string("currency_type"), "ui\\ui_iconsTotal", Frect():set(0, 0, 83, 47), 0, 3000)
     end
 end
 -----------------------------------------------------------------
@@ -194,7 +192,7 @@ function CTreasure:use(npc)
         if not v.done then
             local treasure_prob = xr_logic.pick_section_from_condlist(db.actor, npc, v.condlist)
             treasure_prob = (not treasure_prob or treasure_prob == "") and 0 or tonumber(treasure_prob)
-            if treasure_prob >= 0 and not v.active then
+            if treasure_prob >= 0 and not v.active and level.name() ~= "l13_deep" then
                 if treasure_prob == 100 then
                     self:give_treasure(k)
                 else
@@ -236,7 +234,8 @@ function CTreasure:give_treasure(k)
     local v = self.treasure_info[k]
     -- log3("~~[CTreasure:give_treasure] treasure_info of [%s] is %s", k, v)
     local sobj = alife():story_object(v.target)
-    ASSERT(sobj, "!!Can't find treasure_box with story_id: [%s]", v.target)
+    if not sobj then return end
+    --ASSERT(sobj, "!!Can't find treasure_box with story_id: [%s]", v.target)
     local text =
         opt.need_text == 0 and "%c[255,238,155,23]" .. game.translate_string(v.name) .. "\\n" .. "%c[default]" ..
             game.translate_string(v.description) or "%c[255,238,155,23]" .. game.translate_string(v.name) .. "\\n" ..

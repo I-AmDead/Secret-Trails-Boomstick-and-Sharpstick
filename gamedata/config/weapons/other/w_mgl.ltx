@@ -1,0 +1,529 @@
+;------------------------------------------------------------------------------------------------
+[wpn_m32_mgl]:identity_immunities,base_wpn_zoom
+        GroupControlSection         = spawn_group
+        ;discovery_dependency        =
+        $npc                        = on
+        $prefetch                   = 2
+        $spawn                      = "weapons\rg-6"
+        scheduled                   = off
+        cform                       = skeleton
+        parent_section              = wpn_m32_mgl
+        
+        class                       = WP_RG6
+        slot                        = 2
+        animation_slot              = 10
+        ef_main_weapon_type         = 4
+        ef_weapon_type              = 12
+        hand_dependence             = 1
+        single_handed               = 0
+        
+        sprint_allowed              = true
+        
+        inv_grid_height             = 2
+        inv_grid_width              = 5
+        inv_grid_x                  = 10
+        inv_grid_y                  = 62
+        inv_name                    = st_wpn_m32_mgl
+        inv_name_short              = st_wpn_m32_mgl
+        description                 = st_wpn_m32_mgl_descr
+        
+        kind 			    = w_explosive
+        inv_weight                  = 5.3
+        cost                        = 25000
+        weapon_class                = heavy_weapon
+        
+        hud                         = wpn_m32_mgl_hud
+        visual                      = dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+        position                    = -0.026, -0.111, 0.
+        orientation                 = 0, 0, 0
+        fire_point                  = 0.0, 0.120, 0.452
+        fire_point2                 = 0.0, 0.120, 0.452
+        strap_bone0                 = bip01_spine2
+        strap_bone1                 = bip01_spine1
+        strap_position              = -0.26, -0.11, 0.15
+        strap_orientation           = -15, -9, 110
+        ph_mass                     = 3
+        
+        flame_particles             = weapons\generic_weapon05
+        smoke_particles             = ghost_particles\weapons\flame_eft_sks
+        
+        light_color                 = 0.6, 0.5, 0.3
+        light_range                 = 6.0
+        light_time                  = 0.2
+        light_var_color             = 0.05
+        light_var_range             = 0.5
+        
+        upgr_icon_x                 = 900
+        upgr_icon_y                 = 900
+        upgr_icon_width             = 250
+        upgr_icon_height            = 100
+        
+        tri_state_reload            = on
+        ammo_class                  = ammo_m209
+        ammo_current                = 10
+        ammo_elapsed                = 0
+        ammo_limit                  = 60
+        ammo_mag_size               = 6
+        startup_ammo                = 0
+        
+        scope_names                 = acog, c-more, 0kp2, ac10632, d0cter, aimpoint, aim_low, point_aimpro, rmr, deltapoint, compm4s, rakurs, kemper
+        scope_status                = 2
+	scope_bone_none		    = true
+        
+	scope_respawn               = wpn_m32_mgl
+	scope_respawn_acog          = wpn_m32_mgl_acog
+	scope_respawn_c-more        = wpn_m32_mgl_c-more
+	scope_respawn_0kp2          = wpn_m32_mgl_0kp2
+	scope_respawn_ac10632       = wpn_m32_mgl_ac10632
+	scope_respawn_d0cter        = wpn_m32_mgl_d0cter
+	scope_respawn_aimpoint      = wpn_m32_mgl_aimpoint
+	scope_respawn_aim_low       = wpn_m32_mgl_aim_low
+	scope_respawn_point_aimpro  = wpn_m32_mgl_point_aimpro
+	scope_respawn_rmr           = wpn_m32_mgl_rmr
+	scope_respawn_deltapoint    = wpn_m32_mgl_deltapoint
+	scope_respawn_compm4s	    = wpn_m32_mgl_compm4s
+	scope_respawn_rakurs        = wpn_m32_mgl_rakurs
+	scope_respawn_kemper        = wpn_m32_mgl_kemper
+
+        silencer_status             = 0
+        
+        grenade_launcher_status     = 0
+        launch_speed                = 76
+        
+        hit_impulse                 = 150
+        hit_power                   = 0.75, 0.75, 0.75, 0.75
+        hit_type                    = fire_wound
+        fire_distance               = 500
+        bullet_speed                = 76
+        rpm                         = 115
+        rpm_empty_click             = 200
+        
+        zoom_dof                    = 0.5, 1.0, 180
+        zoom_enabled                = true
+        reload_dof                  = 0.0, 0.5, 5, 1.3
+	control_inertion_factor = 1.0f
+        crosshair_inertion          = 8.3
+        fire_dispersion_base        = 0.76
+        fire_dispersion_condition_factor = 0.001
+        
+        misfire_probability         = 0.0
+        misfire_start_condition     = 0.0
+        misfire_start_prob          = 0.0
+        misfire_end_condition       = 0.0
+        misfire_end_prob            = 0.0
+        
+        condition_queue_shot_dec    = 0.0
+        condition_shot_dec          = 0.0
+        
+        cam_relax_speed             = 7.0
+        cam_dispersion              = 3.02
+        cam_dispersion_frac         = 0.1
+        cam_dispersion_inc          = 3.02
+        cam_max_angle               = 50
+        cam_max_angle_horz          = 50
+        cam_step_angle_horz         = 3.9
+        
+        PDM_disp_accel_factor       = 2.9
+        PDM_disp_base               = 0.95
+        PDM_disp_crouch             = 1.0
+        PDM_disp_crouch_no_acc      = 1.0
+        PDM_disp_vel_factor         = 2.9
+        
+        cam_relax_speed_ai          = 360
+        holder_fov_modifier         = 1.0
+        holder_range_modifier       = 1.0
+        min_radius                  = 0
+        max_radius                  = 500
+        hit_probability_gd_novice   = 1.00
+        hit_probability_gd_stalker  = 1.00
+        hit_probability_gd_veteran  = 1.00
+        hit_probability_gd_master   = 1.00
+        
+        kill_msg_x                  = 0
+        kill_msg_y                  = 172
+        kill_msg_width              = 68
+        kill_msg_height             = 30
+ 
+	snd_bore                    = weapons\mike\mike_bore
+	snd_draw		    = weapons\mike\ak12_show
+	snd_holster		    = weapons\mike\ak12_hide
+	snd_shoot		    = weapons\mike\mike_shot
+	snd_shoot1		    = weapons\mike\mike_shot1
+	snd_shoot2		    = weapons\mike\mike_shot2
+	snd_open_weapon		    = weapons\mike\mike_open
+	snd_add_cartridge	    = weapons\mike\mike_add_grenade
+	snd_close_weapon	    = weapons\mike\mike_close
+	snd_reload_jammed           = weapons\mike\mike_mis
+	snd_empty		    = weapons\_dryfire\gl_dry
+	snd_reload		    = weapons\rg6\rg6_reload
+	snd_mag_shot		    = $silent
+
+	hud_fov			    = 0.75
+
+
+[wpn_m32_mgl_hud]:hud_base
+        item_visual                 = anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_hud.ogf
+        attach_place_idx            = 0
+        zoom_hide_crosshair         = true
+        
+        item_position               = 0, 0, 0
+        item_orientation            = 0, 0, 0
+        
+        aim_hud_offset_pos               = -0.091333, -0.004332, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091333, -0.004332, -0.078925
+        aim_hud_offset_rot               = -0.046126, 0.085383, -0
+        aim_hud_offset_rot_16x9          = -0.046126, 0.085383, -0
+        hands_orientation                = 3.617716, 1.2231, 0
+        hands_orientation_16x9           = 3.617716, 1.2231, 0
+        hands_position                   = 0.002092, 0.006674, -0.029439
+        hands_position_16x9              = 0.002092, 0.006674, -0.029439
+        lowered_hud_offset_pos           = -0.001195, -0.010223, -0.035203
+        lowered_hud_offset_pos_16x9      = -0.001195, -0.010223, -0.035203
+        lowered_hud_offset_rot           = 0.085493, -0.427837, 0.328692
+        lowered_hud_offset_rot_16x9      = 0.085493, -0.427837, 0.328692
+        
+        gl_hud_offset_pos           = 0, 0, 0
+        gl_hud_offset_pos_16x9      = 0, 0, 0
+        gl_hud_offset_rot           = 0, 0, 0
+        gl_hud_offset_rot_16x9      = 0, 0, 0
+        
+        lean_hud_offset_pos         = 0, 0, 0
+        lean_hud_offset_rot         = 0, 0, 0
+        
+
+anm_show                                            = mike_show
+anm_show_empty                                      = mike_show
+
+anm_hide                                            = mike_hide, hide
+anm_hide_empty                                      = mike_hide, hide
+
+anm_idle                                            = mike_idle
+anm_idle_empty                                      = mike_idle
+anm_idle_aim                                        = mike_aim
+anm_idle_aim_empty                                  = mike_aim
+
+anm_idle_moving                                     = mike_move
+anm_idle_moving_empty                               = mike_move
+anm_idle_moving_slow                                = mike_move
+anm_idle_moving_slow_empty                          = mike_move
+anm_idle_moving_crouch                              = mike_move
+anm_idle_moving_crouch_empty                        = mike_move
+anm_idle_moving_crouch_slow			    = mike_move
+anm_idle_moving_crouch_slow_empty		    = mike_move
+
+anm_idle_sprint_start				    = mike_sprint_start
+anm_idle_sprint_start_empty			    = mike_sprint_start
+
+anm_idle_sprint_end				    = mike_sprint_end
+anm_idle_sprint_end_empty			    = mike_sprint_end
+
+anm_idle_sprint                                     = mike_sprint
+anm_idle_sprint_empty                               = mike_sprint
+
+anm_shots                                           = mike_shot
+anm_shots_l                                         = mike_shot
+anm_shots_aim                                       = mike_shot
+anm_shots_aim_last                                  = mike_shot
+
+anm_add_cartridge				    = mike_add_grenade
+
+anm_bore                                            = mike_inspect
+anm_bore_empty                                      = mike_inspect
+
+anm_open					    = mike_reload_start
+anm_close					    = mike_reload_end
+  
+anm_idle_moving_slow_speed_k         	    = 0.8
+anm_idle_moving_slow_empty_speed_k   	    = 0.8
+anm_idle_moving_slow_jammed_speed_k  	    = 0.8
+anm_idle_moving_crouch_speed_k       	    = 0.6
+anm_idle_moving_crouch_empty_speed_k        = 0.6
+anm_idle_moving_crouch_jammed_speed_k       = 0.6
+anm_idle_moving_crouch_slow_speed_k         = 0.4
+anm_idle_moving_crouch_slow_empty_speed_k   = 0.4
+anm_idle_moving_crouch_slow_jammed_speed_k  = 0.4
+		
+		
+        fire_bone                   = muzzle
+        fire_point                  = 0, 0, 0
+ 
+		freelook_z_offset_mul		= 0.3
+		
+		
+;-------------------------------------------------------------------------------
+[wpn_m32_mgl_acog]:wpn_m32_mgl
+
+visual					     = dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+scope_name                                        = acog
+scope_x                                      = 120
+scope_y                                      = -20
+
+inv_weight                                         = 3.550
+
+hud					                               = wpn_m32_mgl_acog_hud
+
+[wpn_m32_mgl_acog_hud]:wpn_m32_mgl_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_acog_hud.ogf
+
+        aim_hud_offset_pos               = -0.091493, -0.012933, -0.138589
+        aim_hud_offset_pos_16x9          = -0.091493, -0.012933, -0.138589
+        aim_hud_offset_rot               = -0.046126, 0.085383, 0
+        aim_hud_offset_rot_16x9          = -0.046126, 0.085383, 0
+;---------------------------------------------------Red_Dot_Sights--------------------------------------------------
+[wpn_m32_mgl_ac10632]:wpn_m32_mgl
+
+visual = dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf        ;Barska ac10632
+
+scope_name			= ac10632
+scope_x                                      = 125
+scope_y                                      = -20
+
+inv_weight                                         = 3.215
+
+hud				= wpn_m32_mgl_ac10632_hud
+
+[wpn_m32_mgl_ac10632_hud]:wpn_m32_mgl_hud
+
+item_visual                	= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_ac10632_hud.ogf
+
+        aim_hud_offset_pos               = -0.091007, -0.004336, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091007, -0.004336, -0.078925
+        aim_hud_offset_rot               = 0.019868, 0.085598, 0
+        aim_hud_offset_rot_16x9          = 0.019868, 0.085598, 0
+;-----------------------------------------------------------------------------
+[wpn_m32_mgl_c-more]:wpn_m32_mgl
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+hud						= wpn_m32_mgl_c-more_hud
+
+scope_name			    = c-more
+scope_x                                      = 120
+scope_y                                      = -20
+
+inv_weight                                         = 3.500
+
+
+[wpn_m32_mgl_c-more_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_c-more_hud.ogf
+
+        aim_hud_offset_pos               = -0.091386, -0.002344, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091386, -0.002344, -0.078925
+        aim_hud_offset_rot               = 0.017945, 0.085223, 0
+        aim_hud_offset_rot_16x9          = 0.017945, 0.085223, 0
+;--------------------------------------------------------------------------------
+[wpn_m32_mgl_0kp2]:wpn_m32_mgl
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+hud						= wpn_m32_mgl_0kp2_hud
+
+inv_weight                                         = 3.400
+
+scope_name			    = 0kp2
+scope_x                                      = 125
+scope_y                                      = -15
+
+
+[wpn_m32_mgl_0kp2_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_0kp2_hud.ogf
+
+        aim_hud_offset_rot               = 0.000956, 0.090824, 0
+        aim_hud_offset_rot_16x9          = 0.000956, 0.090824, 0
+;-------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_d0cter]:wpn_m32_mgl
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+hud						= wpn_m32_mgl_d0cter_hud
+
+inv_weight                                         = 3.230
+
+scope_name			    = d0cter
+scope_x                                      = 130
+scope_y                                      = -19
+
+[wpn_m32_mgl_d0cter_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_docter_hud.ogf
+
+        aim_hud_offset_pos               = -0.091272, 0.004127, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091272, 0.004127, -0.078925
+        aim_hud_offset_rot               = -0.000323, 0.086879, 0
+        aim_hud_offset_rot_16x9          = -0.000323, 0.086879, 0
+;-------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_aimpoint]:wpn_m32_mgl
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+hud						= wpn_m32_mgl_aimpoint_hud
+
+inv_weight                                         = 3.330
+
+scope_name			    = aimpoint
+scope_x                                      = 130
+scope_y                                      = -21
+
+
+[wpn_m32_mgl_aimpoint_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_aimpoint_hud.ogf
+
+        aim_hud_offset_pos               = -0.090954, 0.000355, -0.078925
+        aim_hud_offset_pos_16x9          = -0.090954, 0.000355, -0.078925
+        aim_hud_offset_rot               = 0.049175, 0.085699, 0
+        aim_hud_offset_rot_16x9          = 0.049175, 0.085699, 0
+;-------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_aim_low]:wpn_m32_mgl
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+hud						= wpn_m32_mgl_aim_low_hud
+
+inv_weight                                         = 3.305
+
+scope_name			    = aim_low
+scope_x                                      = 127
+scope_y                                      = -16
+
+
+[wpn_m32_mgl_aim_low_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_aim_low_hud.ogf
+
+        aim_hud_offset_pos               = -0.091592, 0.025944, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091592, 0.025944, -0.078925
+        aim_hud_offset_rot               = 0.077678, 0.08811, 0
+        aim_hud_offset_rot_16x9          = 0.077678, 0.08811, 0
+;-------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_point_aimpro]:wpn_m32_mgl
+
+visual					     = dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+hud						= wpn_m32_mgl_point_aimpro_hud
+
+inv_weight                                         = 3.730
+
+scope_name			    = point_aimpro
+scope_x                                      = 132
+scope_y                                      = -20
+
+
+[wpn_m32_mgl_point_aimpro_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual				= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_aimpoint_pro_hud.ogf
+
+        aim_hud_offset_pos               = -0.091542, 0.002978, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091542, 0.002978, -0.078925
+        aim_hud_offset_rot               = 0.069151, 0.086562, 0
+        aim_hud_offset_rot_16x9          = 0.069151, 0.086562, 0
+;-------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_deltapoint]:wpn_m32_mgl
+
+inv_weight			= 3.241
+
+hud				= wpn_m32_mgl_deltapoint_hud
+
+scope_name			    = deltapoint
+scope_x                                      = 130
+scope_y                                      = -14
+
+visual				= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+
+[wpn_m32_mgl_deltapoint_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual                	= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_deltapoint_hud.ogf
+
+        aim_hud_offset_pos               = -0.090739, 0.005833, -0.078925
+        aim_hud_offset_pos_16x9          = -0.090739, 0.005833, -0.078925
+;----------------------------------------------------------------------------------------
+[wpn_m32_mgl_rmr]:wpn_m32_mgl
+
+inv_weight			= 3.234
+
+hud				= wpn_m32_mgl_rmr_hud
+
+scope_name			    = rmr
+scope_x                                      = 130
+scope_y                                      = -15
+
+visual				= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+
+[wpn_m32_mgl_rmr_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual                	= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_rmr_hud.ogf
+
+        aim_hud_offset_pos               = -0.090847, 0.01017, -0.078925
+        aim_hud_offset_pos_16x9          = -0.090847, 0.01017, -0.078925
+;--------------------------------------------------------------------------------------------------------------------------------
+[wpn_m32_mgl_compm4s]:wpn_m32_mgl
+
+hud					= wpn_m32_mgl_compm4s_hud
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+scope_name                              = compm4s
+scope_x                                      = 130
+scope_y                                      = -21
+
+inv_weight                               = 3.580
+
+
+[wpn_m32_mgl_compm4s_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual                		= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_compm4s_hud.ogf
+
+        aim_hud_offset_pos               = -0.093566, 0.007887, -0.078925
+        aim_hud_offset_pos_16x9          = -0.093566, 0.007887, -0.078925
+        aim_hud_offset_rot               = 0.075697, 0.09402, 0
+        aim_hud_offset_rot_16x9          = 0.075697, 0.09402, 0
+;--------------------------------------------------------------------------------------------
+[wpn_m32_mgl_rakurs]:wpn_m32_mgl
+
+hud					= wpn_m32_mgl_rakurs_hud
+
+visual					= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+scope_name                              = rakurs
+scope_x                                      = 130
+scope_y                                      = -19
+
+inv_weight                               = 3.700
+
+
+[wpn_m32_mgl_rakurs_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual                		= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_rakurs_hud.ogf
+
+        aim_hud_offset_pos               = -0.091646, 0.016773, -0.078925
+        aim_hud_offset_pos_16x9          = -0.091646, 0.016773, -0.078925
+        aim_hud_offset_rot               = 0.070361, 0.08752, 0
+        aim_hud_offset_rot_16x9          = 0.070361, 0.08752, 0
+;---------------------------------------------------------------------------------------------
+[wpn_m32_mgl_kemper]:wpn_m32_mgl
+
+inv_weight			= 3.466
+
+hud				= wpn_m32_mgl_kemper_hud
+
+scope_name			    = kemper
+scope_x                                      = 130
+scope_y                                      = -21
+
+visual				= dynamics\weapons\wpn_m32_mgl\wpn_m32_mgl_world.ogf
+
+
+[wpn_m32_mgl_kemper_hud]:wpn_m32_mgl_ac10632_hud
+
+item_visual                	= anomaly_weapons\wpn_m32_mgl\wpn_m32_mgl_kemper_hud.ogf
+
+        aim_hud_offset_pos               = -0.090472, -0.005188, -0.078925
+        aim_hud_offset_pos_16x9          = -0.090472, -0.005188, -0.078925
+        aim_hud_offset_rot               = 0.039644, 0.085071, 0
+        aim_hud_offset_rot_16x9          = 0.039644, 0.085071, 0
+;------------------------------------------------------------------------------------------------------

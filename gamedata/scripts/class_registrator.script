@@ -1,14 +1,9 @@
-
-
-
 function cs_register(factory,client_object_class,server_object_class,clsid,script_clsid)
 	factory:register(client_object_class,server_object_class,clsid,script_clsid)
 end
 
 function c_register(factory,client_object_class,clsid,script_clsid)
-	if (editor() == false) then
-		factory:register(client_object_class,clsid,script_clsid)
-	end
+	factory:register(client_object_class,clsid,script_clsid)
 end
 
 function register(object_factory)
@@ -71,16 +66,19 @@ function register(object_factory)
 	cs_register(object_factory, "CWeaponUSP45",            "se_item.se_weapon_magazined",         "WP_USP45", "wpn_usp45_s")
 	cs_register(object_factory, "CWeaponVal",              "se_item.se_weapon_magazined",         "WP_VAL",   "wpn_val_s")
 	cs_register(object_factory, "CWeaponVintorez",         "se_item.se_weapon_magazined",         "WP_VINT",  "wpn_vintorez_s")
-	cs_register(object_factory, "CWeaponWalther",	       "se_item.se_weapon_magazined",	      "WP_WALTH", "wpn_walther_s")
 	
 	cs_register(object_factory, "CHairsZone",              "se_zones.se_zone_visual",             "ZS_BFUZZ", "zone_bfuzz_s")
+	cs_register(object_factory, "CMosquitoBald",           "se_zones.se_zone_anom",               "ZS_BUZZ",  "zone_buzz_s")
 	cs_register(object_factory, "CMosquitoBald",           "se_zones.se_zone_anom",               "ZS_MBALD", "zone_mbald_s")
 	cs_register(object_factory, "CMincer",                 "se_zones.se_zone_anom",               "ZS_GALAN", "zone_galant_s")
 	cs_register(object_factory, "CMincer",                 "se_zones.se_zone_anom",               "ZS_MINCE", "zone_mincer_s")
 	cs_register(object_factory, "CMosquitoBald",           "se_zones.se_zone_anom",               "ZS_ZHARK", "zone_zharka_s") --zone_zharka_s = 188
 	cs_register(object_factory, "CMosquitoBald",           "se_zones.se_zone_anom",               "ZS_ELECT", "zone_electra_s")
 	cs_register(object_factory, "CMosquitoBald",	       "se_zones.se_zone_anom",	              "ZS_ICE",	  "zone_ice_s")
+	cs_register(object_factory, "CRadioactiveZone",	       "se_zones.se_zone_anom",	              "ZS_RADIO", "zone_radiation_s")
+	cs_register(object_factory, "CRadioactiveZone",	       "se_zones.se_zone_anom",	              "ZS_TERM",  "zone_thermal_s")
+	cs_register(object_factory, "CRadioactiveZone",	       "se_zones.se_zone_anom",	              "ZS_ACID",  "zone_acidic_s")
+	cs_register(object_factory, "CRadioactiveZone",	       "se_zones.se_zone_anom",	              "ZS_PSY",   "zone_psy_s")
 	
 	cs_register(object_factory, "CGameObject",             "ogse_base_storage.se_custom_storage", "CUST_ST",  "custom_storage")
-	cs_register(object_factory, "CAI_Bloodsucker",	       "se_legs.se_legs",    		      "SWM_LEGS", "legs_s")
 end

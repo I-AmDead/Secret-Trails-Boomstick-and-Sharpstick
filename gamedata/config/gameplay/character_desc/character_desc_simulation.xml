@@ -1044,7 +1044,7 @@
 			[spawn] \n
 			wpn_walther_p99 \n
 			ammo_9x19_fmj \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"\n
@@ -1076,7 +1076,7 @@
 			[spawn] \n
 			wpn_walther_p99 \n
 			ammo_9x19_fmj \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"\n
@@ -1373,7 +1373,7 @@
 			[spawn] \n
 			wpn_walther_p99 \n
 			ammo_9x19_fmj \n		
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 #include "gameplay\character_items.xml" \n
 #include "gameplay\character_food.xml" \n
@@ -3094,7 +3094,7 @@
 			[spawn] \n
 			wpn_korth  \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"
@@ -3169,7 +3169,7 @@
 			[spawn] \n
 			wpn_korth  \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_sig552_isg_siber \n
+			wpn_sig552_tac_siber \n
 			ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_items.xml"	\n
 #include "gameplay\character_food.xml" \n
@@ -3545,7 +3545,7 @@
 			[spawn] \n
 			wpn_korth \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_sig552_isg_siber \n
+			wpn_sig552_tac_siber \n
 			ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_items.xml"	\n
 #include "gameplay\character_food.xml" \n

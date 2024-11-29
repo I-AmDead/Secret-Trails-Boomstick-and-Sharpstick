@@ -121,23 +121,26 @@ min_visible_time   = 1000
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
 
+walk_hud_offset_pos				= 0.0, -0.02, -0.03
+walk_hud_offset_rot				= 0.0, 0.0, 0.0
+
 [wpn_binoc_hud]
 item_visual                 = dynamics\devices\dev_binoculars\dev_binoculars_hud
 attach_place_idx            = 0
 zoom_hide_crosshair         = true
 
 item_position               = 0, 0, 0
-item_orientation            = 180, 0, 0
+item_orientation            = 0, 0, 0
 
-hands_position              = 0, -0.155, 0.0
-hands_position_16x9         = 0, -0.155, -0.1
-hands_orientation           = 0, 0, 0
-hands_orientation_16x9      = 0, 0, 0
+hands_position		    = 0.000000,-0.080000,0.000000
+hands_position_16x9	    = 0.000000,-0.080000,0.000000
+hands_orientation	    = 0,0,0
+hands_orientation_16x9	    = 0,0,0
 
-aim_hud_offset_pos          = 0, 0, 0
-aim_hud_offset_pos_16x9     = 0, 0, 0
-aim_hud_offset_rot          = 0.0, 0.0, 0.0
-aim_hud_offset_rot_16x9     = 0.0, 0.0, 0.0
+aim_hud_offset_pos	    = 0,0,0
+aim_hud_offset_pos_16x9	    = 0,-0.01,-0.045
+aim_hud_offset_rot	    = 0,0,0
+aim_hud_offset_rot_16x9	    = 0,0,0
 
 gl_hud_offset_pos           = 0, 0, 0
 gl_hud_offset_rot           = 0, 0, 0
@@ -145,19 +148,20 @@ gl_hud_offset_rot           = 0, 0, 0
 lean_hud_offset_pos         = 0, 0, 0
 lean_hud_offset_rot         = 0, 0, 0
         
-anm_bore                    = binoculars_idle_bore
+anm_show                    = binoculars_draw
 anm_hide                    = binoculars_holster
 anm_idle                    = binoculars_idle
-anm_idle_aim                = binoculars_idle_aim
+anm_idle_aim                = binoculars_idle
 anm_idle_moving             = binoculars_idle_moving
 anm_idle_moving	 	    = binoculars_idle_moving
 anm_idle_moving_slow 	    = binoculars_idle_moving
 anm_idle_moving_crouch 	    = binoculars_idle_moving
 anm_idle_moving_crouch_slow = binoculars_idle_moving
-anm_idle_sprint             = binoculars_idle_sprint
-anm_show                    = binoculars_draw
+anm_idle_sprint_start	    = binoculars_sprint_start
+anm_idle_sprint		    = binoculars_sprint
+anm_idle_sprint_end	    = binoculars_sprint_end
+anm_bore                    = binoculars_idle
 
-anm_idle_moving_speed_k                     = 1
 anm_idle_moving_slow_speed_k         	    = 0.8
 anm_idle_moving_crouch_speed_k       	    = 0.6
 anm_idle_moving_crouch_slow_speed_k         = 0.4

@@ -23,11 +23,12 @@
         </progress>
     </progress_bar_armor>
 
-    <static_weapon x="885" y="708" width="160" height="62" complex_mode="1" stretch="1">
-        <text x="-105" y="5" align="r" font="letterica16"/>
+    <static_weapon x="675" y="708" width="165" height="55" complex_mode="1">
+        <text x="90" y="5" align="r" font="letterica16"/>
+        <texture>ui_hud_ammo_static</texture>
     </static_weapon>
 
-    <static_ammo x="0" y="40" width="55" height="30" complex_mode="1">
+    <static_ammo x="200" y="40" width="55" height="30" complex_mode="1">
         <text align="r" font="letterica16"/>
     </static_ammo>
 
@@ -35,7 +36,7 @@
         <text align="r" font="letterica16"/>
     </static_fire_mode>
 
-    <static_wpn_icon x="60" y="8" width="10" height="5"/>
+    <static_wpn_icon x="260" y="2" width="10" height="5"/>
 
     <car_panel x="900" y="584" width="123" height="200"/>
 

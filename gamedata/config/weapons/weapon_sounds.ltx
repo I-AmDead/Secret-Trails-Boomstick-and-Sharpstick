@@ -67,6 +67,7 @@ snd_shoot_duplet				                                  = weapons\_gunfire\mono\ug
 snd_open_weapon			                                          = weapons\rg6\rg6_reload_start
 snd_add_cartridge				                                  = weapons\rg6\rg6_reload
 snd_close_weapon				                                  = weapons\rg6\rg6_reload_end
+snd_mag_shot									  = $silent
 
 [wpn_rpg7_sounds]:base_sounds
 snd_draw				                                          = weapons\rpg7\rpg7_draw
@@ -77,6 +78,7 @@ snd_empty				                                          = weapons\rpg7\rpg7_empty
 snd_reload				                                          = weapons\rpg7\rpg7_reload
 snd_explode 				                                      = wpn_fake_og-7b_explode
 snd_fly_sound				                                      = weapons\_boom\mono\rpg\flyby
+snd_mag_shot									   = $silent
 
 [mounted_weapon_sounds]:base_sounds
 snd_shoot				                                          = wpn_pkm_snd_shoot
@@ -386,14 +388,15 @@ snd_reload			            	                              	= weapons\bm16\toz66_re
 snd_shoot_duplet				                                = wpn_bm16_snd_shoot
 snd_shoot_1			            	                              	= wpn_bm16_snd_shoot
 snd_reload_1		            		                          	= weapons\bm16\toz66_reload
-snd_reload_jammed       							= weapons\toz66\toz66_revival
-snd_reload_jammed_last  							= weapons\toz66\toz66_revival
+snd_reload_jammed       							= weapons\bm16\toz66_revival
+snd_reload_jammed_last  							= weapons\bm16\toz66_revival
 snd_jam                 						        = weapons\generic_empty 
+snd_mag_shot									= $silent
 
 [wpn_bm16full_sounds]:wpn_bm16_sounds
 snd_shoot			                                              = wpn_bm16_snd_shoot
-snd_shoot_actor													  = wpn_bm16_snd_shoot_actor
-snd_shoot_duplet				                                  = wpn_mp153_snd_shoot
+snd_shoot_actor								      = wpn_bm16_snd_shoot_actor
+snd_shoot_duplet				                              = wpn_mp153_snd_shoot
 snd_shoot_1			            	                              = wpn_mp153_snd_shoot
 
 ;--------------------------------------
@@ -445,19 +448,6 @@ snd_shoot               				                          = wpn_f2000_snd_shoot
 snd_shoot_actor													  = wpn_f2000_snd_shoot_actor
 snd_silncer_shot				                                  = wpn_556_snd_silenced
 snd_silncer_shot_actor				                              = wpn_556_snd_silenced_actor
-
-;--------------------------------------
-
-[wpn_fn57_sounds]:base_sounds
-snd_draw				                                          = weapons\fn57\fn57_draw
-snd_holster				                                          = weapons\pistol_holster
-snd_empty				                                          = weapons\_dryfire\9_dry_1
-snd_reload				                                          = weapons\glock\glock_reload
-snd_reload_empty                                                  = weapons\glock\glock_reload_empty
-snd_shoot               				                          = wpn_usp_snd_shoot
-snd_shoot_actor													  = wpn_usp_snd_shoot_actor
-snd_silncer_shot				                                  = wpn_45_1_snd_silenced
-snd_silncer_shot_actor				                              = wpn_45_1_snd_silenced_actor
 
 ;--------------------------------------
 
@@ -565,6 +555,7 @@ snd_reload				                                          = weapons\librarian_agus
 snd_reload_empty				                                  = weapons\librarian_aguss\gauss_reload_empty
 snd_reload_jammed				                                  = weapons\librarian_aguss\gauss_unjam
 snd_bore 					                                  = weapons\mp5_bore
+snd_mag_shot									  = $silent
 
 ;--------------------------------------
 
@@ -732,6 +723,7 @@ snd_bore					                                      = $no_sound
 snd_open_weapon				                                      = $no_sound
 snd_add_cartridge				                                  = weapons\m79\m79_reload
 snd_close_weapon				                                  = $no_sound
+snd_mag_shot									  = $silent
 
 ;--------------------------------------
 
@@ -871,6 +863,7 @@ snd_empty				                                          = weapons\_dryfire\76239_
 snd_reload				                                          = weapons\pkm\pkm_reload
 snd_shoot               				                          = wpn_pkm_snd_shoot
 snd_shoot_actor													  = wpn_pkm_snd_shoot_actor
+snd_mag_shot									   = weapons\mag_shot_pkm
 
 ;--------------------------------------
 
@@ -1278,6 +1271,7 @@ snd_reload				                                          = weapons\mp133\mp133_re
 snd_shoot_duplet				                                  = weapons\mp133\mp133_shoot
 snd_add_cartridge				                                  = weapons\mp133\mp133_reload
 snd_close_weapon        			                              = weapons\mp133\mp133_reload_end
+snd_mag_shot									  = $silent
 
 ;--------------------------------------
 
@@ -1292,6 +1286,7 @@ snd_bore					                                      = $no_sound
 snd_open_weapon			                                          = $no_sound
 snd_add_cartridge				                                  = weapons\mp153\mp153_insertshell
 snd_close_weapon				                                  = $no_sound
+snd_mag_shot									  = $silent
 
 ;--------------------------------------
 

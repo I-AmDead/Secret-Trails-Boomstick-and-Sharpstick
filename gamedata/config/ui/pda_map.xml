@@ -42,7 +42,7 @@
 
             <main_map_frame x="0" y="0" width="765" height="592" a="90">
                 <texture>ui\amk_pda_frame_sub</texture>
-                <level_frame x="8" y="41" width="720" height="524"/>
+                <level_frame x="2" y="40" width="761" height="550"/>
             </main_map_frame>
         </main_wnd>
     </map_wnd>

@@ -27,11 +27,7 @@ static const float3 ssfx_hemisphere[32] = {
     float3(-0.554, -0.725, 0.289),  float3(0.534, 0.157, -0.250),
 };
 
-#ifdef USE_MSAA
-TEXTURE2DMS(float4, MSAA_SAMPLES) s_rimage;
-#else
 Texture2D s_rimage;
-#endif
 
 uniform float4 sky_color;
 
@@ -85,29 +81,17 @@ float3 SSFX_yaw_vector(float3 Vec, float Rot)
 
 float SSFX_get_depth(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     return s_position.Sample(smp_nofilter, tc).z;
-#else
-    return s_position.Load(int3(tc * screen_res.xy, 0), iSample).z;
-#endif
 }
 
 float4 SSFX_get_position(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     return s_position.Sample(smp_nofilter, tc);
-#else
-    return s_position.Load(int3(tc * screen_res.xy, 0), iSample);
-#endif
 }
 
 float3 SSFX_get_image(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     return s_rimage.Sample(smp_nofilter, tc).rgb;
-#else
-    return s_rimage.Load(int3(tc * screen_res.xy, 0), 0).rgb;
-#endif
 }
 
 RayTrace SSFX_ray_init(float3 ray_start_vs, float3 ray_dir_vs, float ray_max_dist, int ray_steps, float noise)
@@ -147,13 +131,8 @@ float3 SSFX_ray_intersect(RayTrace Ray, uint iSample)
 // Half-way scene lighting
 float4 SSFX_get_fast_scenelighting(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     float4 rL = s_accumulator.Sample(smp_nofilter, tc);
     float4 C = s_diffuse.Sample(smp_nofilter, tc);
-#else
-    float4 rL = s_accumulator.Load(int3(tc * screen_res.xy, 0), iSample);
-    float4 C = s_diffuse.Load(int3(tc * screen_res.xy, 0), iSample);
-#endif
 
 #ifdef SSFX_ENHANCED_SHADERS // We have Enhanced Shaders installed
 
@@ -180,22 +159,13 @@ float4 SSFX_get_fast_scenelighting(float2 tc, uint iSample : SV_SAMPLEINDEX)
 // Full scene lighting
 float3 SSFX_get_scene(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     float4 rP = s_position.Sample(smp_nofilter, tc);
-#else
-    float4 rP = s_position.Load(int3(tc * screen_res.xy, 0), iSample);
-#endif
 
     if (rP.z <= 0.05f)
         return 0;
 
-#ifndef USE_MSAA
     float4 rD = s_diffuse.Sample(smp_nofilter, tc);
     float4 rL = s_accumulator.Sample(smp_nofilter, tc);
-#else
-    float4 rD = s_diffuse.Load(int3(tc * screen_res.xy, 0), iSample);
-    float4 rL = s_accumulator.Load(int3(tc * screen_res.xy, 0), iSample);
-#endif
 
     // Remove emissive materials for now...
     if (length(rL) > 10.0f)
@@ -213,7 +183,7 @@ float3 SSFX_get_scene(float2 tc, uint iSample : SV_SAMPLEINDEX)
 
     // hemisphere
     float3 hdiffuse, hspecular;
-    hmodel(hdiffuse, hspecular, rMtl, rHemi, rD, rP, rN);
+    hmodel(hdiffuse, hspecular, rMtl, rHemi, rD, rP.rgb, rN);
 
     // Final color
     float3 rcolor = rL.rgb + hdiffuse.rgb;

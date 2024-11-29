@@ -1,6 +1,7 @@
 uniform float4 game_time;
 uniform float4 watch_actor_params;
 uniform float4 watch_color_params;
+uniform float4 radiation_effect;
 
 #define PI 3.14159265359
 #define TPI 6.28318530718
@@ -18,9 +19,9 @@ uniform float4 watch_color_params;
 #define aa 2.0 / min(screen_res.x, screen_res.y)
 
 // Hearthbeat
-#define SCALE 1.5
+#define SCALE 1.0
 #define LINES_WIDTH 0.05
-#define DOT_SPEED_LIMITER 3
+#define DOT_SPEED_LIMITER 2.4
 #define MAX_TRAIL_ITEMS 600
 
 // NixieTime
@@ -37,6 +38,7 @@ float2x2 rotate(float r)
     return float2x2(c, -s, s, c);
 }
 float2 rotate(float2 p, float r) { return mul(rotate(r), p); }
+
 float3 rotate(float3 p, float3 r)
 {
     p.xy = rotate(p.xy, r.z);
@@ -44,6 +46,8 @@ float3 rotate(float3 p, float3 r)
     p.zx = rotate(p.zx, r.y);
     return p;
 }
+
+float radiansToDegrees(float radians_value) { return radians_value * (180.0 / PI); }
 
 float3 hsv(float3 c)
 {
@@ -229,7 +233,6 @@ float ring(float2 uv, float2 pos, float innerRad, float outerRad)
     return (1.0 - smoothstep(outerRad, outerRad + aa, length(uv - pos))) * smoothstep(innerRad - aa, innerRad, length(uv - pos));
 }
 
-
 //
 // NixieTime
 //
@@ -237,16 +240,16 @@ float ring(float2 uv, float2 pos, float innerRad, float outerRad)
 // hash function copy from https://www.shadertoy.com/view/4djSRW
 float hash12(float2 p)
 {
-    float3 p3  = frac(float3(p.xyx) * .1031);
+    float3 p3 = frac(float3(p.xyx) * .1031);
     p3 += dot(p3, p3.yzx + 33.33);
     return frac((p3.x + p3.y) * p3.z);
 }
 
-float noiseNixie(float2 pos) 
+float noiseNixie(float2 pos)
 {
     float2 i = floor(pos);
     float2 f = frac(pos);
-    
+
     float a = hash12(i);
     float b = hash12(i + float2(1, 0));
     float c = hash12(i + float2(0, 1));
@@ -257,24 +260,24 @@ float noiseNixie(float2 pos)
     return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
 }
 
-//Distance to a line segment,
+// Distance to a line segment,
 float dfLine(float2 start, float2 end, float2 uv)
 {
     start = mul(start, 1.0 / 6.0);
     end = mul(end, 1.0 / 6.0);
-    
-	float2 linessss = end - start;
-	float fraccccc = dot(uv - start, linessss) / dot(linessss, linessss);
-	return distance(start + linessss * clamp(fraccccc, 0.0, 1.0), uv);
+
+    float2 linessss = end - start;
+    float fraccccc = dot(uv - start, linessss) / dot(linessss, linessss);
+    return distance(start + linessss * clamp(fraccccc, 0.0, 1.0), uv);
 }
 
-//Distance to the edge of a circle.
+// Distance to the edge of a circle.
 float dfCircle(float2 origin, float radius, float2 uv)
 {
     origin = mul(origin, 1.0 / 6.0);
     radius = mul(radius, 1.0 / 6.0);
-    
-	return abs(length(uv - origin) - radius);
+
+    return abs(length(uv - origin) - radius);
 }
 
 // Distance to an arc.
@@ -282,153 +285,153 @@ float dfArc(float2 origin, float start, float sweep, float radius, float2 uv)
 {
     origin = mul(origin, 1.0 / 6.0);
     radius = mul(radius, 1.0 / 6.0);
-    
+
     uv -= origin;
     uv = mul(uv, float2x2(cos(start), -sin(start), sin(start), cos(start)));
-    
+
     float offs = (sweep / 2.0 - PI);
     float ang = fmod(atan2(uv.y, uv.x) - offs, TPI) + offs;
     ang = clamp(ang, min(0.0, sweep), max(0.0, sweep));
-    
+
     return distance(mul(radius, float2(cos(ang), sin(ang))), uv);
 }
 
-//Distance to the digit "d" (0-9).
+// Distance to the digit "d" (0-9).
 float dfDigit(float2 origin, float d, float2 uv)
 {
-	uv -= origin;
-	d = floor(d);
-	float dist = 1e6;
-	
-	if(d == 0.0)
-	{
+    uv -= origin;
+    d = floor(d);
+    float dist = 1e6;
+
+    if (d == 0.0)
+    {
         float distsss = 1e6;
-		distsss = min(distsss, dfLine(float2(1.000,1.000), float2(1.000,0.500), uv));
-		distsss = min(distsss, dfLine(float2(0.000,1.000), float2(0.000,0.500), uv));
-		distsss = min(distsss, dfArc(float2(0.500,1.000),0.000, 3.142, 0.500, uv));
-		distsss = min(distsss, dfArc(float2(0.500,0.500),3.142, 3.142, 0.500, uv));
+        distsss = min(distsss, dfLine(float2(1.000, 1.000), float2(1.000, 0.500), uv));
+        distsss = min(distsss, dfLine(float2(0.000, 1.000), float2(0.000, 0.500), uv));
+        distsss = min(distsss, dfArc(float2(0.500, 1.000), 0.000, 3.142, 0.500, uv));
+        distsss = min(distsss, dfArc(float2(0.500, 0.500), 3.142, 3.142, 0.500, uv));
 
-		return distsss;
-	}
+        return distsss;
+    }
 
-	if(d == 1.0)
-	{
-		dist = min(dist, dfLine(float2(0.500,1.500), float2(0.500,0.000), uv));
-		return dist;
-	}
+    if (d == 1.0)
+    {
+        dist = min(dist, dfLine(float2(0.500, 1.500), float2(0.500, 0.000), uv));
+        return dist;
+    }
 
-	if(d == 2.0)
-	{
-		dist = min(dist, dfLine(float2(1.000,0.000), float2(0.000,0.000), uv));
-		dist = min(dist, dfLine(float2(0.388,0.561), float2(0.806,0.719), uv));
-		dist = min(dist, dfArc(float2(0.500,1.000),-3.100, -3.142, 0.500, uv));
-		dist = min(dist, dfArc(float2(0.700,1.000),5.074, 1.209, 0.300, uv));
-		dist = min(dist, dfArc(float2(0.600,0.000),1.932, 1.209, 0.600, uv));
-		return dist;
-	}
+    if (d == 2.0)
+    {
+        dist = min(dist, dfLine(float2(1.000, 0.000), float2(0.000, 0.000), uv));
+        dist = min(dist, dfLine(float2(0.388, 0.561), float2(0.806, 0.719), uv));
+        dist = min(dist, dfArc(float2(0.500, 1.000), -3.100, -3.142, 0.500, uv));
+        dist = min(dist, dfArc(float2(0.700, 1.000), 5.074, 1.209, 0.300, uv));
+        dist = min(dist, dfArc(float2(0.600, 0.000), 1.932, 1.209, 0.600, uv));
+        return dist;
+    }
 
-	if(d == 3.0)
-	{
-		dist = min(dist, dfLine(float2(0.000,1.500), float2(1.000,1.500), uv));
-		dist = min(dist, dfLine(float2(1.000,1.500), float2(0.500,1.000), uv));
-		dist = min(dist, dfArc(float2(0.500,0.500),-4.742, -4.712, 0.500, uv));
-		return dist;
-	}
+    if (d == 3.0)
+    {
+        dist = min(dist, dfLine(float2(0.000, 1.500), float2(1.000, 1.500), uv));
+        dist = min(dist, dfLine(float2(1.000, 1.500), float2(0.500, 1.000), uv));
+        dist = min(dist, dfArc(float2(0.500, 0.500), -4.742, -4.712, 0.500, uv));
+        return dist;
+    }
 
-	if(d == 4.0)
-	{
-		dist = min(dist, dfLine(float2(0.700,1.500), float2(0.000,0.500), uv));
-		dist = min(dist, dfLine(float2(0.000,0.500), float2(1.000,0.500), uv));
-		dist = min(dist, dfLine(float2(0.700,1.200), float2(0.700,0.000), uv));
-		return dist;
-	}
+    if (d == 4.0)
+    {
+        dist = min(dist, dfLine(float2(0.700, 1.500), float2(0.000, 0.500), uv));
+        dist = min(dist, dfLine(float2(0.000, 0.500), float2(1.000, 0.500), uv));
+        dist = min(dist, dfLine(float2(0.700, 1.200), float2(0.700, 0.000), uv));
+        return dist;
+    }
 
-	if(d == 5.0)
-	{
-		dist = min(dist, dfLine(float2(1.000,1.500), float2(0.300,1.500), uv));
-		dist = min(dist, dfLine(float2(0.300,1.500), float2(0.200,0.900), uv));
-		dist = min(dist, dfArc(float2(0.500,0.500),-4.074, -5.356, 0.500, uv));
-		return dist;
-	}
+    if (d == 5.0)
+    {
+        dist = min(dist, dfLine(float2(1.000, 1.500), float2(0.300, 1.500), uv));
+        dist = min(dist, dfLine(float2(0.300, 1.500), float2(0.200, 0.900), uv));
+        dist = min(dist, dfArc(float2(0.500, 0.500), -4.074, -5.356, 0.500, uv));
+        return dist;
+    }
 
-	if(d == 6.0)
-	{
-		dist = min(dist, dfLine(float2(0.067,0.750), float2(0.500,1.500), uv));
-		dist = min(dist, dfCircle(float2(0.500,0.500), 0.500, uv));
-		return dist;
-	}
+    if (d == 6.0)
+    {
+        dist = min(dist, dfLine(float2(0.067, 0.750), float2(0.500, 1.500), uv));
+        dist = min(dist, dfCircle(float2(0.500, 0.500), 0.500, uv));
+        return dist;
+    }
 
-	if(d == 7.0)
-	{
-		dist = min(dist, dfLine(float2(0.000,1.500), float2(1.000,1.500), uv));
-		dist = min(dist, dfLine(float2(1.000,1.500), float2(0.500,0.000), uv));
-		return dist;
-	}
+    if (d == 7.0)
+    {
+        dist = min(dist, dfLine(float2(0.000, 1.500), float2(1.000, 1.500), uv));
+        dist = min(dist, dfLine(float2(1.000, 1.500), float2(0.500, 0.000), uv));
+        return dist;
+    }
 
-	if(d == 8.0)
-	{
-		dist = min(dist, dfCircle(float2(0.500,0.400), 0.400, uv));
-		dist = min(dist, dfCircle(float2(0.500,1.150), 0.350, uv));
-		return dist;
-	}
+    if (d == 8.0)
+    {
+        dist = min(dist, dfCircle(float2(0.500, 0.400), 0.400, uv));
+        dist = min(dist, dfCircle(float2(0.500, 1.150), 0.350, uv));
+        return dist;
+    }
 
-	if(d == 9.0)
-	{
-		dist = min(dist, dfLine(float2(0.933,0.750), float2(0.500,0.000), uv));
-		dist = min(dist, dfCircle(float2(0.500,1.000), 0.500, uv));
-		return dist;
-	}
+    if (d == 9.0)
+    {
+        dist = min(dist, dfLine(float2(0.933, 0.750), float2(0.500, 0.000), uv));
+        dist = min(dist, dfCircle(float2(0.500, 1.000), 0.500, uv));
+        return dist;
+    }
 
-	return dist;
+    return dist;
 }
 
-
-//Distance to a number This handles 2 digit integers, leading 0's will be drawn
+// Distance to a number This handles 2 digit integers, leading 0's will be drawn
 float dfNumber(float2 origin, float num, float2 uv)
 {
-	uv -= origin;
-	float dist = 1.0;
-	float offs = 0.0;
-	
+    uv -= origin;
+    float dist = 1.0;
+    float offs = 0.0;
+
     float2 digit_spacing = mul(float2(1.1, 1.6), 1.0 / 6.0);
 
-	for(float i = 1.0; i >= 0.0; i--)
-	{	
-		float d = fmod(num / pow(10.0,i),10.0);
-		
-		float2 pos = digit_spacing * float2(offs, 0.0);
-		
+    for (float i = 1.0; i >= 0.0; i--)
+    {
+        float d = fmod(num / pow(10.0, i), 10.0);
+
+        float2 pos = digit_spacing * float2(offs, 0.0);
+
         dist = min(dist, dfDigit(pos, d, uv));
         offs++;
-	}
-	return dist;	
+    }
+    return dist;
 }
 
-//Distance to a number This handles 2 digit integers, leading 0's will be drawn
+// Distance to a number This handles 2 digit integers, leading 0's will be drawn
 float dfNumber2(float2 origin, float num, float2 uv)
 {
-	uv -= origin;
-	float dist = 1.0;
-	float offs = 0.0;
-	
+    uv -= origin;
+    float dist = 1.0;
+    float offs = 0.0;
+
     float2 digit_spacing = mul(float2(1.3, 1.6), 1.0 / 6.0);
 
-	for(float i = 3.0; i >= 0.0; i--)
-	{	
-		float d = fmod(num / pow(10.0,i),10.0);
-		
-		float2 pos = digit_spacing * float2(offs, 0.0);
-		
+    for (float i = 3.0; i >= 0.0; i--)
+    {
+        float d = fmod(num / pow(10.0, i), 10.0);
+
+        float2 pos = digit_spacing * float2(offs, 0.0);
+
         dist = min(dist, dfDigit(pos, d, uv));
         offs++;
-	}
-	return dist;	
+    }
+    return dist;
 }
 
-float dfColon(float2 origin, float2 uv) {
-	uv -= origin;
-	float dist = 1.0;
-	float offs = 0.0;
+float dfColon(float2 origin, float2 uv)
+{
+    uv -= origin;
+    float dist = 1.0;
+    float offs = 0.0;
 
     dist = min(dist, dfCircle(float2(offs + 0.9, 0.9) * 1.1, 0.04, uv));
     dist = min(dist, dfCircle(float2(offs + 0.9, 0.4) * 1.1, 0.04, uv));
@@ -436,79 +439,70 @@ float dfColon(float2 origin, float2 uv) {
     return dist;
 }
 
-//Length of a number in digits
-float numberLength(float n)
-{
-	return floor(max(log(n) / log(10.0), 0.0) + 1.0) + 2.0;
-}
-
+// Length of a number in digits
+float numberLength(float n) { return floor(max(log(n) / log(10.0), 0.0) + 1.0) + 2.0; }
 
 //
 // HearthBeat
 //
 
-float remap01(float t, float a, float b) 
-{
-    return (t - a) / (b - a);
-}
+float remap01(float t, float a, float b) { return (t - a) / (b - a); }
 
-float Circle(float2 uv, float2 position, float radius, float blur) 
+float Circle(float2 uv, float2 position, float radius, float blur)
 {
     float distance = length(uv - position);
     return smoothstep(radius, radius - blur, distance);
 }
 
-float GridLines(float t, float lines) 
-{
-    return step(frac(t * lines), LINES_WIDTH);
-}
+float GridLines(float t, float lines) { return step(frac(t * lines), LINES_WIDTH); }
 
-float3 Ring(float2 uv, float2 position) 
+float3 Ring(float2 uv, float2 position)
 {
     float ring = Circle(uv, position, 0.08f, 0.01f);
     ring -= Circle(uv, position, 0.065f, 0.01f);
-    
+
     float3 RING_COLOR = float3(0.0f, 0.01f, 0.0f);
-    
+
     return RING_COLOR * ring;
 }
 
-float spike(float x, float d, float w, float raiseBy) 
+float spike(float x, float d, float w, float raiseBy)
 {
     float f1 = pow(abs(x + (d * SCALE)), raiseBy);
     return exp(-f1 / w);
 }
 
-float generateEGC(float x) 
+float generateEGC(float x)
 {
-    x -= .5 * SCALE;
+    x -= .7 * SCALE;
 
     float a = 0.4 * SCALE;
-	float d = .3;
-	float w = 0.001;
-    
+    float d = .3;
+    float w = 0.001;
+
     float f1 = a * spike(x, d, w, 2.);
     float f2 = 0.3 * spike(x, d - 0.02, 0.5 * w, 2.0);
-    float f3 = 0.2 * spike(x, d - 0.25, 0.004, 2.5);
-    float f4 = 0.07 * spike(x, d - 0.55, 0.009, 2.3);
+    float f3 = 0.1 * spike(x, d - 0.25, 0.0002, 2.5);
+    float f4 = 0.07 * spike(x, d - 0.55, 0.009, 1.5);
     float f5 = 0.1 * spike(x, d - 0.75, 0.001, 2.7);
 
     float f6 = a * spike(x, d - 1., 0.002, 2.);
     float f7 = 0.3 * spike(x, d - 1.025, 0.5 * w, 2.0);
-    float f8 = 0.2 * spike(x, d - 1.2, 0.004, 2.5);
-    float f9 = 0.07 * spike(x, d - 1.55, 0.009, 2.3);
+    float f8 = 0.1 * spike(x, d - 1.2, 0.0002, 2.5);
+    float f9 = 0.07 * spike(x, d - 1.55, 0.009, 1.3);
 
-    return (f1 - f2 + f3 + f4 + f5 + f6 - f7 + f8 + f9) * watch_actor_params.x;;
+    return (f1 - f2 + f3 + f4 + f5 + f6 - f7 + f8 + f9) * watch_actor_params.x;
+    ;
 }
 
-float getDotXPosition() 
+float getDotXPosition()
 {
     float dotX = frac(timers.x / DOT_SPEED_LIMITER);
     dotX *= 2.0f * SCALE;
     return dotX;
 }
 
-float3 MovingDot(float2 uv, float2 dotPosition) 
+float3 MovingDot(float2 uv, float2 dotPosition)
 {
     float movingDot = Circle(uv, dotPosition, 0.015f, 0.01f);
     float smallBlurredDot = Circle(uv, dotPosition, 0.06f, 0.1f);

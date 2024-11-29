@@ -4,7 +4,7 @@ script_binding = ogse_dbg_anomaly_binder.init
 GroupControlSection			= spawn_group_zone
 $spawn 						= "zones\buzz"
 $prefetch 					= 16
-class						= ZS_MBALD
+class						= ZS_BUZZ
 
 hit_impulse_scale			= 0.0
 effective_radius			= 1.0 ;размер радиуса в процентах от оригинального, где действует зона
@@ -62,6 +62,7 @@ light_volumetric_enable			= true
 light_volumetric_quality		= 0.9
 light_volumetric_intensity		= 0.1
 light_volumetric_distance		= 0.65
+light_flare_enable			= true
 
 idle_light					= on
 idle_light_color	        	= 0.6,0.9,0.2
@@ -74,6 +75,7 @@ idle_light_volumetric_enable		= true
 idle_light_volumetric_quality		= 0.9
 idle_light_volumetric_intensity		= 0.1
 idle_light_volumetric_distance		= 0.7
+idle_light_flare_enable			= true
 
 awaking_time				= 10
 blowout_time				= 200	

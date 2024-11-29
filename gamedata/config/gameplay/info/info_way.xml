@@ -285,12 +285,6 @@
 <info_portion id="mil_lucash_help_have"></info_portion>
 <info_portion id="mil_lucash_help_done"></info_portion>
 <info_portion id="mil_lucash_help_fail"></info_portion>
-<info_portion id="mil_voen_one"></info_portion>
-<info_portion id="mil_voen_two"></info_portion>
-<info_portion id="mil_voen_tri"></info_portion>
-<info_portion id="mil_voen_four"></info_portion>
-<info_portion id="mil_voen_five"></info_portion>
-<info_portion id="mil_voen_six"></info_portion>
 <info_portion id="lucash_na_meste"></info_portion>
 <info_portion id="leader_hit"></info_portion>
 <info_portion id="max_hit"></info_portion>
@@ -379,6 +373,7 @@
 <!--------------------sveeblov_krovosos_radar------------------------------------------------------------->
 <info_portion id="sveeblov_krovosos_start">
     <task>sveeblov_krovosos</task>
+    <action>braad_test.super_krovosos_spawn</action>
 </info_portion>
 <info_portion id="clear_scy_leader_dead"></info_portion>
 <info_portion id="sveeblov_krovosos_begin"></info_portion>
@@ -763,15 +758,6 @@
 <info_portion id="podmoga_dialog_done"></info_portion>
 <info_portion id="podmoga_nashel"></info_portion>
 <info_portion id="podmoga_mesto"></info_portion>
-<info_portion id="volk_novic1_have"></info_portion>
-<info_portion id="volk_novic2_have"></info_portion>
-<info_portion id="volk_novic3_have"></info_portion>
-<info_portion id="volk_novic4_have"></info_portion>
-<info_portion id="volk_novic5_have"></info_portion>
-<info_portion id="volk_novic6_have"></info_portion>
-<info_portion id="volk_tainik_have"></info_portion>
-<info_portion id="volk_tainik_done"></info_portion>
-<info_portion id="volk_can_speak"></info_portion>
 <!-------------------derevna_stalker------------------------------------------------------------->
 <info_portion id="derevna_stalker_start">
     <task>derevna_stalker</task>
@@ -985,9 +971,7 @@
 <info_portion id="barman_work_begin">    <!-- воронин  -->
     <action>braad_test.ban_kogot_spawn</action>
 </info_portion>
-<info_portion id="barman_work_have">    <!-- коготь  -->
-    <action>braad_test.kogot_rukzak_spawn</action>
-</info_portion>
+<info_portion id="barman_work_have"></info_portion>
 <info_portion id="barman_work_est"></info_portion><!-- пда  -->
 <info_portion id="barman_work_done"></info_portion><!-- бармен  -->
 <!------------------обследовать  заброшенную фабрику------------------------------------------------------------->

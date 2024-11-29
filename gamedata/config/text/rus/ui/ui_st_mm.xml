@@ -157,6 +157,10 @@
 <string id="ui_mm_always_active">
     <text>Не вставать на паузу при переключении на другие окна</text>
 </string>
+<string id="ui_mm_first_person_body">
+    <text>Ноги от первого лица</text>
+</string>
+
 <string id="ui_mm_gamma">
     <text>Гамма</text>
 </string>
@@ -445,6 +449,15 @@
 </string>
 <string id="ui_mm_msaa">
     <text>MSAA сглаживание</text>
+</string>
+<string id="st_opt_taa">
+    <text>TAA</text>
+</string>
+<string id="st_opt_fsr2">
+    <text>AMD FSR 2</text>
+</string>
+<string id="st_opt_dlss">
+    <text>Nvidia DLSS</text>
 </string>
 <string id="ui_mm_switch_torch">
     <text>Использование фонариков AI</text>
@@ -764,7 +777,7 @@
 <string id="video_settings_name_17">
     <text>Частота 60Гц</text>
 </string>
-<string id="video_settings_name_19">
+<string id="video_settings_name_18">
     <text>Тип сглаживания</text>
 </string>
 <string id="video_settings_name_20">
@@ -908,9 +921,6 @@
     <text>Отражения по краям шлема</text>
 </string>
 
-<string id="video_settings_desc_1">
-    <text>MSAA - очень тяжелый и в тоже время очень качественный тип сглаживания. Качественно сглаживает провода, растительность, полупрозрачную геометрию.</text>
-</string>
 <string id="video_settings_desc_2">
     <text>Эта настройка регулирует величину, на которую умножается предельное расстояние видимости, установленное в профиле текущей погоды. Диапазон значений этой величины - от 0.4 (минимум ползунка) до 1.5 (максимум ползунка). Например, в погоде установлена дальность обзора 150 метров. На минимуме ползунка вы будете видеть на 60 метров, на максимуме на 225. ВНИМАНИЕ! Высокая дальность обзора может сильно снижать производительность старых ПК.</text>
 </string>
@@ -956,8 +966,8 @@
 <string id="video_settings_desc_17">
     <text>Эта настройка заставляет игру всегда использовать видеорежим с частотой обновления экрана 60 Герц. Настройка полезна для обладателей мониторов, у которых игра при запуске неверно определяет частоту обновления экрана. Однако, включать эту настройку рекомендуется только если у вас есть такая проблема. В некоторых редких случаях включение этой настройки может вызывать лаги в полноэкранном режиме.</text>
 </string>
-<string id="video_settings_desc_19">
-    <text>Эта настройка переключает тип сглаживания. Доступен SMAA (Subpixel Morphological AntiAliasing).</text>
+<string id="video_settings_desc_18">
+    <text>Эта настройка переключает тип сглаживания. Доступен SMAA (Subpixel Morphological Anti-Aliasing), TAA (Temporal Anti-Aliasing), AMD FidelityFX Super Resolution (FSR) 2 и Nvidia DLSS (Deep Learning Super-Sampling). AMD FSR 2 доступен только на видеокартах GTX 10 серии и выше. Nvidia DLSS - RTX 20 серии и выше.</text>
 </string>
 <string id="video_settings_desc_20">
     <text>Эта настройка регулирует детализацию мип-уровней текстур на расстоянии. Нормальное значение этого ползунка - среднее, при его уменьшении текстуры на расстоянии будут менее четкими, при увеличении - более четкими, но чрезмерное увеличение может привести к появлению муара и неприятных глазу мельтешащих точек на далеких объектах.</text>

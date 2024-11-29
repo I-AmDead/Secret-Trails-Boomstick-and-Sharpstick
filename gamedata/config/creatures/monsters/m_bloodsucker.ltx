@@ -479,7 +479,8 @@ bip01_r_toe1
 ; Bloodsucker Terrain
 ;=================================================================================
 [bloodsucker_terrain]
-  255,000,255,255
+255, 000, 255, 255
+255, 255, 255, 255
   
 ;===========================================================================
 ; Step Events
@@ -756,3 +757,19 @@ telepatic_immunity    = 0.3
 chemical_burn_immunity  = 0.1
 explosion_immunity    = 0.12
 fire_wound_immunity   = 0.003
+
+
+[actor_legs]:m_bloodsucker_e
+script_binding = swm_legs.bind
+
+[monolith_exo_outfit_legs_hd]:actor_legs
+
+[monolith_outfit_legs_hd]:actor_legs
+
+[merc_exo_outfit_legs_hd]:actor_legs
+
+[novice_outfit_legs_hd]:actor_legs
+
+[military_bandit_outfit_legs_hd]:actor_legs
+
+[cs_light_novice_outfit_legs_hd]:actor_legs

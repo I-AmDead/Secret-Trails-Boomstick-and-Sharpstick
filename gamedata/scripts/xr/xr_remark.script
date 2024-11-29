@@ -36,15 +36,10 @@ function action_remark_activity:initialize()
     self.object:set_desired_direction()
     -- log3("--[%s] action_remark_activity:initialize [%s] state [%s]", script_name(), self.object:name(), self.state)
     if self.action_end_signalled then -- уже всё отыграно, нужно просто занять стейт
-        log3("~~[%s] action_remark_activity:initialize [%s] action_end_signalled! reset state [%s]...)", script_name(),
-            self.object:name(), self.state)
-        state_mgr.set_state(self.object, self.st.anim, nil, nil, self:get_target(), {
-            animation = self.st.anim_reset
-        })
+        log3("~~[%s] action_remark_activity:initialize [%s] action_end_signalled! reset state [%s]...)", script_name(), self.object:name(), self.state)
+        state_mgr.set_state(self.object, self.st.anim, nil, nil, self:get_target(), {animation = self.st.anim_reset})
     elseif self.state > state_initial then -- если процесс был прерван - придётся начинать заново
-        log3("~~[%s] action_remark_activity:initialize [%s] reset action (state [%s]), signals: [%s,%s,%s]",
-            script_name(), self.object:name(), self.state, self.sound_end_signalled and "true" or "false",
-            self.anim_end_signalled and "true" or "false", self.action_end_signalled and "true" or "false")
+        log3("~~[%s] action_remark_activity:initialize [%s] reset action (state [%s]), signals: [%s,%s,%s]", script_name(), self.object:name(), self.state, self.sound_end_signalled and "true" or "false", self.anim_end_signalled and "true" or "false", self.action_end_signalled and "true" or "false")
         self.state = state_initial
     end
     xr_sound.set_sound(self.object, nil)
@@ -76,8 +71,7 @@ function action_remark_activity:get_target()
 
     -- ' Если таргет не проинициализирован, то запускаем инициализатор.
     if self.st.target_init == false then
-        self.st.target_position, self.st.target_id, self.st.target_init =
-            initialize_gulag_target(self.object, self.st.target)
+        self.st.target_position, self.st.target_id, self.st.target_init = initialize_gulag_target(self.object, self.st.target)
         if self.st.target_init == false then
             return nil
         end
@@ -133,9 +127,7 @@ function action_remark_activity:update()
             return
         end
 
-        state_mgr.set_state(script_name(), self.object, self.st.anim, cb, 0, target, {
-            animation = self.st.anim_reset
-        }, synsound)
+        state_mgr.set_state(script_name(), self.object, self.st.anim, cb, 0, target, {animation = self.st.anim_reset}, synsound)
         self.state = state_animation
 
         -- Ожидание колбека от стейтменеджера
@@ -155,7 +147,7 @@ function action_remark_activity:update()
             -- log3("--Called play sound [%s] for [%s]", self.st.snd, self.object:name())
             -- KRodin: добавленный четвёртый аргумент фиксит проблему: если попытаться проиграть звук повторно, после рестарта, он не воспроизводился.
             -- Теперь сделано так, что он проиграется принудительно, в любом случае.
-            xr_sound.set_sound_play(self.object, self.st.snd, 50)
+            xr_sound.set_sound_play(self.object, self.st.snd, 50, true)
         end
 
         -- Нужно выдать связанный типс.
@@ -282,15 +274,13 @@ function set_scheme(npc, ini, scheme, section, gulag_name)
 
     st.logic = xr_logic.cfg_get_switch_conditions(ini, section, npc)
 
-    st.snd_anim_sync = get_bool(section, "snd_anim_sync", false, ini)
+    st.snd_anim_sync = get_bool(section, "snd_anim_sync", nil, ini)
 
     st.snd = get_string(section, "snd", nil, ini)
     if not st.snd then -- KRodin: поставил здесь ассерт, чтобы вылавливать косяки в логике. Лучше вылететь с понятной диагностикой, чем гадать, почему непись повис.
         local on_signal = get_string(section, "on_signal", nil, ini)
         if on_signal then
-            ASSERT(not on_signal:find("sound_end"),
-                "Found signal 'sound_end' in logic section [%s] of object [%s], but 'snd' not specified!", section,
-                npc:name())
+            ASSERT(not on_signal:find("sound_end"), "Found signal 'sound_end' in logic section [%s] of object [%s], but 'snd' not specified!", section, npc:name())
         end
     end
 
@@ -320,8 +310,7 @@ function set_scheme(npc, ini, scheme, section, gulag_name)
                 st.target_id = id_by_sid(sid)
                 if not st.target_id then
                     st.target_id = nil
-                    log3("!!remark <error>: Wrong story id [%s] for [%s] in section [%s]", st.target, npc:name(),
-                        section)
+                    log3("!!remark <error>: Wrong story id [%s] for [%s] in section [%s]", st.target, npc:name(), section)
                 end
                 st.target_init = true
             else

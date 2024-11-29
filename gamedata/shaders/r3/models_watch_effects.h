@@ -169,6 +169,46 @@ float3 pda_loading(float2 uv)
     return a * geo;
 }
 
+float3 dosimeter(float2 uva)
+{
+    float2 uv = uva;
+
+    //uv -= 0.5;
+    //uv.y = -uv.y;
+
+    uv *= 280.0;
+    float deg = radiansToDegrees(atan2(uv.y, uv.x));
+    
+    float4 rgba = float4(0.0, 0.0, 0.0, 1.0);
+    
+    if(uv.y > 0.0 && length(uv) < 190.0 && length(uv) > 170.0)
+    {
+        rgba = float4(1.0, 1.0, 1.0, 1.0);
+        if(deg < 120.0)
+            rgba = float4(1.0, 1.0, 0.0, 1.0);
+            
+        if(deg < 60.0)
+            rgba = float4(1.0, 0.0, 0.0, 1.0);
+            
+        if(deg > 120.0)
+            rgba = float4(0.0, 1.0, 0.0, 1.0);
+            
+        if(fmod(deg, 12.0) < 2.0 && length(uv) > 175.0)
+            rgba = float4(0.0, 0.0, 0.0, 1.0);
+        else if(fmod(deg, 12.0) < 2.0 && length(uv) <= 175.0)
+            rgba = float4(0.0, 0.0, 0.0, 1.0);
+    }
+    
+    float rad_level = radiation_effect.z;
+    rad_level = clamp(rad_level, 0.0, 1.0);
+    uv = mul(uv, rotate(-abs(sin(1.4) * rad_level) * PI));
+    
+    if(uv.x < 0.0 && abs((uv.x + 180.0) / 50.0) > abs(uv.y) && uv.x > -160.0 || length(uv) < 6.0)
+        rgba = float4(0.5, 0.4, 0.1, 1.0);
+
+    return rgba.rgb;
+}
+
 float3 NixieTime(float2 uv) 
 {
     uv.x = resize(uv.x, screen_res.x / screen_res.y, 0.0);
@@ -183,6 +223,8 @@ float3 NixieTime(float2 uv)
 
     float hour = game_time.x;
     float minute = game_time.y;
+    float seconds = game_time.z;
+    float miliseconds = game_time.w;
     float radiation = watch_actor_params.z;
     
 	float nsize = numberLength(9999.0);
@@ -191,6 +233,8 @@ float3 NixieTime(float2 uv)
 
     float2 basepos = pos;
 	float dist = 1.0;
+
+	float3 color = float3(0.0, 0.0, 0.0);
 
     if (watch_actor_params.w == 1)
     {
@@ -204,14 +248,38 @@ float3 NixieTime(float2 uv)
 	    dist = min(dist, dfNumber(pos, minute, uv));
     }
 
-    if (watch_actor_params.w == 3)
-    {    
-        pos = basepos;
-        pos.x += 0.15;
-	    dist = min(dist, dfNumber2(pos, radiation, uv));
+    if (watch_actor_params.w == 4)
+    {
+        uv *= 1.5;
+
+        pos.x = basepos.x - 0.15;
+	    dist = min(dist, dfNumber(pos, minute, uv));
+    
+        pos.x = basepos.x + 0.1;
+	    dist = min(dist, dfColon(pos, uv));
+    
+        pos.x = basepos.x + 0.35;
+	    dist = min(dist, dfNumber(pos, seconds, uv));
+
+        pos.x = basepos.x + 1.75;
+        pos.y = basepos.y - 0.75;
+        dist = min(dist, dfCircle(pos, 0.04, uv));
+
+        pos.x = basepos.x + 0.8;
+        pos.y = basepos.y;
+	    dist = min(dist, dfNumber(pos, miliseconds, uv));
     }
 
-	float3 color = float3(0.0, 0.0, 0.0);
+    if (watch_actor_params.w == 3)
+    {
+        uv *= 1.3;
+        pos = basepos;
+        pos.x += 0.15;
+        pos.y -= 0.3;
+	    dist = min(dist, dfNumber2(pos, radiation, uv));
+
+        color += dosimeter(uv);
+    }
 	
 	float shade = 0.004 / (dist);
 	

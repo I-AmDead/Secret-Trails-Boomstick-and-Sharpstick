@@ -27,6 +27,8 @@ v2p main(vv v)
     v2p o;
 
     o.hpos = mul(m_WVP, v.P); // xform, input in world coords
+    o.hpos.xy = get_taa_jitter(o.hpos);
+
     o.tc = v.tc; // copy tc
     o.c = unpack_D3DCOLOR(v.c); // copy color
 

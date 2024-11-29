@@ -52,7 +52,7 @@ function on_item_take(obj)
     if obj:section() == "amk_metka" then
         -- подбираем с земли
         if level.map_has_object_spot(obj:id(), "red_location") == 1 then
-            level.map_remove_object_spot(obj:id(), "red_location")
+            level_tasks.remove_location_by_id(obj:id(), "red_location")
         end
         return true
     end
@@ -125,7 +125,7 @@ function setup_gps_beacon:OnKeyboard(dik, keyboard_action)
 end
 
 function setup_gps_beacon:set_gps()
-    level.map_add_object_spot_ser(self.gps_obj:id(), "red_location", "%c[red]" .. self.edit_box:GetText())
+    level_tasks.add_location_by_id(self.gps_obj:id(), "red_location", self.edit_box:GetText())
     self:on_quit()
 end
 

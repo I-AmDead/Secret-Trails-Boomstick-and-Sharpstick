@@ -1,0 +1,30 @@
+local vertex_setting = {
+    [1] =   {    0,  251, 624967  }, --l01_escape
+    [2] =   {  252,  414, 357996  }, --l02_garbage
+    [3] =   {  415,  702, 422724  }, --l03_agroprom
+    [4] =   {  703,  810, 4951    }, --l03u_agr_underground
+    [5] =   {  811, 1108, 372057  }, --l04_darkvalley
+    [6] =   { 1109, 1167, 7605    }, --l04u_labx18
+    [7] =   { 1168, 1307, 101874  }, --l05_bar
+    [8] =   { 1308, 1437, 69566   }, --l06_rostok
+    [9] =   { 1438, 1528, 153744  }, --l08_yantar
+    [10] =  { 1529, 1544, 8008    }, --l08u_brainlab
+    [11] =  { 1545, 1861, 387579  }, --l07_military
+    [13] =  { 1862, 2115, 227348  }, --l10_radar
+    [14] =  { 2116, 2271, 261774  }, --l11_pripyat
+    [15] =  { 2272, 2400, 495005  }, --l12_stancia
+    [16] =  { 2401, 2465, 11004   }, --l12u_sarcofag
+    [17] =  { 2466, 2515, 4168    }, --l12u_control_monolith
+    [19] =  { 2516, 2659, 859577  }, --l12_stancia_2
+    [20] =  { 2660, 2790, 8821    }, --l10u_bunker
+    [22] =  { 2791, 2910, 245046  }, --l09_deadcity
+    [23] =  { 2911, 2911, 164829  }, --l10_red_forest
+    [27] =  { 2912, 2925, 465427  }, --swamp
+    [28] =  { 2926, 2954, 1059082 }  --l13_deep
+}
+
+vertex_setting_by_name = {}
+
+for id, params in pairs(vertex_setting) do
+    vertex_setting_by_name[alife():level_name(id)] = params
+end

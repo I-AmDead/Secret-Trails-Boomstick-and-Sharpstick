@@ -26,7 +26,7 @@ local function on_foot_step(obj, power)
             --	snd_fname = "material\\human\\step\\rain_jump_0".. math.random(3)
         end
         local snd_rain = xr_sound.get_safe_sound_object(snd_fname)
-        local volume = math.clamp(level.rain_wetness(), 0.0, 0.4) + (level.rain_factor() * 0.1)
+        local volume = math.clamp(level.rain_wetness(), 0.0, 0.4) + (level.rain_factor() * 0.01)
         snd_rain:play(db.actor, 0, sound_object.s2d)
         snd_rain.volume = volume
     end

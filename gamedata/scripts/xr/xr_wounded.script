@@ -8,9 +8,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 pseudo_wounded = {
     -- Хамелеон
-    ["chaes_mamai_master"] = {
-        ["until_info"] = "chaes_mamai_est_help"
-    },
+    ["chaes_mamai_master"] = { ["until_info"] = "chaes_mamai_est_help" },
 
     -- Чистое небо на радаре
     ["clear_scy_leader"] = { ["until_info"] = "osvedomitel_help_radar_done" },
@@ -358,8 +356,8 @@ function Cwound_manager:update()
     end
 
     if is_pseudo_wounded(self.npc:name()) and self.npc.health > 0.1 then -- Квестовые раненые не должны вставать, самолечиться и тп.
-        if self.npc.health > 0.3 then
-            self.npc.health = 0.2
+        if self.npc.health > 0.3 or self.npc.health < 0.25 then
+            self.npc.health = 0.29
         end
         hp = 1
     end

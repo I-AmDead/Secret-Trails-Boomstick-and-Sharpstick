@@ -17,6 +17,6 @@
 #define G_SSDO_WEAPON_RADIUS 0.02f // Weapon radius, higher values means more occlusion coverage with less details.
 #define G_SSDO_WEAPON_INTENSITY 0.4f // Weapon intensity. [ 1.0f = 100% ]
 
-//#define G_SSDO_DETAILED_SEARCH					// Add an extra check to the AO search. By default more detailed. ( 20% of G_SSDO_RADIUS for Scenary and 50% for weapons )
+// #define G_SSDO_DETAILED_SEARCH					// Add an extra check to the AO search. By default more detailed. ( 20% of G_SSDO_RADIUS for Scenary and 50% for weapons )
 #define G_SSDO_DETAILED_RADIUS 0.2f // Detailed search radius. [ 1.0f = 100% ]
 #define G_SSDO_DETAILED_WEAPON_RADIUS 0.5f // Detailed serach radius for weapons. [ 1.0f = 100% ]

@@ -1,15 +1,15 @@
-
 function attach(sm)
-    sm:subscribe({signal = "se_monster_on_before_register", fun = this.se_on_before_register})
-    sm:subscribe({signal = "se_stalker_on_before_register", fun = this.se_on_before_register})
+    sm:subscribe({ signal = "se_monster_on_before_register", fun = this.se_on_before_register })
+    sm:subscribe({ signal = "se_stalker_on_before_register", fun = this.se_on_before_register })
 end
 
-class "timeout_timer"(ogse_qt.quick_timer)
+class "timeout_timer" (ogse_qt.quick_timer)
 function timeout_timer:__init(delay, fun, ...)
     super(delay)
     self.fun = fun
-    self.args = {...}
+    self.args = { ... }
 end
+
 function timeout_timer:taction()
     self.fun(unpack(self.args))
 end
@@ -24,18 +24,21 @@ function timeout(delay, fun, ...)
     return tmout
 end
 
-class "condition_timer"(ogse_qt.quick_timer)
+class "condition_timer" (ogse_qt.quick_timer)
 function condition_timer:__init(fun1, fun2, fun3)
     self.fun1 = fun1
     self.fun2 = fun2
     self.fun3 = fun3
 end
+
 function condition_timer:condition()
     return self.fun1()
 end
+
 function condition_timer:action()
     self.fun2()
 end
+
 function condition_timer:update()
     if self.fun3 then
         self.fun3(self)
@@ -52,14 +55,16 @@ function wait_condition(...)
     return tmout
 end
 
-class "exec_on_update_timer"(ogse_qt.quick_timer)
+class "exec_on_update_timer" (ogse_qt.quick_timer)
 function exec_on_update_timer:__init(fun, ...)
     self.fun = fun
-    self.args = {...}
+    self.args = { ... }
 end
+
 function exec_on_update_timer:condition()
     return not ogse_sleep_mgr.is_sleep_active()
 end
+
 function exec_on_update_timer:action()
     self.fun(unpack(self.args))
 end
@@ -75,7 +80,7 @@ function exec_on_update(...)
 end
 
 function exec_periodic(freq, f, ...)
-    local args = {...}
+    local args = { ... }
     local t = wait_condition(function()
         return false
     end, function()
@@ -106,13 +111,12 @@ function is_actor_looking_to_pos(pos, radius)
 end
 
 function remove_quotes(s) --Вырезать все кавычки из строки
-
-    return string.gsub(s, "[��\"\']", "")
+    return string.gsub(s, "[��\"\']", "")
 end
 
-function strip_quotes(s)  --Срезать кавычки с начала и с конца строки 
-    -- return string.gsub( s, '^[��\"\']*(.-)[��\"\']*$', '%1') --Срезает ВСЕ кавычки слева и справа.
-    return string.gsub(s, '^[��\"\'](.*)[��\"\']$', '%1') --Срезает самую первую кавычку слева и самую последнюю кавычку справа.
+function strip_quotes(s) --Срезать кавычки с начала и с конца строки
+    -- return string.gsub( s, '^[��\"\']*(.-)[��\"\']*$', '%1') --Срезает ВСЕ кавычки слева и справа.
+    return string.gsub(s, '^[��\"\'](.*)[��\"\']$', '%1') --Срезает самую первую кавычку слева и самую последнюю кавычку справа.
 end
 
 local is_creating_free_mob = false
@@ -152,7 +156,7 @@ function clear_used_ai_locations(sobj)
     local pk = get_netpk(sobj, 1)
     ASSERT((pk and pk:isOk()), "can't read netpacket of %s", sobj:name())
     local data = pk:get()
-    data.object_flags = bit_and(data.object_flags, bit_not(object_flags.UsedAI_Locations)) -- ����� ���� flUsedAI_Locations
+    data.object_flags = bit_and(data.object_flags, bit_not(object_flags.UsedAI_Locations)) -- ����� ���� flUsedAI_Locations
     pk:set(data)
 end
 
@@ -169,6 +173,7 @@ function cached_condlist:__init(parsed, ttl)
     self.parsed = parsed
     self.ttl = ttl
 end
+
 function cached_condlist:pick_section_from_condlist(actor, npc)
     if (not self.cached_time) or self.cached_time < time_global() then
         self.cached_res = xr_logic.pick_section_from_condlist(actor, npc, self.parsed)
@@ -183,7 +188,7 @@ end
 -- local p = patrol( "yan_st_stalker3_kamp_1" )
 -- dsh.create_campfire( p:point( 0 ), p:level_vertex_id( 0 ), p:game_vertex_id( 0 ), "objects\\koster_palki_nastil", 0.7 )
 function create_campfire(pos, lvid, gvid, vis, lamp_height)
-    -- кострище 
+    -- кострище
     if vis then
         local sobj = alife():create("physic_object", pos, lvid, gvid)
         local pk = get_netpk(sobj, 1)
@@ -198,7 +203,7 @@ function create_campfire(pos, lvid, gvid, vis, lamp_height)
         sobj:used_ai_locations(false)
         local ini = sobj:spawn_ini()
         ini.readonly = false
-        for _, k in ipairs({"dynamic", "ragdoll", "static"}) do
+        for _, k in ipairs({ "dynamic", "ragdoll", "static" }) do
             local kk = "ignore_" .. k
             ini:w_bool("collide", kk, true)
         end
@@ -210,7 +215,7 @@ function create_campfire(pos, lvid, gvid, vis, lamp_height)
     local sobj = ogse_anomaly.spawn_anomaly("zone_flame_small", pos, lvid, gvid, {
         shtype = 0,
         radius = 1,
-        center = {0, 0, 0}
+        center = { 0, 0, 0 }
     })
     local sr = sobj:get_space_restrictor()
     sr.restrictor_type = global_flags.eRestrictorTypeNone
@@ -242,7 +247,7 @@ function create_campfire(pos, lvid, gvid, vis, lamp_height)
 end
 
 function copy_hit_data(hd, t)
-    for _, k in ipairs({"power", "dir", "who_id", "weapon_id", "bone_id", "impulse", "hit_type"}) do
+    for _, k in ipairs({ "power", "dir", "who_id", "weapon_id", "bone_id", "impulse", "hit_type" }) do
         t[k] = hd[k]
     end
     return t
@@ -295,8 +300,8 @@ end
 function on_level_changer_action(obj, wnd)
     ogse.save_var(script_name() .. ".last_lc_id", obj:id(), "u16")
     wait_condition(
-        function() return not wnd:IsShown() end, 
-        function() ogse.delete_var(script_name() .. ".last_lc_id") end, 
+        function() return not wnd:IsShown() end,
+        function() ogse.delete_var(script_name() .. ".last_lc_id") end,
         function() ogsr_signals.get_mgr():reschedule(1000) end)
 end
 
@@ -405,7 +410,7 @@ function get_ammo_sections(wpn)
     if not ammo_sections_cache[sect] then
         local t = {}
         ammo_sections_cache[sect] = t
-        for _, k in ipairs({"ammo_class", "grenade_class"}) do
+        for _, k in ipairs({ "ammo_class", "grenade_class" }) do
             local s = get_string(sect, k)
             if s then
                 t[k] = string.explode(",", s, true)
@@ -413,4 +418,29 @@ function get_ammo_sections(wpn)
         end
     end
     return ammo_sections_cache[sect]
+end
+
+function find_random_lvid_in_radius(lvid, radius)
+    local dir = vector():set(math.random(-1000, 1000) / 1000, 0, math.random(-1000, 1000) / 1000)
+    dir:normalize()
+    local ai_step = 0.7 -- Шаг AI сетки
+    local cur_angle = 0
+    local math_pi_180 = 180 / math.pi
+    local pi2 = math.pi * 2
+    local rotate_angle = math.asin(ai_step / radius)
+    local found_lv
+    while math.abs(cur_angle) < pi2 do
+        local new_lvid = level.vertex_in_direction(lvid, dir, radius)
+        if new_lvid ~= lvid then
+            found_lv = new_lvid
+            break
+        end
+        -- Поворачиваем направление поиска
+        cur_angle = cur_angle + rotate_angle
+        dir = vector_rotate_y(dir, rotate_angle * math_pi_180)
+    end
+    if found_lv then
+        local gvid = cross_table():vertex(found_lv):game_vertex_id()
+        return found_lv, gvid
+    end
 end

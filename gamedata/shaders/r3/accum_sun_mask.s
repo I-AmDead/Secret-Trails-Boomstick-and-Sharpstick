@@ -20,7 +20,6 @@ function element_2(shader, t_base, t_second, t_detail)
 		:aref(true, 1)
 	shader:dx10color_write_enable(false, false, false, false)
 	shader:dx10texture("s_position", "$user$position")
-	shader:dx10texture("s_normal", "$user$normal")
 	shader:dx10texture("s_diffuse", "$user$albedo")
 
 	shader:dx10sampler("smp_nofilter")

@@ -20,4 +20,4 @@
 
 #define G_PUDDLES_REFRACTION_INTENSITY 1.0f // Refraction intensity
 
-//#define G_PUDDLES_ALLWAYS					// Uncomment to allways render puddles ( Raining or not )
+// #define G_PUDDLES_ALLWAYS					// Uncomment to allways render puddles ( Raining or not )

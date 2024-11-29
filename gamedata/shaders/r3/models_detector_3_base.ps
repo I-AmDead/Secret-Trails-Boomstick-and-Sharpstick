@@ -5,7 +5,7 @@ uniform float4 m_affects;
 
 f_deffer main(p_flat I)
 {
-    //Искажение экрана при выбросе
+    // Искажение экрана при выбросе
     float problems = cos((frac(timers.z * 4) - 0.5) * 3.1416) * 2 - 0.8;
     float AMPL = 0.3;
     I.tcdh.y -= (m_affects.x > 0.15 && I.tcdh.x > problems - AMPL && I.tcdh.x < problems + AMPL) ?
@@ -34,10 +34,14 @@ f_deffer main(p_flat I)
 #endif
 #endif
 
-    //отключение экрана
+    // отключение экрана
     D.rgb = (m_affects.x > 0.41) ? 0 : D.rgb;
 
     float4 Ne = float4(normalize((float3)I.N.xyz), h);
 
-    return pack_gbuffer(Ne, float4(I.position.xyz + Ne.xyz * def_virtualh / 2.h, ms), float4(D.rgb, def_gloss));
+    f_deffer O = pack_gbuffer(Ne, float4(I.position.xyz + Ne.xyz * def_virtualh / 2.h, ms), float4(D.rgb, def_gloss));
+
+    O.Velocity = get_motion_vector(I.hpos_curr, I.hpos_old);
+
+    return O;
 }

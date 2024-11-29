@@ -9,16 +9,16 @@ local slots_wnd_storage = {}
 local slot_focus = false
 local count_item_slot = { 0, 0, 0, 0 }
 local slots_pos = {
-	{ 842, 305, 26, 33 },
-	{ 887, 305, 26, 33 },
-	{ 932, 305, 26, 33 },
-	{ 977, 305, 26, 33 }
+	{ 312, 208, 28, 33 },
+	{ 354, 208, 28, 33 },
+	{ 458, 208, 28, 33 },
+	{ 500, 208, 28, 33 }
 }
 local item_in_slot = {
-	function() return ogse.load_var( "item_in_slot_1", "medkit" ) end,
-	function() return ogse.load_var( "item_in_slot_2", "bandage" ) end,
-	function() return ogse.load_var( "item_in_slot_3", "conserva" ) end,
-	function() return ogse.load_var( "item_in_slot_4", "antirad" ) end
+	function() return ogse.load_var("item_in_slot_1", "medkit") end,
+	function() return ogse.load_var("item_in_slot_2", "bandage") end,
+	function() return ogse.load_var("item_in_slot_3", "conserva") end,
+	function() return ogse.load_var("item_in_slot_4", "antirad") end
 }
 
 -- Получение количества предметов в инвентаре ГГ
@@ -48,21 +48,67 @@ function CUI_InvButton:__init( slot_num ) super()
 	self:AddCallback(id, ui_events.STATIC_FOCUS_RECEIVED, function(n) slot_focus = n end, slot_num)
 	self:AddCallback(id, ui_events.STATIC_FOCUS_LOST, function() slot_focus = false end)
 end
+
 function CUI_InvButton:__finalize()
 	--log1("--delete CUI_InvButton")
 end
 
-local function on_drag_drop( obj )
+local quick_slot_icon = {}
+local quick_slot_num = {}
+local quick_slot_key = {}
+
+local function add_hud()
+	local hud = get_hud()
+	if not hud then return end
+
+	for i = 1, 4 do
+		local section = item_in_slot[i]()
+		local quick_slot_back = hud:GetCustomStatic("quick_slot_back_"..i) or hud:AddCustomStatic("quick_slot_back_"..i, true)
+
+		local dik = bind_to_dik(key_bindings["kQUICK_SLOT_"..i])
+		local key_name = dik and dik_to_keyname(dik) or false
+
+		if not quick_slot_icon[i] then
+			quick_slot_icon[i] = CUIStatic()
+			quick_slot_icon[i]:SetAutoDelete(true)
+			quick_slot_icon[i]:SetWndPos(2, 7)
+			quick_slot_icon[i]:SetWndSize(33, 33)
+			quick_slot_icon[i]:SetStretchTexture(true)
+			CIconParams(section):set_shader(quick_slot_icon[i])
+			quick_slot_back:wnd():AttachChild(quick_slot_icon[i])
+
+			quick_slot_num[i] = CUIStatic()
+			quick_slot_num[i]:SetAutoDelete(true)
+			quick_slot_num[i]:SetText("x"..count_item_slot[i])
+			quick_slot_num[i]:SetWndPos(2, 1)
+			quick_slot_back:wnd():AttachChild(quick_slot_num[i])
+
+			quick_slot_key[i] = CUIStatic()
+			quick_slot_key[i]:SetAutoDelete(true)
+			quick_slot_key[i]:SetText(key_name and key_name:sub(2) or "")
+			quick_slot_key[i]:SetWndPos(2, 28)
+			quick_slot_back:wnd():AttachChild(quick_slot_key[i])
+		else
+			CIconParams(section):set_shader(quick_slot_icon[i])
+			quick_slot_num[i]:SetText("x"..count_item_slot[i])
+			quick_slot_key[i]:SetText(key_name and key_name:sub(2) or "")
+		end
+		--quick_slot_icon:wnd():SetColor(db.actor:object(section) and GetARGB(255,255,255,255) or GetARGB(128,255,255,255))
+	end
+end
+
+local function on_drag_drop(obj)
 	local section = obj:section()
-	local quickslot = get_string( section, "eat_portions_num" )
+	local quickslot = get_string(section, "eat_portions_num")
 	if not quickslot or not slot_focus then return end
 
 	ogse.save_var("item_in_slot_"..slot_focus, section)
-	CIconParams( section ):set_shader( slots_wnd_storage[slot_focus].slot )
+	CIconParams(section):set_shader(slots_wnd_storage[slot_focus].slot)
 	count_item_slot[slot_focus] = count_item_by_section(section)
 
 	local snd_obj = xr_sound.get_safe_sound_object([[interface\inv_slot]])
 	snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 0.7)
+	add_hud()
 end
 
 local function on_item_take(obj)
@@ -72,6 +118,7 @@ local function on_item_take(obj)
 			count_item_slot[i] = count_item_slot[i] + 1
 		end
 	end
+	add_hud()
 end
 
 local function on_item_drop(obj)
@@ -81,6 +128,7 @@ local function on_item_drop(obj)
 			count_item_slot[i] = count_item_slot[i] - 1
 		end
 	end
+	add_hud()
 end
 
 local function inventory_open()
@@ -104,39 +152,6 @@ local function inventory_hide()
 	slots_wnd_storage = {}
 end
 
-
-local function add_hud()
-	local hud = get_hud()
-	if not hud then return end
-
-	for i = 1, 4 do   
-		local section = item_in_slot[i]()
-		local quick_slot_static = hud:GetCustomStatic("quick_slot_"..i) or hud:AddCustomStatic("quick_slot_"..i, true)
-		CIconParams( section ):set_shader( quick_slot_static:wnd() )
-		quick_slot_static:wnd():SetColor( db.actor:object(section) and GetARGB(255,255,255,255) or GetARGB(128,255,255,255) )
-
-		local quick_slot_num_static = hud:GetCustomStatic("quick_slot_item_number_"..i) or hud:AddCustomStatic("quick_slot_item_number_"..i, true)
-		quick_slot_num_static:wnd():SetText("x"..count_item_slot[i])
-
-		local quick_slot_key_static = hud:GetCustomStatic("quick_slot_key_"..i) or hud:AddCustomStatic("quick_slot_key_"..i, true)
-		local dik = bind_to_dik(key_bindings["kQUICK_SLOT_"..i])
-		local key_name = dik and dik_to_keyname(dik) or false
-		quick_slot_key_static:wnd():SetText(key_name and key_name:sub(2) or "")
-	end
-end
-
-local function remove_hud()
-	local hud = get_hud()
-	if not hud then return end
-
-	for i = 1, 4 do   
-		hud:RemoveCustomStatic("quick_slot_"..i)
-		hud:RemoveCustomStatic("quick_slot_item_number_"..i)
-		hud:RemoveCustomStatic("quick_slot_key_"..i)
-	end
-end
-
-
 local function eat_qs_item(slot)
 	local section = item_in_slot[slot]()
 	if section then
@@ -145,7 +160,7 @@ local function eat_qs_item(slot)
 			db.actor:eat(item)
 			return true
 		end
-	end				
+	end
 end
 
 local binds_table = {
@@ -162,25 +177,16 @@ local function on_key_down(key, bind)
 
 	if fun then
 		return fun()
-	elseif bind == key_bindings.kSCORES then
-		add_hud()
 	end
 end
-
-local function on_key_up(key, bind)
-	if bind == key_bindings.kSCORES then
-		remove_hud()
-	end
-end
-
 
 function attach(sm)
-	sm:subscribe({ signal = "on_inventory_open", fun = inventory_open }) 
-	sm:subscribe({ signal = "on_inventory_hide", fun = inventory_hide }) 
+	sm:subscribe({ signal = "on_inventory_open", fun = inventory_open })
+	sm:subscribe({ signal = "on_inventory_hide", fun = inventory_hide })
 	sm:subscribe({ signal = "on_fake_drag_drop", fun = on_drag_drop   })
 	sm:subscribe({ signal = "on_take",           fun = on_item_take   })
 	sm:subscribe({ signal = "on_drop",           fun = on_item_drop   })
 	sm:subscribe({ signal = "on_use",            fun = on_item_drop   })
 	sm:subscribe({ signal = "on_key_down",	     fun = on_key_down    })
-	sm:subscribe({ signal = "on_key_up",	     fun = on_key_up      })
+	sm:subscribe({ signal = "on_first_update",	 fun = add_hud		  })
 end

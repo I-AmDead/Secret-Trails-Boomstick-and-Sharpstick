@@ -988,8 +988,6 @@
             <give_info>grig_start_dialog_done</give_info>
             <action>antreg.hvosty_otdal</action>
             <action>braad_test.create_pripyat_restr</action>
-            <action>braad_test.create_mg_restr1</action>
-            <action>braad_test.create_mg_restr2</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -1368,7 +1366,6 @@
         </phrase>
         <phrase id="1">
             <text>grig_swamp_dialog_est_1</text>
-            <action>antreg.del_lesnik2</action>
             <action>y_level.delete_aver_mg</action>
             <next>2</next>
         </phrase>
@@ -1379,8 +1376,6 @@
             <action>y_level.create_swamp_les</action>
             <action>antreg.spawn_hunters_aver</action>
             <action>antreg.spawn_zahar</action>
-            <action>antreg.spawn_lesnik3</action>
-            <action>antreg.spawn_lesnik_cats</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -1456,7 +1451,7 @@
 
 
 <dialog id="lesnik_cats_dialog">
-    <has_info>lesnik_cats_have</has_info>
+    <has_info>lesnik_cats_start</has_info>
     <dont_has_info>lesnik_cats_done</dont_has_info>
     <phrase_list>
         <phrase id="0">
@@ -2026,7 +2021,6 @@
             <text>smith_one_dialog_4</text>
             <give_info>smith_one_dialog_start</give_info>
             <action>antreg.del_grek</action>
-            <action>antreg.del_lesnik3</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -2055,9 +2049,6 @@
         <phrase id="4">
             <text>kapral_poisk_dialog_4</text>
             <give_info>foster_spawn</give_info>
-            <give_info>foster_restrictor</give_info>
-            <action>braad_test.create_kapral_restr</action>
-            <action>antreg.spawn_lesnik4</action>
             <action>antreg.spawn_grek2</action>
         </phrase>
     </phrase_list>
@@ -2752,37 +2743,9 @@
         <phrase id="6">
             <text>karina_pda_dialog_est_6</text>
             <give_info>karina_pda_est_start</give_info>
-            <action>antreg.karina_idem</action>
-            <action>braad_test.create_karina2_restr</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-
-<dialog id="karina_perehod_dialog">
-    <has_info>karina_prishli</has_info>
-    <dont_has_info>karina_perehod_dialog_start</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>karina_perehod_dialog_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>karina_perehod_dialog_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>karina_perehod_dialog_2</text>
-            <next>3</next>
-        </phrase>
-        <phrase id="3">
-            <text>karina_perehod_dialog_3</text>
-            <next>4</next>
-        </phrase>
-        <phrase id="4">
-            <text>karina_perehod_dialog_4</text>
-            <give_info>karina_perehod_dialog_start</give_info>
             <action>y_level.create_aver_bolota</action>
             <action>antreg.spawn_karina2</action>
+            <action>xyz_teleportation.swamp_karina</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -3854,10 +3817,6 @@
             <give_info>maroder_start_dialog_start</give_info>
             <action>braad_test.create_maroder2_restr</action>
             <action>antreg.spawn_nato_outfit</action>
-            <action>braad_test.create_nato_restr</action>
-            <action>braad_test.create_nato1_restr</action>
-            <action>braad_test.create_nato4_restr</action>
-            <action>braad_test.create_nato7_restr</action>
             <action>dialogs.break_dialog</action>
         </phrase>
     </phrase_list>
@@ -3948,11 +3907,6 @@
             <give_info>smith_maroder_dialog_start</give_info>
             <give_info>maroder_enemy</give_info>
             <action>antreg.smith_arsenal_dal</action>
-            <action>braad_test.create_nato2_restr</action>
-            <action>braad_test.create_nato3_restr</action>
-            <action>braad_test.create_nato5_restr</action>
-            <action>braad_test.create_nato6_restr</action>
-            <action>antreg.del_metka_nato</action>
         </phrase>
     </phrase_list>
 </dialog>

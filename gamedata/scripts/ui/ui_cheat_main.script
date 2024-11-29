@@ -63,9 +63,7 @@ local classes = {
 		[clsid.wpn_val]                 = true,
 		[clsid.wpn_val_s]               = true,
 		[clsid.wpn_vintorez]            = true,
-		[clsid.wpn_vintorez_s]          = true,
-		--[clsid.wpn_walther]             = true,
-		--[clsid.wpn_walther_s]           = true
+		[clsid.wpn_vintorez_s]          = true
 	},
 	addons = {
 		[clsid.wpn_grenade_launcher]    = true,

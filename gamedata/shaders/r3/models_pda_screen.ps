@@ -20,7 +20,7 @@ float4 problems_main(v2p I)
     // Растягиваем картинку под неправильные пропорции модели ганса
     I.tc0.x = resize(I.tc0.x, screen_res.y / screen_res.x, 0.5);
     I.tc0.x = resize(I.tc0.x, screen_res.x / screen_res.y, 0.5);
-    //I.tc0.x = resize(I.tc0.x, 1.25, 0.0); // Тут отмасштабировал под наш ui
+    // I.tc0.x = resize(I.tc0.x, 1.25, 0.0); // Тут отмасштабировал под наш ui
 
     // узкая полоска искажений
     float problems = frac(timers.z * 5 * (1 + 2 * m_affects.x));
@@ -44,11 +44,15 @@ float4 problems_main(v2p I)
     t_vp2.g += noise;
     t_vp2.b += noise;
 
-    //отключение экрана
+    // отключение экрана
     t_vp2.rgb = (m_affects.x > 0.41) ? 0 : t_vp2.rgb;
 
     if (m_affects.a > 0 && m_affects.x >= 0.08)
         t_vp2.rgb += pda_loading(I.tc0);
+
+    // Уменьшение яркости изображения
+    float brightness_factor = 0.7;
+    t_vp2.rgb *= brightness_factor;
 
     return float4(t_vp2.r, t_vp2.g, t_vp2.b, m_affects.z);
 }

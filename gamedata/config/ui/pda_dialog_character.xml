@@ -1,28 +1,28 @@
 <window>
     <!-- ICON -->
-    <icon_static x="0" y="0" width="165" height="108"/>
+    <icon_static x="0" y="0" width="135" height="108"/>
 
     <!-- RANK -->
-    <rank_caption x="175" y="0" width="100" height="15">
-        <text align="l" x="0" y="0" font="letterica16" r="128" g="128" b="128">ui_st_rank</text>
+    <rank_caption x="145" y="10" width="170" height="15">
+        <text align="l" x="0" y="0" font="letterica18" r="128" g="128" b="128">ui_st_rank</text>
     </rank_caption>
-    <rank_static x="175" y="15" width="100" height="15">
-        <text align="l" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
+    <rank_static x="145" y="10" width="170" height="15">
+        <text align="r" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
     </rank_static>
 
-    <reputation_caption x="175" y="70" width="100" height="15">
-        <text x="0" y="0" font="letterica16" r="128" g="128" b="128" a="255">ui_st_reputation</text>
+    <reputation_caption x="145" y="80" width="170" height="15">
+        <text x="0" y="0" font="letterica18" r="128" g="128" b="128" a="255">ui_st_reputation</text>
     </reputation_caption>
-    <reputation_static x="175" y="85" width="100" height="15">
-        <text align="l" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
+    <reputation_static x="145" y="80" width="170" height="15">
+        <text align="r" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
     </reputation_static>
 
     <!-- COMMUNITY -->
-    <community_caption x="175" y="35" width="100" height="15">
-        <text align="l" x="0" y="0" font="letterica16" r="128" g="128" b="128" a="255">ui_st_community</text>
+    <community_caption x="145" y="45" width="170" height="15">
+        <text align="l" x="0" y="0" font="letterica18" r="128" g="128" b="128" a="255">ui_st_community</text>
     </community_caption>
-    <community_static x="175" y="50" width="100" height="15">
-        <text align="l" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
+    <community_static x="145" y="45" width="170" height="15">
+        <text align="r" x="0" y="0" font="letterica18" r="150" g="150" b="180"/>
     </community_static>
 </window>
 

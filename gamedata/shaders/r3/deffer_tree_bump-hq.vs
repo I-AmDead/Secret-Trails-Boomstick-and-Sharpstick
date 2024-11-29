@@ -15,6 +15,12 @@ uniform float4 consts; // {1/quant,1/quant,???,???}
 uniform float4 c_scale, c_bias, wind, wave;
 uniform float2 c_sun; // x=*, y=+
 
+////////////////
+float4 consts_old;
+float4 wave_old;
+float4 wind_old;
+////////////////
+
 #ifdef SSFX_WIND
 #include "screenspace_wind.h"
 #endif
@@ -34,23 +40,47 @@ v2p_bumped main(v_tree I)
     float frac = I.tc.z * consts.x; // fractional (or rigidity)
     float inten = H * dp; // intensity
     float2 wind_result = calc_xz_wave(wind.xz * inten, frac);
+# ifdef USE_TREEWAVE
+    wind_result = 0;
+# endif
+    float4 w_pos = float4(pos.x + wind_result.x, pos.y, pos.z + wind_result.y, 1);
+
+    //////////////
+    // prev
+    dp = calc_cyclic(wave_old.w + dot(pos, (float3)wave_old));
+    frac = I.tc.z * consts_old.x;
+    inten = H * dp;
+    float2 result = calc_xz_wave(wind_old.xz * inten, frac);
+# ifdef USE_TREEWAVE
+    result = 0;
+# endif
+    float4 w_pos_previous = float4(pos.x + result.x, pos.y, pos.z + result.y, 1);
+    //////////
 #else
-    float2 wind_result = ssfx_wind_tree_trunk(pos, H, ssfx_wind_setup()).xy;
+    wind_setup wset = ssfx_wind_setup();
+    float2 wind_result = ssfx_wind_tree_trunk(pos, H, wset).xy;
+    float4 w_pos = float4(pos.x + wind_result.x, pos.y, pos.z + wind_result.y, 1);
+
+    wind_setup wset_old = ssfx_wind_setup(true);
+    float2 wind_result_old = ssfx_wind_tree_trunk(pos, H, wset_old, true).xy;
+    float4 w_pos_previous = float4(pos.x + wind_result_old.x, pos.y, pos.z + wind_result_old.y, 1);
 #endif
 
-#ifdef USE_TREEWAVE
-    wind_result = 0;
-#endif
-    float4 w_pos = float4(pos.x + wind_result.x, pos.y, pos.z + wind_result.y, 1);
     float2 tc = (I.tc * consts).xy;
     float hemi = clamp(I.Nh.w * c_scale.w + c_bias.w, 0.3f, 1.0f); // Limit hemi - SSS Update 14.5
-    //	float 	hemi 	= I.Nh.w;
 
     // Eye-space pos/normal
     v2p_bumped O;
     float3 Pe = mul(m_V, w_pos);
     O.tcdh = float4(tc.xyyy);
     O.hpos = mul(m_VP, w_pos);
+
+    //////////
+    O.hpos_old = mul(m_VP_old, w_pos_previous);
+    O.hpos_curr = O.hpos;
+    O.hpos.xy = get_taa_jitter(O.hpos);
+    /////////////
+
     O.position = float4(Pe, hemi);
 
 #if defined(USE_R2_STATIC_SUN) && !defined(USE_LM_HEMI)

@@ -1,8 +1,3 @@
--- ���� �������� ��� ����� ���������.
--- KRodin (c) 2018
--- ������� ��������� �������� ������, ������� ������� (�.�. �� �� �������������� �������) � ������ �����.
--- ������� ���������� ��� ������������� � ������� OGSR.
-
 local hint_colors = {
     ["gray"]   = { 255, 215, 195, 170 },
     ["white"]  = { 255, 215, 195, 170 },
@@ -42,6 +37,8 @@ local gameplay_params = {
     { "g_mouse_wheel_switch_slot",   "mm_opt_gameplay",  "track", { "ui_mm_switch_slot", hint_colors.white, "", "" },                                                         { is_bool = true} },
 
     { "rs_always_active",            "mm_opt_gameplay",  "track", { "ui_mm_always_active", hint_colors.white, "", "" },                                                       { is_bool = true} },
+
+    { "g_first_person_body",         "mm_opt_gameplay",  "track", { "ui_mm_first_person_body", hint_colors.white, "", "" },                                                       { is_bool = true} },
 
     separator("sep_fakescope"),
 
@@ -102,8 +99,7 @@ local video_params = {
     { "r__detail_density",           "mm_opt_video_adv", "track", { "ui_mm_detail_density", hint_colors.red, "video_settings_name_4", "video_settings_desc_4" },               { step = 0.01, invert = true, smooth = false } },
     { "r__detail_scale",             "mm_opt_video_adv", "track", { "ui_mm_detail_scale", hint_colors.yellow, "", "" },                                                        { step = 0.01, smooth = false } },
 
-    { "r_aa_mode",                   "mm_opt_video_adv", "track", { "ui_mm_r_aa_mode", hint_colors.green, "video_settings_name_18", "video_settings_desc_18" },                { is_token = true, depend = "restart" } },
-    { "r3_msaa",                     "mm_opt_video_adv", "track", { "ui_mm_msaa", hint_colors.red, "video_settings_name_19", "video_settings_desc_19" },                       { is_token = true, depend = "restart" } },
+    { "r_aa_mode",                   "mm_opt_video_adv", "track", { "ui_mm_r_aa_mode", hint_colors.green, "video_settings_name_18", "video_settings_desc_18" },                { is_token = true } },
     { "r_ao_mode",                   "mm_opt_video_adv", "track", { "ui_mm_ao_mode", hint_colors.red, "video_settings_name_38", "video_settings_desc_38" },                    { is_token = true, depend = "restart" } },
     { "r2_ssao",                     "mm_opt_video_adv", "track", { "ui_mm_ssao_quality", hint_colors.red, "video_settings_name_37", "video_settings_desc_37" },               { is_token = true, depend = "restart" } },
 
@@ -120,7 +116,6 @@ local video_params = {
     { "r4_enable_tessellation",      "mm_opt_video_adv", "track", { "ui_mm_r4_enable_tessellation", hint_colors.green, "video_settings_name_52", "video_settings_desc_52" },   { is_bool = true, depend = "vid" } },
 
     { "r2_steep_parallax",           "mm_opt_video_adv", "track", { "ui_mm_r2_steep_parallax", hint_colors.yellow, "video_settings_name_39", "video_settings_desc_39" },       { is_bool = true} },
-    { "r_terrain_parallax_enable",   "mm_opt_video_adv", "track", { "ui_mm_terrain_parallax", hint_colors.yellow, "video_settings_name_24", "video_settings_desc_24" },        { is_bool = true, depend = "restart" } },
 
     { "g_dof_reload",                "mm_opt_video_adv", "track", { "ui_mm_r2_reload_dof", hint_colors.white, "video_settings_name_41", "video_settings_desc_41" },            { is_bool = true} },
     { "g_dof_zoom",                  "mm_opt_video_adv", "track", { "ui_mm_r2_zoom_dof", hint_colors.white, "video_settings_name_42", "video_settings_desc_42" },              { is_bool = true} },
@@ -135,9 +130,26 @@ local video_params = {
 
     { "r2_volumetric_lights",        "mm_opt_video_adv", "track", { "ui_mm_volumetric_light", hint_colors.yellow, "video_settings_name_50", "video_settings_desc_50" },        { is_bool = true} },
     { "ai_use_torch_dynamic_lights", "mm_opt_video_adv", "track", { "ui_mm_npc_torch", hint_colors.yellow, "video_settings_name_14", "video_settings_desc_14" },               { is_bool = true} },
-    { "ai_use_torch_dynamic_lights", "mm_opt_video_adv", "track", { "ui_mm_npc_torch", hint_colors.yellow, "video_settings_name_14", "video_settings_desc_14" },               { is_bool = true} },
 
-    { "r_lens_flare",                "mm_opt_video_adv", "track", { "ui_mm_r2_lens_flare", hint_colors.white, "video_settings_name_45", "video_settings_desc_45" },            { is_bool = true} },
+    { "r_lens_flare",                "mm_opt_video_adv", "track", { "ui_mm_r2_lens_flare", hint_colors.white, "video_settings_name_45", "video_settings_desc_45" },            { is_integer = true} },
+
+    --DEBUG
+    --[[
+    { "ssfx_terrain_offset",         "mm_opt_video",     "track", { "ui_mm_r2_terrain_offset_1", hint_colors.white, "", "" },                                                  { index = 0, step = 0.01} },
+    { "ssfx_terrain_offset",         "mm_opt_video",     "track", { "ui_mm_r2_terrain_offset_2", hint_colors.white, "", "" },                                                  { index = 1, step = 0.01} },
+    { "ssfx_terrain_offset",         "mm_opt_video",     "track", { "ui_mm_r2_terrain_offset_3", hint_colors.white, "", "" },                                                  { index = 2, step = 0.01} },
+    { "ssfx_terrain_offset",         "mm_opt_video",     "track", { "ui_mm_r2_terrain_offset_4", hint_colors.white, "", "" },                                                  { index = 3, step = 0.01} },
+
+    { "ssfx_ssr_1",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_1_1", hint_colors.white, "", "" },                                                  { index = 0, step = 0.01} },
+    { "ssfx_ssr_1",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_1_2", hint_colors.white, "", "" },                                                  { index = 1, step = 0.01} },
+    { "ssfx_ssr_1",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_1_3", hint_colors.white, "", "" },                                                  { index = 2, step = 0.01} },
+    { "ssfx_ssr_1",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_1_4", hint_colors.white, "", "" },                                                  { index = 3, step = 0.01} },
+
+    { "ssfx_ssr_2",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_2_1", hint_colors.white, "", "" },                                                  { index = 0, step = 0.01} },
+    { "ssfx_ssr_2",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_2_2", hint_colors.white, "", "" },                                                  { index = 1, step = 0.01} },
+    { "ssfx_ssr_2",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_2_3", hint_colors.white, "", "" },                                                  { index = 2, step = 0.01} },
+    { "ssfx_ssr_2",                  "mm_opt_video",     "track", { "ui_mm_r2_ssr_2_4", hint_colors.white, "", "" },                                                  { index = 3, step = 0.01} },
+    --]]
 
     separator("sep_asynchrony"),
 
@@ -204,13 +216,10 @@ function options_dialog:InitControls()
         table.insert(pages, control)
     end
 
-    --add_page("VIDEO", ui_mm_opt_adv.opt_adv(adv_opt_params, live_mode))
     add_page("VIDEO", ui_mm_opt_adv.opt_adv(video_params, live_mode))
     add_page("AUDIO", ui_mm_opt_adv.opt_adv(audio_params, live_mode))
     add_page("GAMEPLAY", ui_mm_opt_adv.opt_adv(gameplay_params, live_mode))
     add_page("CONTROLS", ui_mm_opt_controls.opt_controls())
-
-    --add_page("SSS", ui_mm_opt_adv.opt_adv(sss_params, live_mode))
 
     self.pages = pages
 
@@ -247,7 +256,7 @@ end
 
 local opt_tbl = { "mm_opt_video_preset", "mm_opt_video", "mm_opt_video_adv", "mm_opt_gameplay", "mm_opt_sound", "mm_opt_controls", "key_binding" }
 
-function options_dialog:UpdateOptValues(flag) --true - ��������� ���������, false - �������� ���������, nil - ������ �������� ��������� ��������
+function options_dialog:UpdateOptValues(flag)
     if flag == false then
         game_options.init()
     end
@@ -342,7 +351,7 @@ function options_dialog:OnBtnAccept()
 
     self:HintRefresh()
 
-    cmd("cfg_save") -- ��������� ���� �������� �� ����
+    cmd("cfg_save")
 end
 
 function options_dialog:OnBtnCancel()

@@ -30,8 +30,6 @@
             #include "gameplay\character_drugs.xml"
     </supplies>
 
-    <actor_dialog>
-        perehod_dialog2</actor_dialog>
     <actor_dialog>perehod_dialog1</actor_dialog>
     <actor_dialog>
         vas1_dialog</actor_dialog>

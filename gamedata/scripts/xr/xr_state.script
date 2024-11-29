@@ -294,7 +294,7 @@ function body_state:weapon_slot()
     if id == nil then
         return 0
     end
-    if id == clsid.wpn_pm_s or id == clsid.wpn_walther_s or id == clsid.wpn_hpsa_s or id == clsid.wpn_fort_s or id ==
+    if id == clsid.wpn_pm_s or id == clsid.wpn_hpsa_s or id == clsid.wpn_fort_s or id ==
         clsid.wpn_usp45_s then
         return 1
     end
@@ -350,8 +350,8 @@ function body_state:anim_update(type)
     end
 
     -- ' Определяем нужно ли добавлять анимацию или ждать
-    if (self.states.begin == nil or time_global() - self.states.begin > self.states.idle) and self.npc:animation_count() <=
-        1 and self.states.current_state ~= nil then
+    if (self.states.begin == nil or time_global() - self.states.begin > self.states.idle) 
+    and self.npc:animation_count() <= 1 and self.states.current_state ~= nil then
         -- ' Определение промежутков времени между анимациями
         self.states.begin = time_global()
         self.states.idle = (math.random(self.animations[self.states.current_state].prop.maxidle) +
@@ -374,8 +374,7 @@ function body_state:anim_update(type)
 
             self.npc:clear_animations()
             if self.animations[self.states.current_state].rnd[self:weapon_slot()][r] ~= nil then
-                self.npc:add_animation(self.animations[self.states.current_state].rnd[self:weapon_slot()][r], true,
-                    false)
+                self.npc:add_animation(self.animations[self.states.current_state].rnd[self:weapon_slot()][r], true, false)
             end
             if self.animations[type].idle ~= nil then
                 self.npc:add_animation(self.animations[self.states.current_state].idle[self:weapon_slot()], true, false)

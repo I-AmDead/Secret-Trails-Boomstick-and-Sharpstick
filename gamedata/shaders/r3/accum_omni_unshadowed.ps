@@ -2,19 +2,7 @@
 #include "lmodel.h"
 
 //	TODO: DX10: Move to Load
-#ifdef MSAA_OPTIMIZATION
-#ifdef GBUFFER_OPTIMIZATION
-float4 main(float4 tc : TEXCOORD0, float4 pos2d : SV_Position, uint iSample : SV_SAMPLEINDEX) : SV_Target
-#else
-float4 main(float4 tc : TEXCOORD0, uint iSample : SV_SAMPLEINDEX) : SV_Target
-#endif
-#else
-#ifdef GBUFFER_OPTIMIZATION
 float4 main(float4 tc : TEXCOORD0, float4 pos2d : SV_Position) : SV_Target
-#else
-float4 main(float4 tc : TEXCOORD0) : SV_Target
-#endif
-#endif
 {
     const float bias_mul = 0.999f;
 
@@ -44,7 +32,7 @@ float4 main(float4 tc : TEXCOORD0) : SV_Target
     float4 light = plight_local(m, _P, _N, _C, Ldynamic_pos, Ldynamic_pos.w, rsqr);
 
 #ifdef SSFX_ENHANCED_SHADERS
-    return float4(SRGBToLinear(Ldynamic_color.rgb), 0) * light;
+    return float4(SRGBToLinear(Ldynamic_color.rgb), 1.f) * light;
 #else
     return float4(Ldynamic_color * light);
 #endif

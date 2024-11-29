@@ -6,7 +6,7 @@ action_count                     = 9
  
 [sprite]
 shader                           = particles\alpha_add
-texture                          = semitone\anomalies\springboard\flash_particle
+texture                          = semitone\anomalies\flash\flash_particle
  
 [velocity_scale]
 value                            = 0.000000, 0.020000, 0.000000

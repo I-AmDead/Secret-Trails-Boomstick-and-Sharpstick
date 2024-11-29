@@ -91,8 +91,7 @@ function gulag:load_jobs()
 
         if type(job.online) == "string" then
             job.online_condlist = job.online
-            job.online = xr_logic.parse_condlist(self.smrttrn, "gulag:setup_job_online", "job_online",
-                job.online_condlist)
+            job.online = xr_logic.parse_condlist(self.smrttrn, "gulag:setup_job_online", "job_online", job.online_condlist)
         end
     end
 
@@ -192,23 +191,23 @@ function gulag:prepare_jobs()
 
     end
 
-    local job
-
     for obj_id, jobN in pairs(self.ObjectJob) do
 
-        job = self.Job[jobN]
+        local job = self.Job[jobN]
+        if job then
 
-        job.object = obj_id
-        self.ObjectJobPathName[obj_id] = job.path_name
+            job.object = obj_id
+            self.ObjectJobPathName[obj_id] = job.path_name
 
-        if not self:availState(job.state, self.state) then
+            if not self:availState(job.state, self.state) then
+                self.Need_Reinit[obj_id] = true
+                log1("!!DEBUG_GULAG_UNAVAIL [" .. obj_id .. "] [" .. job.section .. "] path [" .. tostring(job.path_name) .. "]")
+            end
+        else
             self.Need_Reinit[obj_id] = true
-            log1("!!DEBUG_GULAG_UNAVAIL [" .. obj_id .. "] [" .. job.section .. "] path [" .. tostring(job.path_name) ..
-                     "]")
+            log3("!!DEBUG_GULAG_job_not_found for objid: [%s], jobn: [%s]", obj_id, jobN)
         end
-
     end
-
 end
 
 -- составить список работ существующих в данном состоянии гулага.
@@ -446,7 +445,7 @@ function gulag:update()
     self:update_objs()
     self:update_beginning_jobs()
 
-    if self.calculateStates ~= nil and db.actor_proxy.online then
+    if self.calculateStates and db.actor_proxy.online then
         self:changeState(self.calculateStates(self))
     end
 
@@ -561,9 +560,10 @@ end
 function gulag:obj1_job_suits_obj2(obj_id, npc_info)
     local job = self.Job[self.ObjectJob[obj_id]]
 
-    -- if not job then
-    --	self:print()
-    -- end
+    if not job then
+    	log3("[%s]: not job, obj = %s, obj_id = %d", script_name(), self.npc_info[obj_id].name, obj_id)
+    	self:print()
+    end
 
     return not job.predicate or job.predicate(npc_info, self)
 end
@@ -619,7 +619,6 @@ function gulag:prepare_available_jobs()
                 self:free_obj_and_reinit(job.object)
             end
             table.insert(Job_avail, job)
-            -- else
         end
     end
     return Job_avail
@@ -742,8 +741,7 @@ function gulag:find_obj_on_jobLow_for_jobHigh(Job_avail, job_high)
     local priority = nil
     local obj_suitable = nil
 
-    while i > job_high_num and (not priority or priority == Job_avail[i].prior) and
-        (Job_avail[i].prior < job_high.prior) do
+    while i > job_high_num and (not priority or priority == Job_avail[i].prior) and (Job_avail[i].prior < job_high.prior) do
         job_low = Job_avail[i]
 
         if job_low.object ~= nil and (not predicate or predicate(self.npc_info[job_low.object], self)) then
@@ -812,18 +810,30 @@ end
 function gulag:print()
     local npc_info, going
 
-    if true then
-        return
+    log2("***  %s -- State: %d -- Total population: %d -- Non exclusive population: %d/%d", self.name, self.state, self:get_population(), self:get_non_exclusive_population(), self.capacity_non_exclusive)
+
+    for k,v in pairs( self.Object ) do
+        log2("id: %d name: %s", k, self.npc_info[k].name)
     end
 
     for k, v in ipairs(self.Job_avail_in_state) do
+        log2("section: %s, prior %d", v.section, v.prior)
         if v.object ~= nil then
             npc_info = self.npc_info[v.object]
+
+            log2("ObjID: %d", v.object)
+            log2("Actor: %s, [%s][%s][%s]", npc_info.name, npc_info.team, npc_info.squad, npc_info.group)
 
             if self.Object_begin_job[v.object] then
                 going = ""
             else
                 going = "(going to job)"
+            end
+
+            if self.Object[v.object] == true then
+                log2("current section: <<<offline>>> %s", going)
+            else
+                log2("current section: %s %s", db.storage[v.object].active_section or "<<<nil>>>", going)
             end
         end
     end
@@ -851,8 +861,7 @@ function gulag:get_stype(obj_id)
     elseif IsMonster(nil, self.npc_info[obj_id].class_id) then
         return modules.stype_mobile
     else
-        abort("[smart_terrain %s] obj=%s clsid=%d: gulag supports stalkers and monsters only!", self.name,
-            self.npc_info[obj_id].name, self.npc_info[obj_id].class_id)
+        abort("[smart_terrain %s] obj=%s clsid=%d: gulag supports stalkers and monsters only!", self.name, self.npc_info[obj_id].name, self.npc_info[obj_id].class_id)
     end
 end
 
@@ -1038,7 +1047,9 @@ function gulag:free_obj(obj_id)
 
         self.ObjectJob[obj_id] = nil
 
-        self.Job[jobN].object = nil
+        if self.Job[jobN] then
+            self.Job[jobN].object  = nil
+        end
 
         self.ObjectJobPathName[obj_id] = nil
 
@@ -1192,8 +1203,7 @@ function setup_gulag_and_logic_on_spawn(obj, st, sobject, stype, loaded)
         abort("GULAG NOT FOUND IN SMART [%s] !", strn:name())
     end
     --
-    local need_setup_logic = strn.gulag.Object_begin_job[obj:id()] and
-                                 (not loaded or st.loaded_gulag_name ~= strn.gulag.name)
+    local need_setup_logic = strn.gulag.Object_begin_job[obj:id()] and (not loaded or st.loaded_gulag_name ~= strn.gulag.name)
     local need_setup_restrictors = strn.gulag.Object_begin_job[obj:id()]
     --
     strn.gulag:object_setup_online(obj:id(), obj, need_setup_logic, need_setup_restrictors)

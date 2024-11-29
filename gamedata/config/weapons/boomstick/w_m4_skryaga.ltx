@@ -70,7 +70,7 @@ ammo_elapsed                             = 30
 ammo_mag_size                            = 30
 startup_ammo                             = 90
 
-scope_names 			         = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, kemper, mepro, ekp8_18, 0kp2
+scope_names 			         = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, pn23, compm4s, kemper, mepro, ekp8_18, 0kp2
 scope_status      = 2
 
 scope_respawn                         = wpn_m4_skryaga
@@ -82,9 +82,7 @@ scope_respawn_c-more                  = wpn_m4_skryaga_c-more
 scope_respawn_point_aimpro            = wpn_m4_skryaga_point_aimpro
 scope_respawn_leupold                 = wpn_m4_skryaga_leupold
 scope_respawn_aimpoint                = wpn_m4_skryaga_aimpoint
-scope_respawn_e0t2                    = wpn_m4_skryaga_e0t2
 scope_respawn_pn23                    = wpn_m4_skryaga_pn23
-scope_respawn_gauss_sight             = wpn_m4_skryaga_gauss_sight
 scope_respawn_compm4s                 = wpn_m4_skryaga_compm4s
 scope_respawn_kemper                  = wpn_m4_skryaga_kemper
 scope_respawn_mepro                   = wpn_m4_skryaga_mepro
@@ -691,26 +689,6 @@ aim_hud_offset_pos_16x9				= -0.048319,0.001090,-0.023085
 aim_hud_offset_rot_16x9				= -0.002000,0.025100,0.000000
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_skryaga_e0t2]:wpn_m4_skryaga
-
-visual					= dynamics\weapons\wpn_m4_skryaga\wpn_m4_skryaga_world.ogf
-
-hud						= wpn_m4_skryaga_e0t2_hud
-
-inv_weight                                         = 2.627
-
-scope_name			    = e0t2
-scope_x			= 110
-scope_y			= -6
-
-[wpn_m4_skryaga_e0t2_hud]:wpn_m4_skryaga_hud
-
-item_visual				= dynamics\weapons\wpn_m4_skryaga\wpn_m4_skryaga_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9				= -0.047919,0.007740,-0.023085
-aim_hud_offset_rot_16x9				= -0.002000,0.025300,0.000000
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_m4_skryaga_pn23]:wpn_m4_skryaga
 
 visual					= dynamics\weapons\wpn_m4_skryaga\wpn_m4_skryaga_world.ogf
@@ -732,26 +710,6 @@ aim_hud_offset_rot_16x9				= -0.002000,0.025300,0.000000
 
 hands_position_16x9				= 0.010200,-0.014240,0.020400
 hands_orientation_16x9			= 1.400999,0.370000,0.000000
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_skryaga_gauss_sight]:wpn_m4_skryaga
-
-visual					= dynamics\weapons\wpn_m4_skryaga\wpn_m4_skryaga_world.ogf
-
-hud					    = wpn_m4_skryaga_gauss_sight_hud
-
-scope_name                              = gauss_sight
-scope_x                            = 70
-scope_y                            = 0
-
-inv_weight                                         = 3.800
-
-[wpn_m4_skryaga_gauss_sight_hud]:wpn_m4_skryaga_hud
-
-item_visual				= dynamics\weapons\wpn_m4_skryaga\wpn_m4_skryaga_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9				= -0.049419,0.016490,-0.060000
-aim_hud_offset_rot_16x9				= -0.002000,0.025300,0.000000
 
 ;------------------------------------------------------------------------------------------------------------------------------
 [wpn_m4_skryaga_compm4s]:wpn_m4_skryaga

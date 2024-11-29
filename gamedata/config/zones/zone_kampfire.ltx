@@ -19,8 +19,8 @@ artefacts					=
 BirthProbability 			= 0.0
 
 ;----------- Anomaly settings -----------------------
-min_start_power		= 0.99
-max_start_power		= 1.00
+min_start_power		= 0.39
+max_start_power		= 0.4
 attenuation			= 1
 period				= 1
 min_artefact_count	= 0
@@ -54,23 +54,22 @@ ignore_artefacts			= true
 
 blowout_light				= on
 light_color                 = 0.4,0.3,0.1
-light_animation             = koster
-light_range                 = 8
-light_time                  = 0.35
-light_height                = 0.5
+light_animation             = koster_01
+light_range                 = 7.0
+light_time                  = 2
+light_height                = 0.75
 
 light_volumetric_enable			= true
 light_volumetric_quality		= 0.9
 light_volumetric_intensity		= 0.05
 light_volumetric_distance		= 0.3
 
-idle_light_r1			    = false
 idle_light          	    = on
-idle_light_range            = 4
-idle_light_range_delta      = 0.25
+idle_light_range            = 5.0
+idle_light_range_delta      = 0.5
 idle_light_color	        = 0.4,0.3,0.1
-idle_light_anim             = koster_00
-idle_light_height           = 0.4
+idle_light_anim				= koster_01
+idle_light_height           = 0.75
 
 idle_light_volumetric_enable		= true
 idle_light_volumetric_quality		= 0.9
@@ -152,17 +151,17 @@ ignore_artefacts			= true
 
 blowout_light				= off
 light_color		    		= 1.8,1.7,1.4
-light_animation             = koster
-light_range		    		= 8
+light_animation				= koster
+light_range		    		= 15
 light_time 		    		= 0.35
 light_height				= 0.35			;подъем источника света на высоту
 
 
-idle_light					= off
-idle_light_range			= 8.0
-idle_light_range_delta 		= 0.25
+idle_light				= off
+idle_light_range			= 15
+idle_light_range_delta			= 0.25
 idle_light_anim				= koster_00
-idle_light_height			= 0.75			;подъем источника света на высоту
+idle_light_height			= 0.35			;подъем источника света на высоту
 
 awaking_time				= 500
 blowout_time				= 1000	

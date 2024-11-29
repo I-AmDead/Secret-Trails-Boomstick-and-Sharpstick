@@ -560,25 +560,24 @@ function start_game_callback()
 		[clsid.psy_dog_phantom_s] 		= true
 		}
 	anomaly_classes = {
-		[clsid.zone_acid_fog] = true,
-		[clsid.zone_bfuzz] = true,
-		[clsid.zone_bfuzz_s] = true,
-		[clsid.zone_dead] = true,
-		[clsid.zone_galant_s] = true,
-		[clsid.zone_galantine] = true,
-		[clsid.zone_mbald_s] = true,
-		[clsid.zone_mincer] = true,
-		[clsid.zone_mincer_s] = true,
-		[clsid.zone_mosquito_bald] = true,
-		[clsid.ameba_zone] = true,
-		[clsid.zone_rusty_hair] = true,
-		[clsid.torrid_zone] = true,
-		[clsid.zone_radioactive] = true
+		[clsid.zone_bfuzz_s]			= true,
+		[clsid.zone_buzz_s]				= true,
+		[clsid.zone_mbald_s]			= true,
+		[clsid.zone_galant_s]			= true,
+		[clsid.zone_mincer_s]			= true,
+		[clsid.zone_zharka_s]			= true,
+		[clsid.zone_electra_s]			= true,
+		[clsid.zone_ice_s]				= true,
+		[clsid.zone_radiation_s]		= true,
+		[clsid.zone_thermal_s]			= true,
+		[clsid.zone_acidic_s]			= true,
+		[clsid.zone_psy_s]				= true
 		}
 	stalker_classes = {
 		[clsid.actor] 					= true,
-		[clsid.script_stalker] 			= true
-		}	
+		[clsid.script_stalker] 			= true,
+		[clsid.script_trader]			= true
+		}
 	weapon_classes = {
 		[clsid.wpn_ak74] 				= true,
 		[clsid.wpn_ak74_s] 				= true,
@@ -627,7 +626,7 @@ function start_game_callback()
 		[clsid.equ_military]			= true,
 		[clsid.equ_scientific] 			= true,
 		[clsid.equ_stalker] 			= true,
-		[clsid.equ_stalker_s] 			= true	
+		[clsid.equ_stalker_s] 			= true
 	}
 
 	m_netpk.attach()
@@ -1378,4 +1377,51 @@ function get_actor_power_max()
 end
 function set_actor_power_max( v )
   db.actor.conditions.power_max = v
+end
+
+function spawn_patrol(section, patrol_name)
+	local patrol = patrol(patrol_name)
+	return alife():create(section, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
+end
+
+local graph_cache = {}
+
+local function get_lv_gv(level_name, pos)
+    local lg = level_graph()
+    local ct = cross_table()
+
+    if level.name() ~= level_name then
+        if graph_cache[level_name] then
+            lg = graph_cache[level_name].lg
+            ct = graph_cache[level_name].ct
+        else
+            lg = level_graph(level_name)
+            ct = cross_table(level_name)
+            graph_cache[level_name] = { lg = lg, ct = ct }
+        end
+    end
+
+    local lv = lg:vertex_id(pos)
+    if not lg:valid_vertex_id(lv) then
+        lv = lg:nearest_vertex_id(pos)
+    end
+    local gv = ct:vertex(lv):game_vertex_id()
+    return lv, gv
+end
+
+function alife_create(section, level_name, pos)
+    local cls = get_class(section)
+    local is_alive =  stalker_classes[cls] or monster_classes[cls]
+
+    if is_alive then
+        -- spawn on valid lv \ gv for any alive
+        local lv, gv = get_lv_gv(level_name, pos)
+		log3("is_alive section = %s lv = %d gv = %d", section, lv, gv)
+        return alife():create(section, pos, lv, gv)
+    else
+        -- spawn all else on first lv \ gv of level
+        local lv_params = ex_level.vertex_setting_by_name[level_name]
+		log3("section = %s lv = %d gv = %d", section, lv_params[3], lv_params[1])
+        return alife():create(section, pos, lv_params[3], lv_params[1])
+    end
 end

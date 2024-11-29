@@ -7,7 +7,7 @@
 
 #define EMBLUR_SAMPLES int(12) // Blur samples     // default int(12)
 #define EMBLUR_CLAMP float(0.025) // Max blur length  // default float(0.025)  // vanilla float(0.012)
-#define EMBLUR_LENGTH float(12) // Blur length      // default float(120)    // vanilla float(12)
+#define EMBLUR_LENGTH float(120) // Blur length      // default float(120)    // vanilla float(12)
 #define EMBLUR_DITHER float(1) // Blur dither      // default float(1)
 
 #define EMBLUR_CONE_DITHER float(0.25) // Cone like dithering aka blurriness // default float(0.25)

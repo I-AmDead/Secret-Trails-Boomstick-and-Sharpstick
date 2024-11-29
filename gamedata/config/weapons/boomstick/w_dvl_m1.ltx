@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------------------------------
-[wpn_dvl10_m1]:identity_immunities,base_wpn_zoom
+[wpn_dvl10]:identity_immunities,base_wpn_zoom
 GroupControlSection  = spawn_group
 $npc = on
 $prefetch    = 8
@@ -39,7 +39,7 @@ cost = 9900
 repair_type  = rifle_7
 weapon_class = sniper_rifle
 
-hud  = wpn_dvl10_m1_hud
+hud  = wpn_dvl10_hud
 visual       = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
 
 position     = -0.08, 0.1, -0.23
@@ -66,15 +66,6 @@ light_time   = 0.2
 light_var_color      = 0.05
 light_var_range      = 0.5
 
-upgrades     = up_gr_firstab_sv98, up_gr_seconab_sv98, up_gr_thirdab_sv98
-;installed_upgrades   =
-upgrade_scheme       = upgrade_scheme_svd
-
-upgr_icon_x  = 1750
-upgr_icon_y  = 100
-upgr_icon_width      = 300
-upgr_icon_height     = 100
-
 fire_modes   = 1
 ammo_class   = ammo_7.62x51_fmj, ammo_7.62x51_ap
 ammo_elapsed = 10
@@ -82,15 +73,14 @@ ammo_mag_size        = 10
 startup_ammo = 10
 
 scope_status = 2
-scope_names       = acog, specter, leupold, pn23, gauss_sight, marchf
+scope_names       = acog, specter, leupold, pn23, marchf
 
-scope_respawn                         = wpn_dvl10_m1
-scope_respawn_acog                    = wpn_dvl10_m1_acog
-scope_respawn_specter                 = wpn_dvl10_m1_specter
-scope_respawn_leupold                 = wpn_dvl10_m1_leupold
-scope_respawn_pn23                    = wpn_dvl10_m1_pn23
-scope_respawn_gauss_sight             = wpn_dvl10_m1_gauss_sight
-scope_respawn_marchf                  = wpn_dvl10_m1_marchf
+scope_respawn                         = wpn_dvl10
+scope_respawn_acog                    = wpn_dvl10_acog
+scope_respawn_specter                 = wpn_dvl10_specter
+scope_respawn_leupold                 = wpn_dvl10_leupold
+scope_respawn_pn23                    = wpn_dvl10_pn23
+scope_respawn_marchf                  = wpn_dvl10_marchf
 
 silencer_name        = wpn_addon_silencer
 silencer_status      = 0
@@ -182,7 +172,7 @@ snd_reload_jammed       = eft_wp\dvl_10\dvl_reload_empty
 snd_shoot_actor					    = wpn_dvlsp_snd_silenced_actor
 snd_shoot				    = wpn_dvlsp_snd_silenced
 ;----------------------------------------------------------------------HUD------------------------------------------------------------------------------
-[wpn_dvl10_m1_hud]:hud_base
+[wpn_dvl10_hud]:hud_base
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_hud.ogf
 
@@ -305,20 +295,19 @@ shoot_point  = 0, 0, -0.7
 freelook_z_offset_mul = 0.3
  
 ;-----------------------------------------------------------------------Addons--------------------------------------------------------------------------
-[wpn_dvl10_m1_acog]:wpn_dvl10_m1
+[wpn_dvl10_acog]:wpn_dvl10
 
 visual	      = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
 
-$spawn      = "weapons\wpn_dvl10_m1_acog"
 scope_name = acog
 scope_x       = 79
 scope_y       = 0
 
 inv_weight  = 6.050
 
-hud	        = wpn_dvl10_m1_acog_hud
+hud	        = wpn_dvl10_acog_hud
 
-[wpn_dvl10_m1_acog_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_acog_hud]:wpn_dvl10_hud
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_acog_hud.ogf
 
@@ -330,11 +319,10 @@ aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
 
 
 ;-------------------------------------------------------------------------------
-[wpn_dvl10_m1_specter]:wpn_dvl10_m1
+[wpn_dvl10_specter]:wpn_dvl10
 
-$spawn	 = "weapons\wpn_dvl10_m1_specter"
 visual	 = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
-hud	 = wpn_dvl10_m1_specter_hud
+hud	 = wpn_dvl10_specter_hud
 
 scope_name       = specter
 scope_x     = 56
@@ -342,7 +330,7 @@ scope_y     = -4
 
 inv_weight  = 6.370
 
-[wpn_dvl10_m1_specter_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_specter_hud]:wpn_dvl10_hud
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_specter_hud.ogf
 
@@ -354,13 +342,10 @@ aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
 
 
 ;--------------------------------------------------------------------------------
-[wpn_dvl10_m1_pks]:wpn_dvl10_m1
-
-$spawn	 = "weapons\wpn_dvl10_m1_pks"
+[wpn_dvl10_pks]:wpn_dvl10
 
 visual	      = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
-
-hud	 = wpn_dvl10_m1_pks_hud
+hud	 = wpn_dvl10_pks_hud
 
 scope_name       = pks
 scope_x     = 60
@@ -368,7 +353,7 @@ scope_y     = 2
 
 inv_weight  = 6.500
 
-[wpn_dvl10_m1_pks_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_pks_hud]:wpn_dvl10_hud
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_pks_hud.ogf
 
@@ -380,13 +365,10 @@ aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
 
 
 --------------------------------------------------------------------------------
-[wpn_dvl10_m1_leupold]:wpn_dvl10_m1
-
-$spawn	 = "weapons\wpn_dvl10_m1_leupold"
+[wpn_dvl10_leupold]:wpn_dvl10
 
 visual	 = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
-
-hud	 = wpn_dvl10_m1_leupold_hud
+hud	 = wpn_dvl10_leupold_hud
 
 scope_name       = leupold
 scope_x     = 64
@@ -394,7 +376,7 @@ scope_y     = 4
 
 inv_weight  = 6.380
 
-[wpn_dvl10_m1_leupold_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_leupold_hud]:wpn_dvl10_hud
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_leupold_hud.ogf
 
@@ -406,12 +388,10 @@ aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
 
 
 ----------------------------------------------------------------------------------------------------------
-[wpn_dvl10_m1_pn23]:wpn_dvl10_m1
-$spawn	 = "weapons\wpn_dvl10_m1_pn23"
+[wpn_dvl10_pn23]:wpn_dvl10
 
 visual	 = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
-
-hud	 = wpn_dvl10_m1_pn23_hud
+hud	 = wpn_dvl10_pn23_hud
 
 scope_name       = pn23
 scope_x     = 44
@@ -419,7 +399,7 @@ scope_y     = -7
 
 inv_weight  = 6.349
 
-[wpn_dvl10_m1_pn23_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_pn23_hud]:wpn_dvl10_hud
 
 item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_pn23_hud.ogf
 
@@ -430,39 +410,17 @@ aim_hud_offset_pos_16x9  = -0.048165,0.007650,-0.036201
 aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
 
 
---------------------------------------------------------------------------------
-[wpn_dvl10_m1_gauss_sight]:wpn_dvl10_m1
-$spawn	 = "weapons\wpn_dvl10_m1_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
-
-hud	 = wpn_dvl10_m1_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 54
-scope_y     = 8
-
-inv_weight  = 7.100
-
-[wpn_dvl10_m1_gauss_sight_hud]:wpn_dvl10_m1_hud
-
-item_visual  = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.046965,0.012150,-0.050001
-aim_hud_offset_rot_16x9  = 0.016137,0.019610,0.000000
-
-
 ;-----------------------------------------------------------------------------------------------------
-[wpn_dvl10_m1_marchf]:wpn_dvl10_m1
+[wpn_dvl10_marchf]:wpn_dvl10
 scope_name       = marchf
 scope_x     = 64
 scope_y     = 4
 
 inv_weight        = 6.340
 
-hud       = wpn_dvl10_m1_marchf_hud
+hud       = wpn_dvl10_marchf_hud
 visual    = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_world.ogf
 
-[wpn_dvl10_m1_marchf_hud]:wpn_dvl10_m1_hud
+[wpn_dvl10_marchf_hud]:wpn_dvl10_hud
 item_visual       = dynamics\weapons\wpn_dvl10_m1\wpn_dvl10_m1_marchf_hud.ogf
 ;-----------------------------------------------------------------------------------------------------

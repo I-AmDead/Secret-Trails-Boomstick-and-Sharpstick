@@ -587,39 +587,11 @@
 #include "gameplay\character_drugs.xml"
     </supplies>
 
+    <actor_dialog>five_urok_dialog</actor_dialog>
     <actor_dialog>four_urok_dialog_est</actor_dialog>
     <actor_dialog>four_urok_dialog</actor_dialog>
     <actor_dialog>tri_urok_dialog_est</actor_dialog>
     <actor_dialog>tri_urok_dialog</actor_dialog>		
-		#include "gameplay\character_dialogs.xml"
-</specific_character>
-
-<!-------------------------- esc_mervin_last ------------------------>
-<specific_character id="esc_mervin_last" team_default = "1">
-    <name>Мэрвин</name>
-    <icon>ui_npc_u_marvin</icon>
-    <map_icon x="3" y="0"></map_icon>
-    <bio>pri_monolith_leader_bio</bio>
-
-    <class>esc_mervin_last</class>
-    <community>trader</community>
-
-
-    <rank>989</rank>
-    <reputation>-998</reputation>
-    <money min="20000" max="20500" infinitive="1"/>
-
-    <visual>actors\monolit\stalker_mo_mervin</visual>
-    <snd_config>characters_voice\human_01\monolith\</snd_config>
-    <crouch_type>-1</crouch_type>
-    <supplies>
-            [spawn] \n
-            ammo_5.45x39_fmj = 2 \n
-#include "gameplay\character_food.xml" \n
-#include "gameplay\character_drugs.xml"
-    </supplies>
-
-    <actor_dialog>five_urok_dialog</actor_dialog>
 		#include "gameplay\character_dialogs.xml"
 </specific_character>
 
@@ -643,7 +615,7 @@
     <visual>actors\killer\stalker_fantom_exoskeleton</visual>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n	
+			wpn_val \n	
             ammo_9x39_ap = 1 \n
             #include "gameplay\character_food.xml" \n
             #include "gameplay\character_drugs.xml"			
@@ -673,7 +645,7 @@
     <visual>actors\killer\stalker_fantom_exoskeleton</visual>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n	
+			wpn_val \n	
             ammo_9x39_ap = 1 \n
             #include "gameplay\character_food.xml" \n
             #include "gameplay\character_drugs.xml"			
@@ -1149,7 +1121,7 @@
       [spawn] \n
       wpn_sig220 \n
       ammo_11.43x23_fmj \n    
-      wpn_ak105_bas \n
+      wpn_m4a1_siber \n
       ammo_5.56x45_ss190 = 1 \n
       device_torch \n     
 #include "gameplay\character_items.xml"\n
@@ -2192,7 +2164,7 @@
     <crouch_type>1</crouch_type>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n
@@ -2234,7 +2206,7 @@
     <crouch_type>1</crouch_type>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n
@@ -3326,7 +3298,7 @@
 
     <supplies>
       [spawn] \n
-      wpn_val_tac \n
+      wpn_val \n
       ammo_9x39_sp5 \n
       device_torch \n
 #include "gameplay\character_drugs.xml" \n
@@ -3624,7 +3596,7 @@
 			wpn_walther_p99 \n
 			ammo_9x19_fmj \n
 			device_torch \n
-		    wpn_ak74u_m1_isg \n
+			wpn_ak74u_m1_isg \n
 			ammo_5.45x39_fmj = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -3653,7 +3625,7 @@
     <supplies>
 			[spawn] \n
 			device_torch \n
-		    wpn_ak74u \n
+			wpn_ak74u \n
 			ammo_5.45x39_fmj = 1 \n
 #include "gameplay\character_items.xml" \n
 #include "gameplay\character_drugs.xml" \n
@@ -3762,7 +3734,7 @@
 
 <!---------------------------yan_wound_ucen-------------------------------->
 <specific_character id="yan_wound_ucen" team_default = "1">
-    <name>доцент Дородин</name>
+    <name>Доцент Дородин</name>
     <icon>ui_npc_u_stalker_ecolog_military</icon>
     <map_icon x="0" y="6"></map_icon>
     <bio>ros_ecolog_guard_bio</bio>
@@ -4693,7 +4665,7 @@
 			part4 \n
 			sweets \n
 			money20 \n
-			wpn_groza \n
+			wpn_groza_m1 \n
 			ammo_5.45x39_ap = 3 \n
 			device_torch \n
 #include "gameplay\character_food.xml"
@@ -4826,7 +4798,7 @@
     <visual>actors\killer\stalker_ki_nauchniy</visual>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
             ammo_9x39_sp5 \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n
@@ -4894,7 +4866,7 @@
 			[spawn] \n
 			wpn_walther_p99 \n
 			ammo_9x19_pbp = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
             ammo_9x39_sp5 \n
 			device_torch \n
 #include "gameplay\character_drugs.xml" \n
@@ -5216,7 +5188,7 @@
     <crouch_type>1</crouch_type>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_ap \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n
@@ -5894,7 +5866,7 @@
     <crouch_type>-1</crouch_type>
     <supplies>
             [spawn] \n
-			wpn_val_tac \n	
+			wpn_vintorez_m1 \n	
             ammo_9x39_ap = 2 \n
 			device_torch \n
 #include "gameplay\character_food.xml" \n
@@ -6034,7 +6006,7 @@
 			[spawn] \n
 			wpn_korth \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"
@@ -6064,7 +6036,7 @@
 			[spawn] \n
 			wpn_korth \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"
@@ -6094,7 +6066,7 @@
 			[spawn] \n
 			wpn_korth \n
 			ammo_11.43x23_hydro = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"
@@ -6284,7 +6256,7 @@
     <crouch_type>-1</crouch_type>
     <supplies>
             [spawn] \n
-			wpn_val_tac \n	
+			wpn_vintorez_m1 \n	
             ammo_9x39_ap = 2 \n
 			device_torch \n
 #include "gameplay\character_food.xml" \n
@@ -6504,7 +6476,7 @@
     <crouch_type>-1</crouch_type>
     <supplies>
             [spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_ap \n
 			device_torch \n
 #include "gameplay\character_food.xml" \n
@@ -7154,7 +7126,7 @@
     <crouch_type>1</crouch_type>
     <supplies>
 			[spawn] \n
-			wpn_val_tac \n
+			wpn_val \n
 		ammo_9x39_sp5 = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n
@@ -7189,7 +7161,7 @@
       [spawn] \n
       wpn_sig220 \n
       ammo_11.43x23_hydro \n  
-      wpn_val_tac \n
+      wpn_val \n
       ammo_9x39_sp5 = 1 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -7305,7 +7277,7 @@
 			[spawn] \n
 			wpn_pm_bas \n
 			ammo_9x18_fmj = 1 \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 \n
 			device_torch \n
 			hand_radio \n
@@ -7315,12 +7287,11 @@
 
     <actor_dialog>volk_talk_vilage_est</actor_dialog>
     <actor_dialog>volk_talk_vilage</actor_dialog>
-    <actor_dialog>volk_give_pda</actor_dialog>
     <actor_dialog>volk_about_tainik</actor_dialog>
     <actor_dialog>volk_thanks_tolik</actor_dialog>
     <actor_dialog>escape_lager_volk_story</actor_dialog>
     <actor_dialog>escape_lager_volk_story2</actor_dialog>
-		#include "gameplay\character_criticals.xml"
+	#include "gameplay\character_criticals.xml"
         #include "gameplay\character_dialogs.xml"
 </specific_character>
 <!---------------------------------------esc_tolik----------------------------------------------------->

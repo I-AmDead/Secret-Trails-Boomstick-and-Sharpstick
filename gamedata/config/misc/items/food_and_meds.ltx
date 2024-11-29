@@ -16,6 +16,7 @@ eat_radiation		= 0
 wounds_heal_perc	= 0
 eat_portions_num	= 1
 
+keep_visual		= true
 
 [bread]:use_base
 visual			= huds\world\bread.ogf
@@ -107,19 +108,19 @@ snd_use_anm		= interface\item_usage\kolbasa_use
 
 hud			= kolbasa_hud
 
-cam_effect		= camera_effects\weapon\eat_hleb_d_use_h.anm
+cam_effect		= camera_effects\weapon\kolbasa.anm
 
 
 [kolbasa_hud]:hud_base
 item_visual             = dynamics\weapons\wpn_eat\food\kolbasa_hud.ogf
-hands_position		= 0.020000,0.010000,0.040000
 hands_orientation	= 0.000000,0.000000,0.000000
-hands_position_16x9	= 0.020000,0.010000,0.040000
-hands_orientation_16x9	= 0.000000,0.000000,0.000000
+hands_orientation_16x9 	= 0.000000,0.000000,0.000000
+hands_position		= -0.100000,-0.197000,0.060000
+hands_position_16x9	= -0.100000,-0.197000,0.060000
 
-hud_fov			= 0.5
+hud_fov			= 0.7
 
-anm_use			= kolbasa_hand_animation, kolbasa_hud_animation
+anm_use			= kolbasa, kolbasa_hud
 
 
 [conserva]:use_base
@@ -159,19 +160,23 @@ snd_use_anm		= interface\item_usage\conserva_use
 
 hud			= conserva_hud
 
-cam_effect		= camera_effects\weapon\tushka_draw.anm
+cam_effect		= camera_effects\weapon\conserva.anm
 
+trash_section		= conserva_trash
+trash_spawn_timing	= 8500
 
 [conserva_hud]:hud_base
 item_visual             = dynamics\weapons\wpn_eat\conservi\wpn_eat_tushonka.ogf
-hands_position		= 0.0, -0.143296, 0.284578
-hands_orientation	= 0.0, 16.4738, 0.0
-hands_position_16x9	= 0.003000,-0.165296,0.185578
-hands_orientation_16x9	= 0.000000,16.473801,0.000000
+item_position		= -0.01,0.005,-0.005
 
-hud_fov			= 0.55
+hands_orientation	= 0.000000,0.000000,0.000000
+hands_orientation_16x9 	= 0.000000,0.000000,0.000000
+hands_position		= -0.01,0.01,-0.1
+hands_position_16x9	= -0.01,0.01,-0.1
 
-anm_use			= tushka_draw
+hud_fov			= 0.65
+
+anm_use			= conserva, conserva_hud
 
 
 [sweets]:use_base
@@ -254,17 +259,22 @@ snd_use_anm		= interface\item_usage\energy_drink
 
 hud			= energy_drink_hud
 
-cam_effect		= camera_effects\weapon\energy_drink.anm
+cam_effect		= camera_effects\weapon\energy.anm
+
+trash_section		= energy_drink_trash
+trash_spawn_timing	= 4850
 
 
 [energy_drink_hud]:hud_base
 item_visual		= gwr\equipment\energy_drink\energy_hud.ogf
-hands_position		= 0.0,-0.02,0.07
-hands_position_16x9	= 0.0,-0.02,0.07
+hands_orientation	= 0.000000,0.000000,0.000000
+hands_orientation_16x9	= 0.000000,0.000000,0.000000
+hands_position          = 0.000000,-0.023800,0.07
+hands_position_16x9     = 0.000000,-0.023800,0.07
 
 hud_fov			= 0.65
 
-anm_use			= energetic, energy_drink
+anm_use			= energy, energy_hud
 
 
 [oceanic815]:use_base
@@ -385,7 +395,7 @@ anm_use			= vodka, vodka_hud
 [cognac]:use_base
 class			= II_BOTTL
 visual			= equipments\cognac
-description		= cognac_descr
+description		= cognac_desc
 
 ef_weapon_type		= 0
 
@@ -480,18 +490,20 @@ hud_exo			= antirad_exo_hud
 cam_effect		= camera_effects\weapon\antirad.anm
 cam_effect_exo		= camera_effects\weapon\medkit_exo_antirad.anm
 
+trash_section		= antirad_trash
+trash_spawn_timing	= 6100
+
 
 [antirad_hud]:hud_base
 item_visual             = gwr\equipment\antirad\antirad_hud.ogf
-hands_position		= 0.0, 0.0, 0.1
-hands_orientation	= 0.0, 0.0, 0.0
-
-item_position		= 0.0,0.0,0.0
-item_orientation	= 0.0,0.0,0.0
+hands_orientation	= 0.000000,0.000000,0.000000
+hands_orientation_16x9	= 0.000000,0.000000,0.000000
+hands_position	        = 0.000000,0.011600,0.015000
+hands_position_16x9     = 0.000000,0.011600,0.015000
 
 hud_fov 		= 0.65
 
-anm_use			= rad, antirad
+anm_use			= antirad
 
 [antirad_exo_hud]:hud_base
 item_visual             = gwr\equipment\medkit_exo\medkit_exo_hud.ogf
@@ -548,18 +560,20 @@ hud_exo			= medkit_exo_hud
 cam_effect		= camera_effects\weapon\apteka.anm
 cam_effect_exo		= camera_effects\weapon\medkit_exo.anm
 
+trash_section		= medkit_trash
+trash_spawn_timing	= 2800
+
 
 [medkit_hud]:hud_base
 item_visual             = gwr\equipment\medkit\medkit_hud.ogf
-hands_position		= 0.0,-0.025,0.12
-hands_orientation	= 0.0,0.0,0.0
-hands_position_16x9	= 0.0,-0.025,0.12
-hands_orientation_16x9	= 0.0,0.0,0.0
+hands_orientation	= 0.000000,0.000000,0.000000
+hands_orientation_16x9	= 0.000000,0.000000,0.000000
+hands_position	        = 0.000000,-0.010000,0.030000
+hands_position_16x9     = 0.000000,-0.010000,0.030000
 
 hud_fov 		= 0.65
 
-anm_use			= med1, med1
-anm_use_alt		= med, med
+anm_use			= apteka, apteka
 
 
 [medkit_exo_hud]:antirad_exo_hud
@@ -582,11 +596,10 @@ inv_grid_y		= 14
 
 icon_name		= medkit_blue
 
-cost			= 220
+cost			= 400
 
 ; eatable item
 eat_health		= 0.6
-eat_power		= -0.3
 eat_radiation		= -0.1
 
 wounds_heal_perc	= 1.0
@@ -630,11 +643,10 @@ inv_grid_y		= 5
 
 icon_name		= medkit_yellow
 
-cost			= 300
+cost			= 500
 
 ; eatable item
 eat_health		= 1.0
-eat_power		= -0.3
 eat_radiation		= -1.0
 
 wounds_heal_perc	= 0.3
@@ -665,7 +677,7 @@ anm_use			= medkit_exo_yellow
 
 [psy_inject]:use_base
 class			= II_ANTIR
-visual          	= huds\world\aptechka.ogf
+visual          	= gwr\equipment\injector\psy_injector
 description		= psy_block_desc
 
 inv_name		= psy_block
@@ -683,11 +695,14 @@ cost		   	= 3000
 
 item_used_timing	= 1500
 snd_use			= items_sounds\inv_food
-snd_use_anm		= interface\item_usage\inject
+snd_use_anm		= interface\item_usage\stimulator_use
 
 hud			= psy_inject_hud
 
-cam_effect		= itemuse_anm_effects\syringe_anim_s.anm
+cam_effect		= camera_effects\weapon\stimulator.anm
+
+trash_section		= psy_inject_trash
+trash_spawn_timing	= 1800
 
 boost_time		= 30
 boost_telepat_protection = 1
@@ -696,17 +711,19 @@ boost_psy_health_restore = 0.1
 
 [psy_inject_hud]:hud_base
 
-hud_fov			= 0.5
-hands_position		= -0.02,0.01, 0.04
-hands_position_16x9	= -0.02,0.01, 0.04
-item_visual		= gwr\equipment\injector\psy_injector
+hud_fov			= 0.65
+hands_orientation	= 0.000000,-0.010000,0.000000
+hands_orientation_16x9	= 0.000000,-0.010000,0.000000
+hands_position		= 0.000000,0.000000,0.000000
+hands_position_16x9     = 0.000000,0.000000,0.000000
+item_visual		= gwr\equipment\injector\psy_injector_hud
 
-anm_use			= obdalbos_h, obdalbos_b
+anm_use			= stimulator, stimulator_hud
 
 
 [rad_inject]:use_base
 class			= II_ANTIR
-visual          	= huds\world\aptechka.ogf
+visual          	= gwr\equipment\injector\rad_injector
 description		= rad_block_desc
 
 inv_name		= rad_block
@@ -720,7 +737,7 @@ inv_grid_y         	= 41
 
 icon_name		= injector_red
 
-cost		   	= 3000
+cost		   	= 2000
 
 item_used_timing	= 1500
 snd_use			= items_sounds\inv_food
@@ -730,24 +747,21 @@ hud			= rad_inject_hud
 
 cam_effect		= itemuse_anm_effects\syringe_anim_s.anm
 
+trash_section		= rad_inject_trash
+trash_spawn_timing	= 1800
+
 boost_time		= 60
 boost_radiation_protection = 1
 
 
-[rad_inject_hud]:hud_base
-
-hud_fov			= 0.52
-hands_position		= -0.02,0.01, 0.04
-hands_position_16x9	= -0.02,0.01, 0.04
-item_visual		= gwr\equipment\injector\rad_injector
-
-anm_use			= obdalbos_h, obdalbos_b
+[rad_inject_hud]:psy_inject_hud
+item_visual		= gwr\equipment\injector\rad_injector_hud
 
 
 
 [rad_restore_inject]:use_base
 class			= II_ANTIR
-visual          	= huds\world\aptechka.ogf
+visual          	= gwr\equipment\injector\rad_restore_injector
 description		= rad_restore_desc
 
 inv_name		= rad_restore
@@ -761,7 +775,7 @@ inv_grid_y         	= 41
 
 icon_name		= injector_violet
 
-cost		   	= 3000
+cost		   	= 2000
 
 item_used_timing	= 1500
 snd_use			= items_sounds\inv_food
@@ -771,23 +785,20 @@ hud			= rad_restore_inject_hud
 
 cam_effect		= itemuse_anm_effects\syringe_anim_s.anm
 
+trash_section		= rad_restore_inject_trash
+trash_spawn_timing	= 1800
+
 boost_time		= 60
 boost_radiation_restore = 0.1
 
 
-[rad_restore_inject_hud]:hud_base
-
-hud_fov			= 0.52
-hands_position		= -0.02,0.01, 0.04
-hands_position_16x9	= -0.02,0.01, 0.04
-item_visual		= gwr\equipment\injector\rad_restore_injector
-
-anm_use			= obdalbos_h, obdalbos_b
+[rad_restore_inject_hud]:psy_inject_hud
+item_visual		= gwr\equipment\injector\rad_restore_injector_hud
 
 
 [weight_inject]:use_base
 class			= II_ANTIR
-visual          	= huds\world\aptechka.ogf
+visual          	= gwr\equipment\injector\weight_injector
 description		= weigth_boost_desc
 
 inv_name		= weigth_boost
@@ -801,7 +812,7 @@ inv_grid_y		= 41
 
 icon_name		= injector_yellow
 
-cost			= 3000
+cost			= 2000
 
 item_used_timing	= 1500
 snd_use			= items_sounds\inv_food
@@ -811,24 +822,21 @@ hud			= weight_inject_hud
 
 cam_effect		= itemuse_anm_effects\syringe_anim_s.anm
 
+trash_section		= weight_inject_trash
+trash_spawn_timing	= 1800
+
 boost_time		= 60
 boost_max_weight 	= 20
 boost_power_restore	= 0.1
 
 
-[weight_inject_hud]:hud_base
-
-hud_fov			= 0.52
-hands_position		= -0.02,0.01, 0.04
-hands_position_16x9	= -0.02,0.01, 0.04
-item_visual		= gwr\equipment\injector\weight_injector
-
-anm_use			= obdalbos_h, obdalbos_b
+[weight_inject_hud]:psy_inject_hud
+item_visual		= gwr\equipment\injector\weight_injector_hud
 
 
 [health_inject]:use_base
 class			= II_ANTIR
-visual          	= huds\world\aptechka.ogf
+visual          	= gwr\equipment\injector\health_injector
 description		= health_boost_desc
 
 inv_name		= health_boost
@@ -842,7 +850,7 @@ inv_grid_y		= 41
 
 icon_name		= injector_green
 
-cost		   	= 4000
+cost		   	= 2000
 
 item_used_timing	= 1500
 snd_use			= items_sounds\inv_food
@@ -852,25 +860,22 @@ hud			= health_inject_hud
 
 cam_effect		= itemuse_anm_effects\syringe_anim_s.anm
 
+trash_section		= health_inject_trash
+trash_spawn_timing	= 1800
+
 boost_time		= 60
 boost_health_restore 	= 0.1
 boost_bleeding_restore 	= 0.1
 
 
-[health_inject_hud]:hud_base
-
-hud_fov			= 0.52
-hands_position		= -0.02,0.01, 0.04
-hands_position_16x9	= -0.02,0.01, 0.04
-item_visual		= gwr\equipment\injector\health_injector
-
-anm_use			= obdalbos_h, obdalbos_b
+[health_inject_hud]:psy_inject_hud
+item_visual		= gwr\equipment\injector\health_injector_hud
 
 
 [antizombin]:use_base
 class			= II_MEDKI
 visual			= equipments\item_aptechka4.ogf
-description		= antizombin_descr
+description		= antizombin_desc
 inv_name		= antizombin
 inv_name_short		= antizombin
 inv_weight		= 0.3	;0.2
@@ -931,6 +936,9 @@ hud			= bandage_hud
 
 cam_effect		= camera_effects\weapon\bandage.anm
 
+trash_spawn_timing	= 1000
+trash_section		= bandage_trash
+
 
 [bandage_hud]:hud_base
 item_visual		= gwr\equipment\bandage\bandage_hud.ogf
@@ -942,7 +950,6 @@ hands_orientation_16x9	= 0,0,0
 hud_fov			= 0.65
 
 anm_use			= bint, bint
-anm_use_alt		= bint1, bint1
 
 
 [adulin]:use_base

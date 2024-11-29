@@ -22,15 +22,12 @@ local snd_pda_dead = sound_object('device\\pda\\pda_dead')
 
 local aux_counter = 0
 function surge_log(f, ...)
-    if not debug_logging then
-        return
-    end
+    if not debug_logging then return end
     if not fsurgelog then
         local surge_log_path = getFS():update_path("$logs$", "surge_log_" .. get_game_id() .. ".txt")
         fsurgelog = io.open(surge_log_path, "a")
     end
-    local time_str = time2string(game.get_game_time(), "%04d/%02d/%02d %02d:%02d:%02d.%03d",
-        {'y', 'm', 'd', 'h', 'min', 's', 'ms'})
+    local time_str = time2string(game.get_game_time(), "%04d/%02d/%02d %02d:%02d:%02d.%03d", {'y', 'm', 'd', 'h', 'min', 's', 'ms'})
     local cntr_str = string.format(" %03d] ", aux_counter)
     fsurgelog:write('[' .. time_str .. cntr_str .. f:format(...) .. '\n')
     aux_counter = aux_counter + 1
@@ -55,8 +52,7 @@ function on_actor_spawn()
 end
 
 function can_start_surge_now()
-    return not (lname == "l12_stancia" or lname == "l12_stancia_2" or lname == "l12u_control_monolith" or lname ==
-               "l12u_sarcofag" or lname == "swamp")
+    return not (lname == "l12_stancia" or lname == "l12_stancia_2" or lname == "l12u_control_monolith" or lname == "l12u_sarcofag" or lname == "swamp" or lname == "l13_deep")
 end
 
 function get_first_surge_wait_time()
@@ -115,15 +111,15 @@ local function start_pda_distortion(min, max)
         pda_distortion_timer = nil
     end
 
-    pda_distortion_timer = dsh.wait_condition(function()
+    pda_distortion_timer = dsh.wait_condition(
+    function()
         min = min + 1
         set_pda_params(vector():set(min / 1000, min / 1000, 0))
         return min == max
-    end, function()
-        pda_distortion_timer = nil
-    end, function()
-        ogsr_signals.get_mgr():reschedule(100)
-    end)
+    end, 
+    function() pda_distortion_timer = nil end, 
+    function() ogsr_signals.get_mgr():reschedule(100) end
+    )
 end
 
 function set_info_preblow()
@@ -789,8 +785,8 @@ function deadly_blowout()
 end
 
 local surge_hit_db = {
-	aver           = { power = 0.001,  type = hit.radiation},
-	predbannik     = { power = 0.001,  type = hit.radiation},
+	l10_red_forest = { power = 0.001,  type = hit.radiation},
+	l13_deep       = { power = 0.001,  type = hit.radiation},
 	swamp          = { power = 0.0,    type = hit.radiation},
 	l01_escape     = { power = 0.001,  type = hit.radiation},
 	l02_garbage    = { power = 0.001,  type = hit.radiation},
@@ -802,7 +798,7 @@ local surge_hit_db = {
 	l07_military   = {{power = 0.01,   type = hit.radiation}, {power = 0.2, type = hit.telepatic}},
 	l10_radar      = {{power = 0.02,   type = hit.radiation}, {power = 0.2, type = hit.telepatic}},
 	l11_pripyat    = {{power = 0.02,   type = hit.radiation}, {power = 0.2, type = hit.telepatic}},
-	dead_city      = {{power = 0.01,   type = hit.radiation}, {power = 0.1, type = hit.telepatic}}
+	l09_deadcity   = {{power = 0.01,   type = hit.radiation}, {power = 0.1, type = hit.telepatic}}
 }
 -- Нанесение хита актору в смертельной стадии выброса
 function hit_actor()

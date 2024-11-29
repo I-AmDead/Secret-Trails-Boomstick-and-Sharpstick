@@ -10,13 +10,6 @@ path_walk = brown_walk
 path_look = brown_look
 meet = no_meet@brown
 danger = danger_condition@brown
-on_info = {+brown_razgovor} walker@brown1
-
-[walker@brown1]
-path_walk = brown_walk
-path_look = brown_look
-meet = meet@brown
-danger = danger_condition@brown
 on_info = {+brown_gotov_idti} remark@brown1
 
 [remark@brown1]
@@ -29,9 +22,6 @@ on_timer = 2000 | walker@brown11
 [walker@brown11]
 path_walk = brown1_walk
 path_look = brown1_look
-def_state_moving1 = run
-def_state_moving2 = run
-def_state_moving3 = run
 meet = no_meet
 danger = danger_condition@brown
 on_signal = rep | %+brown_mesto1% walker@brown111

@@ -1,0 +1,118 @@
+#include "common.h"
+
+// classic TAA implementation by ya local shaderguy (LVutner)
+
+// SRVs
+Texture2D<float4> t_current;
+Texture2D<float4> t_previous;
+Texture2D<float2> t_motion_vectors; // RG16FLOAT
+Texture2D t_zbuffer; // R24G8
+
+// Sampler states
+SamplerState SamplerLinearClamp;
+SamplerState SamplerPointClamp;
+
+float3 find_closest_fragment_3x3(float2 texcoord)
+{
+    float4 zbuffer_gather_0 = t_zbuffer.GatherRed(SamplerPointClamp, texcoord, int2(0, 0));
+    float4 zbuffer_gather_1 = t_zbuffer.GatherRed(SamplerPointClamp, texcoord, int2(-1, 0));
+    float4 zbuffer_gather_2 = t_zbuffer.GatherRed(SamplerPointClamp, texcoord, int2(0, -1));
+    float4 zbuffer_gather_3 = t_zbuffer.GatherRed(SamplerPointClamp, texcoord, int2(-1, -1));
+
+    float3 tap_topleft = float3(-screen_res.z, -screen_res.w, zbuffer_gather_3.w);
+    float3 tap_topcenter = float3(0, -screen_res.w, zbuffer_gather_2.w);
+    float3 tap_topright = float3(screen_res.z, -screen_res.w, zbuffer_gather_2.z);
+
+    float3 tap_left = float3(-screen_res.z, 0, zbuffer_gather_1.w);
+    float3 tap_center = float3(0, 0, zbuffer_gather_0.w);
+    float3 tap_right = float3(screen_res.z, 0, zbuffer_gather_0.z);
+
+    float3 tap_downleft = float3(-screen_res.z, screen_res.w, zbuffer_gather_1.x);
+    float3 tap_downcenter = float3(0, screen_res.w, zbuffer_gather_0.x);
+    float3 tap_downright = float3(screen_res.z, screen_res.w, zbuffer_gather_0.y);
+
+    // test all samples
+    float3 closest = tap_topleft;
+    if (closest.z > tap_topcenter.z)
+        closest = tap_topcenter;
+    if (closest.z > tap_topright.z)
+        closest = tap_topright;
+
+    if (closest.z > tap_left.z)
+        closest = tap_left;
+    if (closest.z > tap_center.z)
+        closest = tap_center;
+    if (closest.z > tap_right.z)
+        closest = tap_right;
+
+    if (closest.z > tap_downleft.z)
+        closest = tap_downleft;
+    if (closest.z > tap_downcenter.z)
+        closest = tap_downcenter;
+    if (closest.z > tap_downright.z)
+        closest = tap_downright;
+
+    return float3(texcoord + closest.xy, closest.z);
+}
+
+float3 SMAABicubicFilter(float3 current_top, float3 current_bottom, float3 current_left, float3 current_right, float3 current_center, float3 previous_center, float2 texcoord,
+                         float4 rt_metrics, float sharpness_scale)
+{
+    float2 f = frac(rt_metrics.zw * texcoord - 0.5);
+    float c = 0.8 * sharpness_scale / 100.0;
+    float2 w = c * (f * f - f);
+    float4 color = float4(lerp(current_left, current_right, f.x), 1.0) * w.x + float4(lerp(current_top, current_bottom, f.y), 1.0) * w.y;
+    color += float4((1.0 + color.w) * previous_center - color.w * current_center, 1.0);
+    return color.xyz / color.w;
+}
+
+float4 main(p_screen I) : SV_Target
+{
+    // fetch center color (aliased)
+    float3 c_c = t_current.Load(int3(I.hpos.xy, 0)).xyz;
+
+    // dilate motion vectors
+    float2 motion_vectors = t_motion_vectors.SampleLevel(SamplerPointClamp, find_closest_fragment_3x3(I.tc0.xy).xy, 0).xy;
+
+    // previous frame texture coordinates
+    float2 tc_previous = I.tc0.xy + motion_vectors;
+
+    // early exit
+    if (any(tc_previous != saturate(tc_previous)))
+        return float4(c_c, 1.0);
+
+    // fetch 3x3 neighborhood (center is first)
+    float3 c_tl = t_current.Load(int3(I.hpos.xy, 0), int2(-1, -1)).xyz;
+    float3 c_t = t_current.Load(int3(I.hpos.xy, 0), int2(0, -1)).xyz;
+    float3 c_tr = t_current.Load(int3(I.hpos.xy, 0), int2(1, -1)).xyz;
+    float3 c_l = t_current.Load(int3(I.hpos.xy, 0), int2(-1, 0)).xyz;
+
+    float3 c_r = t_current.Load(int3(I.hpos.xy, 0), int2(1, 0)).xyz;
+    float3 c_bl = t_current.Load(int3(I.hpos.xy, 0), int2(-1, 1)).xyz;
+    float3 c_b = t_current.Load(int3(I.hpos.xy, 0), int2(0, 1)).xyz;
+    float3 c_br = t_current.Load(int3(I.hpos.xy, 0), int2(1, 1)).xyz;
+
+    // soft min-max window
+    float3 c_min = min(c_tl, min(c_t, min(c_tr, min(c_l, min(c_c, min(c_r, min(c_bl, min(c_b, c_br))))))));
+    c_min += min(c_t, min(c_l, min(c_c, min(c_r, c_c)))); // cross
+    c_min *= 0.5;
+
+    float3 c_max = max(c_tl, max(c_t, max(c_tr, max(c_l, max(c_c, max(c_r, max(c_bl, max(c_b, c_br))))))));
+    c_max += max(c_t, max(c_l, max(c_c, max(c_r, c_c))));
+    c_max *= 0.5;
+
+    // 1tap bicubic filter
+    float3 p_c = SMAABicubicFilter(c_t, c_b, c_l, c_r, c_c, t_previous.Sample(SamplerLinearClamp, tc_previous).xyz, tc_previous, screen_res.zwxy, 60.0);
+
+    // neighborhood clamping
+    p_c = clamp(p_c, c_min, c_max);
+
+    // weights
+    float response = lerp(0.125, 0.91, 1.0 - saturate(length(motion_vectors) * 54.0)); // 54 better
+
+    // proper blending for 8bit rendertargets
+    float3 delta = c_c - p_c;
+    float3 clamped_weight = min(response.xxx, saturate(1.0 - rcp(255.0) * rcp(delta)));
+    float3 c_blended = p_c + (1.0 - clamped_weight) * delta; // final color
+    return float4(c_blended, 1.0);
+}

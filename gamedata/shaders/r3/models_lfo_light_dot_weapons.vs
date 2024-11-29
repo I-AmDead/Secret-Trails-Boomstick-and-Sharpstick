@@ -15,7 +15,9 @@ vf _main(v_model v)
     vf o;
 
     o.hpos = mul(m_WVP, v.P); // Homogenous position
-    o.tc0 = v.tc.xy; //Texture coordinates
+    o.hpos.xy = get_taa_jitter(o.hpos);
+
+    o.tc0 = v.tc.xy; // Texture coordinates
 
     o.v_pos = mul(m_WV, v.P).xyz; // Position in view space
     o.v_nrm = mul(m_WV, v.N).xyz; // Normal in view space
@@ -23,7 +25,7 @@ vf _main(v_model v)
     return o;
 }
 
-//Skinning
+// Skinning
 #ifdef SKIN_NONE
 vf main(v_model v) { return _main(v); }
 #endif

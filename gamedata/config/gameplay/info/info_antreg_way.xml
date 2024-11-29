@@ -123,7 +123,9 @@
 <info_portion id="monstry_peschera_start"></info_portion>
 <info_portion id="controler_spawn"></info_portion>
 <info_portion id="polter2_spawn"></info_portion>
-<info_portion id="predbannik_monsters_spawn"></info_portion>
+<info_portion id="predbannik_monsters_spawn">
+    <action>braad_test.foster_controller</action>
+</info_portion>
 <info_portion id="tankist_start">
     <action>antreg.spawn_tankist_ohr</action>
     <action>antreg.spawn_podmoga</action>
@@ -148,10 +150,6 @@
 <info_portion id="les_dobralis"></info_portion>
 <info_portion id="lesnik_del">
     <action>antreg.del_lesnik</action>
-</info_portion>
-
-<info_portion id="lesnik2_spawn">
-    <action>braad_test.create_lesnik2_restr</action>
 </info_portion>
 
 <info_portion id="lesnik2_mesto">
@@ -182,7 +180,6 @@
 
 
 <info_portion id="vasil2_restrict_spawn">
-    <action>braad_test.create_vasil2_restr</action>
     <action>braad_test.create_zombi_restr</action>
 </info_portion>
 <info_portion id="yantar_dialog_start"></info_portion>
@@ -208,9 +205,7 @@
 <info_portion id="skit_start_dialog_done">
     <task>leila_vstrecha</task>
 </info_portion>
-<info_portion id="leila_pogovoril">
-    <action>braad_test.create_skit_trader_restr</action>
-</info_portion>
+<info_portion id="leila_pogovoril"></info_portion>
 
 <info_portion id="enemy_skit">
     <action>antreg.enemy_skit</action>
@@ -410,19 +405,9 @@
 
 <info_portion id="grig_swamp_dialog_done"></info_portion>
 
-<info_portion id="lesnik3_dead"></info_portion>
-<info_portion id="lesnik4_dead"></info_portion>
-<info_portion id="lesnik_cat1_dead"></info_portion>
-<info_portion id="lesnik_cat2_dead"></info_portion>
-<info_portion id="lesnik_cat3_dead"></info_portion>
-<info_portion id="lesnik_cat4_dead"></info_portion>
-<info_portion id="lesnik_cat5_dead"></info_portion>
-<info_portion id="lesnik_cat6_dead"></info_portion>
-
 <info_portion id="lesnik_cats_start">
     <task>lesnik_cats</task>
 </info_portion>
-<info_portion id="lesnik_cats_have"></info_portion>
 <info_portion id="lesnik_cats_done"></info_portion>
 
 <info_portion id="lesnik_hunters_done">
@@ -508,7 +493,6 @@
     <task>smith_brown</task>
     <action>braad_test.create_brown_restr</action>
 </info_portion>
-<info_portion id="brown_razgovor"></info_portion>
 <info_portion id="brown_pogovoril"></info_portion>
 
 <info_portion id="foster_spawn">
@@ -516,8 +500,6 @@
     <action>braad_test.foster_zvuk_restr</action>
 </info_portion>
 <info_portion id="foster_vstal"></info_portion>
-<info_portion id="foster_restrictor"></info_portion>
-<info_portion id="foster_wounded"></info_portion>
 <info_portion id="foster_plen_dialog_done"></info_portion>
 <info_portion id="kapral_mesto"></info_portion>
 <info_portion id="kapral_poisk_dialog_done"></info_portion>
@@ -623,19 +605,7 @@
 <info_portion id="karina_mesto"></info_portion>
 <info_portion id="karina_pda_dialog_start"></info_portion>
 <info_portion id="pda_nebo_have"></info_portion>
-
-<info_portion id="karina_pda_est_start">
-    <task>karina_perehod</task>
-</info_portion>
-
-<info_portion id="karina_perehod_dialog_start"></info_portion>
-
-<info_portion id="karina_prishli">
-    <action>antreg.spawn_kontra_les</action>
-</info_portion>
-
-<info_portion id="kontra_les_dead"></info_portion>
-
+<info_portion id="karina_pda_est_start"></info_portion>
 <info_portion id="karina_razgovor">
     <task>karina_doc</task>
 </info_portion>
@@ -891,7 +861,9 @@
     <action>antreg.spawn_dolg_mafon</action>
 </info_portion>
 
-<info_portion id="osvedom_mafon_spawn"></info_portion>
+<info_portion id="osvedom_mafon_spawn">
+    <action>antreg.spawn_osvedom_mafon</action>
+</info_portion>
 
 <info_portion id="maroder_enemy">
     <action>antreg.enemy_maroder</action>
@@ -904,19 +876,14 @@
 <info_portion id="maroder_start_dialog_start">
     <task>maroder_dialog</task>
 </info_portion>
-<info_portion id="maroder_start_dialog_have">
-    <action>antreg.del_metka_nato</action>
-</info_portion>
+<info_portion id="maroder_start_dialog_have"></info_portion>
 <info_portion id="maroder_start_dialog_done"></info_portion>
 
 <info_portion id="smith_maroder_dialog_start"></info_portion>
 
 <info_portion id="chek_mesto"></info_portion>
 <info_portion id="chek_mesto2"></info_portion>
-
-<info_portion id="nato_enemy">
-    <action>esc_graf.sound_mir_alarm</action>
-</info_portion>
+<info_portion id="nato_enemy"></info_portion>
 
 <info_portion id="monolitt_enemy">
     <action>antreg.enemy_monolith</action>

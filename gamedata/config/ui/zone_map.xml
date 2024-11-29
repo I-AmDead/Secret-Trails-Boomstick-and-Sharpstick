@@ -1,8 +1,8 @@
 <!-- ENHANCED GUI В© 2007 INCBOX INC TEAM -->
 
 <window>
-    <minimap rounded="1" alpha="220">
-        <level_frame x="75" y="670" width="172" height="172" stretch="1" alignment="c"/>
+    <minimap rounded="1" alpha="0">
+        <level_frame x="999" y="999" width="172" height="172" stretch="1" alignment="c"/>
 
         <background width="350" height="380" stretch="1" alignment="c">
             <texture></texture>

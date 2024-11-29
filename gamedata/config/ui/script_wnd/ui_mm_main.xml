@@ -9,7 +9,7 @@
 		<texture width="1920" height="1080">ui\menu_video</texture>
 	</back_movie>
 
-	<shniaga_wnd x="0" y="450" width="530" height="280">
+	<shniaga_wnd x="0" y="450" width="230" height="280">
 		<buttons_region	x="70" y="0" width="164" height="280" always_show_scroll="false"/>
 		
 		<shniaga x="9" y="0" width="392" height="73">
@@ -92,5 +92,15 @@
 	
 	<static_version x="70" y="740" width="530" height="30">
 		<text align="l" vert_align="c" font="ui_font_saar14" a="205" complex_mode="1"/>
-	</static_version>	
+	</static_version>
+
+	<btn_discord x="175" y="740" width="530" height="30">
+		<text align="l" vert_align="c" font="ui_font_saar14" a="205" complex_mode="1">Discord</text>
+		<text_color>
+			<e r="238" g="153" b="26"/>
+			<t r="191" g="191" b="191"/>
+			<d r="128" g="128" b="128"/>
+			<h r="0" g="255" b="0"/>
+		</text_color>
+	</btn_discord>	
 </window>

@@ -1,153 +1,86 @@
 <character id="aver_ecolog">
     <class>aver_ecolog</class>
 </character>
-<character id="aver_ecolog_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="brown">
     <class>brown</class>
 </character>
-<character id="brown_zombi">
-    <class>cit_doctor</class>
-</character>
-
 <character id="smith">
     <class>smith</class>
-</character>
-<character id="smith_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="nato_mask">
     <class>nato_mask</class>
 </character>
-<character id="nato_mask_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="nato_specnaz">
     <class>nato_specnaz</class>
-</character>
-<character id="nato_specnaz_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="fab_trup">
     <class>fab_trup</class>
 </character>
-<character id="fab_trup_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="nato_antigas">
     <class>nato_antigas</class>
-</character>
-<character id="nato_antigas_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="nato_parol">
     <class>nato_parol</class>
 </character>
-<character id="nato_parol_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="nato_shlem">
     <class>nato_shlem</class>
-</character>
-<character id="nato_shlem_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="sutuly">
     <class>sutuly</class>
 </character>
-<character id="sutuly_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="mazay">
     <class>mazay</class>
-</character>
-<character id="mazay_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="grek">
     <class>grek</class>
 </character>
-<character id="grek_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="hunter1">
     <class>hunter1</class>
-</character>
-<character id="hunter1_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="hunter2">
     <class>hunter2</class>
 </character>
-<character id="hunter2_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="esc_podmoga1">
     <class>esc_podmoga1</class>
-</character>
-<character id="esc_podmoga1_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="esc_podmoga2">
     <class>esc_podmoga2</class>
 </character>
-<character id="esc_podmoga2_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="esc_podmoga3">
     <class>esc_podmoga3</class>
-</character>
-<character id="esc_podmoga3_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="nevidimka">
     <class>nevidimka</class>
 </character>
-<character id="nevidimka_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="kapitan">
     <class>kapitan</class>
-</character>
-<character id="kapitan_zombi">
-    <class>cit_doctor</class>
 </character>
 
 <character id="drug">
     <class>drug</class>
 </character>
-<character id="drug_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="babka_blue">
     <class>babka_blue</class>
 </character>
-<character id="babka_blue_zombi">
-    <class>cit_doctor</class>
-</character>
 
 <character id="babka_brown">
     <class>babka_brown</class>
-</character>
-<character id="babka_brown_zombi">
-    <class>cit_doctor</class>
 </character>

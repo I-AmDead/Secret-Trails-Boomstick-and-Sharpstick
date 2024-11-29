@@ -1,0 +1,116 @@
+local hud_show = false
+local quickslot_show = false
+local ammo_show = false
+
+local hud_alpha = 0
+local quickslot_alpha = 0
+local ammo_alpha = 0
+
+local function on_key_down(key, bind)
+	if level.main_input_receiver() or not db.actor:alive() then return end
+
+	if bind == key_bindings.kSCORES then
+		hud_show = true
+	end
+	if bind >= key_bindings.kQUICK_SLOT_1 and bind <= key_bindings.kQUICK_SLOT_4 then
+		quickslot_show = true
+	end
+	if bind == key_bindings.kWPN_FIRE 
+	or bind == key_bindings.kWPN_RELOAD 
+	or bind == key_bindings.kWPN_NEXT 
+	or bind == key_bindings.kWPN_FUNC 
+	or bind == key_bindings.kWPN_FIREMODE_PREV 
+	or bind == key_bindings.kWPN_FIREMODE_NEXT 
+	or bind == key_bindings.kBORE 
+	or (bind >= key_bindings.kWPN_1 and bind <= key_bindings.kWPN_6)
+	or bind == key_bindings.kNEXT_SLOT 
+	or bind == key_bindings.kPREV_SLOT then
+		ammo_show = true
+	end
+end
+
+local function on_key_up(key, bind)
+	if level.main_input_receiver() or not db.actor:alive() then return end
+
+	if bind == key_bindings.kSCORES then
+		dsh.wait_condition(function() return hud_alpha >= 250 end, function() hud_show = false end)
+	end
+	if bind >= key_bindings.kQUICK_SLOT_1 and bind <= key_bindings.kQUICK_SLOT_4 then
+		dsh.wait_condition(function() return quickslot_alpha >= 250 end, function() quickslot_show = false end)
+	end
+	if bind == key_bindings.kWPN_FIRE 
+	or bind == key_bindings.kWPN_RELOAD 
+	or bind == key_bindings.kWPN_NEXT 
+	or bind == key_bindings.kWPN_FUNC 
+	or bind == key_bindings.kWPN_FIREMODE_PREV 
+	or bind == key_bindings.kWPN_FIREMODE_NEXT 
+	or bind == key_bindings.kBORE 
+	or (bind >= key_bindings.kWPN_1 and bind <= key_bindings.kWPN_6)
+	or bind == key_bindings.kNEXT_SLOT 
+	or bind == key_bindings.kPREV_SLOT then
+		dsh.wait_condition(function() return ammo_alpha >= 250 end, function() ammo_show = false end)
+	end
+end
+
+local function alpha_static(static_name, alpha)
+	local wnd = get_main_window()
+	local hud = get_hud()
+	local static_1 = wnd:GetStatic(static_name)
+	local static_2 = hud:GetCustomStatic(static_name)
+	if static_1 then
+		static_1:SetAlphaValue(alpha)
+	elseif static_2 then
+		static_2:wnd():SetAlphaValue(alpha)
+	end
+end
+
+local quest_static_icon
+
+local function on_update()
+    local active_objection = gametask.active_objection()
+	local quest_static = get_hud():GetCustomStatic("main_task_script") or get_hud():AddCustomStatic("main_task_script")
+	quest_static:wnd():SetText(active_objection and active_objection:get_description() or game.translate_string("st_no_active_task"))
+	if not quest_static_icon then
+		quest_static_icon = CUIStatic()
+		quest_static_icon:SetWndPos(8, 10)
+		quest_static_icon:SetWndSize(35, 35)
+		quest_static_icon:InitTexture("ui\\compas\\target")
+		quest_static_icon:SetColor(GetARGB(255, 255, 180, 70))
+		quest_static_icon:SetStretchTexture(true)
+		quest_static:wnd():AttachChild(quest_static_icon)
+	end
+
+	if hud_show then
+		hud_alpha = hud_alpha < 250 and hud_alpha + 5 or 255
+		alpha_static("main_task_script", hud_alpha)
+	else
+		hud_alpha = hud_alpha > 3 and hud_alpha - 3 or 0
+		alpha_static("main_task_script", hud_alpha)
+	end
+
+	if quickslot_show or hud_show then
+		quickslot_alpha = quickslot_alpha < 250 and quickslot_alpha + 5 or 255
+		for i = 1, 4 do
+			alpha_static("quick_slot_back_"..i, quickslot_alpha)
+		end
+	else
+		quickslot_alpha = quickslot_alpha > 3 and quickslot_alpha - 3 or 0
+		for i = 1, 4 do
+			alpha_static("quick_slot_back_"..i, quickslot_alpha)
+		end
+	end
+
+	if ammo_show or hud_show then
+		ammo_alpha = ammo_alpha < 250 and ammo_alpha + 5 or 255
+		alpha_static("static_weapon", ammo_alpha)
+	else
+		ammo_alpha = ammo_alpha > 3 and ammo_alpha - 3 or 0
+		alpha_static("static_weapon", ammo_alpha)
+	end
+end
+
+function attach(sm)
+	sm:subscribe({ signal = "on_key_down",	fun = on_key_down })
+	sm:subscribe({ signal = "on_key_up",	fun = on_key_up   })
+	sm:subscribe({ signal = "on_update",	fun = on_update })
+end

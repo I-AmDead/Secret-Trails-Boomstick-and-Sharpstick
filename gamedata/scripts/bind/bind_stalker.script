@@ -25,9 +25,6 @@ function actor_binder:net_spawn(data)
     db.add_actor(self.object)
     self.am:call("on_before_spawn")
 
-    cmd("reflections_only_on_puddles on")
-    cmd("reflections_only_on_terrain on")
-
     if not db.storage[self.object:id()].pstor then --KRodin: из xr_logic почему-то не срабатывает, поэтому создаём pstor здесь.
         db.storage[self.object:id()].pstor = {}
     end
@@ -40,75 +37,13 @@ function actor_binder:net_spawn(data)
         rx_ai.actor_net_spawn()
     end
 
-    cmd("r_SunShafts_Radius 2.0")
-    cmd("r_SunShafts_Blend 0.01")
-
     cmd("cam_inert 0") --сбрасываем инерцию камеры в 0
-
-    if get_console():get_integer("r3_dynamic_wet_surfaces_sm_res") < 1024 then
-        cmd("r3_dynamic_wet_surfaces_sm_res 1024") --Чтобы полос на стенах не было во время дождя.
-    end
-
-    cmd("r2_exp_donttest_shad off") --Это экономит фпс.
-    cmd("r_terrain_parallax_enable on") --Не все текстуры земли у нас адаптированы под параллакс
 
     if isIndoor(level.name()) then -- SSS18
         cmd("ssfx_is_underground 1")
     else
         cmd("ssfx_is_underground 0")
     end
-
------------------------------------------------------------
-    if not ogse.var_exists("ES_GRAPHICS_SETTINGS") then
-        cmd("r2_sun_lumscale 1.5")
-        cmd("r2_sun_lumscale_amb 1.0")
-        cmd("r2_sun_lumscale_hemi 1.5")
-        cmd("r2_ls_bloom_kernel_b 0.7")
-        cmd("r2_ls_bloom_kernel_g 3.0")
-        cmd("r2_ls_bloom_kernel_scale 0.7")
-        cmd("r2_ls_bloom_speed 100.0")
-        cmd("r2_ls_bloom_threshold 0.00001")
-
-        cmd("r2_tonemap on")
-        cmd("r2_tonemap_adaptation 1.0")
-        cmd("r2_tonemap_amount 0.7")
-        cmd("r2_tonemap_lowlum 0.0001")
-        cmd("r2_tonemap_middlegray 1.0")
-
-        cmd("r3_dynamic_wet_surfaces_far 100.")
-        cmd("ssfx_wetsurfaces_1 1.700000, 1.400000, 0.700000, 2.000000")
-        cmd("ssfx_wetsurfaces_2 1.100000, 1.500000, 0.200000, 0.700000")
-        cmd("ssfx_gloss_method 1")
-        cmd("ssfx_gloss_minmax 0.7, 0.9, 0.4")
-        cmd("ssfx_lightsetup_1 0.55, 0.5, 1.0, 0.5")
-        cmd("ssfx_florafixes_1 0.1, 0.3, 0.1, 0.3")
-        cmd("ssfx_florafixes_2 1.0, 1.0, 0.0, 0.0")
-
-        cmd("ssfx_rain_1 10.0, 0.015, 5.0, 2.0")
-        cmd("ssfx_rain_2 0.4, 0.5, 5.0, 1.0")
-        cmd("ssfx_rain_3 0.95, 0.5, 0.0, 0.0")
-
-        cmd("ssfx_volumetric_limits 100.0, 0.05, 5.0")
-
-        cmd("ssfx_exposure 1")
-        cmd("ssfx_gamma 1")
-        cmd("ssfx_saturation 1.3")
-        cmd("ssfx_color_grading 0.520000, 0.515000, 0.500000")
-        cmd("crosshair_color 0.400000, 0.900000, 0.500000")
-        ogse.save_var("ES_GRAPHICS_SETTINGS", true)
-    end
-
-    if not ogse.var_exists("CBT_GRAPHICS_SETTINGS") then
-        cmd("ssfx_lightsetup_1 0.65, 1.0, 1.0, 0.5")
-        cmd("ssfx_gloss_minmax 0.6, 0.8, 0.15")
-        cmd("r2_ls_bloom_kernel_b 0.7")
-        cmd("r2_ls_bloom_kernel_g 3.0")
-        cmd("r2_ls_bloom_kernel_scale 0.7")
-        cmd("r2_ls_bloom_speed 100.0")
-        cmd("r2_ls_bloom_threshold 0.00001")
-        ogse.save_var("CBT_GRAPHICS_SETTINGS", true)
-    end
------------------------------------------------------------
 
     self.am:call("on_spawn", data)
     return true
@@ -275,6 +210,7 @@ local info2call = {
 }
 
 function actor_binder:info_callback(npc, info_id)
+    log3("give info portion %s", info_id) 	
     self.am:call("on_info", npc, info_id)
     local sc = info2call[info_id]
     if sc then
@@ -355,11 +291,11 @@ function actor_binder:update(delta)
     if update_was_never_called then
         -------------------------------------------------------------------
         if not has_alife_info("storyline_actor_start") then
+            level_tasks.add_lchanger_location()
             self.object:give_info_portion("global_dialogs")
             self.am:call("on_storyline_start")
             self.object:give_info_portion("storyline_actor_start")
         end
-        level_tasks.add_lchanger_location()
         -------------------------------------------------------------------
         self.am:call("on_first_update")
         update_was_never_called = false
@@ -512,7 +448,7 @@ function actor_binder:level_changer_action(obj, wnd)
     local dest_vertex = lc.dest_game_vertex_id
     local dest_lname  = alife():level_name(game_graph():vertex( dest_vertex ):level_id())
     local msg_text_wnd = wnd:FindChild( "message_box_change_level:message_text" )
-    msg_text_wnd:GetCUIStatic():SetText(game.translate_string("level_changer_invitation") .. " " .. game.translate_string(dest_lname) .. "?")
+    msg_text_wnd:GetCUIStatic():SetText(game.translate_string("level_changer_invitation") .. " " .. game.translate_string("to_" .. dest_lname) .. "?")
   self.am:call( "level_changer_action", obj, wnd )
 end
 

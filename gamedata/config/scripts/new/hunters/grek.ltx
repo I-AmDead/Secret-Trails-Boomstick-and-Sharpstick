@@ -22,18 +22,6 @@ def_state_moving2 = assault
 def_state_moving3 = assault
 panic = 0
 danger = danger_condition@grek
-on_info = {+grek_hit} walker@grek_hit
-on_signal = razgovor | remark@grek1
-
-[walker@grek_hit]
-path_walk = grek_walk1
-path_look = grek_look1
-meet = no_meet
-def_state_moving1 = assault
-def_state_moving2 = assault
-def_state_moving3 = assault
-panic = 0
-danger = danger_condition@grek
 on_signal = razgovor | remark@grek1
 
 [remark@grek1]

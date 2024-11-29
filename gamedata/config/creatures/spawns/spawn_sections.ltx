@@ -160,13 +160,6 @@ spec_rank = master
 community = trader
 custom_data             = scripts\new\esc_mervin3.ltx
 
-[esc_mervin_last]:stalker_sakharov
-$spawn 				= "respawn\esc_mervin_last_spawn"
-character_profile	= esc_mervin_last
-spec_rank = master
-community = trader
-custom_data             = scripts\new\esc_mervin_last.ltx
-
 [pri_monolith_respawn_1]:stalker
 $spawn 				= "respawn\pri_monolith_respawn_1"
 character_profile	= sim_monolith_regular
@@ -391,6 +384,9 @@ community = zombied
 [yan_ecolog_respawn_1]:stalker
 $spawn				=  "respawn\yan_ecolog_respawn_1"
 character_profile	= sim_ecolog
+
+[yan_ecolog_help]:stalker
+character_profile = yan_ecolog_help
 
 
 
@@ -964,26 +960,6 @@ character_profile       = atp_monolit5
 spec_rank = regular
 community = monolith
 custom_data		= scripts\new\dyak_monolit.ltx
-
-[bloodsucker_normal_new]:bloodsucker_normal
-$spawn                 =  "respawn\bloodsucker_normal_new"
-custom_data		= scripts\new\bloodsucker_normal_new.ltx
-
-[chimera_normal_new]:chimera_normal
-$spawn                 =  "respawn\chimera_normal_new"
-custom_data		= scripts\new\chimera_normal_new.ltx
-
-[pseudodog_strong_new]:pseudodog_strong
-$spawn                 =  "respawn\pseudodog_strong_new"
-custom_data		= scripts\new\pseudodog_strong_new.ltx
-
-[m_controller_old_new]:m_controller_old
-$spawn                 =  "respawn\m_controller_old_new"
-custom_data		= scripts\new\m_controller_old_new.ltx
-
-[snork_normal_new]:snork_normal
-$spawn                 =  "respawn\snork_normal_new"
-custom_data		= scripts\new\snork_normal_new.ltx
 
 [mil_stalker1]:stalker_sniper
 $spawn                 =  "respawn\mil_stalker1"
@@ -1927,11 +1903,6 @@ spec_rank = veteran
 community = bandit
 custom_data		= scripts\new\volk_ban4.ltx
 
-[volk_inv]:inventory_box
-visual = equipments\item_rukzak
-radius = 1
-custom_data = scripts\new\volk_inv.ltx
-
 [pseudodog_volk]:pseudodog_strong
 $spawn                 =  "respawn\pseudodog_volk"
 custom_data		= scripts\new\pseudodog_volk.ltx
@@ -2208,11 +2179,6 @@ character_profile	= sim_killer_general
 spec_rank = regular
 community = killer
 custom_data		= scripts\new\levsha_naem3.ltx
-
-[prov_ruk]:inventory_box
-visual = equipments\item_rukzak
-radius = 1
-custom_data = scripts\new\prov_ruk.ltx
 
 [valet_mil]:stalker_sniper
 $spawn				=  "respawn\valet_mil"

@@ -1,0 +1,15 @@
+[_group]
+version                          = 3
+flags                            = 0
+effects_count                    = 1
+timelimit                        = 0.000000
+ 
+[effect_0000]
+effect_name                      = static\effects\lava_particles
+on_play_child                    = static\effects\lava_trails
+on_birth_child                   =
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 6
+ 

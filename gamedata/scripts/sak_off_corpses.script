@@ -37,35 +37,34 @@ local always_remove = {
 }
 
 -- кол-во левел вертексов на локации
-level_vertexes = {
-	aver                  = 1790762,
-	dead_city             = 551769,
-	swamp                 = 0,
-	predbannik            = 0,
-	l01_escape            = 595499,
-	l02_garbage           = 382663,
-	l03_agroprom          = 437421,
-	l03u_agr_underground  = 4932,
-	l04_darkvalley        = 390125,
-	l04u_labx18           = 7581,
-	l05_bar               = 99539,
-	l06_rostok            = 67713,
-	l07_military          = 418268,
-	l08_yantar            = 141471,
+local level_vertexes = {
+	l01_escape            = 624967,
+	l02_garbage           = 357996,
+	l03_agroprom          = 422724,
+	l03u_agr_underground  = 4951,
+	l04_darkvalley        = 372057,
+	l04u_labx18           = 7605,
+	l05_bar               = 101874,
+	l06_rostok            = 69566,
+	l08_yantar            = 153744,
 	l08u_brainlab         = 8008,
-	l10_radar             = 227189,
+	l07_military          = 387579,
+	l10_radar             = 227348,
+	l11_pripyat           = 261774,
+	l12_stancia           = 495005,
+	l12u_sarcofag         = 11004,
+	l12u_control_monolith = 4168,
+	l12_stancia_2         = 859577,
 	l10u_bunker           = 8821,
-	l11_pripyat           = 261219,
-	l12_stancia           = 477923,
-	l12_stancia_2         = 264577,
-	l12u_control_monolith = 3982,
-	l12u_sarcofag         = 10672,
+	l09_deadcity          = 245046,
+	l10_red_forest        = 164829,
+	swamp                 = 465427,
+	l13_deep              = 1059082
 }
 
 function is_level_vertex_ok(sobj, obj_level)
-    local level_vertexes = level_vertexes[obj_level]
-    if level_vertexes > 0 and sobj.m_level_vertex_id >= level_vertexes then
-        log2("[%s]: found %s on %s: wrong level_vertex: %s >= %s", script_name(), sobj:name(), obj_level, sobj.m_level_vertex_id, level_vertexes)
+    if level_vertexes[obj_level] > 0 and sobj.m_level_vertex_id >= level_vertexes[obj_level] then
+        log2("[%s]: found %s on %s: wrong level_vertex: %s >= %s", script_name(), sobj:name(), obj_level, sobj.m_level_vertex_id, level_vertexes[obj_level])
         return false
     end
     return true
@@ -107,7 +106,7 @@ function off_corpses()
             end
 
             -- сталкер
-        elseif IsStalker(obj) then
+        elseif IsStalker(obj) and not obj:clsid() == clsid.script_trader then
             if obj_level ~= actor_level and not obj:alive() then
                 -- проверка трупа сталкера, если не в исключениях - в
                 -- таблицу и бум удалять

@@ -16,9 +16,6 @@ function init(obj)
     if has_light_config or has_logic then
         local new_binder = light_binder(obj, has_light_config, has_logic)
         obj:bind_object(new_binder)
-    else
-        local new_binder = light_binder(obj, false, false)
-        obj:bind_object(new_binder)
     end
 end
 

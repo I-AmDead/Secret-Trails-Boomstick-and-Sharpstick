@@ -68,6 +68,26 @@ base_name                        = $base0
 alpha_ref                        = 33, 0, 255
 alpha_blend                      = false
  
+[def_shaders\def_aref_noblend]
+class                            = V_AREF
+computer                         = GEORGY-PC
+version                          = 1
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+alpha_ref                        = 33, 0, 255
+alpha_blend                      = false
+
+[def_shaders\def_aref_noshadow]
+class                            = LM_AREF
+computer                         = SKYLOADER-PC
+version                          = 1
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+alpha_ref                        = 33, 0, 255
+alpha_blend                      = false
+
 [def_shaders\def_aref_v]
 class                            = V_AREF
 computer                         = KARMA
@@ -78,6 +98,10 @@ base_name                        = $base0
 alpha_ref                        = 33, 0, 255
 alpha_blend                      = false
  
+[def_shaders\def_shaders\def_aref_v]:def_shaders\def_aref_v
+
+[def_shaders\def_aref_vv]:def_shaders\def_aref_v
+
 [def_shaders\def_objects_lod]
 class                            = D_TREE
 computer                         = YURIY
@@ -176,6 +200,15 @@ strict_sorting                   = false
 base_name                        = $base0
 tesselation                      = 2
  
+[def_shaders\def_vertex_noshadow]
+class                            = V
+computer                         = SKYLOADER-PC
+version                          = 1
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+tesselation                      = 0
+
 [def_shaders\def_vertex_pn]
 class                            = V
 computer                         = YURIY
@@ -355,8 +388,8 @@ strict_sorting                   = false
 base_name                        = $base0
 blending                         = 5
 texture_clamp                    = true
-alpha_ref                        = 255, 255, 0
-z_test                           = false
+alpha_ref                        = 0, 0, 255
+z_test                           = true
 z_write                          = false
 lighting                         = false
 fog                              = false
@@ -610,6 +643,21 @@ z_write                          = true
 lighting                         = true
 fog                              = false
  
+[effects\water_river]
+class                            = S_SET
+computer                         = SKYLOADER-PC
+version                          = 4
+priority                         = 2, 0, 3
+strict_sorting                   = true
+base_name                        = water\water_water
+blending                         = 0
+texture_clamp                    = false
+alpha_ref                        = 0, 0, 255
+z_test                           = true
+z_write                          = true
+lighting                         = true
+fog                              = false
+
 [effects\waterryaska]
 class                            = S_SET
 computer                         = YURIY
@@ -675,6 +723,16 @@ base_name                        = $base0
 alpha_blend                      = true
 object_lod                       = false
  
+[flora\leaf_wave_no_int]
+class                            = D_TREE
+computer                         = CHRIOTMAO-01
+version                          = 1
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+alpha_blend                      = true
+object_lod                       = false
+
 [flora\trunk_wave]
 class                            = D_TREE
 computer                         = ALEXMX
@@ -861,1079 +919,633 @@ z_write                          = false
 lighting                         = false
 fog                              = false
  
-[levels\agroprom_asfalt]
+[terrains]
 class                            = BmmDold
-computer                         = YURIY
+computer                         = I AM DEAD
 version                          = 3
 priority                         = 1, 0, 3
 strict_sorting                   = false
 base_name                        = $base0
+detail_name                      = $base0
+r2_r                             = $base0
+r2_g                             = $base0
+r2_b                             = $base0
+r2_a                             = $base0
+
+[levels\vostok_gravi1]:terrains
+detail_name                      = detail\detail_grnd_plates
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_02
+r2_a                             = detail\ground_mud_01
+
+[levels\vostok_earth1]:terrains
+detail_name                      = detail\ground_earth_04
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_02
+r2_a                             = detail\ground_mud_01
+
+
+[levels\vostok_sand1]:terrains
+detail_name                      = detail\ground_earth_02
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_02
+r2_a                             = detail\ground_mud_01
+
+
+[levels\vostok_asfalt1]:terrains
+detail_name                      = detail\ground_asphalt_01
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_02
+r2_a                             = detail\ground_mud_01
+
+
+[levels\vostok_gras1]:terrains
+detail_name                      = detail\ground_grass_02
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_02
+r2_a                             = detail\ground_mud_01
+
+
+[levels\agroprom_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\agroprom_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\agroprom_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\agroprom_gravel]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\agroprom_gravel]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
 
-[levels\aver_grass]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\aver_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\aver_gryaz]
-class                            = BmmDold
-computer                         = HOME-218329F16C
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\aver_gryaz]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\aver_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\aver_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\aver_tropa]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\aver_tropa]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\bar_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\bar_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\bar_asphalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\bar_asphalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\bar_grass]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\bar_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\bar_gravel]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\bar_gravel]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darkcape_asfalt]
-class                            = BmmDold
-computer                         = ALEXANDR-PC
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darkcape_asfalt]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darkcape_grass]
-class                            = BmmDold
-computer                         = ALEXANDR-PC
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darkcape_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darksc_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darksc_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darksc_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darksc_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darkvalley_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darkvalley_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darkvalley_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darkvalley_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\darkvalley_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\darkvalley_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\dead_city_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\dead_city_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\dead_city_grass]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\dead_city_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\dead_city_ground]
-class                            = BmmDold
-computer                         = TUZ
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\dead_city_ground]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\deadcity_asfalt]
-class                            = BmmDold
-computer                         = HOME-218329F16C
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\deadcity_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\deadcity_earth]
-class                            = BmmDold
-computer                         = HOME-218329F16C
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\deadcity_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\deadcity_grass]
-class                            = BmmDold
-computer                         = HOME-218329F16C
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\deadcity_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\escape_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\escape_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\escape_asfalt_noblend]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\escape_asfalt_noblend]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\escape_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\escape_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\escape_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\escape_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\garbage_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\garbage_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_earth_04
  
-[levels\garbage_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\garbage_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_earth_04
  
-[levels\garbage_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\garbage_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_earth_04
  
-[levels\generator_asfalt]
-class                            = BmmDold
-computer                         = RAINBOW
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\generator_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\generator_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\generator_earth]:terrains
 detail_name                      = detail\ground_earth_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\generators_art]
-class                            = BmmDold
-computer                         = ALEXANDR-PC
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\generators_art]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\hospital_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\hospital_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\hospital_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\hospital_sand]:terrains
 detail_name                      = detail\ground_earth_02
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\jupiter_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
-detail_name                      = detail\ground_asphalt_01
-r2_r                             = detail\ground_grass_01
-r2_g                             = detail\ground_asphalt_01
-r2_b                             = detail\ground_earth_01
-r2_a                             = detail\detail_grnd_plates
- 
-[levels\jupiter_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
-detail_name                      = detail\ground_earth_01
-r2_r                             = detail\ground_grass_01
-r2_g                             = detail\ground_asphalt_01
-r2_b                             = detail\ground_earth_01
-r2_a                             = detail\detail_grnd_plates
- 
-[levels\jupiter_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\jupiter_asfalt]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
-r2_a                             = detail\detail_grnd_plates
+r2_a                             = detail\ground_mud_01
  
-[levels\jupiter_plates]
-class                            = BmmDold
-computer                         = MIRON
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\jupiter_earth]:terrains
+detail_name                      = detail\ground_earth_01
+r2_r                             = detail\ground_grass_02
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_01
+r2_a                             = detail\ground_mud_01
+ 
+[levels\jupiter_grass]:terrains
+detail_name                      = detail\ground_grass_01
+r2_r                             = detail\ground_grass_01
+r2_g                             = detail\ground_asphalt_01
+r2_b                             = detail\ground_earth_01
+r2_a                             = detail\ground_mud_01
+ 
+[levels\jupiter_plates]:terrains
 detail_name                      = detail\detail_grnd_plates
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\detail_grnd_plates
  
-[levels\l01_escape_asfalt]
-class                            = BmmDold
-computer                         = DESCRUO
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\l01_escape_asfalt]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\l01_escape_asfalt_noblend]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\l01_escape_asfalt_noblend]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_asphalt_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_asphalt_01
 r2_a                             = detail\ground_asphalt_01
  
-[levels\l01_escape_detritus]
-class                            = BmmDold
-computer                         = DESCRUO
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\l01_escape_detritus]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\l01_escape_grass]
-class                            = BmmDold
-computer                         = DESCRUO
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\l01_escape_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\l01_escape_sand]
-class                            = BmmDold
-computer                         = DESCRUO
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\l01_escape_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\limansk_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\limansk_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\limansk_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\limansk_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\limansk_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\limansk_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\maedow_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\maedow_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\maedow_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\maedow_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\maedow_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\maedow_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\marsh_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\marsh_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_mud_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_marsh_01
  
-[levels\military_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\military_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\military_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\military_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\military_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\military_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\pripyat_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\pripyat_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\pripyat_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\pripyat_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\pripyat_gras2]
-class                            = BmmDold
-computer                         = WORK-FF42AC63F6
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\pripyat_gras2]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\pripyat_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\pripyat_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\radar_asfalt]
-class                            = BmmDold
-computer                         = LEX
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\radar_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\radar_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\radar_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\red_forest_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\red_forest_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\red_forest_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\red_forest_earth]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\red_forest_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\red_forest_grass]:terrains
 detail_name                      = detail\ground_grass_03
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\red_forest_leaves]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\red_forest_leaves]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\red_forest_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\red_forest_sand]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\stancia]
-class                            = BmmDold
-computer                         = OLESXXX
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\stancia]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\stancia_asfalt]
-class                            = BmmDold
-computer                         = RAINBOW
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\stancia_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\stancia_build_kanal]
-class                            = BmmDold
-computer                         = ALEXANDR-PC
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\stancia_build_kanal]:terrains
 detail_name                      = detail\ground_earth_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\stancia_kanal]
-class                            = BmmDold
-computer                         = RAINBOW
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\stancia_kanal]:terrains
 detail_name                      = detail\ground_mud_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\truckscemetery]
-class                            = BmmDold
-computer                         = OLESXXX
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\truckscemetery]:terrains
 detail_name                      = detail\ground_mud_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\truckscemetery_asfalt]
-class                            = BmmDold
-computer                         = RAINBOW
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\truckscemetery_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\truckscemetery_grass]
-class                            = BmmDold
-computer                         = RAINBOW
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\truckscemetery_grass]:terrains
 detail_name                      = detail\ground_grass_01
 r2_r                             = detail\ground_grass_01
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_01
 r2_a                             = detail\ground_mud_01
  
-[levels\yantar_asfalt]
-class                            = BmmDold
-computer                         = WORKHORSE
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\yantar_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_04
 r2_a                             = detail\ground_mud_01
  
-[levels\yantar_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\yantar_earth]:terrains
 detail_name                      = detail\ground_earth_04
 r2_r                             = detail\ground_grass_03
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_04
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_asfalt]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_asfalt]:terrains
 detail_name                      = detail\ground_asphalt_01
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_cracked]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_cracked]:terrains
 detail_name                      = detail\ground_earth_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_earth]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_earth]:terrains
 detail_name                      = detail\ground_earth_04
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_earth_2]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_earth_2]:terrains
 detail_name                      = detail\ground_earth_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_grass]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_grass]:terrains
 detail_name                      = detail\ground_grass_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_pebbles]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_pebbles]:terrains
 detail_name                      = detail\detail_grnd_pebbles
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_plates]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_plates]:terrains
 detail_name                      = detail\detail_grnd_plates
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
 r2_b                             = detail\ground_earth_02
 r2_a                             = detail\ground_mud_01
  
-[levels\zaton_sand]
-class                            = BmmDold
-computer                         = YURIY
-version                          = 3
-priority                         = 1, 0, 3
-strict_sorting                   = false
-base_name                        = $base0
+[levels\zaton_sand]:terrains
 detail_name                      = detail\ground_earth_02
 r2_r                             = detail\ground_grass_02
 r2_g                             = detail\ground_asphalt_01
@@ -1993,6 +1605,28 @@ alpha_blend                      = false
 [models\lightplanes]
 class                            = MODEL
 computer                         = ALEXMX
+version                          = 2
+priority                         = 2, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 4, 0, 255
+tessellation                     = 0
+ 
+[models\lightplanes_00]
+class                            = MODEL
+computer                         = GEORGY-77C0BBEB
+version                          = 2
+priority                         = 2, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 4, 0, 255
+tessellation                     = 0
+ 
+[models\lightplanesself]
+class                            = MODEL
+computer                         = YURIY
 version                          = 2
 priority                         = 2, 0, 3
 strict_sorting                   = true
@@ -2076,6 +1710,28 @@ base_name                        = $base0
 alpha_channel                    = false
 alpha_ref                        = 32, 0, 255
 tessellation                     = 3
+ 
+[models\model_puh]
+class                            = MODEL
+computer                         = PROF
+version                          = 2
+priority                         = 2, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 32, 0, 255
+tessellation                     = 0
+ 
+[models\model_refl]
+class                            = MODEL
+computer                         = KARMA
+version                          = 2
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+alpha_channel                    = false
+alpha_ref                        = 32, 0, 255
+tessellation                     = 0
  
 [models\pautina]
 class                            = MODEL
@@ -2194,6 +1850,17 @@ alpha_channel                    = true
 alpha_ref                        = 0, 0, 255
 tessellation                     = 0
  
+[models\xbrainglass]
+class                            = MODEL
+computer                         = YURIY
+version                          = 2
+priority                         = 3, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 0, 0, 255
+tessellation                     = 0
+ 
 [models\xdistort]
 class                            = MODEL
 computer                         = OLESXXX
@@ -2227,11 +1894,55 @@ alpha_channel                    = true
 alpha_ref                        = 0, 0, 255
 tessellation                     = 0
  
+[models\xdistortcolorlinv]
+class                            = MODEL
+computer                         = YURIY
+version                          = 2
+priority                         = 3, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 0, 0, 255
+tessellation                     = 0
+ 
 [models\xdistortinv]
 class                            = MODEL
 computer                         = OLESXXX
 version                          = 2
 priority                         = 3, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 0, 0, 255
+tessellation                     = 0
+ 
+[models\xglass]
+class                            = MODEL
+computer                         = YURIY
+version                          = 2
+priority                         = 3, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 0, 0, 255
+tessellation                     = 0
+ 
+[models\xglass2]
+class                            = MODEL
+computer                         = YURIY
+version                          = 2
+priority                         = 2, 0, 3
+strict_sorting                   = true
+base_name                        = $base0
+alpha_channel                    = true
+alpha_ref                        = 0, 0, 255
+tessellation                     = 0
+ 
+[models\xlens]
+class                            = MODEL
+computer                         = YURIY
+version                          = 2
+priority                         = 2, 0, 3
 strict_sorting                   = true
 base_name                        = $base0
 alpha_channel                    = true
@@ -2373,6 +2084,15 @@ fog                              = false
 [selflight]
 class                            = V
 computer                         = LEX
+version                          = 1
+priority                         = 1, 0, 3
+strict_sorting                   = false
+base_name                        = $base0
+tesselation                      = 0
+ 
+[selflight_static]
+class                            = V
+computer                         = GEORGY-PC
 version                          = 1
 priority                         = 1, 0, 3
 strict_sorting                   = false

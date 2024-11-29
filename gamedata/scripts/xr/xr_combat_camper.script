@@ -2,8 +2,9 @@
 Боевая схема кемпера, оторванная от поведенческой схемы кемпера.
 Просто сидеть и стрелять, если враг дальше какого-то расстояния
 Чугай Александр
-------------------------------------------------------------------------------------------------------------]] local 
-    base = xr_evaluators_id.combat_camper_base
+------------------------------------------------------------------------------------------------------------]] 
+
+local base = xr_evaluators_id.combat_camper_base
 local prop_enable = base + 0
 local prop_see = base + 1
 
@@ -53,9 +54,7 @@ end
 function action_shoot:initialize()
     action_base.initialize(self)
 
-    state_mgr.set_state(self.object, "hide_fire", nil, nil, {
-        look_object = self.object:best_enemy()
-    })
+    state_mgr.set_state(script_name(), self.object, "hide_fire", nil, nil, {look_object = self.object:best_enemy()})
 
     self.st.camper_combat_action = true
 end
@@ -95,9 +94,7 @@ function action_look_around:reset()
         self.st.last_seen_pos = self.object:best_enemy():position()
     end
 
-    state_mgr.set_state(self.object, "hide", nil, nil, {
-        look_position = self.st.last_seen_pos
-    })
+    state_mgr.set_state(script_name(), self.object, "hide", nil, nil, {look_position = self.st.last_seen_pos})
 end
 
 function action_look_around:execute()
@@ -118,9 +115,7 @@ function action_look_around:execute()
         local dir = vector():set(self.st.last_seen_pos):sub(self.object:position())
         dir = vector_rotate_y(dir, ang)
 
-        state_mgr.set_state(self.object, "hide", nil, nil, {
-            look_position = self.object:position():add(dir)
-        })
+        state_mgr.set_state(script_name(), self.object, "hide", nil, nil, {look_position = self.object:position():add(dir)})
     end
 end
 

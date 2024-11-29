@@ -30,16 +30,16 @@ def_state_moving1 = assault
 def_state_moving2 = assault
 def_state_moving3 = assault
 danger = danger_condition@zahar
-on_info = {+grek_ohota_dialog_done} remark@zahar3
+on_info = {+grek_ohota_dialog_done} remark@zahar2
 
-[remark@zahar3]
+[remark@zahar2]
 target = actor
 meet = no_meet
 combat_ignore_cond = always
 danger = danger_condition@zahar
-on_timer = 4000 | walker@zahar3
+on_timer = 4000 | walker@zahar2
 
-[walker@zahar3]
+[walker@zahar2]
 path_walk = zahar_walk2
 path_look = zahar_look2
 def_state_moving1 = run
@@ -48,7 +48,7 @@ def_state_moving3 = run
 meet = no_meet
 panic = 0
 danger = danger_condition@zahar
-on_signal = zaharka | walker@zahar4
+on_signal = zaharka | walker@zahar3
 on_info = {+zahar_hit} walker@zahar_hit
 
 [walker@zahar_hit]
@@ -60,33 +60,33 @@ def_state_moving3 = run
 meet = no_meet
 panic = 0
 danger = danger_condition@zahar
-on_info = {+zahar_mesto} walker@zahar4
+on_info = {+zahar_mesto} walker@zahar3
 
-[walker@zahar4]
+[walker@zahar3]
 path_walk = zahar_walk2
 path_look = zahar_look2
 meet = meet@zahar
 danger = danger_condition@zahar
-on_info = {+zahar_perehod_dialog_done} remark@zahar5
+on_info = {+zahar_perehod_dialog_done} remark@zahar3
 
-[remark@zahar5]
+[remark@zahar3]
 anim = guard
 target = actor
 meet = meet@zahar
 combat_ignore_cond = always
 danger = danger_condition@zahar
-on_timer = 2000 | walker@zahar5
+on_timer = 2000 | walker@zahar4
 
-[walker@zahar5]
-path_walk = zahar_walk3
-path_look = zahar_look3
+[walker@zahar4]
+path_walk = zahar_walk
+path_look = zahar_look
 meet = meet@zahar
 danger = danger_condition@zahar
-on_signal = finito | walker@zahar6
+on_signal = finito | walker@zahar5
 
-[walker@zahar6]
-path_walk = zahar_walk3
-path_look = zahar_look3
+[walker@zahar5]
+path_walk = zahar_walk
+path_look = zahar_look
 meet = meet@zahar
 def_state_standing = sit
 danger = danger_condition@zahar

@@ -2128,20 +2128,13 @@ on_info = %+levsha_dead%
 ;*************** ЛЕВША НА СКЛАДАХ *******************
 ;**************************************************
 [logic@mil_levsha]
-active = camper@mil_levsha
+active = walker@mil_levsha
 on_death = death@levsha_mil
 
-[camper@mil_levsha]
+[walker@mil_levsha]
 path_walk = mil_levsha_walk
 path_look = mil_levsha_look
 danger = danger_condition@mil_levsha
-on_actor_dist_le = 5| remark@mil_levsha
-
-[remark@mil_levsha]
-anim = wait
-target = actor
-danger = danger_condition@mil_levsha
-on_actor_dist_le = 15| camper@mil_levsha
 
 [danger_condition@mil_levsha]
 ignore_distance = 0

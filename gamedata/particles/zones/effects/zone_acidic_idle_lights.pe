@@ -1,0 +1,127 @@
+[_effect]
+version                          = 1
+max_particles                    = 46
+flags                            = 2049
+action_count                     = 9
+ 
+[sprite]
+shader                           = particles\alpha_add
+texture                          = fx\fx_gradient
+ 
+[action_0000]
+action_type                      = 10
+version                          = 1
+action_name                      = killold
+flags                            = 1
+flt_0000                         = 3.000000
+bool_0000                        = false
+ 
+[action_0001]
+action_type                      = 21
+version                          = 1
+action_name                      = source
+flags                            = 3
+flt_0000                         = 0.000000
+flt_0001                         = 0.050000
+flt_0002                         = 0.000000
+flt_0003                         = 24.000000
+flt_0004                         = 0.000000
+bool_0000                        = true
+bool_0001                        = false
+ 
+[domain_action_0001_0000]
+type                             = 0
+v0                               = 0.207843, 0.278431, 0.094118
+v1                               = 0.000000, 0.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0001_0001]
+type                             = 5
+v0                               = 0.000000, 1.500000, 0.000000
+v1                               = 1.000000, 4.000000, 0.000000
+v2                               = 1.000000, 3.000000, 0.000000
+ 
+[domain_action_0001_0002]
+type                             = 1
+v0                               = 6.283186, 6.283186, 0.000000
+v1                               = -6.283186, -6.283186, 0.000000
+v2                               = 1.000000, 0.000000, 0.000000
+ 
+[domain_action_0001_0003]
+type                             = 1
+v0                               = 0.040000, 0.040000, 0.040000
+v1                               = 0.120000, 0.120000, 0.120000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[domain_action_0001_0004]
+type                             = 0
+v0                               = 0.000000, 0.120000, 0.000000
+v1                               = 0.000000, 0.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 
+[action_0002]
+action_type                      = 27
+version                          = 1
+action_name                      = targetvelocity
+flags                            = 1
+flt_0000                         = 0.900000
+vec_0000                         = 0.000000, 0.120000, 0.000000
+bool_0000                        = true
+ 
+[action_0003]
+action_type                      = 24
+version                          = 1
+action_name                      = targetsize
+flags                            = 0
+vec_0000                         = 1.000000, 1.000000, 1.000000
+vec_0001                         = 6.000000, 6.000000, 6.000000
+ 
+[action_0004]
+action_type                      = 23
+version                          = 1
+action_name                      = targetcolor_00
+flags                            = 1
+flt_0000                         = 1.000000
+flt_0001                         = 1.000000
+flt_0002                         = 0.000000
+flt_0003                         = 0.600000
+vec_0000                         = 0.615686, 0.996078, 0.000000
+ 
+[action_0005]
+action_type                      = 23
+version                          = 1
+action_name                      = targetcolor
+flags                            = 1
+flt_0000                         = 0.000000
+flt_0001                         = 1.000000
+flt_0002                         = 1.000000
+flt_0003                         = 1.000000
+vec_0000                         = 0.011765, 0.000000, 0.023529
+ 
+[action_0006]
+action_type                      = 25
+version                          = 1
+action_name                      = targetrotate
+flags                            = 1
+flt_0000                         = 0.010000
+vec_0000                         = 0.000000, 0.000000, 0.000000
+ 
+[action_0007]
+action_type                      = 12
+version                          = 1
+action_name                      = move
+flags                            = 1
+ 
+[action_0008]
+action_type                      = 15
+version                          = 1
+action_name                      = randomaccel
+flags                            = 1
+bool_0000                        = true
+ 
+[domain_action_0008_0000]
+type                             = 5
+v0                               = 0.000000, 0.000000, 0.000000
+v1                               = 1.000000, 3.000000, 0.000000
+v2                               = 0.000000, 0.000000, 0.000000
+ 

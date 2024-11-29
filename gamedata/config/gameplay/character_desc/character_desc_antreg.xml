@@ -74,71 +74,6 @@
 
 </specific_character>
 
-<!---------------------------lesnik4---------------------->
-<specific_character id="lesnik4" team_default = "1">
-    <name>Лесник</name>
-    <icon>ui_npc_u_stalker_lesnik</icon>
-    <map_icon x="3" y="2"></map_icon>
-    <bio>sim_stalker_general_bio</bio>
-
-    <class>lesnik4</class>
-    <community>stranger</community>
-    <terrain_sect>stalker_terrain</terrain_sect>
-    <money min="200" max="300" infinitive="0"></money>
-
-    <rank>650</rank>
-    <reputation>500</reputation>
-
-    <visual>actors\lesnik</visual>
-    <snd_config>characters_voice\human_01\stalker\</snd_config>
-    <crouch_type>1</crouch_type>
-
-    <supplies>
-      [spawn] \n
-			wpn_toz34 = 1 \n	
-            ammo_12x70_buck = 3 \n
-			device_torch \n
-#include "gameplay\character_items.xml" \n
-#include "gameplay\character_food.xml" \n
-#include "gameplay\character_drugs.xml"	  
-    </supplies>
-
-    <actor_dialog>lesnik_karina_dialog</actor_dialog>
-</specific_character>
-
-<!---------------------------lesnik3---------------------->
-<specific_character id="lesnik3" team_default = "1">
-    <name>Лесник</name>
-    <icon>ui_npc_u_stalker_lesnik</icon>
-    <map_icon x="3" y="2"></map_icon>
-    <bio>sim_stalker_general_bio</bio>
-
-    <class>lesnik3</class>
-    <community>stranger</community>
-    <terrain_sect>stalker_terrain</terrain_sect>
-    <money min="200" max="300" infinitive="0"></money>
-
-    <rank>650</rank>
-    <reputation>500</reputation>
-
-    <visual>actors\lesnik</visual>
-    <snd_config>characters_voice\human_01\stalker\</snd_config>
-    <crouch_type>1</crouch_type>
-
-    <supplies>
-      [spawn] \n
-			wpn_toz34 = 1 \n	
-            ammo_12x70_buck = 3 \n
-			device_torch \n
-#include "gameplay\character_items.xml" \n
-#include "gameplay\character_food.xml" \n
-#include "gameplay\character_drugs.xml"	  
-    </supplies>
-
-    <actor_dialog>lesnik_hunters_dialog</actor_dialog>
-    <actor_dialog>lesnik_cats_dialog</actor_dialog>
-</specific_character>
-
 <!--------------------------zahar2----------------------->
 <specific_character id="zahar2" team_default = "1">
     <name>Захар</name>
@@ -160,7 +95,7 @@
 
     <supplies>
     [spawn] \n
-    wpn_val_tac \n
+    wpn_val \n
 	ammo_9x39_sp5 = 3 \n
 	device_torch \n
 #include "gameplay\character_food.xml" \n
@@ -196,7 +131,7 @@
 
     <supplies>
     [spawn] \n
-    wpn_val_tac \n
+    wpn_val \n
 	ammo_9x39_sp5 = 3 \n
 	device_torch \n
 #include "gameplay\character_food.xml" \n
@@ -563,7 +498,6 @@
     </supplies>
 
     <actor_dialog>karina_bolota_dialog</actor_dialog>
-    <actor_dialog>karina_perehod_dialog</actor_dialog>
     <actor_dialog>karina_pda_dialog_est</actor_dialog>
     <actor_dialog>karina_pda_dialog</actor_dialog>
     <actor_dialog>karina_help_dialog</actor_dialog>
@@ -689,7 +623,7 @@
 
     <supplies>
       [spawn] \n
-			wpn_val_tac \n	
+			wpn_val \n	
             ammo_9x39_ap = 5 \n
 #include "gameplay\character_items.xml" \n
 #include "gameplay\character_food.xml" \n
@@ -778,16 +712,11 @@
 
     <class>lesnik2</class>
     <community>stranger</community>
-    <terrain_sect>stalker_terrain</terrain_sect>
-    <money min="200" max="300" infinitive="0"></money>
+    <visual>actors\stalker_lesnik\stalker_lesnik_1</visual>
 
     <rank>650</rank>
     <reputation>500</reputation>
-
-    <visual>actors\lesnik</visual>
-    <snd_config>characters_voice\human_01\stalker\</snd_config>
-    <crouch_type>1</crouch_type>
-
+    <money min="100" max="5000" infinitive="0"></money>
     <supplies>
       [spawn] \n
 			wpn_toz34 = 1 \n	
@@ -798,6 +727,9 @@
 #include "gameplay\character_drugs.xml"	  
     </supplies>
 
+    <actor_dialog>lesnik_karina_dialog</actor_dialog>
+    <actor_dialog>lesnik_hunters_dialog</actor_dialog>
+    <actor_dialog>lesnik_cats_dialog</actor_dialog>
     <actor_dialog>lesnik_grig_dialog</actor_dialog>
     <actor_dialog>lesnik_poisk_dialog_est</actor_dialog>
     <actor_dialog>lesnik_poisk_dialog</actor_dialog>
@@ -995,7 +927,7 @@
 			[spawn] \n
 			wpn_sig220 \n
 			ammo_11.43x23_fmj \n		
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_sp5 = 5 \n
 #include "gameplay\character_items.xml" \n
 #include "gameplay\character_food.xml" \n
@@ -1027,7 +959,7 @@
       [spawn] \n
       wpn_sig220 \n
       ammo_11.43x23_hydro \n  
-      wpn_val_tac \n
+      wpn_val \n
       ammo_9x39_sp5 = 5 \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -1205,7 +1137,6 @@
 </specific_character>
 
 <!---------------------------sidor_old---------------------->
-
 <specific_character id="sidor_old" team_default = "1">
     <name>escape_trader_name</name>
     <icon>ui_npc_u_trader</icon>
@@ -1214,7 +1145,7 @@
 
     <class>sidor_old</class>
     <community>trader</community>
-    <visual>actors\trader\sidor_stalker</visual>
+    <visual>actors\trader\sidor</visual>
 
     <rank>380</rank>
     <reputation>53</reputation>
@@ -1227,8 +1158,7 @@
     <actor_dialog>sidor_nomagomet_dialog</actor_dialog>
     <actor_dialog>sidor_magomet_dialog</actor_dialog>
     <actor_dialog>sidor_poslanie_dialog</actor_dialog>
-    <actor_dialog>escape_trader_repair</actor_dialog>
-#include "gameplay\character_dialogs.xml"		
+    <actor_dialog>escape_trader_repair</actor_dialog>	
 </specific_character>
 
 <!---------------------------barman_old---------------------->
@@ -1450,7 +1380,7 @@
     <supplies>
 			[spawn] \n
 			pda_nebo \n
-			wpn_val_tac \n
+			wpn_val \n
 			ammo_9x39_ap \n
 			device_torch \n
 #include "gameplay\character_items.xml" \n

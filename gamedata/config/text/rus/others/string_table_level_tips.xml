@@ -52,42 +52,6 @@
 <string id="st_codelock">
     <text>[%c[yellow]$$ACTION_USE$$%c[default]] Кодовый замок</text>
 </string>
-<string id="to_aes">
-    <text>На ЧАЭС</text>
-</string>
-<string id="to_agroprom">
-    <text>На Агропром</text>
-</string>
-<string id="to_agroprom_underground">
-    <text>В Катакомбы</text>
-</string>
-<string id="to_bar">
-    <text>В Бар</text>
-</string>
-<string id="to_darkvalley">
-    <text>В Тёмную Долину</text>
-</string>
-<string id="to_escape">
-    <text>На Кордон</text>
-</string>
-<string id="to_garbage">
-    <text>На Свалку</text>
-</string>
-<string id="to_military">
-    <text>На Склады</text>
-</string>
-<string id="to_pripyat">
-    <text>В Припять</text>
-</string>
-<string id="to_radar">
-    <text>На Радар</text>
-</string>
-<string id="to_rostok">
-    <text>На Дикую Территорию</text>
-</string>
-<string id="to_yantar">
-    <text>На Янтарь</text>
-</string>
 <string id="st_helmet_countdown">
     <text>Отключение защиты</text>
 </string>
@@ -157,4 +121,72 @@
 </string>
 <string id="currency_type">
     <text>рублей</text>
+</string>
+
+
+<string id="to_l01_escape">
+    <text>На Кордон</text>
+</string>
+<string id="to_l02_garbage">
+    <text>На Свалку</text>
+</string>
+<string id="to_l03_agroprom">
+    <text>На Агропром</text>
+</string>
+<string id="to_l03u_agr_underground">
+    <text>В Катакомбы Агропрома</text>
+</string>
+<string id="to_l04_darkvalley">
+    <text>В Тёмную Долину</text>
+</string>
+<string id="to_l04u_labx18">
+    <text>В X18</text>
+</string>
+<string id="to_l05_bar">
+    <text>В Бар</text>
+</string>
+<string id="to_l06_rostok">
+    <text>На Дикую Территорию</text>
+</string>
+<string id="to_l08_yantar">
+    <text>На Янтарь</text>
+</string>
+<string id="to_l08u_brainlab">
+    <text>В X-16</text>
+</string>
+<string id="to_l07_military">
+    <text>На Склады</text>
+</string>
+<string id="to_l10_radar">
+    <text>На Радар</text>
+</string>
+<string id="to_l10u_bunker">
+    <text>В X10</text>
+</string>
+<string id="to_l11_pripyat">
+    <text>В Припять</text>
+</string>
+<string id="to_l12_stancia">
+    <text>На ЧАЭС</text>
+</string>
+<string id="to_l12u_sarcofag">
+    <text>В Саркофаг</text>
+</string>
+<string id="to_l12_stancia_2">
+    <text>На ЧАЭС 2</text>
+</string>
+<string id="to_l12u_control_monolith">
+    <text>В Бункер Управления</text>
+</string>
+<string id="to_l09_deadcity">
+    <text>В Мёртвый Город</text>
+</string>
+<string id="to_l10_red_forest">
+    <text>В Рыжий Лес</text>
+</string>
+<string id="to_l13_deep">
+    <text>На Станцию Глубокое</text>
+</string>
+<string id="to_swamp">
+    <text>На Топи</text>
 </string>

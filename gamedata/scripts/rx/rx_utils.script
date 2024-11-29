@@ -284,7 +284,6 @@ end
 function init_clsid()
     firearm_clst = {
         [clsid.wpn_pm_s] = true,
-        [clsid.wpn_walther_s] = true,
         [clsid.wpn_usp45_s] = true,
         [clsid.wpn_hpsa_s] = true,
         [clsid.wpn_bm16_s] = true,

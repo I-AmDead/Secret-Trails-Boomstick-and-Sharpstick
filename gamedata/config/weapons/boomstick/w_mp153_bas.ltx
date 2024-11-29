@@ -31,8 +31,8 @@ inv_grid_y         = 0
         repair_type                 = shotgun
         weapon_class                = shotgun
         
-        hud                         = wpn_mp153_bas_hud
-        visual                      = dynamics\weapons\wpn_mp153_bas\wpn_mp153_bas_world.ogf
+        hud                         = wpn_mp153_hud
+        visual                      = dynamics\weapons\wpn_mp153\wpn_mp153.ogf
         position                    = -0.024, -0.097, 0
         orientation                 = 0, -4, 0
         fire_point                  = 0, 0.158, 0.647
@@ -61,7 +61,7 @@ inv_grid_y         = 0
         
         tri_state_reload            = on
         fire_modes                  = 1
-        ammo_class                  = ammo_12x70_buck, ammo_12x70_kart, ammo_12x76_dart, ammo_12x76_zhekan
+        ammo_class                  = ammo_12x70_buck, ammo_12x76_dart, ammo_12x76_zhekan
         ammo_elapsed                = 5
         ammo_mag_size               = 5
         startup_ammo                = 10
@@ -132,9 +132,8 @@ control_inertion_factor = 1.0f
         kill_msg_width              = 75
         kill_msg_height             = 20
 		
-hud_fov                             = 0.78 
+	hud_fov                             = 0.75
 
-bas_state_reload                    = true
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------
 flame_particles = ghost_particles\weapons\flame_eft_shotgun
 smoke_particles = ghost_particles\weapons\flame_eft_sks
@@ -144,158 +143,134 @@ grenade_flame_particles = weapons\generic_weapon01
 snd_draw					= eft_wp\shared\draw_shotgun
 snd_holster					= eft_wp\shared\hide_shotgun
 snd_empty					= eft_wp\shared\empty_click_rifle
-snd_open_weapon             = eft_wp\mp133\mp133_open
-snd_add_cartridge			= eft_wp\mp133\mp133_insert1, 1.2, 0.1
-snd_add_cartridge1			= eft_wp\mp133\mp133_insert2, 1.2, 0.1
-snd_add_cartridge2			= eft_wp\mp133\mp133_insert3, 1.2, 0.1
-snd_close_weapon        = eft_wp\mp133\mp133_close, 1.0 ;mp133_close
-snd_close_weapon_empty        = weapons\mp153_young_prince\mp153_close_empty
-snd_shoot					= weapons\mp153_young_prince\mp153_shoot_1
-snd_silncer_shot		    = weapons\saiga_eft\saiga_shot_sil
-snd_shoot				                                          = wpn_mp133_snd_shoot
-snd_shoot_actor			                                        = wpn_mp153_snd_shoot_actor
-snd_shoot_last	                                                      = wpn_mp153_snd_shoot_actor
-snd_silncer_shot	= wpn_shotgun_snd_silenced
-snd_silncer_shot_actor	 = wpn_shotgun_snd_silenced_actor
+snd_open_weapon					= weapons\spas12\spas12_reload_start
+snd_add_cartridge				= weapons\mp133\mp133_reload
+snd_add_cartridge_empty				= weapons\spas12\spas12_reload_empty
+snd_close_weapon				= weapons\spas12\spas12_reload_end
+snd_close_weapon_empty				= weapons\spas12\spas12_reload_end
+snd_reload_jammed				= weapons\spas12\spas12_misfire
+snd_reload_jammed_last				= weapons\spas12\spas12_misfire
+snd_silncer_shot				= weapons\saiga_eft\saiga_shot_sil
+snd_shoot					= wpn_mp133_snd_shoot
+snd_shoot_actor					= wpn_mp153_snd_shoot_actor
+snd_shoot_last					= wpn_mp153_snd_shoot_actor
+snd_silncer_shot				= wpn_shotgun_snd_silenced
+snd_silncer_shot_actor				= wpn_shotgun_snd_silenced_actor
 ;--------------------------------------------------------------------HUD--------------------------------------------------------------------------------
-[wpn_mp153_bas_hud]:hud_base
-        item_visual                 = dynamics\weapons\wpn_mp153_bas\wpn_mp153_bas_hud.ogf
-        attach_place_idx            = 0
-        zoom_hide_crosshair         = true
+[wpn_mp153_hud]:hud_base
+item_visual                 = dynamics\weapons\wpn_mp153\wpn_mp153_hud.ogf
+attach_place_idx            = 0
+zoom_hide_crosshair         = true
         
-        item_position               = 0, 0, 0
-        item_orientation            = 0, 0, 0
-        
-        hands_position              = 0.003800,-0.001500,-0.037200
-        hands_orientation           = 1.600000,2.200000,0.200000
-        
-        aim_hud_offset_pos          = -0.0965, 0.078, -0.23
-        aim_hud_offset_rot          = 0.0275, 0.035, 0
-	
-item_position				= 0.001528,-0.012408,-0.099066
-item_orientation			= -0.046126,-1.000036,-0.024950
-		
-hands_position_16x9				= 0.003800,-0.001500,-0.037200
-hands_orientation_16x9			= 1.600000,2.200000,0.200000
+item_position               = 0,0,0
+item_orientation            = 0,0,0
 
-aim_hud_offset_pos_16x9				= -0.055500,0.031300,-0.026100
-aim_hud_offset_rot_16x9				= 0.016500,0.028050,-0.001500
+hands_position              = 0.060125,0.052325,-0.186075
+hands_orientation           = 0,0,0	
+hands_position_16x9	    = 0.060125,0.052325,-0.186075
+hands_orientation_16x9	    = 0,0,0
+
+aim_hud_offset_pos          = -0.059800,0.037900,-0.026100
+aim_hud_offset_rot          = -0.002500,0.001050,-0.001500
+aim_hud_offset_pos_16x9	    = -0.059800,0.037900,-0.026100
+aim_hud_offset_rot_16x9	    = -0.002500,0.001050,-0.001500
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ;Идл обычный
 
-anm_idle			= mp133_ghost_idle, idle_mp153
-anm_idle_empty			= mp133_ghost_idle, idle_empty_mp153
-anm_idle_jammed			= mp133_ghost_idle, idle_mp153
-
-;Идл - сосредоточенный
-anm_idle_slow			= mp133_ghost_idle, idle_mp153
-anm_idle_slow_empty		= mp133_ghost_idle, idle_empty_mp153
-anm_idle_slow_jammed		= mp133_ghost_idle, idle_mp153
-
-;Идл - присев
-anm_idle_crouch			= mp133_ghost_idle, idle_mp153
-anm_idle_crouch_empty		= mp133_ghost_idle, idle_empty_mp153
-anm_idle_crouch_jammed		= mp133_ghost_idle, idle_mp153
-
-;Идл - сосредоточенный и присев
-anm_idle_crouch_slow		= mp133_ghost_idle, idle_mp153
-anm_idle_crouch_slow_empty	= mp133_ghost_idle, idle_empty_mp153
-anm_idle_crouch_slow_jammed	= mp133_ghost_idle, idle_mp153
+anm_idle			= mp153_idle
+anm_idle_empty			= mp153_idle, idle_empty
+anm_idle_jammed			= mp153_idle
 
 ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ;Обычное движение
-anm_idle_moving				= mp133_ghost_idle_moving, idle_mp153
-anm_idle_moving_empty			= mp133_ghost_idle_moving, idle_empty_mp153
-anm_idle_moving_jammed			= mp133_ghost_idle_moving, idle_mp153
+anm_idle_moving				= mp153_moving
+anm_idle_moving_empty			= mp153_moving, idle_empty
+anm_idle_moving_jammed			= mp153_moving
 
 ;Замедленное движение
-anm_idle_moving_slow			= mp133_ghost_idle_moving, idle_mp153
-anm_idle_moving_slow_empty		= mp133_ghost_idle_moving, idle_empty_mp153
-anm_idle_moving_slow_jammed		= mp133_ghost_idle_moving, idle_mp153
+anm_idle_moving_slow			= mp153_moving
+anm_idle_moving_slow_empty		= mp153_moving, idle_empty
+anm_idle_moving_slow_jammed		= mp153_moving
 
 ;Движение в присяде
-anm_idle_moving_crouch			= mp133_ghost_idle_moving, idle_mp153
-anm_idle_moving_crouch_empty		= mp133_ghost_idle_moving, idle_empty_mp153
-anm_idle_moving_crouch_jammed		= mp133_ghost_idle_moving, idle_mp153
+anm_idle_moving_crouch			= mp153_moving
+anm_idle_moving_crouch_empty		= mp153_moving, idle_empty
+anm_idle_moving_crouch_jammed		= mp153_moving
 
 ;Замедленное движение в присяде
-anm_idle_moving_crouch_slow		= mp133_ghost_idle_moving, idle_mp153
-anm_idle_moving_crouch_slow_empty	= mp133_ghost_idle_moving, idle_empty_mp153
-anm_idle_moving_crouch_slow_jammed	= mp133_ghost_idle_moving, idle_mp153
+anm_idle_moving_crouch_slow		= mp153_moving
+anm_idle_moving_crouch_slow_empty	= mp153_moving, idle_empty
+anm_idle_moving_crouch_slow_jammed	= mp153_moving
 
 
 ;прицеливание - стоя на месте
-anm_idle_aim			= mp133_ghost_idle_aim, idle_mp153
-anm_idle_aim_empty		= mp133_ghost_idle_aim, idle_empty_mp153
-anm_idle_aim_jammed		= mp133_ghost_idle_aim, idle_mp153
+anm_idle_aim			= mp153_idle_aim
+anm_idle_aim_empty		= mp153_idle_aim, idle_empty
+anm_idle_aim_jammed		= mp153_idle_aim
 
 ;прицеливание с оптикой - стоя на месте
-anm_idle_aim_scope		= mp133_ghost_idle_aim, idle_mp153
-anm_idle_aim_scope_empty	= mp133_ghost_idle_aim, idle_empty_mp153
-anm_idle_aim_scope_jammed	= mp133_ghost_idle_aim, idle_mp153
+anm_idle_aim_scope		= mp153_idle_aim
+anm_idle_aim_scope_empty	= mp153_idle_aim, idle_empty
+anm_idle_aim_scope_jammed	= mp153_idle_aim
 
 ;спринт
-anm_idle_sprint			= mp133_ghost_idle_sprint, idle_mp153
-anm_idle_sprint_empty		= mp133_ghost_idle_sprint, idle_empty_mp153
-anm_idle_sprint_jammed		= mp133_ghost_idle_sprint, idle_mp153
+;вход в спринт
+anm_idle_sprint_start      = mp153_sprint_start
+anm_idle_sprint_start_empty  = mp153_sprint_start, idle_empty
+anm_idle_sprint_start_jammed = mp153_sprint_start
+
+;спринт
+anm_idle_sprint			= mp153_sprint
+anm_idle_sprint_empty		= mp153_sprint, idle_empty
+anm_idle_sprint_jammed		= mp153_sprint
+
+;выход из спринта
+anm_idle_sprint_end        = mp153_sprint_end
+anm_idle_sprint_end_empty  = mp153_sprint_end, idle_empty
+anm_idle_sprint_end_jammed = mp153_sprint_end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ;начало релоада
-anm_open			= mp133_ghost_open, idle_mp153
-anm_open_empty			= mp133_ghost_open, idle_empty_mp153
+anm_open			= mp153_reload_start
+anm_open_empty			= mp153_reload_empty_start, idle_empty
 
 ;добавление патрона
-anm_add_cartridge		= mp133_ghost_insert, insert_mp153
-anm_add_cartridge_empty		= mp133_ghost_insert, insert_mp153
+anm_add_cartridge		= mp153_reload, reload
+anm_add_cartridge_empty		= mp153_reload_empty, reload_empty
 
 ;конец релоада
-anm_close			= mp133_ghost_close, idle_mp153
-anm_close_empty			= mp153_ghost_close_empty, close_empty_mp153
+anm_close			= mp153_reload_end
+anm_close_empty			= mp153_reload_end
+
+;расклин
+anm_reload_jammed		= mp153_misfire, misfire
+anm_reload_jammed_last		= mp153_misfire, misfire
 
 ;доставание
-anm_show			= mp133_ghost_draw, idle_mp153
-anm_show_empty			= mp133_ghost_draw, idle_empty_mp153
-anm_show_jammed			= mp133_ghost_draw, idle_mp153
+anm_show			= mp153_draw
+anm_show_empty			= mp153_draw, idle_empty
+anm_show_jammed			= mp153_draw
 
 ;убирание
-anm_hide			= mp133_ghost_holster, idle_mp153
-anm_hide_empty			= mp133_ghost_holster, idle_empty_mp153
-anm_hide_jammed			= mp133_ghost_holster, idle_mp153
+anm_hide			= mp153_holster
+anm_hide_empty			= mp153_holster, idle_empty
+anm_hide_jammed			= mp153_holster
+
 
 ;Стрельба
-anm_shoot		   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_sil		   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_last		   = mp133_ghost_shoot_last, shoot_last_mp153
-anm_shoot_last_sil	   = mp133_ghost_shoot_last, shoot_last_mp153
-anm_shoot_aim		   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_sil	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_last	   = mp133_ghost_shoot_last, shoot_last_mp153
-anm_shoot_aim_last_sil	   = mp133_ghost_shoot_last, shoot_last_mp153
-anm_shoot_aim_scope	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_scope_sil	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_scope_last   = mp133_ghost_shoot_last, shoot_last_mp153
-anm_shoot_aim_scope_last_sil = mp133_ghost_shoot_last, shoot_last_mp153
-
-
-; выстрел с переходом в состояние клина
-anm_shoot_jammed	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_jammed_sil	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_jammed	   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_jammed_sil   = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_scope_jammed = mp133_ghost_shoot_last, shoot_mp153
-anm_shoot_aim_scope_jammed_sil = mp133_ghost_shoot_last, shoot_mp153
+anm_shots		   = mp153_shoot, shoot
+anm_shots_l		   = mp153_shoot, idle_empty
+anm_shots_aim              = mp153_shoot_aim, shoot
+anm_shots_aim_last	   = mp153_shoot_aim, idle_empty
 
 ;Скука
-anm_bore			 = mp133_ghost_idle_aim
-anm_bore_empty			 = mp133_ghost_idle_aim, idle_empty_mp153
-anm_bore_jammed			 = mp133_ghost_idle_aim
+anm_bore			 = mp153_idle
+anm_bore_empty			 = mp153_idle, idle_empty
+anm_bore_jammed			 = mp153_idle
 
-anm_idle_moving_speed_k                     = 1
-anm_idle_moving_empty_speed_k               = 1
-anm_idle_moving_jammed_speed_k              = 1
 anm_idle_moving_slow_speed_k         	    = 0.8
 anm_idle_moving_slow_empty_speed_k   	    = 0.8
 anm_idle_moving_slow_jammed_speed_k  	    = 0.8
@@ -306,23 +281,19 @@ anm_idle_moving_crouch_slow_speed_k         = 0.4
 anm_idle_moving_crouch_slow_empty_speed_k   = 0.4
 anm_idle_moving_crouch_slow_jammed_speed_k  = 0.4
 
-anm_add_cartridge_speed_k		    = 1.2
-anm_add_cartridge_empty_speed_k		    = 1.2
-
-	lowered_hud_offset_pos		= 0.1,0,0
-	lowered_hud_offset_rot		= 0.1,-0.8,0.1  
-        
-        fire_bone2                  = muzzle
-
-        fire_point2                 = 0, 0, 0
+lowered_hud_offset_pos	    = 0.1,0,0
+lowered_hud_offset_rot	    = 0.1,-0.8,0.1  
 		
-	shell_point		    = -0.025000,0.033000,0.102000
-	shell_dir                   = 0.0, 1.0, 0.0
-	shell_bone		    = wpn_body
-	shells_3d_hit_dir 	    = 1.25, 0.5, -0.3
+shell_point		    = 0.02,0.02,-0.045
+shell_dir                   = 0.0, 1.0, 0.0
+shell_bone		    = wpn_body
+shells_3d_hit_dir 	    = 1.25, 0.5, -0.3
 
-	fire_point		                    = 0, 0, 0.072
-	fire_bone			                = muzzle
-	shoot_point		  					= 0, 0, -0.7
+fire_point		    = 0.000000,0.000000,0.205499
+fire_bone		    = muzzle
+fire_point2                 = 0, 0, 0
+fire_bone2                  = muzzle
+
+shoot_point		    = 0, 0, -0.3
  
-	freelook_z_offset_mul		= 0.1
+freelook_z_offset_mul	    = 0.1

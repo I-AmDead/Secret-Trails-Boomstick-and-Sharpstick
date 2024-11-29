@@ -29,7 +29,7 @@ float get_noise(float2 co) { return (frac(sin(dot(co.xy, float2(12.9898, 78.233)
 
 float4 main(p_flat I) : SV_Target
 {
-    //Искажение экрана при выбросе
+    // Искажение экрана при выбросе
     float problems = cos((frac(timers.z * 4) - 0.5) * 3.1416) * 2 - 0.8;
     float AMPL = 0.3;
     I.tcdh.y -= (m_affects.x > 0.15 && I.tcdh.x > problems - AMPL && I.tcdh.x < problems + AMPL) ?
@@ -118,7 +118,7 @@ float4 main(p_flat I) : SV_Target
 
     color.a = 1.0 - m_affects.x - m_affects.x;
 
-    const bool turn_off = m_affects.x > 0.41; //отключение экрана
+    const bool turn_off = m_affects.x > 0.41; // отключение экрана
 
     color = turn_off ? 0.0 : saturate(color);
 

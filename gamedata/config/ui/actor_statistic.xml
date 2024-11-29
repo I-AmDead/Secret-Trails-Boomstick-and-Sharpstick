@@ -15,7 +15,7 @@
 
     <character_info x="15" y="58" width="350" height="120"/>
 
-    <master_list x="15" y="200" width="280" height="387" always_show_scroll="0" can_select="1" scroll_profile="pda"/>
+    <master_list x="0" y="200" width="350" height="387" always_show_scroll="0" can_select="1" scroll_profile="pda"/>
 
     <detail_list x="33" y="41" width="561" height="546" always_show_scroll="0" scroll_profile="pda"/>
 
@@ -40,11 +40,6 @@
         </title>
         <texture>amk_blank_01</texture>
     </chicon_frame_line>
-
-    <a_static x="250" y="-3" width="32" height="32" frames="16" duration="1000" columns="8" frame_width="32" frame_height="32" cyclic="1" autoplay="1">
-        <texture>ui\pda_anims\ui_pda_anims_03</texture>
-    </a_static>
-
 
     <right_auto_static x="8" y="52" width="4" height="420">
         <texture></texture>
@@ -71,44 +66,44 @@
 
     <actor_stats_wnd>
         <master_part x="0" y="0" width="250" height="55" id="foo">
-            <text_1 x="0" y="20" width="200" height="20">
+            <text_1 x="15" y="20" width="200" height="20">
                 <text align="l" x="0" y="0" font="letterica25" r="230" g="230" b="200" a="230">st_pda_statistic_score</text>
             </text_1>
             <text_2 x="0" y="0" width="0" height="0"/>
         </master_part>
 
         <master_part x="0" y="0" width="250" height="25" id="stalkerkills">
-            <text_1 x="0" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
+            <text_1 x="15" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
                 <text align="l" x="0" y="0" font="letterica18" r="170" g="170" b="170" a="160">st_pda_stalker_kills</text>
             </text_1>
-            <text_2 x="210" y="0" width="25" height="20">
+            <text_2 x="300" y="0" width="25" height="20">
                 <text align="r" x="0" y="0" font="letterica18" a="200"/>
             </text_2>
         </master_part>
 
         <master_part x="0" y="0" width="250" height="25" id="monsterkills">
-            <text_1 x="0" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
+            <text_1 x="15" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
                 <text align="l" x="0" y="0" font="letterica18" r="170" g="170" b="170" a="160">st_pda_monster_kills</text>
             </text_1>
-            <text_2 x="210" y="0" width="25" height="20">
+            <text_2 x="300" y="0" width="25" height="20">
                 <text align="r" x="0" y="0" font="letterica18" a="200"/>
             </text_2>
         </master_part>
 
         <master_part x="0" y="0" width="250" height="25" id="quests">
-            <text_1 x="0" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
+            <text_1 x="15" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
                 <text align="l" x="0" y="0" font="letterica18" r="170" g="170" b="170" a="160">st_pda_quest_complete</text>
             </text_1>
-            <text_2 x="210" y="0" width="25" height="20">
+            <text_2 x="300" y="0" width="25" height="20">
                 <text align="r" x="0" y="0" font="letterica18" a="200"/>
             </text_2>
         </master_part>
 
         <master_part x="0" y="0" width="250" height="45" id="total">
-            <text_1 x="0" y="20" width="200" height="20">
+            <text_1 x="15" y="20" width="200" height="20">
                 <text align="l" x="0" y="0" font="letterica18" r="180" g="180" b="180" a="230">st_pda_total</text>
             </text_1>
-            <text_2 x="210" y="20" width="25" height="20">
+            <text_2 x="300" y="20" width="25" height="20">
                 <text align="r" x="0" y="0" font="letterica18" a="200"/>
             </text_2>
         </master_part>

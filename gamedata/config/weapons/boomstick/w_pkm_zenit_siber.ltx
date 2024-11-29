@@ -34,7 +34,7 @@ inv_grid_y         = 38
         
         kind                        = w_rifle
         inv_weight                  = 8.400
-        cost                        = 83850
+        cost                        = 60000
         repair_type                 = rifle_7
         weapon_class                = assault_rifle
         
@@ -83,7 +83,7 @@ inv_grid_y         = 38
 	misfire_and_reload	    = true
        
         scope_bone_none 	    = true
-        scope_names                 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, e0t2, pn23, gauss_sight, rmr, deltapoint, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
+        scope_names                 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, pn23, rmr, deltapoint, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
         scope_status                = 2
 
         scope_respawn                         = wpn_pkm_zenit_siber
@@ -98,9 +98,7 @@ inv_grid_y         = 38
         scope_respawn_aimpoint                = wpn_pkm_zenit_siber_aimpoint
         scope_respawn_aim_low                = wpn_pkm_zenit_siber_aim_low
         scope_respawn_point_aimpro            = wpn_pkm_zenit_siber_point_aimpro
-        scope_respawn_e0t2                    = wpn_pkm_zenit_siber_e0t2
         scope_respawn_pn23                    = wpn_pkm_zenit_siber_pn23
-        scope_respawn_gauss_sight             = wpn_pkm_zenit_siber_gauss_sight
         scope_respawn_rmr                     = wpn_pkm_zenit_siber_rmr
         scope_respawn_deltapoint              = wpn_pkm_zenit_siber_deltapoint
         scope_respawn_compm4s                 = wpn_pkm_zenit_siber_compm4s
@@ -677,27 +675,6 @@ aim_hud_offset_rot_16x9				= 0.058260,0.001325,0.009321
 hands_position_16x9				= -0.006400,-0.016640,0.025950
 hands_orientation_16x9			= 0.340000,0.200000,0.000000
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_pkm_zenit_siber_e0t2]:wpn_pkm_zenit_siber
-
-visual					= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit_siber_world.ogf
-
-hud						= wpn_pkm_zenit_siber_e0t2_hud
-
-inv_weight                                         = 8.730
-
-scope			    = e0t2
-scope_x			= 85
-scope_y			= -14
-
-scope_name                 = e0t2
-
-[wpn_pkm_zenit_siber_e0t2_hud]:wpn_pkm_zenit_siber_hud
-
-item_visual				= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit_siber_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9				= 0.006610,-0.033690,0.003304
-aim_hud_offset_rot_16x9				= -0.007240,0.006325,0.009321
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_pkm_zenit_siber_pn23]:wpn_pkm_zenit_siber
 
 visual					= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit_siber_world.ogf
@@ -721,27 +698,6 @@ aim_hud_offset_rot_16x9				= 0.004760,0.006325,0.009321
 
 hands_position_16x9				= -0.001200,-0.031240,0.016050
 hands_orientation_16x9			= 0.340000,0.200000,0.000000
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_pkm_zenit_siber_gauss_sight]:wpn_pkm_zenit_siber
-
-visual					= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit_siber_world.ogf
-
-hud					= wpn_pkm_zenit_siber_gauss_sight_hud
-
-scope                              = gauss_sight
-scope_x                            = 65
-scope_y                            = -8
-
-scope_name                 = gauss_sight
-
-inv_weight                                         = 9.800
-
-[wpn_pkm_zenit_siber_gauss_sight_hud]:wpn_pkm_zenit_siber_hud
-
-item_visual				= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit_siber_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9				= 0.006310,-0.025690,0.006704
-aim_hud_offset_rot_16x9				= 0.004760,0.006325,0.009321
 ;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_pkm_zenit_siber_deltapoint]:wpn_pkm_zenit_siber
 
@@ -869,7 +825,3 @@ item_visual                	= dynamics\weapons\wpn_pkm_zenit_siber\wpn_pkm_zenit
 
 aim_hud_offset_pos_16x9				= 0.006310,-0.040000,0.009704
 aim_hud_offset_rot_16x9				= 0.002260,0.006325,0.006321
-;------------------------------------------------------------------------------------------------
-
-
-[wpn_fn2000]:wpn_pkm_zenit_siber

@@ -24,7 +24,7 @@ function normal(shader, t_base, t_second, t_detail)
 			: aref 		(true,0)
 			 
 	shader : dx10texture("s_base", "fx\\rain_splash")
-	shader : dx10texture("s_rimage", "$user$generic0_temp")
+	shader : dx10texture("s_rimage", "$user$generic_temp")
 
 	shader 	: dx10sampler	("smp_base")
 	shader 	: dx10sampler	("smp_nofilter")

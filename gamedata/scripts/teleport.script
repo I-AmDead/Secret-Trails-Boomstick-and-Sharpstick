@@ -1,70 +1,29 @@
-
-function create_teleport(...)
-    local sobj = alife():create(...)
-    local pk = get_netpk(sobj, 1)
-    ASSERT((pk and pk:isOk()), "can't read netpacket of %s", sobj:name())
-    local data = pk:get()
-    data.shapes:addSphere(1, vector():set(0, 0, 0))
-    pk:set(data)
-    sobj = alife():object(sobj.id)
-    local sr = sobj:get_space_restrictor()
-    sr.restrictor_type = global_flags.eRestrictorTypeNone
-    return sobj
-end
-
 function spawn_teleport1() -- телепорт страховочный для прыжка за svitok5
-    local obj = alife():create("m_teleport_1", vector():set(186.49, 2.00, 31.77), 155121, 2263)
+    local obj = alife_create("m_teleport_1", "l11_pripyat", vector():set(186.49, 2.00, 31.77))
     alife():assign_story_id(obj.id, story_ids.teleport_strah)
 end
 
 function spawn_teleport2() -- телепорт, перебрасывающий недалеко от входа в тайник Стрелка
-    local obj = alife():create("m_teleport_2", vector():set(-83.591, -14.648, -70.751), 2582, 717)
+    local obj = alife_create("m_teleport_2", "l03u_agr_underground", vector():set(-83.591, -14.648, -70.751))
     alife():assign_story_id(obj.id, story_ids.teleport_taynik)
 end
 
-function spawn_teleport3() -- телепорт, перебрасывающий из ДТ за её пределы
-    local obj = alife():create("m_teleport_3", vector():set(-281.876, 0.925, 53.547), 1740, 1392)
-    alife():assign_story_id(obj.id, story_ids.teleport_dt_outside)
-end
-
-function spawn_teleport4() -- телепорт, перебрасывающий из-за пределов ДТ обратно
-    local obj = alife():create("m_teleport_4", vector():set(-261.414, -22.226, -442.616), 1737, 1392)
-    alife():assign_story_id(obj.id, story_ids.teleport_outside_dt)
-end
-
-function spawn_teleport5() -- телепорт, перебрасывающий из Припяти за её пределы
-    local obj = alife():create("m_teleport_5", vector():set(-76.652, 0.948, -76.323), 62934, 2132)
-    alife():assign_story_id(obj.id, story_ids.teleport_pripyat_outside)
-end
-
-function spawn_teleport6() -- телепорт, перебрасывающий из-за пределов Припяти обратно
-    local obj = alife():create("m_teleport_6", vector():set(-80.656, -2.222, -78.400), 29516, 2258)
-    alife():assign_story_id(obj.id, story_ids.teleport_outside_pripyat)
-end
-
------------------------------------------tt2-----------------------------------------------
-
-function spawn_teleport7() -- телепорт, перебрасывающий за пределы Радара
-    local obj = alife():create("m_teleport_7", vector():set(94.773, 2.880, 93.603), 41724, 1947)
-    alife():assign_story_id(obj.id, story_ids.teleport_radar_outside)
-end
-
 function spawn_teleport8() -- телепорт, перебрасывающий внутрь Чаэс-2 из вне
-    local obj = alife():create("m_teleport_8", vector():set(116.323, -0.080, 523.742), 178968, 2618)
+    local obj = alife_create("m_teleport_8", "l12_stancia_2", vector():set(116.323, -0.080, 523.742))
     alife():assign_story_id(obj.id, story_ids.teleport_vyhod)
 end
 
 function spawn_teleport9() -- телепорт, перебрасывающий по крышам Чаэс-2
-    local obj = alife():create("m_teleport_9", vector():set(578.559, 18.205, 294.443), 174619, 2613)
+    local obj = alife_create("m_teleport_9", "l12_stancia_2", vector():set(578.559, 18.205, 294.443))
     alife():assign_story_id(obj.id, story_ids.teleport_end)
 end
 
 function spawn_teleport10() -- телепорт, перебрасывающий на крышу к последнему телепорту
-    local obj = alife():create("m_teleport_10", vector():set(444.904, 0.165, 143.613), 147661, 2599)
+    local obj = alife_create("m_teleport_10", "l12_stancia_2", vector():set(444.904, 0.165, 143.613))
     alife():assign_story_id(obj.id, story_ids.teleport_rule)
 end
 
 function spawn_teleport11() -- телепорт, перебрасывающий на Агропроме из люка обратно на землю
-    local obj = alife():create("m_teleport_11", vector():set(-111.109, -3.963, -143.663), 128573, 696)
+    local obj = alife_create("m_teleport_11", "l03_agroprom", vector():set(-111.109, -3.963, -143.663))
     alife():assign_story_id(obj.id, story_ids.teleport_agro_und)
 end

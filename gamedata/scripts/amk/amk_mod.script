@@ -12,8 +12,7 @@ end
 function treasure_create(obj)
     local section = obj:section()
     if section == "treasure_item" then
-        local sobj = alife():create("m_inventory_box", db.actor:position(), db.actor:level_vertex_id(),
-            db.actor:game_vertex_id())
+        local sobj = alife():create("m_inventory_box", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
         sobj = alife():object(sobj.id)
         sobj.custom_data = "[logic]\ncfg = scripts\\treasure_inventory_box.ltx\n"
         sobj:used_ai_locations(false)
@@ -25,17 +24,16 @@ end
 -- '*******************************************************************************
 function first_run()
     -- На момент вызова этой функции актор уже доступен - переделано на поршень.
-    if has_alife_info("x_first_run") then
+    if has_alife_info("x_first_run") or level.name() == "fake_start" then
         return
     end
 
     ogse.spawn_item_in_inv("matras")
 
-    alife():create("x18_zapiska_ruk", vector():set(21.6, -5.64, -18.28), 5991, 1140)
-    alife():create("x16_zapiska_ruk", vector():set(-128.0, 22.5, -30.0), 35, 1529)
+    alife_create("x18_zapiska_ruk", "l04u_labx18", vector():set(21.6, -5.64, -18.28))
+    alife_create("x16_zapiska_ruk", "l08u_brainlab", vector():set(-128.0, 22.5, -30.0))
 
     spawn_military_btr()
-    spawn_fuel()
 
     dsh_alife.invalidate_items()
 
@@ -45,20 +43,28 @@ end
 -- '****************************************************************************
 -- '   **   **   **   **   **    **   **   **        CHECK_SPAWN          **   *
 -- '****************************************************************************
+function delete_new_lc(levch, info)
+    if not db.actor:has_info(info) then
+        local obj = alife():story_object(levch)
+        if obj then
+            alife():release(obj)
+        end
+    end
+end
 
 function check_spawn()
-    if ogse.var_exists("START_GAME") then return end
+    if ogse.var_exists("START_GAME") or level.name() == "fake_start" then return end
 
     spawn_unspawned_respawners()
 
     local obj = alife():story_object(6001)
     if obj then
-        level.map_add_object_spot_ser(obj.id, "level_changer", "to_pripyat")
+        level_tasks.add_location_by_id(obj.id, "level_changer", "to_l11_pripyat")
     end
 
     local obj = alife():story_object(6002)
     if obj then
-        level.map_add_object_spot_ser(obj.id, "level_changer", "to_darkvalley")
+        level_tasks.add_location_by_id(obj.id, "level_changer", "to_l04_darkvalley")
     end
 
     local obj = alife():story_object(6000)
@@ -67,8 +73,8 @@ function check_spawn()
         obj = alife():story_object(6000)
     end
 
-    braad_test.delete_new_lc(833, "info_way_pripyat")
-    braad_test.delete_new_lc(1007, "info_way_radar")
+    delete_new_lc(833, "info_way_pripyat")
+    delete_new_lc(1007, "info_way_radar")
 
     ogse.save_var("START_GAME", true)
 end
@@ -172,8 +178,7 @@ function check_af_transform(obj, anom, lv, gv)
         -- если компонент есть в рецепте
         if component_sect_string == obj:section() then
             -- устанавливаем все параметры для рецепта, возможно из умолчаний
-            local result_sect, luck = af_select_result(lucky_percent, bad_percent, bad_sect_string, lucky_sect_string,
-                component_sect_string)
+            local result_sect, luck = af_select_result(lucky_percent, bad_percent, bad_sect_string, lucky_sect_string, component_sect_string)
 
             if not lucky_sect_string or not lucky_percent or not bad_percent or not bad_sect_string or not time_vector or
                 anomaly_remove_bool == nil or (not lucky_sect_string and not anomaly_remove_bool) or lucky_percent +
@@ -206,8 +211,7 @@ function check_af_transform(obj, anom, lv, gv)
                     level.add_pp_effector("teleport.ppe", 1524, false)
                 end
             end
-            dsh.start_gtimerDHMS("af_transform", time_vector.x, time_vector.y, time_vector.z, 0,
-                "amk_mod.af_transform_universal_end", t)
+            dsh.start_gtimerDHMS("af_transform", time_vector.x, time_vector.y, time_vector.z, 0, "amk_mod.af_transform_universal_end", t)
 
             -- удаляем из игры компоненты рецепта
             alife():release(alife():object(obj:id()))
@@ -259,8 +263,8 @@ function af_transform_universal_end(params)
             local sobj = alife():create(v, vector():set(anom_pos.x, anom_pos.y + 1, anom_pos.z), params.lv, params.gv)
             alife():use_ai_locations(sobj, false)
             if params.actor_signal then
-                level.map_add_object_spot_ser(sobj.id, "red_location", game.translate_string("trans_finished_title") .. "%c[red]" .. from_comp)
-                news_manager.send_tip(db.actor, game.translate_string("trans_finished_title") .. "%c[255,255,0,0]" .. from_comp)
+                level_tasks.add_location_by_id(sobj.id, "red_location", game.translate_string("trans_finished_title") .. " " .. from_comp)
+                news_manager.send_tip(db.actor, game.translate_string("trans_finished_title") .. "%c[255,255,0,0]" .. " " .. from_comp)
             end
             archievements.acv_count_event("acv_art", 100, game.translate_string("acv_art"))
         end
@@ -269,8 +273,9 @@ function af_transform_universal_end(params)
     -- удаляем аномалии, если нужно и она не в исключениях
     if params.remove_anomaly then
         local sobj = alife():object(params.remove_anomaly_id)
-        if sobj and game_graph():valid_vertex_id(sobj.m_game_vertex_id) and is_generated_anomaly(sobj) then
-            dsh_anomaly_detector.remove_restriction(sobj.id)
+        if sobj and game_graph():valid_vertex_id(sobj.m_game_vertex_id) then
+            ogse_anomaly.set_anomaly_mode(params.remove_anomaly_id, "anom_off")
+            alife():release(sobj, true)
         end
     end
 
@@ -307,8 +312,7 @@ function on_blowout_hit(npc, hide)
                 if o.zone then
                     for j, v in ipairs(o.zone) do
                         if v.p3 then
-                            tmp = ogse.check_npc_in_box_amk(npc, vector():set(unpack(v.p1)), vector():set(unpack(v.p2)),
-                                vector():set(unpack(v.p3)))
+                            tmp = ogse.check_npc_in_box_amk(npc, vector():set(unpack(v.p1)), vector():set(unpack(v.p2)), vector():set(unpack(v.p3)))
                         else
                             tmp = ogse.check_npc_in_box_amk(npc, vector():set(unpack(v.p1)), vector():set(unpack(v.p2)))
                         end
@@ -385,6 +389,10 @@ function check_usable_item(obj)
             ogse.remove_inv_items_by_section(obj:section())
         elseif level.name() == "l08u_brainlab" then
             db.actor:give_info_portion("info_amk_recipt_dummy")
+            db.actor:give_info_portion("info_amk_recipt_dummy_fire")
+            db.actor:give_info_portion("info_amk_recipt_dummy_bright")
+            db.actor:give_info_portion("info_amk_recipt_dummy_moon")
+            db.actor:give_info_portion("info_amk_recipt_dummy_puding")
             ogse.remove_inv_items_by_section(obj:section())
         end
     elseif obj:section() == "amk_zapiska_tears_electra" then
@@ -394,52 +402,17 @@ function check_usable_item(obj)
         db.actor:give_info_portion("info_amk_recipt_tears_chimaera")
         ogse.remove_inv_items_by_section(obj:section())
     end
-    level.map_remove_object_spot(obj:id(), "red_location")
+    level_tasks.remove_location_by_id(obj:id(), "red_location")
 end
 
 -- '*******************************************************************************
 -- '   **   **   **   **   **    **   **   **     SPAWN_OBJ        **   **   **   **   **    **   **   **   **   
 -- '*******************************************************************************
-function spawn_fuel()
-    local ballons = {{108.16, -6.30, -18.17, 412158, 115}, {370.12, 15.06, -39.48, 594401, 0},
-                     {58.30, 19.36, 156.50, 345136, 97}, {-92.21, -1.18, -212.66, 115177, 268},
-                     {-74.17, 1.80, 8.45, 127766, 329}, {3.18, 1.24, 42.48, 243919, 490},
-                     {15.35, -1.90, 2.40, 255433, 479}, {77.54, 0.30, -108.47, 312366, 427},
-                     {-145.54, -0.00, -199.61, 92520, 650}, {-130.08, 10.00, -196.67, 109214, 629},
-                     {-140.13, 10.00, -197.94, 98647, 629}, {37.28, 1.02, -49.90, 220638, 1084},
-                     {476.68, -46.94, -0.23, 155714, 1919}, {76.80, -2.54, -23.93, 36304, 1970},
-                     {94.78, 0.03, -6.88, 88986, 1514}, {-3.24, -11.75, -263.07, 33794, 1448}}
-
-    local kanisters = {{-293.80, -14.18, -15.36, 15703, 67}, {-16.57, 2.48, 58.82, 260308, 88},
-                       {-74.81, -1.30, 160.52, 196218, 163}, {-69.94, 0.97, 6.51, 131411, 329},
-                       {64.01, 0.60, 148.46, 235341, 364}, {63.29, -0.20, 5.10, 299326, 461},
-                       {-28.52, -1.04, -181.84, 211644, 676}, {2.93, -1.88, -13.30, 176553, 1047},
-                       {41.71, 4.54, -86.36, 227110, 1100}, {7.90, 1.41, -71.93, 183138, 1041},
-                       {158.71, -0.76, -259.73, 358950, 962}, {-342.92, -13.60, 390.01, 11235, 1847},
-                       {305.22, -36.99, -24.40, 68330, 1930}, {55.02, 1.17, 40.35, 68094, 1511},
-                       {-114.14, -0.00, 121.75, 43453, 1315}, {31.33, 5.60, -13.51, 4683, 1538}}
-
-    for k, v in pairs(ballons) do
-        if #v == 5 then
-            local obj = alife():create("amk_ballon", vector():set(v[1], v[2], v[3]), v[4], v[5])
-        end
-    end
-
-    for k, v in pairs(kanisters) do
-        if #v == 5 then
-            local obj = alife():create("amk_kanistra", vector():set(v[1], v[2], v[3]), v[4], v[5])
-        end
-    end
-end
 
 -- БТР на блокпосту
 function spawn_military_btr()
-    spawn_military_tech_pack(alife():create("vehicle_btr", vector():set(-168.11, -29.71, -303.21), 81808, 38),
-        "vehicle_btr", "scripts\\esc\\esc_blockpost_btr.ltx")
-    spawn_military_tech_pack(alife():create("vehicle_btr", vector():set(-237.85, -26.23, -378.81), 17147, 14),
-        "vehicle_btr", "scripts\\esc\\esc_blockpost_btr.ltx")
-    spawn_military_tech_pack(alife():create("helicopter", vector():set(-150.0, -40.0, -620.0), 128298, 11),
-        "helicopter", "scripts\\esc\\esc_blockpost_heli.ltx")
+    spawn_military_tech_pack(alife_create("vehicle_btr", "l01_escape", vector():set(-168.11, -29.71, -303.21)), "vehicle_btr", "scripts\\esc\\esc_blockpost_btr.ltx")
+    spawn_military_tech_pack(alife_create("vehicle_btr", "l01_escape", vector():set(-237.85, -26.23, -378.81)), "vehicle_btr", "scripts\\esc\\esc_blockpost_btr.ltx")
 end
 
 function spawn_military_tech_pack(obj, spawn_item, spawn_item_logic)

@@ -60,7 +60,6 @@ local item_clsids = { -- список clsid собираемых предмет�
     [clsid.wpn_svu_s] = true,
     [clsid.wpn_rpg7_s] = true,
     [clsid.wpn_val_s] = true,
-    [clsid.wpn_walther_s] = true,
     [clsid.wpn_usp45_s] = true,
     [clsid.wpn_groza_s] = true,
     [clsid.wpn_knife_s] = true,

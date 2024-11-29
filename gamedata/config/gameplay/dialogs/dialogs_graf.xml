@@ -1084,7 +1084,6 @@
         <phrase id="12">
             <text>karina_poisk_dialog_12</text>
             <give_info>karina_poisk_dialog_start</give_info>
-            <action>teleport.spawn_teleport7</action>
             <action>y_level.create_radar_mg</action>
         </phrase>
     </phrase_list>
@@ -1396,7 +1395,7 @@
             <action>esc_graf.pekar_first_dialog_dal</action>
             <action>esc_graf.spawn_muka</action>
             <action>esc_graf.sound_pekar</action>
-            <action>braad_test.create_pekar_restr</action>
+            <action>y_level.create_mir_bar_mir</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -1908,7 +1907,6 @@
         </phrase>
         <phrase id="8">
             <text>lektor_dialog_8</text>
-            <action>teleport.spawn_teleport3</action>
             <give_info>lektor_dialog_start</give_info>
         </phrase>
     </phrase_list>
@@ -2098,7 +2096,6 @@
             <action>esc_graf.spawn_superkaban</action>
             <action>esc_graf.spawn_likvidator</action>
             <action>esc_graf.zveroboy_first_dialog_dal</action>
-            <action>teleport.spawn_teleport4</action>
             <give_info>zveroboy_first_dialog_start</give_info>
         </phrase>
     </phrase_list>
@@ -3002,7 +2999,6 @@
             <text>fokusnik_dialog_4</text>
             <give_info>fokusnik_dialog_start</give_info>
             <give_info>mervin_new_spawn</give_info>
-            <action>teleport.spawn_teleport5</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -3060,7 +3056,6 @@
             <text>fokusnik_first_dialog_5</text>
             <give_info>fokusnik_first_dialog_start</give_info>
             <action>esc_graf.mervin_zadan_dal</action>
-            <action>teleport.spawn_teleport6</action>
             <action>esc_graf.sound_kill_doc</action>
         </phrase>
     </phrase_list>

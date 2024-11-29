@@ -76,7 +76,7 @@ ammo_elapsed      = 20
 ammo_mag_size     = 20
 startup_ammo      = 90
 
-scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18, 0kp2
+scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, pn23, compm4s, marchf, kemper, mepro, ekp8_18, 0kp2
 scope_status      = 2
 
 scope_respawn                         = wpn_m4_ru556
@@ -88,9 +88,7 @@ scope_respawn_c-more                  = wpn_m4_ru556_c-more
 scope_respawn_point_aimpro            = wpn_m4_ru556_point_aimpro
 scope_respawn_leupold                 = wpn_m4_ru556_leupold
 scope_respawn_aimpoint                = wpn_m4_ru556_aimpoint
-scope_respawn_e0t2                    = wpn_m4_ru556_e0t2
 scope_respawn_pn23                    = wpn_m4_ru556_pn23
-scope_respawn_gauss_sight             = wpn_m4_ru556_gauss_sight
 scope_respawn_compm4s                 = wpn_m4_ru556_compm4s
 scope_respawn_marchf                  = wpn_m4_ru556_marchf
 scope_respawn_kemper                  = wpn_m4_ru556_kemper
@@ -306,7 +304,7 @@ anm_bore_jammed            = mka_sh_idle_bore_alt
 
 ;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
 anm_shots		       = mka_sh_alt_fire
-anm_shot_l		       = mka_sh_alt_fire, fire_empty
+anm_shots_l		       = mka_sh_alt_fire, fire_empty
 
 ;Перезарядка/////////////////////////////////////////////////////////////////////
 anm_reload                           = mka_sh_tac_reload, mka_tac_reload_zz
@@ -443,33 +441,6 @@ use_alt_aim_hud    = true
 item_visual  = dynamics\weapons\wpn_ru556\wpn_ru556_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.059275,0.007700,-0.056725
-aim_hud_offset_rot_16x9  = 0.037250,0.043436,-0.055187
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_ru556_gauss_sight]:wpn_m4_ru556
-
-$spawn	 = "weapons\m4_ru556_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_ru556\wpn_ru556_world.ogf
-
-hud	     = wpn_m4_ru556_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = 2
-
-inv_weight  = 4.350
-
-scope_zoom_factor_alt      = 0
-
-use_alt_aim_hud    = true
-
-[wpn_m4_ru556_gauss_sight_hud]:wpn_m4_ru556_hud
-
-item_visual  = dynamics\weapons\wpn_ru556\wpn_ru556_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.059275,0.029300,-0.054925
 aim_hud_offset_rot_16x9  = 0.037250,0.043436,-0.055187
 
 
@@ -665,27 +636,6 @@ scope_y	 = 2
 item_visual  = dynamics\weapons\wpn_ru556\wpn_ru556_ekp8_18_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.053520,0.009600,-0.032425
-aim_hud_offset_rot_16x9  = 0.001437,0.007725,-0.079000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4_ru556_e0t2]:wpn_m4_ru556
-
-visual	 = dynamics\weapons\wpn_ru556\wpn_ru556_world.ogf
-
-hud  = wpn_m4_ru556_e0t2_hud
-
-inv_weight  = 3.177
-
-scope_name 	     = e0t2
-scope_x	 = 90
-scope_y	 = -8
-
-[wpn_m4_ru556_e0t2_hud]:wpn_m4_ru556_hud
-
-item_visual  = dynamics\weapons\wpn_ru556\wpn_ru556_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.053320,0.015100,-0.032425
 aim_hud_offset_rot_16x9  = 0.001437,0.007725,-0.079000
 
 

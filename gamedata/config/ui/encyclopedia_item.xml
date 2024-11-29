@@ -1,21 +1,21 @@
 <window>
 
     <events_wnd>
-        <objective_item x="0" y="0" width="365" height="10">
+        <objective_item x="0" y="0" width="375" height="10">
             <image x="170" y="32" width="5" height="5" stretch="1"/>
 
-            <text_cont x="0" y="90" width="365" height="10" complex_mode="1">
-                <text font="letterica18" r="255" g="255" b="255"/>
+            <text_cont x="10" y="90" width="385" height="10" complex_mode="1">
+                <text align="c" vert_align="c" font="letterica18" r="255" g="255" b="255"/>
             </text_cont>
         </objective_item>
     </events_wnd>
 
     <encyclopedia_wnd>
-        <objective_item x="0" y="0" width="340" height="10">
+        <objective_item x="0" y="0" width="375" height="10">
             <image x="170" y="0" width="5" height="5" stretch="1"/>
 
-            <text_cont x="0" y="100" width="340" height="10" complex_mode="1">
-                <text font="letterica18" r="255" g="255" b="255"/>
+            <text_cont x="0" y="90" width="340" height="10" complex_mode="1">
+                <text align="c" vert_align="c" font="letterica18" r="255" g="255" b="255"/>
             </text_cont>
         </objective_item>
     </encyclopedia_wnd>

@@ -4,25 +4,10 @@ none = true
 [dont_spawn_loot]
 
 [logic]
-active = {+vasil_mesto2} remark@vasil2, {+perehod_dialog1_start} walker@vasil3, {+vasil_mesto} remark@vasil, {+vasil_mesto1} remark@vasil_start, {+vas1_dialog_start} walker@vasil2, walker@vasil
+active = {+vasil_mesto} remark@vasil, {+vasil_mesto} remark@vasil_start, {+vas1_dialog_start} walker@vasil2, walker@vasil
 danger = danger_condition@vasil
 
 [walker@vasil]
-path_walk = vasil_walk1
-path_look = vasil_look1
-danger = danger_condition@vasil
-meet = meet
-on_actor_dist_le_nvis = 5 | {-vas1_dialog_start} remark@vasil_talk, {+vas1_dialog_start -vasil_mesto1} walker@vasil2, {+vasil_mesto1 -vasil_mesto} walker@vasil22, {+vasil_mesto -vasil_mesto2} walker@vasil3, {+vasil_mesto2} remark@vasil2
-
-[remark@vasil_talk]
-target = actor
-snd = vasilyev
-meet = no_meet
-combat_ignore_cond = always
-danger = danger_condition@vasil
-on_signal = sound_end | {-vas1_dialog_start} walker@vasil1
-
-[walker@vasil1]
 path_walk = vasil_walk1
 path_look = vasil_look1
 danger = danger_condition@vasil
@@ -37,45 +22,9 @@ def_state_moving1 = run
 def_state_moving2 = run
 def_state_moving3 = run
 meet = no_meet
-on_info = {+vasil_mesto1} remark@vasil_start
+on_info = {+vasil_mesto} remark@vasil_start
 
 [remark@vasil_start]
-anim = guard
-target = vasil_look2, 0
-meet = no_meet
-combat_ignore_cond = always
-danger = danger_condition@vasil
-on_timer = 4000 | walker@vasil22
-
-[walker@vasil22]
-path_walk = vasil_walk22
-path_look = vasil_look22
-danger = danger_condition@vasil
-def_state_moving1 = run
-def_state_moving2 = run
-def_state_moving3 = run
-meet = no_meet
-on_info = {+vasil_mesto} remark@vasil
-
-[remark@vasil]
-anim = guard
-target = actor
-meet = meet
-combat_ignore_cond = always
-danger = danger_condition@vasil
-on_info = {+perehod_dialog1_start} walker@vasil3
-
-[walker@vasil3]
-path_walk = vasil_walk3
-path_look = vasil_look3
-danger = danger_condition@vasil
-def_state_moving1 = run
-def_state_moving2 = run
-def_state_moving3 = run
-meet = no_meet
-on_info = {+vasil_mesto2} remark@vasil2
-
-[remark@vasil2]
 anim = guard
 target = actor
 meet = meet

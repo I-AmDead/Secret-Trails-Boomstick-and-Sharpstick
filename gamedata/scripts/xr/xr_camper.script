@@ -6,12 +6,6 @@
 ----------------------------------------------------------------------------------------------------------------------
 -- EVALUATORS
 ----------------------------------------------------------------------------------------------------------------------
-function id(npc)
-    if npc then
-        return npc:id()
-    end
-    return nil
-end
 
 -- ' Условие завершения скрипта
 class "evaluator_end"(property_evaluator)
@@ -58,8 +52,7 @@ function evaluator_close_combat:evaluate()
     end
 
     if self.close_combat == false then
-        self.close_combat = self.object:position():distance_to(self.object:memory_position(self.object:best_enemy())) <
-                                self.a.radius
+        self.close_combat = self.object:position():distance_to(self.object:memory_position(self.object:best_enemy())) < self.a.radius
     end
 
     if self.close_combat == true then
@@ -116,20 +109,13 @@ function action_patrol:reset_scheme()
                         if self.a.scan_table[i] == nil then
                             self.a.scan_table[i] = {}
                         end
-                        table.insert(self.a.scan_table[i], {
-                            key = k,
-                            pos = path:point(k)
-                        })
+                        table.insert(self.a.scan_table[i], {key = k, pos = path:point(k)})
                     end
                 end
             end
         end
     else
-        self.move_mgr:reset(self.a.path_walk, utils.path_parse_waypoints(self.a.path_walk), self.a.path_look,
-            utils.path_parse_waypoints(self.a.path_look), nil, self.a.suggested_state, {
-                obj = self,
-                func = self.process_point
-            })
+        self.move_mgr:reset(self.a.path_walk, utils.path_parse_waypoints(self.a.path_walk), self.a.path_look, utils.path_parse_waypoints(self.a.path_look), nil, self.a.suggested_state, {obj = self, func = self.process_point})
     end
     self.a.last_look_point = nil
     self.a.cur_look_point = nil
@@ -187,43 +173,15 @@ function action_patrol:execute()
             -- отстрел врага
             if self.a.sniper == true then
                 if self.a.suggested_state.campering_fire then
-                    state_mgr.set_state(self.object, self.a.suggested_state.campering_fire, nil, nil, {
-                        look_object = self.enemy,
-                        look_position = self.enemy:position()
-                    }, {
-                        animation = true
-                    }, nil, {
-                        yaw_delta = 0.2
-                    })
+                    state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering_fire, nil, nil, {look_object = self.enemy, look_position = self.enemy:position()}, {animation = true}, nil, {yaw_delta = 0.2})
                 else
-                    state_mgr.set_state(self.object, "hide_sniper_fire", nil, nil, {
-                        look_object = self.enemy,
-                        look_position = self.enemy:position()
-                    }, {
-                        animation = true
-                    }, nil, {
-                        yaw_delta = 0.2
-                    })
+                    state_mgr.set_state(script_name(), self.object, "hide_sniper_fire", nil, nil, {look_object = self.enemy, look_position = self.enemy:position()}, {animation = true}, nil, {yaw_delta = 0.2})
                 end
             else
                 if self.a.suggested_state.campering_fire then
-                    state_mgr.set_state(self.object, self.a.suggested_state.campering_fire, nil, nil, {
-                        look_object = self.enemy,
-                        look_position = self.enemy:position()
-                    }, {
-                        animation = true
-                    }, nil, {
-                        yaw_delta = 0.2
-                    })
+                    state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering_fire, nil, nil, {look_object = self.enemy, look_position = self.enemy:position()}, {animation = true}, nil, {yaw_delta = 0.2})
                 else
-                    state_mgr.set_state(self.object, "hide_fire", nil, nil, {
-                        look_object = self.enemy,
-                        look_position = self.enemy:position()
-                    }, {
-                        animation = true
-                    }, nil, {
-                        yaw_delta = 0.2
-                    })
+                    state_mgr.set_state(script_name(), self.object, "hide_fire", nil, nil, {look_object = self.enemy, look_position = self.enemy:position()}, {animation = true}, nil, {yaw_delta = 0.2})
                 end
             end
             xr_sound.set_sound(self.object, self.a.attack_sound)
@@ -272,14 +230,12 @@ function action_patrol:execute()
                 if time_global() - self.a.mem_enemy < self.a.post_enemy_wait then
                     local position
                     if self.enemy_position then
-                        position = {
-                            look_position = self.enemy_position
-                        }
+                        position = {look_position = self.enemy_position}
                     end
                     if self.a.suggested_state.campering then
-                        state_mgr.set_state(self.object, self.a.suggested_state.campering, nil, nil, position)
+                        state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering, nil, nil, position)
                     else
-                        state_mgr.set_state(self.object, "hide_na", nil, nil, position)
+                        state_mgr.set_state(script_name(), self.object, "hide_na", nil, nil, position)
                     end
                 else
                     self:scan(-1)
@@ -289,14 +245,12 @@ function action_patrol:execute()
                 if self:on_place() then
                     local position
                     if self.enemy_position then
-                        position = {
-                            look_position = self.enemy_position
-                        }
+                        position = {look_position = self.enemy_position}
                     end
                     if self.a.suggested_state.campering then
-                        state_mgr.set_state(self.object, self.a.suggested_state.campering, nil, nil, position)
+                        state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering, nil, nil, position)
                     else
-                        state_mgr.set_state(self.object, "hide", nil, nil, position)
+                        state_mgr.set_state(script_name(), self.object, "hide", nil, nil, position)
                     end
                 else
                     -- идем дальше
@@ -354,17 +308,63 @@ function action_patrol:process_danger()
         return false
     end
 
+    -- Отсеиваем реакцию на денжеры своих чуваков
+    local bd_type = best_danger:type()
+    local danger_obj = best_danger:object()
+
+    if not danger_obj then	
+        return false
+    end	
+	
+    local is_monster_obj = danger_obj:is_monster()
+    local is_stalker_obj = danger_obj:is_stalker() or danger_obj:is_actor()
+    local is_still_alive = danger_obj:alive()	
+
     local passed_time = time_global() - best_danger:time()
     -- Отсеиваем по инерции
     if xr_danger.check_danger_inertion_time(self.object, best_danger, passed_time) == false then
         return false
     end
 
-    -- Отсеиваем реакцию на денжеры своих чуваков
-    local bd_type = best_danger:type()
-    local danger_obj = best_danger:object()
-    if bd_type == danger_object.attack_sound then
-        if danger_obj and danger_obj:character_community() == self.object:character_community() then
+
+    if is_monster_obj or is_stalker_obj then
+        if is_still_alive == false then
+            return false
+        end
+
+        if self.object:relation(danger_obj) == game_object.enemy then
+            if not self.object:binded_object():enemy_callback( self.object, danger_obj ) then
+                --log3("~~[%s.enemy_callback] Removing from danger: [%s], [%s]!", script_name(), self.object:name(), danger_obj:name())
+                return false
+            end
+        else
+            return false
+        end
+    end
+
+    -- Отсеиваем далёких монстров
+    if is_monster_obj then
+        if not self.object:see(danger_obj) and danger_obj:position():distance_to(self.object:position()) > 40 then
+            return false
+        end
+    -- И неписей
+    elseif is_stalker_obj then	
+        if not self.object:see(danger_obj) and not danger_obj:see(self.object) and danger_obj:position():distance_to(self.object:position()) > 150 then
+            return false
+        end		
+    end
+
+    -- Проверка на запрещенный денжер от актера
+    if danger_obj ~= nil and danger_obj:is_actor()
+    and (bd_type == danger_object.attack_sound or bd_type == danger_object.bullet_ricochet) then
+        if db.actor and self.object:best_enemy() == nil and self.object:relation(db.actor) ~= game_object.enemy then
+            return false
+        end	
+    end	
+
+    --' Игнорим денжеры от своих.
+    if is_stalker_obj and danger_obj:character_community() == self.object:character_community()  then
+        if not self.object:relation(danger_obj) == game_object.enemy then 
             return false
         end
     end
@@ -376,47 +376,33 @@ function action_patrol:process_danger()
     end
     --	end
 
-    position = {
-        look_position = best_danger:position()
-    }
+    position = {look_position = best_danger:position()}
     local emerg = nil
     if self.danger ~= true then
-        emerg = {
-            animation = true
-        }
+        emerg = {animation = true}
         self.object:play_sound(stalker_ids.sound_alarm, 1, 0, 1, 0)
     end
 
     -- Если денжер опасный - стрельнуть в позицию его инициатора, если нет - повернуться и смотреть туда.
     -- Опасный денжер - хит или очень близкий рикошет.
-    local urgent_danger = (danger_obj ~= nil) and (bd_type == danger_object.attacked) and
-                              (time_global() - best_danger:time() < 5000)
+    local urgent_danger = danger_obj and bd_type == danger_object.attacked 
+    and self.object:see(danger_obj) and (time_global() - best_danger:time() < 5000)
 
     if urgent_danger == true then
-        local danger_object_position = {
-            look_position = danger_obj:position()
-        }
+        local danger_object_position = {look_position = danger_obj:position()}
         if self.a.suggested_state.campering_fire then
-            state_mgr.set_state(self.object, self.a.suggested_state.campering_fire, nil, nil, danger_object_position, {
-                animation = true
-            }, nil, {
-                yaw_delta = 0.2
-            })
+            state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering_fire, nil, nil, danger_object_position, {animation = true}, nil, {yaw_delta = 0.2})
         else
-            state_mgr.set_state(self.object, "hide_fire", nil, nil, danger_object_position, {
-                animation = true
-            }, nil, {
-                yaw_delta = 0.2
-            })
+            state_mgr.set_state(script_name(), self.object, "hide_fire", nil, nil, danger_object_position, {animation = true}, nil, {yaw_delta = 0.2})
         end
     else
         if self.a.suggested_state.campering then
-            state_mgr.set_state(self.object, self.a.suggested_state.campering, nil, nil, position, emerg)
+            state_mgr.set_state(script_name(), self.object, self.a.suggested_state.campering, nil, nil, position, emerg)
         else
             if self.a.sniper == true then
-                state_mgr.set_state(self.object, "hide_na", nil, nil, position, emerg)
+                state_mgr.set_state(script_name(), self.object, "hide_na", nil, nil, position, emerg)
             else
-                state_mgr.set_state(self.object, "hide", nil, nil, position, emerg)
+                state_mgr.set_state(script_name(), self.object, "hide", nil, nil, position)
             end
         end
     end
@@ -446,23 +432,13 @@ function action_patrol:scan(flag)
 
         self.look_position = self.a.last_look_point.pos
         self.dest_position = self.next_point.pos
-        self.look_point = vector():set(self.look_position.x + self.a.cur_look_point *
-                                           (self.dest_position.x - self.look_position.x) / self.a.scandelta,
-            self.look_position.y + self.a.cur_look_point * (self.dest_position.y - self.look_position.y) /
-                self.a.scandelta, self.look_position.z + self.a.cur_look_point *
-                (self.dest_position.z - self.look_position.z) / self.a.scandelta)
-        if self.a.suggested_state.campering then
-            state_mgr.set_state(self.object, self.a.suggested_state.campering, nil, nil, {
-                look_position = self.look_point
-            }, nil, nil, {
-                yaw_delta = 0.2
-            })
+        self.look_point = vector():set(self.look_position.x + self.a.cur_look_point * (self.dest_position.x - self.look_position.x)/self.a.scandelta,
+									   self.look_position.y + self.a.cur_look_point * (self.dest_position.y - self.look_position.y)/self.a.scandelta,
+									   self.look_position.z + self.a.cur_look_point * (self.dest_position.z - self.look_position.z)/self.a.scandelta)
+        if self.a.suggested_state.campering then									   
+            state_mgr.set_state( script_name(), self.object, self.a.suggested_state.campering, nil, nil, {look_position = self.look_point}, nil, nil, {yaw_delta = 0.2})
         else
-            state_mgr.set_state(self.object, "hide_na", nil, nil, {
-                look_position = self.look_point
-            }, nil, nil, {
-                yaw_delta = 0.2
-            })
+            state_mgr.set_state( script_name(), self.object, "hide_na", nil, nil, {look_position = self.look_point}, nil, nil, {yaw_delta = 0.2})
         end
 
         if self.a.cur_look_point >= self.a.scandelta then
@@ -470,8 +446,7 @@ function action_patrol:scan(flag)
             self.a.last_look_point = self.next_point
         else
             if self.a.scan_begin ~= nil then
-                self.a.cur_look_point = self.a.cur_look_point + (time_global() - self.a.scan_begin) /
-                                            self.a.time_scan_delta
+                self.a.cur_look_point = self.a.cur_look_point + (time_global() - self.a.scan_begin) / self.a.time_scan_delta
             else
                 self.a.cur_look_point = self.a.cur_look_point + 1
             end
@@ -483,9 +458,7 @@ function action_patrol:get_next_point(flag)
     local next = false
 
     if self.a.last_look_point == nil then
-        table.sort(self.a.scan_table[flag], function(a, b)
-            return a.key < b.key
-        end)
+        table.sort(self.a.scan_table[flag], function(a, b) return a.key < b.key end)
     end
     for k, v in pairs(self.a.scan_table[flag]) do
         if self.a.last_look_point == nil then
@@ -500,13 +473,9 @@ function action_patrol:get_next_point(flag)
     end
     if next == true then
         if self.a.last_look_point.key == 0 then
-            table.sort(self.a.scan_table[flag], function(a, b)
-                return a.key < b.key
-            end)
+            table.sort(self.a.scan_table[flag], function(a, b) return a.key < b.key end)
         else
-            table.sort(self.a.scan_table[flag], function(a, b)
-                return a.key > b.key
-            end)
+            table.sort(self.a.scan_table[flag], function(a, b) return a.key > b.key end)
         end
     end
     return self.a.last_look_point
@@ -594,7 +563,7 @@ function set_scheme(npc, ini, scheme, section, gulag_name)
     st.shoot = get_string(section, "shoot", "always", ini)
 
     if st.sniper and st.no_retreat then
-        _G.abort("ERROR: NPC [%s] Section [%s]. No_retreat not available for SNIPER.", npc:name(), section)
+        abort("ERROR: NPC [%s] Section [%s]. No_retreat not available for SNIPER.", npc:name(), section)
     end
 
     st.radius = get_u32(section, "radius", 20, ini)

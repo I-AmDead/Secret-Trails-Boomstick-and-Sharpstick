@@ -42,11 +42,7 @@ float3 gbuf_unpack_position(float z, float2 pos2d) { return float3(z * (pos2d * 
 
 float3 unpack_position(float2 tc, uint iSample : SV_SAMPLEINDEX)
 {
-#ifndef USE_MSAA
     float depth = s_position.Sample(smp_nofilter, tc).z;
-#else
-    float depth = s_position.Load(int3(tc * screen_res.xy, 0), iSample).z;
-#endif
     return gbuf_unpack_position((depth > 0.01f ? depth : 1000.f), tc * pos_decompression_params2.xy);
 }
 

@@ -35,7 +35,6 @@ local list = {
     "gar_secret_metal_hiding2",
     "gar_secret_box_supply",
     "gar_secret_bus_tube",
-    "gar_secret_rucksack_ruins",
     "gar_secret_box_blockpost",
     "gar_secret_avoska",
     "gar_secret_escavator",

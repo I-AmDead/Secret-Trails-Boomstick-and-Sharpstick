@@ -27,6 +27,13 @@ local cfg = {
     end
 }
 
+local function apply_boost(sect)
+    local boost_time = get_float(sect, "boost_time", 0)
+    if boost_time then
+        laucer_item_special_effect.on_item_use(sect)
+    end
+end
+
 local function apply_item(sect)
     for line, func in pairs(cfg) do
         local val = get_float(sect, line)
@@ -43,17 +50,34 @@ local function apply_item(sect)
     archievements.on_use_item(sect)
 end
 
-function apply_boost(sect)
-    local boost_time = get_float(sect, "boost_time", 0)
-    if boost_time then
-        laucer_item_special_effect.on_item_use(sect)
+local function spawn_trash(sect)
+    local trash_section = get_string(sect, "trash_section", nil)
+    if not trash_section then return end
+
+    local pos = device().cam_pos
+    local dir = device().cam_dir
+    pos.y = pos.y + get_float(trash_section, "throw_offset_y", 0.0)
+    dir:mul(get_float(trash_section, "throw_offset_x", 0.0))
+    if get_line_exist(trash_section, "throw_offset_z") then
+        local cd = device().cam_dir
+        cd:mul(get_float(trash_section, "throw_offset_z", 1.0))
+        dir:add(transform_dir(cd, get_string(trash_section, "throw_dir")))
     end
+    alife():create(trash_section, pos:add(dir), db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end
 
-local function respawn_item(obj)
-    obj:zero_effects()
-    alife():create(obj:section(), db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id(),
-        db.actor:id())
+--/ Обработка дирекции
+function transform_dir(cd, dir)
+    if dir == "left" then 
+        local tmp = cd.x
+        cd.x = -cd.z
+        cd.z = tmp
+    elseif dir == "right" then
+        local tmp = cd.x
+        cd.x = cd.z
+        cd.z = -tmp
+    end
+    return cd
 end
 
 local snd_in_use = false
@@ -74,6 +98,7 @@ local function play_item_use(item)
     local item_hud = get_string(item, "hud")
     local cam_effect = get_string(item, "cam_effect", nil)
     local used_time = get_u32(item, "item_used_timing")
+    local trash_spawn_time = get_u32(item, "trash_spawn_timing", 0)
     local snd = get_string(item, "snd_use_anm")
     local outfit = db.actor:item_in_slot(6)
 
@@ -86,8 +111,6 @@ local function play_item_use(item)
             cam_effect = get_string(item, "cam_effect_exo")
         end
     end
-
-    local anim = (string.find(item, "^bandage") or (not exo and string.find(item, "^medkit"))) and math.random() > 0.5 and "anm_use_alt" or "anm_use"
 
     if level.get_inventory_wnd():IsShown() then
         level.start_stop_menu(level.get_inventory_wnd(), true)
@@ -105,17 +128,18 @@ local function play_item_use(item)
         snd_in_use = sound_object(snd)
         snd_in_use:play(db.actor, 0, sound_object.s2d)
 
-        local anm_start = time_global()
-        local anm_duration = game.play_hud_motion(2, item_hud, anim, false, 1, true)
+        local anm_duration = game.play_hud_motion(2, item_hud, "anm_use", false, 1, true)
         if cam_effect then
             level.add_cam_effector(cam_effect, 7538, false, "", 0, false)
         end
 
-        dsh.timeout(used_time, function()
-            apply_item(item)
-        end)
+        dsh.timeout(used_time, function() apply_item(item) end)
 
-        local tmr = dsh.timeout(anm_duration, function()
+        if trash_spawn_time > 0 and not string.find(item_hud, "_exo_hud") then
+            dsh.timeout(trash_spawn_time, function() spawn_trash(item) end)
+        end
+
+        dsh.timeout(anm_duration, function()
             ogsr_actor_animation.animation_off()
             db.actor:activate_slot(prev_active_slot)
         end)

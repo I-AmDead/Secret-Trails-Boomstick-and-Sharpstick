@@ -1,0 +1,167 @@
+#include "common.h"
+#include "sload.h"
+
+float2 rand2(float2 p)
+{
+    return frac(float2(sin(p.x * 591.32 + p.y * 154.077), cos(p.x * 391.32 + p.y * 49.077)));
+}
+
+float voronoi(float2 x)
+{
+    float2 p = floor(x);
+    float2 f = frac(x);
+    float minDistance = 1.0;
+
+    for(int j = -1; j <= 1; j++)
+    {
+        for(int i = -1; i <= 1; i++)
+        {
+            float2 b = float2(i, j);
+            float2 rand = .5 + .5 * sin(timers.x * 3.0 + 12.0 * rand2(p + b));
+            float2 r = b - f + rand;
+            minDistance = min(minDistance, length(r));
+        }
+    }
+    return minDistance;
+}
+
+float4 electric_grid(float2 uv)
+{
+    float val = pow(voronoi(uv * 8.0) * 1.25, 7.0) * 2.0;
+    float gridLineThickness = 2.0 / screen_res.y;
+    float2 grid = step(fmod(uv, 0.1), float2(gridLineThickness, gridLineThickness));
+
+    return float4(0.0, 0.0, val * (grid.x + grid.y), 1.0);
+}
+
+float3 MIX(float3 x, float3 y) { return abs(x - y); }
+
+float CV(float3 c, float2 uv)
+{
+    float size = 640.0 * 0.003;
+    float l = clamp(size * (length(c.xy - uv) - c.z), 0.0, 1.0);
+    return 1.0 - l;
+}
+
+float4 electric_glitch(float2 uv)
+{
+    float4 color = float4(0, 0, 0, 1);
+    for(int i = 0; i < 20; i += 1)
+    {
+        float3 c = float3(1.0, 1.0, 1.0);
+        color.rgb = MIX(color.rgb, c * CV(float3((1.0 + sin(timers.x * 0.52 + (i - 1400.0) * 1.35)) * 0.5, (1.0 + sin(timers.x * 0.73 + (i - 1200.0) * 1.61)) * 0.5, 0.0), uv));
+    }
+    color.rgb = (1.0 - color.rgb) * 1.01;
+    color.rgb = pow(color.rgb, float3(42.0, 32.0, 12.0));
+
+    return color;
+}
+
+// Value Noise by Inigo Quilez - iq/2013
+// https://www.shadertoy.com/view/lsf3WH
+float noise2(float2 st)
+{
+    float2 i = floor(st);
+    float2 f = frac(st);
+    float2 u = f * f * (3.0 - 2.0 * f);
+
+    return lerp(lerp(dot(rand2(i + float2(0.0, 0.0)), f - float2(0.0, 0.0)), dot(rand2(i + float2(1.0, 0.0)), f - float2(1.0, 0.0)), u.x), lerp(dot(rand2(i + float2(0.0, 1.0)), f - float2(0.0, 1.0)), dot(rand2(i + float2(1.0, 1.0)), f - float2(1.0, 1.0)), u.x), u.y);
+}
+
+// Value Noise by Inigo Quilez - iq/2013
+// https://www.shadertoy.com/view/lsf3WH
+float4 slime(float2 uv)
+{
+    float3 orange = float3(0.0, 0.45, 0.0);
+    float3 yellow = float3(0.0, 1.0, 0.0);
+
+    uv *= 2.0;
+
+    uv.y += cos(timers.x / 10.0) * .1 + timers.x / 10.0;
+    uv.x *= sin(timers.x * 1.0 + uv.y * 4.0) * .1 + .8;
+    uv += noise2(uv * 6.25 + timers.x / 5.0);
+
+    float col = smoothstep(0.01, 0.2, noise2(uv * 3.0)) + smoothstep(0.01, 0.2, noise2(uv * 6.0 + 0.5)) + smoothstep(0.01, 0.3, noise2(uv * 7.0 + 0.2));
+
+    orange.rgb += .3 * sin(uv.y * 4.0 + timers.x / 1.0) * sin(uv.x * 5.0 + timers.x / 1.0);
+
+    float color = smoothstep(0.0, 1.0, col);
+    return float4(lerp(yellow, orange, float3(color, color, color)), 1.0);
+}
+
+float3 magmaFunc(float3 color, float2 uv, float detail, float power, float colorMul, float glowRate, bool animate, float noiseAmount)
+{
+    float3 rockColor = float3(0.0, 0.0, 0.0);
+    float minDistance = 1.0;
+    uv *= detail;
+
+    float2 cell = floor(uv);
+    float2 fractal = frac(uv);
+
+    for(int i = -1; i <= 1; i++)
+    {
+        for(int j = -1; j <= 1; j++)
+        {
+            float2 cellDir = float2(float(i), float(j));
+            float2 randPoint = rand2(cell + cellDir);
+            randPoint += noise2(uv) * noiseAmount;
+            randPoint = animate ? 0.5 + 0.5 * sin(timers.x * .35 + 6.2831 * randPoint) : randPoint;
+            minDistance = min(minDistance, length(cellDir + randPoint - fractal));
+        }
+    }
+
+    float powAdd = sin(uv.x * 2. + timers.x * glowRate) + sin(uv.y * 2. + timers.x * glowRate);
+    float3 outColor = color * pow(minDistance, power + powAdd * .95) * colorMul;
+    outColor = lerp(rockColor, outColor, minDistance);
+    return outColor;
+}
+
+float4 slime2(float2 uv)
+{
+    uv.x += timers.x * .01;
+    float4 fragColor = float4(0.0, 0.0, 0.0, 1.0);
+    fragColor.rgb += magmaFunc(float3(0.0, 1.5, 0.45), uv, 3., 2.5, 1.15, 1.5, false, 1.5);
+    fragColor.rgb += magmaFunc(float3(0.0, 1.5, 0.4), uv, 6., 3., .4, 1., false, 0.);
+    fragColor.rgb += magmaFunc(float3(0.0, 1.5, 0.4), uv, 8., 4., .2, 1.9, true, 0.5);
+    return fragColor;
+}
+
+f_deffer main(p_flat I)
+{
+    f_deffer O;
+
+    // diffuse
+    float3 D = tbase(I.tcdh); // IN:  rgb.a
+
+    //D += slime(I.tcdh) * 0.2;
+    D += slime2(I.tcdh);
+
+#ifdef USE_TDETAIL
+    //	D.rgb	= 2*D.rgb*tex2D	(s_detail, I.tcdbump).rgb;
+    D.rgb = 2 * D.rgb * s_detail.Sample(smp_base, I.tcdbump).rgb;
+#endif
+
+    // hemi,sun,material
+    float ms = xmaterial;
+#ifdef USE_LM_HEMI
+    //	float4	lm 	= tex2D( s_hemi, I.lmh );
+    float4 lm = s_hemi.Sample(smp_rtlinear, I.lmh);
+    //	float 	h  	= dot( lm.rgb, 1.h/3.h );
+    float h = get_hemi(lm);
+#ifdef USE_R2_STATIC_SUN
+    //		 	ms 	= lm.w			;
+    ms = get_sun(lm);
+#endif
+#else
+    float h = I.position.w;
+#ifdef USE_R2_STATIC_SUN
+    ms = I.tcdh.w;
+#endif
+#endif
+
+    // 2. Standart output
+    float4 Ne = float4(normalize((float3)I.N.xyz), h);
+    O = pack_gbuffer(Ne, float4(I.position.xyz + Ne.xyz * def_virtualh / 2.h, ms), float4(D.rgb, 1.0)); // OUT: rgb.gloss
+
+    return O;
+}

@@ -2,7 +2,4 @@
 active = sr_idle
 
 [sr_idle]
-on_actor_inside = {+smith_one_dialog_start} sr_idle@one %=play_snd(new\brown)%
-
-[sr_idle@one]
-on_timer = 3000 | nil %+brown_razgovor%
+on_actor_inside = {+smith_one_dialog_start} nil %=play_snd(new\brown)%

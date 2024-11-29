@@ -1,5 +1,5 @@
 local function on_actor_conditions_update(ext)
-    local outfit = db.actor:item_in_slot(6)
+    local outfit = db.actor:get_current_outfit()
     if not outfit then return end
     local jump_speed = get_float(outfit:section(), "jump_speed", 0)
     local sprint_koef = get_float(outfit:section(), "sprint_koef", 0)
@@ -8,7 +8,7 @@ local function on_actor_conditions_update(ext)
 end
 
 local function check_my_suit_hud()
-    local outfit = db.actor:item_in_slot(6)
+    local outfit = db.actor:get_current_outfit()
     if outfit then
         local outfitname = outfit:section()
         local control = get_string(outfitname, "control")

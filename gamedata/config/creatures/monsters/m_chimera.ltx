@@ -314,14 +314,14 @@ stand_run_fwd_0	 	=	   1,	   0.01,    1,	    0.25,    0.6,
 ;---------------------------------------------------------------------------
 [chimera_immunities]
 burn_immunity			= 0.66 ;0.35
-strike_immunity     	= 0.0
-shock_immunity			= 0.12 ;0.1
-wound_immunity      	= 0.08
-radiation_immunity   	= 0.0
-telepatic_immunity    	= 0.0
-chemical_burn_immunity	= 0.85 ;3.0 ;0.45
+strike_immunity     	= 0.3
+shock_immunity			= 0.3
+wound_immunity      	= 0.01
+radiation_immunity   	= 0.01
+telepatic_immunity    	= 1.0
+chemical_burn_immunity	= 0.1
 explosion_immunity    	= 0.1
-fire_wound_immunity   	= 0.005
+fire_wound_immunity   	= 0.04
 
 [chimera_weak]:m_chimera_e
 $spawn               = "monsters\chimera_weak"			; option for Level Editor
@@ -345,9 +345,9 @@ icon = ui_npc_monster_chimera_strong
 immunities_sect	= strong_chimera_immunities
 
 [strong_chimera_immunities]:chimera_immunities
-chemical_burn_immunity = 0.8
-explosion_immunity = 0.04
-fire_wound_immunity  = 0.007
+chemical_burn_immunity = 0.15
+explosion_immunity = 0.15
+fire_wound_immunity = 0.035
 
 [elektro_chimera]:chimera_strong
 $spawn               = "monsters\chimera_v_strong"			; option for Level Editor
@@ -365,8 +365,6 @@ panic_threshold			= 0.00001
 
 [electro_chimera_immunities]:strong_chimera_immunities
 shock_immunity = 0.0
-explosion_immunity = 0.037
-fire_wound_immunity  = 0.007
 
 [electro_chimera_particles]
 electro_chimera_particles_lfoot = electro_chimera_particles_lfoot
@@ -413,12 +411,12 @@ Spawn_Inventory_Item_Probability = 0.0
 immunities_sect				= wolk_immunities
 
 [wolk_immunities]
-burn_immunity = 0.2				;коэффициенты иммунитета 
-strike_immunity = 0.2
-shock_immunity = 0.2
-wound_immunity = 0.1
-radiation_immunity = 0.1
-telepatic_immunity = 0.1
-chemical_burn_immunity = 0.2
-explosion_immunity = 0.12
-fire_wound_immunity  = 0.02
+burn_immunity			= 0.7
+strike_immunity     	= 0.35
+shock_immunity			= 0.35
+wound_immunity      	= 0.01
+radiation_immunity   	= 0.01
+telepatic_immunity    	= 1.0
+chemical_burn_immunity	= 0.15
+explosion_immunity    	= 0.15
+fire_wound_immunity   	= 0.02

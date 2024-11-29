@@ -11,18 +11,6 @@ static const float DETAIL_GLOSS = 1.0;
 
 #include "common.h"
 
-#ifdef MSAA_ALPHATEST_DX10_1
-#if MSAA_SAMPLES == 2
-static const float2 MSAAOffsets[2] = {float2(4, 4), float2(-4, -4)};
-#endif
-#if MSAA_SAMPLES == 4
-static const float2 MSAAOffsets[4] = {float2(-2, -6), float2(6, -2), float2(-6, 2), float2(2, 6)};
-#endif
-#if MSAA_SAMPLES == 8
-static const float2 MSAAOffsets[8] = {float2(1, -3), float2(-1, 3), float2(5, 1), float2(-3, -5), float2(-5, 5), float2(-7, -1), float2(3, 7), float2(7, -7)};
-#endif
-#endif //	MSAA_ALPHATEST_DX10_1
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // Texture samplers and blenders             //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -248,15 +236,8 @@ surface_bumped sload(p_bumped I) { return sload_i(I); }
 
 surface_bumped sload(p_bumped I, float2 pixeloffset)
 {
-    // apply offset
-#ifdef MSAA_ALPHATEST_DX10_1
-    I.tcdh.xy += pixeloffset.x * ddx(I.tcdh.xy) + pixeloffset.y * ddy(I.tcdh.xy);
-#ifdef USE_TDETAIL
-    I.tcdbump.xy += pixeloffset.x * ddx(I.tcdbump.xy) + pixeloffset.y * ddy(I.tcdbump.xy);
-#endif
-#endif
-
     return sload_i(I);
 }
+void hashed_alpha_test(float2 tc, float alpha) { clip(alpha - def_aref); }
 
 #endif

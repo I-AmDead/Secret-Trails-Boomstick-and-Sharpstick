@@ -40,32 +40,36 @@
         <texture>controller\controller_blood_01</texture>
     </monster_claws>
 
-    <main_task x="10" y="10" width="165" height="40" complex_mode="1">
-        <text x="40" y="0" align="l" vert_align="c" font="letterica16" r="255" g="255" b="0" a="255"/>
-        <texture>ui_actor_task</texture>
+    <main_task x="999" y="999" width="10" height="10" complex_mode="1">
+        <text font="letterica18" r="255" g="255" b="0" a="255"/>
     </main_task>
 
+    <main_task_script x="15" y="703" width="165" height="55" complex_mode="1">
+        <text x="50" y="0" align="l" vert_align="c" font="letterica18" r="255" g="180" b="70" a="255"/>
+        <texture>ui_hud_task_static</texture>
+    </main_task_script>
+
     <main_task_new x="256" y="0" width="512" height="768" complex_mode="1" stretch="1" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text y="-150" align="c" vert_align="c" font="ui_font_saar42" r="255" g="153" b="51" a="255"/>
+        <text y="-150" align="c" vert_align="c" font="ui_font_saar42" r="255" g="255" b="255" a="255"/>
     </main_task_new>
 
     <secondary_task x="235" y="180" width="554" height="60" complex_mode="1" stretch="1">
         <text align="c" font="letterica18" r="240" g="217" b="182" a="255"/>
     </secondary_task>
 
-    <cs_psy_danger x="0" y="10" width="1024" height="50" complex_mode="1" priority="50">
+    <cs_psy_danger x="0" y="68" width="1024" height="50" complex_mode="1" priority="50">
         <text align="c" vert_align="c" font="graffiti22" r="240" g="217" b="182" a="255"/>
     </cs_psy_danger>
 
-    <cs_radiation_danger x="0" y="60" width="1024" height="50" complex_mode="1" priority="50">
+    <cs_radiation_danger x="0" y="68" width="1024" height="50" complex_mode="1" priority="50">
         <text align="c" vert_align="c" font="graffiti22" r="240" g="217" b="182" a="255"/>
     </cs_radiation_danger>
 
-    <game_saved x="0" y="25" width="1024" height="50" complex_mode="1" light_anim="ui_slow_blinking_alpha" la_alpha="1" la_cyclic="1" priority="100">
+    <game_saved x="0" y="670" width="1024" height="50" complex_mode="1" light_anim="ui_slow_blinking_alpha" la_alpha="1" la_cyclic="1" priority="100">
         <text align="c" vert_align="c" font="letterica18" r="255" g="255" b="255" a="255"/>
     </game_saved>
 
-    <autosave x="0" y="25" width="1024" height="50" complex_mode="1" light_anim="ui_slow_blinking_alpha" la_alpha="1" la_cyclic="1" priority="100">
+    <autosave x="0" y="670" width="1024" height="50" complex_mode="1" light_anim="ui_slow_blinking_alpha" la_alpha="1" la_cyclic="1" priority="100">
         <text align="c" vert_align="c" font="graffiti22" r="240" g="217" b="182" a="255">st_autosave</text>
     </autosave>
 
@@ -97,65 +101,21 @@
         <text font="letterica18" r="240" g="217" b="182" a="255" align="l"/>
     </cs_demo_play>
 
-    <quick_slot_key_1 x="440" y="730" width="50" height="17" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" r="255" g="128" b="0" a="255" align="l"/>
-    </quick_slot_key_1>
+    <quick_slot_back_1 x="438" y="715" width="38" height="43" stretch="1" priority="10">
+        <texture>ui\quickslot</texture>
+    </quick_slot_back_1>
 
-    <quick_slot_key_2 x="480" y="730" width="50" height="17" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" r="255" g="128" b="0" a="255" align="l"/>
-    </quick_slot_key_2>
+    <quick_slot_back_2 x="478" y="715" width="38" height="43" stretch="1" priority="10">
+        <texture>ui\quickslot</texture>
+    </quick_slot_back_2>
 
-    <quick_slot_key_3 x="520" y="730" width="50" height="17" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" r="255" g="128" b="0" a="255" align="l"/>
-    </quick_slot_key_3>
+    <quick_slot_back_3 x="518" y="715" width="38" height="43" stretch="1" priority="10">
+        <texture>ui\quickslot</texture>
+    </quick_slot_back_3>
 
-    <quick_slot_key_4 x="560" y="730" width="50" height="17" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" r="255" g="128" b="0" a="255" align="l"/>
-    </quick_slot_key_4>
-
-    <quick_slot_1 x="440" y="708" width="33" height="33" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0" stretch="1">
-        <auto_static x="-2" y="-7" width="38" height="43" stretch="1">
-            <texture>ui\quickslot</texture>
-        </auto_static>
-        <texture>ui\ui_icon_equipment</texture>
-    </quick_slot_1>
-
-    <quick_slot_2 x="480" y="708" width="33" height="33" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0" stretch="1">
-        <auto_static x="-2" y="-7" width="38" height="43" stretch="1">
-            <texture>ui\quickslot</texture>
-        </auto_static>
-        <texture>ui\ui_icon_equipment</texture>
-    </quick_slot_2>
-
-    <quick_slot_3 x="520" y="708" width="33" height="33" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0" stretch="1">
-        <auto_static x="-2" y="-7" width="38" height="43" stretch="1">
-            <texture>ui\quickslot</texture>
-        </auto_static>
-        <texture>ui\ui_icon_equipment</texture>
-    </quick_slot_3>
-
-    <quick_slot_4 x="560" y="708" width="33" height="33" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0" stretch="1">
-        <auto_static x="-2" y="-7" width="38" height="43" stretch="1">
-            <texture>ui\quickslot</texture>
-        </auto_static>
-        <texture>ui\ui_icon_equipment</texture>
-    </quick_slot_4>
-
-    <quick_slot_item_number_1 x="440" y="702" width="24" height="14" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" color="ui_clr_1" align="l"/>
-    </quick_slot_item_number_1>
-
-    <quick_slot_item_number_2 x="480" y="702" width="24" height="14" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" color="ui_clr_1" align="l"/>
-    </quick_slot_item_number_2>
-
-    <quick_slot_item_number_3 x="520" y="702" width="24" height="14" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" color="ui_clr_1" align="l"/>
-    </quick_slot_item_number_3>
-
-    <quick_slot_item_number_4 x="560" y="702" width="24" height="14" light_anim="ui_btn_hint" la_alpha="1" la_cyclic="0">
-        <text font="letterica18" color="ui_clr_1" align="l"/>
-    </quick_slot_item_number_4>
+    <quick_slot_back_4 x="558" y="715" width="38" height="43" stretch="1" priority="10">
+        <texture>ui\quickslot</texture>
+    </quick_slot_back_4>
 
     <achievement_static x="680" y="10" width="348" height="108" complex_mode="1">
         <text x="55" y="8" width="240" font="letterica18" r="255" g="255" b="255" a="255" align="l"/>

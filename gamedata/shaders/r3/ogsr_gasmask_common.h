@@ -22,9 +22,6 @@ Texture2D s_mask_nm_8;
 Texture2D s_mask_nm_9;
 Texture2D s_mask_nm_10;
 
-// Condensation droplets texture
-Texture2D s_mask_droplets;
-
 // Breath noise texture
 Texture2D s_breath_noise;
 

@@ -18,7 +18,7 @@ def_state_moving2 = run
 def_state_moving3 = run
 meet = no_meet
 on_info = {+vasil2_hit} walker@vasil2_hit
-on_actor_dist_le_nvis = 5 | {+pomog_zombi -yantar_dialog_start} remark@vasil, {+yantar_dialog_start -vasil_dovel} walker@vasil2_2, {+vasil_dovel} walker@vasil2_finish 
+on_actor_dist_le_nvis = 5 | {+pomog_zombi -yantar_dialog_start} remark@vasil, {+yantar_dialog_start -vasil_dovel} walker@vasil2_2
 
 [walker@vasil2_hit]
 path_walk = vasil2_walk1
@@ -55,13 +55,7 @@ def_state_moving1 = run
 def_state_moving2 = run
 def_state_moving3 = run
 meet = no_meet
-on_info = {+vasil_dovel} walker@vasil2_finish
 
-[walker@vasil2_finish]
-path_walk = vasil2_walk3
-path_look = vasil2_look3
-danger = danger_condition@vasil2
-meet = meet
 
 [danger_condition@vasil2]
 ignore_distance = 0

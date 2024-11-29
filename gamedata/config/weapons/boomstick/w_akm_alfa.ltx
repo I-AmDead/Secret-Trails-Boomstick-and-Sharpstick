@@ -79,7 +79,7 @@ ammo_elapsed      = 30
 ammo_mag_size     = 30
 startup_ammo      = 90
 
-scope_names    = acog, specter, c-more, ac10632, leupold, aimpoint, point_aimpro, e0t2, pn23, gauss_sight, compm4s, rakurs, marchf, kemper, mepro, ekp8_18, eot, 0kp2
+scope_names    = acog, specter, c-more, ac10632, leupold, aimpoint, point_aimpro, pn23, compm4s, rakurs, marchf, kemper, mepro, ekp8_18, eot, 0kp2
 scope_status      = 2
 
 scope_respawn                         = wpn_akm_alfa
@@ -90,9 +90,7 @@ scope_respawn_ac10632                 = wpn_akm_alfa_ac10632
 scope_respawn_leupold                 = wpn_akm_alfa_leupold
 scope_respawn_aimpoint                = wpn_akm_alfa_aimpoint
 scope_respawn_point_aimpro            = wpn_akm_alfa_point_aimpro
-scope_respawn_e0t2                    = wpn_akm_alfa_e0t2
 scope_respawn_pn23                    = wpn_akm_alfa_pn23
-scope_respawn_gauss_sight             = wpn_akm_alfa_gauss_sight
 scope_respawn_compm4s                 = wpn_akm_alfa_compm4s
 scope_respawn_rakurs                  = wpn_akm_alfa_rakurs
 scope_respawn_marchf                  = wpn_akm_alfa_marchf
@@ -724,27 +722,6 @@ aim_hud_offset_rot_16x9  = 0.005938,0.007057,0.002187
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_akm_alfa_e0t2]:wpn_akm_alfa
-
-visual	 = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_world.ogf
-
-hud  = wpn_akm_alfa_e0t2_hud
-
-inv_weight  = 3.727
-
-scope_name 	     = e0t2
-scope_x	 = 80
-scope_y	 = -11
-
-[wpn_akm_alfa_e0t2_hud]:wpn_akm_alfa_hud
-
-item_visual  = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.061575,0.009475,-0.054275
-aim_hud_offset_rot_16x9  = -0.011562,0.007057,-0.000313
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_akm_alfa_pn23]:wpn_akm_alfa
 
 visual	 = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_world.ogf
@@ -762,27 +739,6 @@ inv_weight  = 4.150
 item_visual  = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.061775,0.000875,-0.059075
-aim_hud_offset_rot_16x9  = -0.011562,0.007057,0.002187
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_akm_alfa_gauss_sight]:wpn_akm_alfa
-
-visual	 = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_world.ogf
-
-hud	 = wpn_akm_alfa_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = -2
-
-inv_weight  = 4.900
-
-[wpn_akm_alfa_gauss_sight_hud]:wpn_akm_alfa_hud
-
-item_visual  = dynamics\weapons\wpn_akm_alfa\wpn_akm_alfa_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.062075,0.021075,-0.037475
 aim_hud_offset_rot_16x9  = -0.011562,0.007057,0.002187
 
 

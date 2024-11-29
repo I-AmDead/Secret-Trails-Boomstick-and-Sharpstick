@@ -87,437 +87,71 @@ function add_lchanger_location()
     -- escape
     local obj = alife():story_object(91)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
+        add_location_by_id(obj.id, "level_changer", "to_l02_garbage")
     end
-
     -- garbage
-    obj = alife():story_object(191)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_agroprom")
-    end
     obj = alife():story_object(192)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_agroprom")
+        add_location_by_id(obj.id, "level_changer", "to_l03_agroprom")
     end
     obj = alife():story_object(193)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_escape")
+        add_location_by_id(obj.id, "level_changer", "to_l01_escape")
     end
     obj = alife():story_object(194)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бар")
-    end
-    obj = alife():story_object(195)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
+        add_location_by_id(obj.id, "level_changer", "to_l05_bar")
     end
     obj = alife():story_object(196)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
+        add_location_by_id(obj.id, "level_changer", "to_l04_darkvalley")
     end
 
     -- agroprom
-    obj = alife():story_object(391)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
-    end
     obj = alife():story_object(392)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
+        add_location_by_id(obj.id, "level_changer", "to_l02_garbage")
     end
 
     -- darkvalley
-    obj = alife():story_object(415)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
-    end
     obj = alife():story_object(416)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
+        add_location_by_id(obj.id, "level_changer", "to_l02_garbage")
     end
-    obj = alife():story_object(417)
+
+    -- bar
+    obj = alife():story_object(592)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_escape")
+        add_location_by_id(obj.id, "level_changer", "to_l07_military")
+    end
+    obj = alife():story_object(593)
+    if obj then
+        add_location_by_id(obj.id, "level_changer", "to_l02_garbage")
     end
 
     -- rostok
     obj = alife():story_object(608)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_yantar")
-    end
-
-    -- bar
-
-    obj = alife():story_object(592)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_military")
-    end
-    obj = alife():story_object(593)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_garbage")
-    end
-    obj = alife():story_object(594)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_rostok")
-    end
-
-    -- military
-    obj = alife():story_object(771)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_bar")
-    end
-    obj = alife():story_object(773)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_radar")
-    end
-
-    -- yantar
-    obj = alife():story_object(925)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_rostok")
+        add_location_by_id(obj.id, "level_changer", "to_l08_yantar")
     end
 
     -- radar
     obj = alife():story_object(1007)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_pripyat")
+        add_location_by_id(obj.id, "level_changer", "to_l11_pripyat")
     end
     obj = alife():story_object(1008)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_military")
+        add_location_by_id(obj.id, "level_changer", "to_l07_military")
     end
 
     -- pripyat
-    obj = alife():story_object(833)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_radar")
-    end
     obj = alife():story_object(832)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_aes")
+        add_location_by_id(obj.id, "level_changer", "to_l12_stancia")
     end
-    obj = alife():story_object(6001)
+    obj = alife():story_object(833)
     if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_pripyat")
-    end
-    obj = alife():story_object(6002)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_radar")
-    end
-    obj = alife():story_object(9100)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_escape")
-    end
-    obj = alife():story_object(9101)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_agroprom")
-    end
-    obj = alife():story_object(9102)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_yantar")
-    end
-    obj = alife():story_object(9103)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_agroprom")
-    end
-    obj = alife():story_object(9104)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_military")
-    end
-    obj = alife():story_object(9105)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_rostok")
-    end
-    obj = alife():story_object(9106)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_radar")
-    end
-    obj = alife():story_object(9107)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
-    end
-    obj = alife():story_object(9108)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_yantar")
-    end
-    obj = alife():story_object(9109)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_radar")
-    end
-    obj = alife():story_object(9110)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_military")
-    end
-    obj = alife():story_object(9111)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
-    end
-    obj = alife():story_object(31000)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Радар")
-    end
-    obj = alife():story_object(31050)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Тёмную Долину")
-    end
-    obj = alife():story_object(31100)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(31150)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Агропром")
-    end
-    obj = alife():story_object(31200)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Саркофаг")
-    end
-    obj = alife():story_object(31250)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(31300)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На ЧАЭС-2")
-    end
-    obj = alife():story_object(31320)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Саркофаг")
-    end
-    obj = alife():story_object(31340)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(31350)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Радар")
-    end
-    obj = alife():story_object(31370)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Саркофаг")
-    end
-    obj = alife():story_object(31390)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На ЧАЭС-1")
-    end
-    obj = alife():story_object(31410)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(31510)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(21410)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Тёмную Долину")
-    end
-    obj = alife():story_object(31610)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Радар")
-    end
-    obj = alife():story_object(31710)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Припять")
-    end
-    obj = alife():story_object(9700)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На АТП")
-    end
-    obj = alife():story_object(9701)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(9702)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "to_escape")
-    end
-    obj = alife():story_object(31920)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На АТП")
-    end
-    obj = alife():story_object(31980)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Болота")
-    end
-    obj = alife():story_object(32000)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(32010)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Припять")
-    end
-    obj = alife():story_object(20020)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Кордон")
-    end
-    obj = alife():story_object(20019)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Агропром")
-    end
-    obj = alife():story_object(20018)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Тёмную Долину")
-    end
-    obj = alife():story_object(20017)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Армейские Склады")
-    end
-    obj = alife():story_object(20021)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Припять")
-    end
-    obj = alife():story_object(20022)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Радар")
-    end
-    obj = alife():story_object(20023)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бункер Управления")
-    end
-    obj = alife():story_object(20024)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Чаэс-2")
-    end
-    obj = alife():story_object(32101)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(33000)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Болота")
-    end
-    obj = alife():story_object(33003)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Мертвый Город")
-    end
-    obj = alife():story_object(20025)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бункер Управления")
-    end
-    obj = alife():story_object(20026)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20027)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(20028)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20029)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Мёртвый Город")
-    end
-    obj = alife():story_object(20030)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20031)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Припять")
-    end
-    obj = alife():story_object(20032)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20033)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(20034)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бар")
-    end
-    obj = alife():story_object(20035)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Радар")
-    end
-    obj = alife():story_object(20036)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Кордон")
-    end
-    obj = alife():story_object(20037)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Тёмную Долину")
-    end
-    obj = alife():story_object(20038)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Миротворческий Корпус")
-    end
-    obj = alife():story_object(20039)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Кордон")
-    end
-    obj = alife():story_object(20040)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Росток")
-    end
-    obj = alife():story_object(20041)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бар")
-    end
-    obj = alife():story_object(20042)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Янтарь")
-    end
-    obj = alife():story_object(20043)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Росток")
-    end
-    obj = alife():story_object(20044)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Мёртвый Город")
-    end
-    obj = alife():story_object(20045)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20046)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Болота")
-    end
-    obj = alife():story_object(20047)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Лес")
-    end
-    obj = alife():story_object(20048)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(20049)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Миротворческий Корпус")
-    end
-    obj = alife():story_object(20050)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Тёмную Долину")
-    end
-    obj = alife():story_object(20051)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Мёртвый Город")
-    end
-    obj = alife():story_object(20052)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Склады")
-    end
-    obj = alife():story_object(20253)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Мёртвый Город")
-    end
-    obj = alife():story_object(20054)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "На Болота")
-    end
-    obj = alife():story_object(20055)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Бар")
-    end
-    obj = alife():story_object(20056)
-    if obj then
-        level.map_add_object_spot(obj.id, "level_changer", "В Миротворческий Корпус")
+        add_location_by_id(obj.id, "level_changer", "to_l10_radar")
     end
 end

@@ -37,67 +37,7 @@
     </file>
 
     <file name="ui\ui_inventory">
-        <texture id="ui_inv_btn_e" x="75" y="960" width="104" height="30" />
-        <texture id="ui_inv_btn_d" x="75" y="990" width="104" height="30" />
-        <texture id="ui_inv_btn_h" x="179" y="960" width="104" height="30" />
-        <texture id="ui_inv_btn_t" x="179" y="990" width="104" height="30" />
-        <texture id="ui_inv_btn_buy_e" x="283" y="960" width="103" height="46" />
-        <texture id="ui_inv_btn_buy_h" x="386" y="960" width="103" height="46" />
-        <texture id="ui_inv_btn_buy_t" x="489" y="960" width="103" height="46" />
-        <texture id="ui_inv_btn_buy_d" x="283" y="960" width="103" height="46" />
-        <texture id="ui_inv_btn_drop_e" x="592" y="960" width="113" height="64" />
-        <texture id="ui_inv_btn_drop_h" x="705" y="960" width="113" height="64" />
-        <texture id="ui_inv_btn_drop_t" x="818" y="960" width="113" height="64" />
-        <texture id="ui_inv_btn_drop_d" x="592" y="960" width="113" height="64" />
-        <texture id="ui_inventory_main" x="1014" y="0" width="1014" height="766" />
-
-        <texture id="ui_inventory_mp_buy" x="0" y="483" width="1014" height="477" />
-        <texture id="ui_inventory_rank" x="0" y="959" width="75" height="65" />
-        <texture id="ui_inventory_mp_shop" x="0" y="483" width="314" height="460" />
-        <texture id="ui_dg_time" x="1021" y="975" width="190" height="36" />
-        <texture id="ui_weather_params_list" x="0" y="0" width="344" height="483" />
-
-        <texture id="ui_inv_icon_shock" x="685" y="714" width="19" height="19" />
-        <texture id="ui_inv_icon_burn" x="723" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_strike" x="517" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_wound" x="685" y="657" width="19" height="19" />
-        <texture id="ui_inv_icon_telepatic" x="555" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_chemical_burn" x="555" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_explosion" x="742" y="714" width="19" height="19" />
-        <texture id="ui_inv_icon_fire_wound" x="685" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_health" x="517" y="676" width="19" height="19" />
-        <texture id="ui_inv_icon_bleeding" x="517" y="619" width="19" height="19" />
-        <texture id="ui_inv_icon_satiety" x="704" y="733" width="19" height="19" />
-        <texture id="ui_inv_icon_power" x="536" y="619" width="19" height="19" />
-        <texture id="ui_inv_icon_alcohol" x="555" y="657" width="19" height="19" />
-        <texture id="ui_inv_icon_radiation" x="685" y="733" width="19" height="19" />
-        <texture id="ui_inv_icon_radiation_2" x="536" y="657" width="19" height="19" />
-        <texture id="ui_inv_icon_power_loss" x="723" y="676" width="19" height="19" />
-        <texture id="ui_inv_icon_additional_weight" x="536" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_physic_strike" x="517" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_thirst" x="555" y="676" width="19" height="19" />
-
-        <texture id="ui_inv_icon_ammo_mag_size" x="647" y="619" width="19" height="19" />
-        <texture id="ui_inv_icon_rpm" x="609" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_fire_distance" x="609" y="676" width="19" height="19" />
-        <texture id="ui_inv_icon_scope" x="498" y="638" width="19" height="19" />
-        <texture id="ui_inv_icon_adjust_scope" x="666" y="714" width="19" height="19" />
-        <texture id="ui_inv_icon_comp_scope" x="628" y="695" width="19" height="19" />
-        <texture id="ui_inv_icon_nv_scope" x="628" y="733" width="19" height="19" />
-        <texture id="ui_inv_icon_kalibr" x="498" y="619" width="19" height="19" />
-        <texture id="ui_inv_icon_otdaca" x="609" y="657" width="19" height="19" />
-        <texture id="ui_inv_icon_ves" x="460" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_fire_distance_knife" x="647" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_hit_power" x="609" y="619" width="19" height="19" />
-
-        <texture id="ui_inv_icon_time" x="761" y="600" width="19" height="19" />
-        <texture id="ui_inv_icon_charge" x="536" y="676" width="19" height="19" />
-
-        <texture id="ui_mg_progress_efficiency_empty" x="0" y="10" width="120" height="17" />
-        <texture id="ui_mg_progress_efficiency_full" x="0" y="10" width="120" height="17" />
-
-        <texture id="ui_mg_progress_empty" x="0" y="50" width="120" height="17" />
-        <texture id="ui_mg_progress_full" x="0" y="50" width="120" height="17" />
+        <texture id="ui_inventory_main" x="0" y="0" width="1024" height="768" />
     </file>
 
     <file name="ui\icons\icon_biohazard">

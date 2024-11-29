@@ -8,10 +8,6 @@
 #include "screenspace_shadows.h"
 #endif
 
-#ifdef USE_MINMAX_SM
-#define SM_MINMAX
-#endif
-
 #if SUN_QUALITY > 2
 #define ULTRA_SHADOWS_ON
 #endif //	SUN_QUALITY>2
@@ -25,18 +21,12 @@
 // uniform float3 view_shadow_proj; // Unused
 
 #ifdef USE_SUNFILTER
-#ifdef MSAA_OPTIMIZATION
-float4 main(v2p_volume I, uint iSample : SV_SAMPLEINDEX) : SV_Target
-#else
 float4 main(v2p_volume I) : SV_Target
-#endif
 {
     gbuffer_data gbd = gbuffer_load_data(GLD_P(I.tc, I.hpos, ISAMPLE));
 
-#ifdef GBUFFER_OPTIMIZATION
     //	Emulate virtual offset
     gbd.P += gbd.N * 0.015f;
-#endif //	GBUFFER_OPTIMIZATION
 
     float4 _P = float4(gbd.P, 1.f);
 
@@ -47,18 +37,12 @@ float4 main(v2p_volume I) : SV_Target
     return s;
 }
 #else
-#ifdef MSAA_OPTIMIZATION
-float4 main(v2p_volume I, uint iSample : SV_SAMPLEINDEX) : SV_Target
-#else
 float4 main(v2p_volume I) : SV_Target
-#endif
 {
     gbuffer_data gbd = gbuffer_load_data(GLD_P(I.tc.xy / I.tc.w, I.hpos, ISAMPLE));
 
-#ifdef GBUFFER_OPTIMIZATION
     //	Emulate virtual offset
     gbd.P += gbd.N * 0.015f;
-#endif //	GBUFFER_OPTIMIZATION
 
     float4 _P = float4(gbd.P, gbd.mtl);
     float4 _N = float4(gbd.N, gbd.hemi);
@@ -72,7 +56,15 @@ float4 main(v2p_volume I) : SV_Target
     float4 light = plight_infinity(m, _P, _N, _C, Ldynamic_dir);
 
     // ----- shadow
-    float4 P4 = float4(_P.x, _P.y, _P.z, 1.0);
+
+    // SHADOWS FIXES - SSS Update 19
+    // Normal Offset for biasing
+    float3 NormalOffset = 0;
+#ifdef SSFX_SHADOWS
+    NormalOffset = _N * ssfx_shadow_bias.y;
+#endif
+
+    float4 P4 = float4(_P.xyz + NormalOffset, 1.0);
     float4 PS = mul(m_shadow, P4);
 
     // SHADOWS FIXES - SSS Update 14.7
@@ -84,9 +76,9 @@ float4 main(v2p_volume I) : SV_Target
     float2 FadeUV = PS.xy / PS.w;
 
     // Fade calc
-    float4 fade = smoothstep(0.0f, 0.1f, float4(FadeUV.x, 1.0f - FadeUV.x, FadeUV.y, 1.0f - FadeUV.y));
+    float4 fade = smoothstep(0.f, 0.1f, float4(FadeUV.x, 1.f - FadeUV.x, FadeUV.y, 1.f - FadeUV.y));
     float f = fade.x * fade.y * fade.z * fade.w;
-    s += (1.0f - s) * (1.0f - f);
+    s += (1.f - s) * (1.f - f);
 
 #ifdef SSFX_SSS
     s *= SSFX_ScreenSpaceShadows_Far(_P, I.hpos, ISAMPLE);

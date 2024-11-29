@@ -13,9 +13,9 @@ function on_spawn()
 
     local text = string.format("%s", game.translate_string("later_other"))
     local hud = get_hud()
-    hud:AddCustomStatic("main_task", true)
-    hud:GetCustomStatic("main_task"):wnd():SetTextST(text)
-    hud:GetCustomStatic("main_task").m_endTime = time_global() / 1000 + 10
+    hud:AddCustomStatic("main_task_new", true)
+    hud:GetCustomStatic("main_task_new"):wnd():SetTextST(text)
+    hud:GetCustomStatic("main_task_new").m_endTime = time_global() / 1000 + 10
     show_wnd_tutorial = false
 end
 
@@ -52,11 +52,11 @@ function sarcofag_start()
 end
 
 function generator()
-    teleport_actor(210301, 2641, vector():set(554.542, 152.252, 201.912), vector():set(0.0, 0.0, 0.0))
+    teleport_actor(219143, 2547, vector():set(554.448, 152.252, 201.151), vector():set(0.0, 0.0, 0.0))
 end
 
 function radar()
-    teleport_actor(190530, 2623, vector():set(415.81, 43.58, 93.31), vector():set(0.0, 0.0, 0.0))
+    teleport_actor(193136, 2559, vector():set(415.891, 46.821, 106.251), vector():set(0.0, 0.0, 0.0))
 end
 
 function pripyat_mervin()
@@ -64,7 +64,7 @@ function pripyat_mervin()
 end
 
 function mg_pripyat_new()
-    teleport_actor(581, 2141, vector():set(-162.555, -1.757, 65.565), vector():set(0.0, 0.0, 0.0))
+    teleport_actor(634, 2140, vector():set(-162.555, -1.757, 65.565), vector():set(0.0, 0.0, 0.0))
 end
 
 function bunker_brat()
@@ -80,16 +80,22 @@ function sarfinal()
 end
 
 function stadium_teleport()
-    teleport_actor(218545, 2265, vector():set(106.772, 1.017, 407.975), vector():set(0.0, 3.0, 0.0))
+    teleport_actor(142242, 2269, vector():set(31.507, 1.032, 413.601), vector():set(0.0, 3.0, 0.0))
     show_wnd_tutorial = true
 end
 
 function sarcofag_teleport()
-    teleport_actor(10193, 2437, vector():set(46.698, 12.195, -5.712), vector():set(0.0, 0.0, 0.0))
+    teleport_actor(8519, 2455, vector():set(46.934, 12.186, -3.127), vector():set(0.0, 0.0, 0.0))
     show_wnd_tutorial = true
 end
 
 function chaos_teleport()
     teleport_actor(172158, 2385, vector():set(393.82781, -0.0035887, 63.712), vector():set(0.0, 3.0, 0.0))
+    show_wnd_tutorial = true
+end
+
+function swamp_karina()
+    local pp = patrol("lc_swamp_mg")
+    teleport_actor(pp:level_vertex_id(0), pp:game_vertex_id(0), pp:point(0), vector():set(0.0, 0.5, 0.0))
     show_wnd_tutorial = true
 end

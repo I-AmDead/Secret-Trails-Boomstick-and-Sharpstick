@@ -1,1 +1,1 @@
-//#define SSFX_SHADOWS
+#define SSFX_SHADOWS

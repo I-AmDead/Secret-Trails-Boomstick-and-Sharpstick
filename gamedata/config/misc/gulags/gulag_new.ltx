@@ -66,72 +66,6 @@ on_signal = sig_attacked | mob_combat@pseudo4
 on_timer = 60000 | mob_home@pseudo4
 
 ;**************************************************
-;*************** ХИМЕРА В ГОСТЯХ У ЛИСА *******************
-;**************************************************
-[logic@chimeras1]
-active = mob_home@chimeras1
-
-[mob_home@chimeras1]
-path_home = chimeras1_walk
-home_min_radius = 40
-home_max_radius = 120
-on_signal = sig_attacked | mob_combat@chimeras1
-
-[mob_combat@chimeras1]
-on_timer = 60000 | mob_home@chimeras1
-
-[logic@chimeras2]
-active = mob_home@chimeras2
-
-[mob_home@chimeras2]
-path_home = chimeras2_walk
-home_min_radius = 40
-home_max_radius = 120
-on_signal = sig_attacked | mob_combat@chimeras2
-
-[mob_combat@chimeras2]
-on_timer = 60000 | mob_home@chimeras2
-
-[logic@chimeras3]
-active = mob_home@chimeras3
-
-[mob_home@chimeras3]
-path_home = chimeras3_walk
-home_min_radius = 40
-home_max_radius = 120
-on_signal = sig_attacked | mob_combat@chimeras3
-
-[mob_combat@chimeras3]
-on_timer = 60000 | mob_home@chimeras3
-
-;**************************************************
-;*************** ПСЕВДОГИГАНТ НА ПРОГУЛКЕ *******************
-;**************************************************
-[logic@giants1]
-active = mob_home@giants1
-
-[mob_home@giants1]
-path_home = giants1_walk
-home_min_radius = 40
-home_max_radius = 120
-on_signal = sig_attacked | mob_combat@giants1
-
-[mob_combat@giants1]
-on_timer = 60000 | mob_home@giants1
-
-[logic@giants2]
-active = mob_home@giants2
-
-[mob_home@giants2]
-path_home = giants2_walk
-home_min_radius = 40
-home_max_radius = 120
-on_signal = sig_attacked | mob_combat@giants2
-
-[mob_combat@giants2]
-on_timer = 60000 | mob_home@giants2
-
-;**************************************************
 ;*************** СНОРКИ НА БАЗЕ БОРОВА *******************
 ;**************************************************
 [logic@val_snork1]
@@ -952,6 +886,60 @@ on_info = {+haron_doktor_begin} walker@aesmon4
 [walker@aesmon4]
 path_walk = aesmon4_atak_walk
 path_look = aesmon4_atak_look
+def_state_moving1 = assault
+def_state_moving2 = assault
+def_state_moving3 = assault
+danger = danger_ignore@dyak
+
+[logic@aesmon5]
+active = kamp@aesmon5
+on_hit = hit@monolitt
+on_death = death@monolitt
+
+[kamp@aesmon5]
+center_point = aesmon_centr 
+danger = danger_ignore@dyak
+on_info = {+haron_doktor_begin} walker@aesmon5
+
+[walker@aesmon5]
+path_walk = aesmon1_atak_walk
+path_look = aesmon1_atak_look
+def_state_moving1 = assault
+def_state_moving2 = assault
+def_state_moving3 = assault
+danger = danger_ignore@dyak
+
+[logic@aesmon6]
+active = kamp@aesmon6
+on_hit = hit@monolitt
+on_death = death@monolitt
+
+[kamp@aesmon6]
+center_point = aesmon_centr 
+danger = danger_ignore@dyak
+on_info = {+haron_doktor_begin} walker@aesmon6
+
+[walker@aesmon6]
+path_walk = aesmon2_atak_walk
+path_look = aesmon2_atak_look
+def_state_moving1 = assault
+def_state_moving2 = assault
+def_state_moving3 = assault
+danger = danger_ignore@dyak
+
+[logic@aesmon7]
+active = kamp@aesmon7
+on_hit = hit@monolitt
+on_death = death@monolitt
+
+[kamp@aesmon7]
+center_point = aesmon_centr 
+danger = danger_ignore@dyak
+on_info = {+haron_doktor_begin} walker@aesmon7
+
+[walker@aesmon7]
+path_walk = aesmon3_atak_walk
+path_look = aesmon3_atak_look
 def_state_moving1 = assault
 def_state_moving2 = assault
 def_state_moving3 = assault
@@ -3570,7 +3558,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} kamp@esc_petruha
 
 [meet@esc_petruha]
-meet_dialog = novice_talk1
 use = true
 use_wpn = true
 meet_talk_enabled = true
@@ -3605,7 +3592,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} kamp@esc_tolik
 
 [meet@esc_tolik]
-meet_dialog = novice_talk2
 use = true
 use_wpn = true
 meet_talk_enabled = true
@@ -3674,7 +3660,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} walker@esc_fabrika2
 
 [meet@esc_fabrika2]
-meet_dialog = novice_talk3
 use = true
 use_wpn = true
 meet_talk_enabled = true
@@ -3704,7 +3689,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} walker@esc_fabrika3
 
 [meet@esc_fabrika3]
-meet_dialog = novice_talk4
 use = true
 use_wpn = true
 meet_talk_enabled = true
@@ -3734,7 +3718,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} walker@esc_fabrika4
 
 [meet@esc_fabrika4]
-meet_dialog = novice_talk5
 use = true
 use_wpn = true
 meet_talk_enabled = true
@@ -3763,7 +3746,6 @@ danger = danger_condition@esc_wolf
 on_info = {+podmoga_mesto} kamp@esc_fabrika5
 
 [meet@esc_fabrika5]
-meet_dialog = novice_talk6
 use = true
 use_wpn = true
 meet_talk_enabled = true

@@ -27,7 +27,7 @@
     <text>Разработчики Secret Trails</text>
 </string>
 <string id="secret_trails_resources_developers_names">
-    <text>I am dead - переработка всего и вся \n Dsh - интереснейшие идеи по скриптам и не только \n Naxac - реализация скриптового инвентаря \n fED - CGIM2 weather \n Bak - Ai Additions 2.0 \n Laucer, Ivan, Asurah26, prxphet - работа с моделями и анимациями \n JSRS Addon + Soundscape Overhaul \n ScreenSpaceShaders - шейдеры \n wundukot - работа с локализацией \n exDeMODER - а хули бы и нет? \n Sergey Dementev - работа с локациями \n ALX Beats, skinnyDRAG - звуковая составляющая (главное меню, титры, эмбиенты, финал)</text>
+    <text>I am dead - ведущий разработчик \n Dsh, Naxac, JR - интереснейшие идеи по скриптам и не только \n fED - погода \n Bak - AI \n Ivan, Laucer, Asurah26, prxphet, IWP Mod, Gunslinger Mod - модели и анимации \n ScreenSpaceShaders, Shadertoy.com, LVutner - шейдеры \n wundukot - работа с локализацией \n exDeMODER - а хули бы и нет? \n Sergey Dementev, detooxe, Anomaly - локации \n JSRS Addon, Soundscape Overhaul, ALX Beats, skinnyDRAG - звук</text>
 </string>
 
 <string id="secret_trails_testers">
@@ -69,7 +69,7 @@
 </string>
 
 <string id="quality_assurance_lead_value">
-    <text>Команда контроля качества, координация и помощь с отладкой</text>
+    <text>Контроль качества, координация и помощь с отладкой</text>
 </string>
 <string id="quality_assurance_lead_name">
     <text>xrSimpodin aka Ustal \n Sergii T</text>

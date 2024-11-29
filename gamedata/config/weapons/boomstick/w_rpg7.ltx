@@ -9,8 +9,6 @@ cform        = skeleton
 
 parent_section    = wpn_rpg7
 
-scope_names    = pgo7gs
-
 class        = WP_RPG7
 slot = 2
 animation_slot       = 4
@@ -271,34 +269,3 @@ kill_msg_width       = 73
 kill_msg_height      = 19
 
 can_spawner	    = false
-
-;--------------------------------------------------------------------------Addons----------------------------------------------------------------------- 
-[wpn_rpg7_pgo7gs]:wpn_rpg7
-scope_name       = pgo7gs
-scope_x     = 125
-scope_y     = 6
-
-visual	 = dynamics\weapons\wpn_rpg7\wpn_rpg7_pgo_world.ogf
-
-inv_weight        = 6.900
-
-hud       = wpn_rpg7_pgo7gs_hud
-
-scope_status      = 1
-scope_dynamic_zoom        = off
-scope_texture     = wpn_crosshair_rpg
-scope_zoom_factor   = 25
-	
-[wpn_rpg7_pgo7gs_hud]:wpn_rpg7_hud
-
-item_visual                		= dynamics\weapons\wpn_rpg7\wpn_rpg7_pgo_hud.ogf
-
-aim_hud_offset_pos_16x9				= -0.037000,0.011100,-0.054100
-aim_hud_offset_rot_16x9				= -0.007000,0.000500,-0.045500
-
-hands_position_16x9				= 0.035500,-0.024900,0.000000
-hands_orientation_16x9			= 0.000000,0.000000,0.000000
-
-aim_hud_offset_alt_pos_16x9				= -0.072801,0.007200,-0.054100
-aim_hud_offset_alt_rot_16x9				= -0.007000,0.000500,-0.045500
-;---------------------------------------------------------------------------------------------------

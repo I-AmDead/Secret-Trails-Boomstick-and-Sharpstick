@@ -1,32 +1,32 @@
 <window>
     <main_wnd x="30" y="100" width="913" height="592"/>
     <!-- INFO BACKGROUND -->
-    <left_frame_window x="362" y="0" width="405" height="592" a="80">
-        <texture>ui\amk_pda_frame_sub</texture>
+    <left_frame_window x="362" y="10" width="405" height="592" a="80">
+
     </left_frame_window>
 
     <!-- INFO BACKGROUND HEADER -->
-    <left_frame_line x="8" y="17" width="434" height="21">
+    <left_frame_line x="999" y="17" width="434" height="21">
         <title x="10" y="1" width="435" height="18">
-            <text font="letterica16" r="255" g="255" b="255" complex_mode="0"/>
+            <text allign="c" font="letterica16" r="255" g="255" b="255" complex_mode="0"/>
         </title>
         <texture>amk_blank_01</texture>
     </left_frame_line>
 
     <!-- CURRENT ARTICLE HEADER -->
-    <article_header_static x="22" y="48" width="340" height="22">
-        <text allign="c" font="letterica25" r="225" g="225" b="250" complex_mode="0"/>
+    <article_header_static x="145" y="48" width="340" height="22">
+        <text allign="j" font="letterica25" r="225" g="225" b="250" complex_mode="0"/>
     </article_header_static>
 
     <!-- LIST BACKGROUND -->
-    <right_frame_window x="0" y="0" width="350" height="592" a="80">
+    <right_frame_window x="0" y="0" width="767" height="592" a="80">
         <texture>ui\amk_pda_frame_sub</texture>
     </right_frame_window>
 
     <!-- LIST HEADER -->
-    <right_frame_line x="8" y="16" width="284" height="27">
-        <title x="15" y="1" width="270" height="27">
-            <text font="letterica25" r="120" g="117" b="67">Encyclopedia</text>
+    <right_frame_line x="0" y="16" width="767" height="27">
+        <title x="0" y="1" width="767" height="27">
+            <text align="c" font="letterica25" r="120" g="117" b="67">Encyclopedia</text>
         </title>
         <texture>amk_blank_01</texture>
     </right_frame_line>
@@ -39,10 +39,6 @@
     <idx_list x="35" y="55" width="258" height="415" item_height="20" scroll_profile="pda" always_show_scroll="0">        <!-- ДОДЕЛАТЬ -->
         <font font="letterica16" r="120" g="117" b="67"/>
     </idx_list>
-
-    <a_static x="250" y="-3" width="32" height="32" frames="16" duration="1000" columns="8" frame_width="32" frame_height="32" cyclic="1" autoplay="1">
-        <texture>ui\pda_anims\ui_pda_anims_04</texture>
-    </a_static>
 
     <info_list x="32" y="41" width="340" height="546" item_height="15" right_ident="5" top_indent="47" scroll_profile="pda" always_show_scroll="0">
         <font font="letterica18" r="120" g="117" b="67"/>

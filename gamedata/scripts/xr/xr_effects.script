@@ -6,14 +6,14 @@ function disable_ui_elements(p)
         db.actor:hide_weapon()
         level.disable_input()
         level.hide_indicators()
-        ui_minimap_bioradar.hud_hide()
+        --ui_minimap_bioradar.hud_hide()
     elseif p == "weapon" then
         db.actor:hide_weapon()
     elseif p == "input" then
         level.disable_input()
     elseif p == "hud" then
         level.hide_indicators()
-        ui_minimap_bioradar.hud_hide()
+        --ui_minimap_bioradar.hud_hide()
     end
 end
 
@@ -22,14 +22,14 @@ function enable_ui_elements(p)
         db.actor:restore_weapon()
         level.enable_input()
         level.show_indicators()
-        ui_minimap_bioradar.hud_show()
+        --ui_minimap_bioradar.hud_show()
     elseif p == "weapon" then
         db.actor:restore_weapon()
     elseif p == "input" then
         level.enable_input()
     elseif p == "hud" then
         level.show_indicators()
-        ui_minimap_bioradar.hud_show()
+        --ui_minimap_bioradar.hud_show()
     end
 end
 
@@ -37,14 +37,14 @@ function disable_ui(actor, npc)
     db.actor:hide_weapon()
     level.disable_input()
     level.hide_indicators()
-    ui_minimap_bioradar.hud_hide()
+    --ui_minimap_bioradar.hud_hide()
 end
 
 function enable_ui(actor, npc)
     level.show_indicators()
     level.enable_input()
     db.actor:restore_weapon()
-    ui_minimap_bioradar.hud_show()
+    --ui_minimap_bioradar.hud_show()
 end
 
 function run_tutorial(actor, npc, p)

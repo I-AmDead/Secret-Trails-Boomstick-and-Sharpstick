@@ -1380,7 +1380,7 @@
         </phrase>
         <phrase id="2">
             <text>haron_dopross_dialog_2</text>
-            <action>esc_graf.del_mervin_last</action>
+            <action>esc_graf.del_mervin3</action>
             <give_info>haron_spy_start</give_info>
         </phrase>
     </phrase_list>
@@ -3064,6 +3064,7 @@
             <text>rad_sveeblov_predatel_est_8</text>
             <give_info>sveeblov_predatel_done</give_info>
             <action>new_dialog.sveeblov_predatel_done</action>
+            <action>esc_graf.spawn_strannik</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -4199,8 +4200,6 @@
             <text>agro_varayg_first_krug_4</text>
             <action>braad_test.peredacha</action>
             <action>braad_test.krugone_spawn</action>
-            <action>braad_test.create_noweapons_restr1</action>
-            <action>braad_test.create_noweapons_restr2</action>
             <give_info>agro_varayg_start_krug</give_info>
             <give_info>agro_varayg_one_start</give_info>
             <action>dialogs.break_dialog</action>
@@ -5294,146 +5293,6 @@
         </phrase>
     </phrase_list>
 </dialog>
-<dialog id="volk_give_pda">
-    <precondition>new_dialog.volk_tainik_have</precondition>
-    <has_info>volk_tainik_have</has_info>
-    <dont_has_info>volk_tainik_done</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>volk_give_pda_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>volk_give_pda_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>volk_give_pda_2</text>
-            <give_info>volk_tainik_done</give_info>
-            <action>new_dialog.volk_tainik_done</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk1">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic1_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk1_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk1_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk1_2</text>
-            <give_info>volk_novic1_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk2">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic2_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk2_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk2_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk2_2</text>
-            <give_info>volk_novic2_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk3">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic3_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk3_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk3_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk3_2</text>
-            <give_info>volk_novic3_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk4">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic4_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk4_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk4_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk4_2</text>
-            <give_info>volk_novic4_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk5">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic5_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk5_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk5_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk5_2</text>
-            <give_info>volk_novic5_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-<dialog id="novice_talk6">
-    <precondition>new_dialog.novice_weapon_have</precondition>
-    <has_info>volk_tainik_done</has_info>
-    <dont_has_info>volk_novic6_have</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>novice_talk6_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>novice_talk6_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>novice_talk6_2</text>
-            <give_info>volk_novic6_have</give_info>
-            <action>new_dialog.novice_weapon_dal</action>
-        </phrase>
-    </phrase_list>
-</dialog>
 <dialog id="volk_talk_vilage">
     <has_info>podmoga_mesto</has_info>
     <dont_has_info>derevna_stalker_start</dont_has_info>
@@ -5485,6 +5344,10 @@
             <text>volk_talk_vilage_est_5</text>
             <give_info>derevna_stalker_done</give_info>
             <give_info>info_amk_recipt_souls</give_info>
+            <give_info>info_amk_recipt_soul_drops</give_info>
+            <give_info>info_amk_recipt_soul_fire</give_info>
+            <give_info>info_amk_recipt_soul_cristal</give_info>
+            <give_info>info_amk_recipt_soul_bengal</give_info>
         </phrase>
     </phrase_list>
 </dialog>

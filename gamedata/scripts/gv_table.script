@@ -1,0 +1,17 @@
+local levels = {}
+
+function gv_table()
+    local gg = game_graph()
+
+    for i = 0, gg:vertex_count() do
+        local gv = gg:vertex(i)
+        local level_id = gv:level_id()
+        local level_name = alife():level_name(level_id)
+        if not levels[level_name] then
+            levels[level_name] = {level_id = level_id, start_gv = i, end_gv = i}
+        else
+            levels[level_name].end_gv = i
+        end
+    end
+    log3("%s", levels)
+end

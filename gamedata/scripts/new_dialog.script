@@ -30,19 +30,19 @@ local nagrad = {
     "af_dummy_glassbeads"
    },
     level_3 = {
-    "wpn_sig552_isg_siber",
+    "wpn_sig552_tac_siber",
     "wpn_l85_m2",
     "wpn_abakan_n_m2",
     "wpn_desert_eagle",
     "wpn_mp153_m1",
     "wpn_groza",
-    "wpn_scar_siber_m1_black",
+    "wpn_scar_siber_m1",
     "wpn_kiparis_s",
     "wpn_glock17_m1",
     "wpn_remington700_bas",
    },
     level_4 = {
-    "wpn_fn57_bas",
+    "wpn_pl15_tan",
     "wpn_scar_siber",
     "wpn_m4_butcher",
     "wpn_scar_siber_m2",
@@ -518,7 +518,7 @@ end
 function solomon3_give(first_speaker, second_speaker)
     dialogs.relocate_item_section(first_speaker, "box_food", "out", 1)
     dialogs.relocate_item_section(first_speaker, "box_remont", "out", 1)
-    dialogs.relocate_item_section(first_speaker, "wpn_vz61_scorpion_m1", "in", 1)
+    dialogs.relocate_item_section(first_speaker, "wpn_mp5", "in", 1)
 end
 
 function prizrak_zachita_have(task, info)
@@ -540,7 +540,7 @@ end
 
 function kliyk_done(first_speaker, second_speaker)
     dialogs.relocate_item_section(first_speaker, "medkit_army", "in", 3)
-    dialogs.relocate_item_section(first_speaker, "wpn_svd_m1", "in", 1)
+    dialogs.relocate_item_section(first_speaker, "wpn_mp9", "in", 1)
 end
 
 function aes_solomon_dal(first_speaker, second_speaker)
@@ -704,9 +704,7 @@ function mil_lucash_help_have(task, info)
 end
 
 function mil_lucash_barier_have(task, info)
-    if (db.actor:has_info("mil_barier_one") and db.actor:has_info("mil_barier_two")
-    and db.actor:has_info("mil_barier_tri") and db.actor:has_info("mil_barier_four")
-    and db.actor:has_info("mil_barier_five") and db.actor:has_info("keb_na_meste")) then
+    if db.actor:has_info("keb_na_meste") then
         return db.actor:give_info_portion("mil_lucash_barier_have")
     end
     return false
@@ -998,7 +996,7 @@ end
 
 function petr_tri_af_dummy_battery_dal(first_speaker, second_speaker)
     dialogs.relocate_item_section(first_speaker, "af_dummy_spring_red", "out", 2)
-    dialogs.relocate_item_section(first_speaker, "wpn_pk_siber", "in", 1)
+    dialogs.relocate_item_section(first_speaker, "wpn_pkm_siber", "in", 1)
 end
 
 function petr_tri_af_cristall_have()
@@ -1274,23 +1272,6 @@ function esc_tolik_help_done(first_speaker, second_speaker)
     dialogs.relocate_item_section(first_speaker, "grenade_f1", "in", 1)
 end
 
-function volk_tainik_have()
-    return count_item("volk_pda", 1) and count_item("ammo_5.45x39_fmj", 12) and count_item("wpn_ak74u_isg", 6)
-end
-
-function volk_tainik_done(first_speaker, second_speaker)
-    dialogs.relocate_item_section(first_speaker, "volk_pda", "out", 1)
-end
-
-function novice_weapon_have()
-    return count_item("wpn_ak74u", 1) and count_item("ammo_5.45x39_fmj", 2)
-end
-
-function novice_weapon_dal(first_speaker, second_speaker)
-    dialogs.relocate_item_section(second_speaker, "ammo_5.45x39_fmj", "out", 2)
-    dialogs.relocate_item_section(second_speaker, "wpn_ak74u", "out", 1)
-end
-
 function derevna_stalker_have(task, info)
     if db.actor and db.actor:has_info("volk_na_mest") and db.actor:has_info("volk_ban1_dead") and
         db.actor:has_info("volk_ban2_dead") and db.actor:has_info("volk_ban3_dead") and
@@ -1489,7 +1470,7 @@ function svoboda_af_simbion_have()
 end
 
 function svoboda_af_simbion_dal(first_speaker, second_speaker)
-    dialogs.relocate_item_section(first_speaker, "wpn_pk_siber", "in", 1)
+    dialogs.relocate_item_section(first_speaker, "wpn_pkm_siber", "in", 1)
     dialogs.relocate_item_section(first_speaker, "af_simbion", "out", 1)
 end
 
@@ -1587,11 +1568,11 @@ function ohranik_trava_done(first_speaker, second_speaker)
 end
 
 function petrenko_weapon_have()
-    return count_item("wpn_rg6_m1", 1)
+    return count_item("wpn_m32_mgl", 1)
 end
 
 function petrenko_weapon_done(first_speaker, second_speaker)
-    dialogs.relocate_item_section(second_speaker, "wpn_rg6_m1", "out", 1)
+    dialogs.relocate_item_section(second_speaker, "wpn_m32_mgl", "out", 1)
     dialogs.relocate_item_section(first_speaker, "wpn_akm_alfa", "in", 1)
 end
 

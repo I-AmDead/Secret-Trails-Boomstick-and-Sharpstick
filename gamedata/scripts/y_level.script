@@ -1,11 +1,11 @@
-function create_level(sid, position, lvid, gvid, dest_position, dest_lvid, dest_gvid, dest_dir_v, mode, shapes)
+function create_level(sid, position, lvid, gvid, dest_position, dest_lvid, dest_gvid, dest_dir_v, mode, shapes, spot_hint)
     if type(position) == "table" then
         position = vector():set(unpack(position))
     end
     local sobj = alife():create("level_changer", position, lvid, gvid)
     ASSERT(sobj, "create_level_changer: failed to create level changer")
 
-    level.map_add_object_spot_ser(sobj.id, "level_changer", "")
+    level_tasks.add_location_by_id(sobj.id, "level_changer", spot_hint and game.translate_string(spot_hint) or "")
 
     local initial_packet = get_netpk(sobj, 1)
     local table_lc = initial_packet:get()
@@ -29,10 +29,10 @@ function create_level(sid, position, lvid, gvid, dest_position, dest_lvid, dest_
         table_lc.shapes:addSphere(shapes.radius, vector():set(unpack(shapes.center)))
     else
         table_lc.shapes:addBox(
-            vector():set( unpack( shapes.v1 ) ),
-            vector():set( unpack( shapes.v2 ) ),
-            vector():set( unpack( shapes.v3 ) ),
-            vector():set( unpack( shapes.offset ) )
+            vector():set(unpack(shapes.v1)),
+            vector():set(unpack(shapes.v2)),
+            vector():set(unpack(shapes.v3)),
+            vector():set(unpack(shapes.offset))
         )
     end
 
@@ -50,7 +50,6 @@ function create_level_changer(p_story_id, -- STORY_ID нового level_changer
     p_dest_gv, -- game_vertex_id
     p_dest_pos, -- координаты точки, в которой на новом уровне окажется игрок
     p_dest_dir, -- направление взгляда игрока
-    p_dest_level, -- название уровня, например "L11_Pripyat"
     p_silent -- следует задать 1, чтобы подавить вопрос о смене уровня (автоматический переход)
 )
     local sobj = create_level(p_story_id, p_position, p_lvertex_id, p_gvertex_id, p_dest_pos, p_dest_lv, p_dest_gv,
@@ -59,31 +58,39 @@ function create_level_changer(p_story_id, -- STORY_ID нового level_changer
     return sobj
 end
 
+function create_level_changer_patrol(story_id, p_name_1, p_name_2, p_silent, radius, spot_hint)
+    local pt1 = patrol(p_name_1)
+    local pt2 = patrol(p_name_2)
+    local sobj = create_level(story_id, pt1:point(0), pt1:level_vertex_id(0), pt1:game_vertex_id(0), pt2:point(0), pt2:level_vertex_id(0), pt2:game_vertex_id(0), vector():set(0.0, 0.0, 0.0), p_silent, {shtype = 0, radius = radius and radius or 3.5, center = {0, 0, 0}}, spot_hint)
+    news_manager.send_tip(db.actor, game.translate_string("new_way"))
+    return sobj
+end
+
 -----------------------------level_chenger_antreg--------------------------------
 
 function create_agro_taynik()
     -- создается переход c АГРОПРОМА В ТАЙНИК СТРЕЛКА
-    create_level_changer(20015, vector():set(-45.089, -0.637, -34.386), 194126, 654, 3053, 717, vector():set(-75.975, -6.726, -74.848), vector():set(0.0, 0.0, 0.0), "l03u_agr_underground", 0)
+    create_level_changer_patrol(20015, "lc_agroprom_agroprom_underground", "lc_agroprom_agroprom_underground_desc", 0, 3.5, "to_l03u_agr_underground")
 
     -- создается переход ИЗ ТАЙНИКА СТРЕЛКА НА АГРОПРОМ
-    create_level_changer(20016, vector():set(-81.394, -4.946, -70.915), 2709, 717, 194118, 695, vector():set(-47.207, -0.364, -40.833), vector():set(0.0, 0.0, 0.0), "l03_agroprom", 0)
+    create_level_changer_patrol(20016, "lc_agroprom_underground_agroprom", "lc_agroprom_underground_agroprom_desc", 0, 3.5, "to_l03_agroprom")
 end
 
 ------------------------------tropy----------------------------------------------------
 
 function tropa_rostok()
     -- создается переход c РОСТОКА НА АРМЕЙСКИЕ СКЛАДЫ
-    create_level_changer(20017, vector():set(-289.735, 0.099, 192.842), 295, 1340, 13812, 1847, vector():set(-408.979, -13.798, 400.699), vector():set(0.0, -1.5, 0.0), "l07_military", 0)
+    create_level_changer_patrol(20017, "lc_rostok_ac", "lc_rostok_ac_desc", 0, 3.5, "to_l07_military")
 end
 
 function tropa_sklady()
     -- создается переход c АРМЕЙСКИХ СКЛАДОВ В ТЁМНУЮ ДОЛИНУ
-    create_level_changer(20018, vector():set(-383.267, -14.092, 399.227), 336, 1848, 25159, 894, vector():set(-133.346, 3.572, -20.987), vector():set(0.0, 3.0, 0.0), "l04_darkvalley", 0)
+    create_level_changer_patrol(20018, "lc_ac_darkvalley", "lc_ac_darkvalley_desc", 0, 3.5, "to_l04_darkvalley")
 end
 
 function tropa_kordon()
     -- создается переход c КОРДОНА НА АГРОПРОМ
-    create_level_changer(20019, vector():set(-118.938, 26.298, 153.369), 135423, 84, 67382, 447, vector():set(-169.074, 0.362, -304.087), vector():set(0.0, 0.0, 0.0), "l03_agroprom", 0)
+    create_level_changer_patrol(20019, "lc_escape_agroprom", "lc_escape_agroprom_desc", 0, 3.5, "to_l03_agroprom")
 end
 
 function delete_tropa_kordon()
@@ -95,27 +102,27 @@ end
 
 function tropa_agro()
     -- создается переход c АГРОПРОМА НА КОРДОН
-    create_level_changer(20020, vector():set(192.274, 0.301, -239.588), 404036, 692, 148439, 84, vector():set(-109.461, 8.285, 117.162), vector():set(0.0, -2.0, 0.0), "l01_escape", 0)
+    create_level_changer_patrol(20020, "lc_agroprom_escape", "lc_agroprom_escape_desc", 0, 3.5, "to_l01_escape")
 end
 
 ------------------------------radar_pripyat_radar----------------------------------
 
 function create_radar_pripyat()
     -- создается переход c РАДАРА в ПРИПЯТЬ
-    create_level_changer(20021, vector():set(381.753, -33.640, 157.167), 112194, 1865, 135689, 2269, vector():set(27.129, -2.396, -278.483), vector():set(0.0, 0.0, 0.0), "l11_pripyat", 0)
+    create_level_changer_patrol(20021, "lc_radar_pripyat", "lc_radar_pripyat_desc", 0, 3.5, "to_l11_pripyat")
 
     -- создается переход из ПРИПЯТИ на РАДАР
-    create_level_changer(20022, vector():set(20.161, -2.392, -293.569), 126477, 2128, 115249, 1926, vector():set(385.528, -33.965, 146.600), vector():set(0.0, 3.0, 0.0), "l10_radar", 0)
+    create_level_changer_patrol(20022, "lc_pripyat_radar", "lc_pripyat_radar_desc", 0, 3.5, "to_l10_radar")
 end
 
 ------------------------------ch2_bunker_ch2----------------------------------
 
 function create_chaes2_bunker()
     -- создается переход c ЧАЭС-2 в БУНКЕР
-    create_level_changer(20023, vector():set(12.082, 1.881, 64.896), 26198, 2659, 3917, 2467, vector():set(36.841, -34.999, 19.608), vector():set(0.0, 3.0, 0.0), "l12u_control_monolith", 0)
+    create_level_changer_patrol(20023, "lc_aes_2_cm", "lc_aes_2_cm_desc", 0, 3.5, "to_l12u_control_monolith")
 
     -- создается переход из БУНКЕРА на ЧАЭС-2
-    create_level_changer(20024, vector():set(36.635, -30.735, 27.205), 3856, 2470, 25868, 2659, vector():set(3.262, 5.248, 63.823), vector():set(0.0, 0.0, 0.0), "l12_stancia_2", 0)
+    create_level_changer_patrol(20024, "lc_cm_aes_2", "lc_cm_aes_2_desc", 0, 3.5, "to_l12_stancia_2")
 end
 
 function delete_final_lch1()
@@ -134,14 +141,14 @@ end
 
 function create_sar_bunker()
     -- создается переход из Саркофага в БУНКЕР
-    create_level_changer(20025, vector():set(52.985, 16.849, 28.852), 9064, 2462, 3917, 2467, vector():set(36.841, -34.999, 19.608), vector():set(0.0, 3.0, 0.0), "l12u_control_monolith", 0)
+    create_level_changer_patrol(20025, "lc_sar_cm", "lc_aes_2_cm_desc", 0, 3.5, "to_l12u_control_monolith")
 end
 
 -------------------------------------tt2---------------------------------------
 
 function create_mg_aver()
     -- создается переход из Мёртвого Города в Лес
-    create_level_changer(20026, vector():set(140.989, 1.228, -129.631), 478939, 3085, 304506, 2978, vector():set(-329.218, -8.414, 15.884), vector():set(0.0, 2.5, 0.0), "aver", 0)
+    create_level_changer_patrol(20026, "lc_mg_aver", "lc_mg_aver_desc_2", 0, 3.5, "to_l10_red_forest")
 end
 
 function delete_mg_aver()
@@ -153,7 +160,7 @@ end
 
 function create_aver_yantar()
     -- создается переход из Леса на Янтарь
-    create_level_changer(20027, vector():set(58.750, -15.500, -183.686), 970368, 2997, 22468, 1454, vector():set(-48.544, -11.000, -269.100), vector():set(0.0, 0.0, 0.0), "l08_yantar", 0)
+    create_level_changer_patrol(20027, "lc_aver_yantar", "lc_aver_yantar_desc", 0, 3.5, "to_l08_yantar")
 end
 
 function delete_aver_yantar()
@@ -165,7 +172,7 @@ end
 
 function create_yantar_aver()
     -- создается переход с Янтаря в Лес
-    create_level_changer(20028, vector():set(197.578, -3.809, -82.437), 137062, 1451, 263348, 2979, vector():set(-352.143, 4.276, -411.526), vector():set(0.0, 0.0, 0.0), "aver", 0)
+    create_level_changer_patrol(20028, "lc_yantar_aver", "lc_yantar_aver_desc", 0, 3.5, "to_l10_red_forest")
 end
 
 function delete_yantar_aver()
@@ -177,7 +184,7 @@ end
 
 function create_aver_mg()
     -- создается переход из Леса в Мёртвый Город
-    create_level_changer(20029, vector():set(307.715, -24.323, 478.214), 1416481, 2994, 478426, 3085, vector():set(139.968, 1.228, -132.976), vector():set(0.0, 0.5, 0.0), "dead_city", 0)
+    create_level_changer_patrol(20029, "lc_aver_mg", "lc_aver_mg_desc", 0, 3.5, "to_l09_deadcity")
 end
 
 function delete_aver_mg()
@@ -189,7 +196,7 @@ end
 
 function create_mg_aver1()
     -- создается переход из Мёртвого Города в Лес
-    create_level_changer(20030, vector():set(140.252, 1.228, -136.043), 478422, 3085, 304506, 2978, vector():set(-329.218, -8.414, 15.884), vector():set(0.0, 2.5, 0.0), "aver", 0)
+    create_level_changer_patrol(20030, "lc_mg_aver", "lc_mg_aver_desc", 0, 3.5, "to_l10_red_forest")
 end
 
 function delete_mg_aver1()
@@ -199,14 +206,9 @@ function delete_mg_aver1()
     end
 end
 
-function create_mg_pripyat()
-    -- создается переход из Мёртвого Города в Припять
-    create_level_changer(20031, vector():set(-230.818, -2.086, 290.419), 107972, 3024, 581, 2141, vector():set(-163.414, -1.770, 63.461), vector():set(0.0, 0.0, 0.0), "l11_pripyat", 0)
-end
-
 function create_swamp_les()
     -- создается переход с Болот в Лес
-    create_level_changer(20032, vector():set(-284.502, 1.358, -23.205), 534419, 2999, 160044, 2978, vector():set(-411.694, 0.687, 61.844), vector():set(0, 0, 0), "aver", 0)
+    create_level_changer_patrol(20032, "lc_swamp_aver", "lc_swamp_aver_desc", 0, 3.5, "to_l10_red_forest")
 end
 
 function delete_swamp_les()
@@ -218,7 +220,7 @@ end
 
 function create_les_ac()
     -- создается переход из Леса на Склады
-    create_level_changer(20033, vector():set(-407.554, 58.912, 370.298), 167828, 2976, 316, 1848, vector():set(-415.004791, -13.714756, 398.767883), vector():set(0, 0, 0), "l07_military", 0)
+    create_level_changer_patrol(20033, "lc_aver_ac", "lc_aver_ac_desc", 0, 3.5, "to_l07_military")
 end
 
 function delete_les_ac()
@@ -230,58 +232,58 @@ end
 
 function create_ac_bar()
     -- создается переход со Складов в Бар
-    create_level_changer(20034, vector():set(-372.624, -21.699, -4.806), 884, 1545, 17882, 1246, vector():set(3.342, -5.176, 343.251), vector():set(0, 3.142, 0), "l05_bar", 0)
+    create_level_changer_patrol(20034, "lc_ac_bar", "lc_ac_bar_desc", 0, 3.5, "to_l05_bar")
 
-    -- создается переход со Бара на склады
-    create_level_changer(32667, vector():set(-6.528273, -5.565088, 352.674805), 17423, 1246, 16231, 1546, vector():set(-334.578491210938, -25.5103607177734, 45.0102348327637), vector():set(0, -0.698128044605255, 0), "l07_military", 0)
+    -- создается переход с Бара на склады
+    create_level_changer_patrol(32667, "lc_bar_ac", "lc_bar_ac_desc", 0, 3.5, "to_l07_military")
 end
 
 function create_ac_radar()
     -- создается переход со Складов на Радар
-    create_level_changer(20035, vector():set(147.516, -7.786, 433.043), 414435, 1812, 199539, 1868, vector():set(568.326, -53.470, -408.685), vector():set(0.019, -0.353, 0.047), "l10_radar", 0)
+    create_level_changer_patrol(20035, "lc_ac_radar", "lc_ac_radar_desc", 0, 3.5, "to_l10_radar")
 end
 
 function create_td_kordon()
     -- создается переход из ТД на Кордон
-    create_level_changer(20036, vector():set(-44.624, 0.435, -548.773), 121701, 815, 587230, 2, vector():set(345.363, 15.059, -26.600), vector():set(0.007, 1.031, 0.000), "l01_escape", 0)
+    create_level_changer_patrol(20036, "lc_darkvalley_escape", "lc_darkvalley_escape_desc", 0, 3.5, "to_l01_escape")
 
     -- создается переход с Кордона в ТД
-    create_level_changer(20037, vector():set(372.180, 15.160, -40.800), 382315, 0, 118985, 815, vector():set(-46.750, 2.065, -542.753), vector():set(0.0, -0.072, 1.0), "l04_darkvalley", 0)
+    create_level_changer_patrol(20037, "lc_escape_darkvalley", "lc_escape_darkvalley_desc", 0, 3.5, "to_l04_darkvalley")
 end
 
 function create_kordon_mir()
     -- создается переход с Кордона к Миротворцам
-    create_level_changer(20038, vector():set(-123.326, -26.311, -477.530), 129143, 11, 85444, 2821, vector():set(-563.731, 17.213, 389.754), vector():set(0.0, 3.0, 0.0), "predbannik", 0)
+    create_level_changer_patrol(20038, "lc_escape_predbannik", "lc_escape_predbannik_desc", 0, 3.5, "to_l13_deep")
 
     -- создается переход от Миротворцев на Кордон
-    create_level_changer(20039, vector():set(-569.451, 18.802, 412.382), 75986, 2820, 118751, 11, vector():set(-132.499, -26.322, -433.226), vector():set(0.0, 0.0, 0.0), "l01_escape", 0)
+    create_level_changer_patrol(20039, "lc_predbannik_escape", "lc_predbannik_escape_desc", 0, 3.5, "to_l01_escape")
 end
 
 ---------------------------------bar_rostok_bar-----------------------------------
 
 function create_bar_rostok()
     -- создается переход с Бара на Росток
-    create_level_changer(20040, vector():set(43.924, -0.436, 142.147), 22321, 1247, 67363, 1412, vector():set(31.432, -0.632, 140.408), vector():set(0.0, 1.5, 0.0), "l06_rostok", 0)
+    create_level_changer_patrol(20040, "lc_bar_rostok", "lc_bar_rostok_desc", 0, 3.5, "to_l06_rostok")
 
     -- создается переход с Ростока в Бар
-    create_level_changer(20041, vector():set(37.954, -0.597, 139.854), 67556, 1308, 23949, 1247, vector():set(50.155, -0.174, 140.720), vector():set(0.0, -1.5, 0.0), "l05_bar", 0)
+    create_level_changer_patrol(20041, "lc_rostok_bar", "lc_rostok_bar_desc", 0, 3.5, "to_l05_bar")
 end
 
 -------------------------------rostok_yantar_rostok--------------------------------
 
 function create_rostok_yantar()
     -- создается переход с Ростока на Янтарь
-    create_level_changer(20042, vector():set(-82.764, -15.755, -220.943), 47966, 1408, 136760, 1459, vector():set(195.412, 5.879, -245.030), vector():set(0.0, 1.5, 0.0), "l08_yantar", 0)
+    create_level_changer_patrol(20042, "lc_rostok_yantar", "lc_rostok_yantar_desc", 0, 3.5, "to_l08_yantar")
 
     -- создается переход с Янтаря на Росток
-    create_level_changer(20043, vector():set(216.440, 6.548, -250.478), 138031, 1475, 49927, 1408, vector():set(-75.413, -15.759, -209.353), vector():set(0.0, -1.0, 0.0), "l06_rostok", 0)
+    create_level_changer_patrol(20043, "lc_yantar_rostok", "lc_yantar_rostok_desc", 0, 3.5, "to_l06_rostok")
 end
 
 ----------------------------------radar_mg--------------------------------
 
 function create_radar_mg()
     -- создается переход с Радара в МГ
-    create_level_changer(20044, vector():set(-58.518, 11.586, 255.762), 16644, 2015, 551581, 3090, vector():set(318.683, -8.738, 53.081), vector():set(0.0, 1.5, 0.0), "dead_city", 0)
+    create_level_changer_patrol(20044, "lc_radar_mg", "lc_ac_mg_desc", 0, 3.5, "to_l09_deadcity")
 end
 
 function delete_radar_mg()
@@ -295,116 +297,116 @@ end
 
 function create_mg_aver2()
     -- создается переход из Мёртвого Города в Лес
-    create_level_changer(20045, vector():set(140.252, 1.228, -136.043), 478422, 3085, 304506, 2978, vector():set(-329.218, -8.414, 15.884), vector():set(0.0, 2.5, 0.0), "aver", 0)
+    create_level_changer_patrol(20045, "lc_mg_aver", "lc_mg_aver_desc", 0, 3.5, "to_l10_red_forest")
 end
 
 -----------------------------------aver_bolota-------------------------------
 
 function create_aver_bolota()
     -- создается переход из Леса на Болота
-    create_level_changer(20046, vector():set(-422.292, -3.500, 64.428), 142958, 2978, 1760955, 3008, vector():set(282.305, 4.856, -273.329), vector():set(0.0, 0.5, 0.0), "swamp", 0)
+    create_level_changer_patrol(20046, "lc_aver_swamp", "lc_aver_swamp_desc", 0, 3.5, "to_swamp")
 end
 
 ------------------------------------swamp_les2--------------------------------
 
 function create_swamp_les2()
     -- создается переход с Болот в Лес
-    create_level_changer(20047, vector():set(-284.502, 1.358, -23.205), 534419, 2999, 160044, 2978, vector():set(-411.694, 0.687, 61.844), vector():set(0, 0, 0), "aver", 0)
+    create_level_changer_patrol(20047, "lc_swamp_aver", "lc_swamp_aver_desc", 0, 3.5, "to_l10_red_forest")
 end
 
 -------------------------------------les_ac2----------------------------------
 
 function create_les_ac2()
     -- создается переход из Леса на Склады
-    create_level_changer(20048, vector():set(-407.554, 58.912, 370.298), 167828, 2976, 69811, 1786, vector():set(-268.359832763672, -22.0936756134033, 239.8955078125), vector():set(0, 0, 0), "l07_military", 0)
+    create_level_changer_patrol(20048, "lc_aver_ac", "lc_aver_ac_desc", 0, 3.5, "to_l07_military")
 end
 
 -------------------------------------td_mir_td---------------------------------
 
 function create_td_mir_td()
     -- создается переход из ТД к Миротворцам
-    create_level_changer(20049, vector():set(151.723, 4.271, -488.558), 351073, 948, 1214625, 2972, vector():set(180.233, -24.544, 503.653), vector():set(0.0, 1.8, 0.0), "predbannik", 0)
+    create_level_changer_patrol(20049, "lc_darkvalley_predbannik", "lc_darkvalley_predbannik_desc", 0, 3.5, "to_l13_deep")
 
     -- создается переход от Миротворцев в ТД
-    create_level_changer(20050, vector():set(190.067, -27.725, 507.081), 1215646, 2972, 340755, 948, vector():set(142.549, 4.024, -489.529), vector():set(0.0, 1.5, 0.0), "l04_darkvalley", 0)
+    create_level_changer_patrol(20050, "lc_predbannik_darkvalley", "lc_predbannik_darkvalley_desc", 0, 3.5, "to_l04_darkvalley")
 end
 
 -----------------------------------tropy_doctor_tuda--------------------------------
 
 function create_swamp_mg_ac()
     -- создается переход С Болот в МГ
-    create_level_changer(20051, vector():set(-33.795, 1.870, -260.866), 1070984, 3000, 104463, 3024, vector():set(-235.336, -2.086, 295.443), vector():set(0.0, -2.3, 0.0), "dead_city", 0)
+    create_level_changer_patrol(20051, "lc_swamp_mg", "lc_swamp_mg_desc", 0, 3.5, "to_l09_deadcity")
 
     -- создается переход из МГ на АС
-    create_level_changer(20052, vector():set(-107.328, -4.422, -283.153), 233539, 3050, 665, 1848, vector():set(-375.797, -13.994, 398.322), vector():set(0.0, -1.8, 0.0), "l07_military", 0)
+    create_level_changer_patrol(20052, "lc_mg_ac", "lc_mg_ac_desc", 0, 3.5, "to_l07_military")
 end
 
 ----------------------------------tropy_doctor_ottuda-------------------------------
 
 function create_ac_mg_swamp()
     -- создается переход с АС в МГ
-    create_level_changer(20253, vector():set(-427.113692, -13.161615, 378.632111), 124966, 1657, 253638, 3050, vector():set(-90.016, -8.918, -273.165), vector():set(0.0, -1.1, 0.0), "dead_city", 0)
+    create_level_changer_patrol(20253, "lc_ac_mg", "lc_ac_mg_desc", 0, 3.5, "to_l09_deadcity")
 
     -- создается переход из МГ на БОЛОТА
-    create_level_changer(20054, vector():set(-242.562, -1.414, 304.437), 100363, 3024, 1066435, 3000, vector():set(-35.394, 2.379, -244.995), vector():set(0.0, -0.5, 0.0), "swamp", 0)
+    create_level_changer_patrol(20054, "lc_mg_swamp", "lc_mg_swamp_desc", 0, 3.5, "to_swamp")
 end
 
 ----------------------------------tropy_pekar-------------------------------
 
 function create_mir_bar_mir()
     -- создается переход от Миротворцев в Бар
-    create_level_changer(20055, vector():set(102.480, -15.284, -244.737), 1103677, 2961, 59481, 1262, vector():set(254.226, 1.634, 3.315), vector():set(0.0, 2.0, 0.0), "l05_bar", 0)
+    create_level_changer_patrol(20055, "lc_predbannik_bar", "lc_predbannik_bar_desc", 0, 3.5, "to_l05_bar")
 
     -- создается переход из Бара к Миротворцам
-    create_level_changer(20056, vector():set(259.505, 1.634, 2.543), 59480, 1262, 1140024, 2961, vector():set(124.986, -12.247, -246.658), vector():set(0.0, 2.0, 0.0), "predbannik", 0)
+    create_level_changer_patrol(20056, "lc_bar_predbannik", "lc_bar_predbannik_desc", 0, 3.5, "to_l13_deep")
 end
 
 function spawn_level_dark()
     -- создается переход из ТЕМНОЙ ДОЛИНЫ НА РАДАР
-    create_level_changer(31000, vector():set(157.544, -4.795, -88.7233), 357929, 919, 227097, 1914, vector():set(660.463, -43.8839, 173.0097), vector():set(0, -0.281389117240906, 0), "l10_radar", 0)
+    create_level_changer_patrol(31000, "lc_darkvalley_radar", "lc_darkvalley_radar_desc", 0, 3.5, "to_l10_radar")
 
     -- создается переход с РАДАРА в ТЕМНУЮ ДОЛИНУ
-    create_level_changer(31050, vector():set(660.2858, -43.876, 168.832), 227063, 1915, 359929, 919, vector():set(160.9338989, -4.352917, -82.83966), vector():set(0, 0, 0), "l04_darkvalley", 0)
+    create_level_changer_patrol(31050, "lc_radar_darkvalley", "lc_radar_darkvalley_desc", 0, 3.5, "to_l04_darkvalley")
 end
 
 function spawn_level_agro()
     -- создается переход с АГРОПРОМА НА ЯНТАРЬ
-    create_level_changer(31100, vector():set(-129.02766, 14.4666, 199.999), 111251, 522, 15229, 1487, vector():set(-68.1646, 1.669, -357.0758), vector():set(0.219999998807907, -0.349999994039536, 0.62), "l08_yantar", 0)
+    create_level_changer_patrol(31100, "lc_agroprom_yantar", "lc_agroprom_yantar_desc", 0, 3.5, "to_l08_yantar")
 
     -- создается переход с ЯНТАРЯ НА АГРОПРОМ
-    create_level_changer(31150, vector():set(-69.8496, 3.838, -362.1278), 15229, 1487, 117966, 520, vector():set(-122.43, 11.38, 185.53999), vector():set(0, -2.6800000667572, 0), "l03_agroprom", 0)
+    create_level_changer_patrol(31150, "lc_yantar_agroprom", "lc_yantar_agroprom_desc", 0, 3.5, "to_l03_agroprom")
 end
 
 function spawn_sar_chaes2()
     -- создается переход из САРКОФАГА НА ЧАЭС2
-    create_level_changer(31300, vector():set(77.10116577, 58.2671585, 51.8668289), 6406, 2417, 53648, 2537, vector():set(67.8906097, 5.04050731, 97.7711), vector():set(0.0, -0.5, 0.0), "l12_stancia_2", 0)
+    create_level_changer_patrol(31300, "lc_sar_aes_2", "lc_sar_aes_2_desc", 0, 3.5, "to_l12_stancia_2")
 
     -- создается переход с ЧАЭС2 в САРКОФАГ
-    create_level_changer(31320, vector():set(663.8462524, 0.355151146, 140.6202697), 192695, 2623, 6321, 2417, vector():set(85.1118, 60.11035, 50.743), vector():set(0.0, -2.0, 0.0), "l12u_sarcofag", 0)
+    create_level_changer_patrol(31320, "lc_aes_2_sar", "lc_aes_2_sar_desc", 0, 3.5, "to_l12u_sarcofag")
 end
 
 function spawn_rad_yan()
     -- создается переход с РАДАРА НА ЯНТАРЬ
-    create_level_changer(31340, vector():set(-33.8359031677246, 4.1663, -92.70242), 469, 1959, 132440, 1521, vector():set(176.82000732, 14.0399999, 81.319999), vector():set(0.0, 2.0, 0.0), "l08_yantar", 0)
+    create_level_changer_patrol(31340, "lc_radar_yantar", "lc_radar_yantar_desc", 0, 3.5, "to_l08_yantar")
 
     -- создается переход с ЯНТАРЯ НА РАДАР
-    create_level_changer(31350, vector():set(181.97956848, 19.407814, 83.3477859), 132440, 1521, 794, 1959, vector():set(-30.9628868103027, 2.09963, -91.5933761), vector():set(0.0, -1.5, 0.0), "l10_radar", 0)
+    create_level_changer_patrol(31350, "lc_yantar_radar", "lc_yantar_radar_desc", 0, 3.5, "to_l10_radar")
 end
 
 function spawn_sarc_chaes()
     -- создается переход с ЧАЭС В САРКОФАГ
-    create_level_changer(31370, vector():set(388.24746, 0.14821225, 65.81998443), 169331, 2385, 101, 2419, vector():set(-27.261982, 0.2294, 40.4672), vector():set(0.0, -1.5, 0.0), "l12u_sarcofag", 0)
+    create_level_changer_patrol(31370, "lc_aes_sar", "lc_aes_sar_desc", 0, 3.5, "to_l12u_sarcofag")
 
     -- создается переход из САРКОФАГА НА ЧАЭС
-    create_level_changer(31390, vector():set(-30.6271, 0.232626, 45.8944), 40, 2403, 172158, 2385, vector():set(393.82781, -0.0035887, 63.712), vector():set(0.0, 3.0, 0.0), "l12_stancia", 0)
+    create_level_changer_patrol(31390, "lc_sar_aes", "lc_sar_aes_desc", 0, 3.5, "to_l12_stancia")
 end
 
 function prip_atp_spawn()
     -- создается переход с ПРИПЯТИ НА БОЛОТА
-    create_level_changer(31980, vector():set(-33.3158, -2.4126, -184.56288), 65184, 2134, 1778027, 3011, vector():set(290.082, 6.804, 67.704), vector():set(0.0, 1.0, 0.0), "swamp", 0)
+    create_level_changer_patrol(31980, "lc_pripyat_swamp", "lc_pripyat_swamp_desc", 0, 3.5, "to_swamp")
 end
 
 function zahar_atp_pripyat()
     -- создается переход с БОЛОТ В ПРИПЯТЬ
-    create_level_changer(32010, vector():set(290.643, 6.939, 66.954), 1779505, 3011, 65184, 2134, vector():set(-33.3158, -2.4126, -184.56288), vector():set(0, 0, 0), "l11_pripyat", 0)
+    create_level_changer_patrol(32010, "lc_swamp_pripyat", "lc_swamp_pripyat_desc", 0, 3.5, "to_l11_pripyat")
 end

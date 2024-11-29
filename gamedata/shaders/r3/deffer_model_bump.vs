@@ -8,6 +8,9 @@ v2p_bumped _main(v_model I)
     // Eye-space pos/normal
     v2p_bumped O;
     O.hpos = mul(m_WVP, w_pos);
+    O.hpos_curr = O.hpos;
+    O.hpos_old = mul(m_WVP_old, I.P_old);
+    O.hpos.xy = get_taa_jitter(O.hpos);
     float2 tc = I.tc;
     float3 Pe = mul(m_WV, w_pos);
     O.tcdh = float4(tc.xyyy);

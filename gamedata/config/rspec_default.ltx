@@ -1,116 +1,174 @@
 ph_iterations 18
 
-snd_device OpenAL Soft
-snd_efx off
-
-r__actor_shadow off
-
+ai_use_torch_dynamic_lights off
 cam_inert 0.
 cam_slide_inert 0.25
-g_3d_scopes off
+crosshair_color 0.400000, 0.900000, 0.500000
 fakescope_enable on
-g_dof_zoom off
+g_3d_pda on
+g_3d_scopes off
+g_3d_scopes_fps_factor 2
+g_cam_height_speed 8.
+g_cam_lookout_speed 2.
+g_camera_collision on
+g_console_show_always 0
+g_cop_death_anim 1
+g_crosshair_dbg off
 g_dof_reload on
+g_dof_zoom off
+g_first_person_body on
+g_first_person_body_offset -0.6
+g_first_person_cam_offset 0, 0.1, -0.4
+g_first_person_death on
+g_font_scale_x 1.0
+g_font_scale_y 1.0
+g_freelook_z_offset_factor 0.7
+g_ironsights_zoom_factor 1.5
+g_laserdotcorrection on
+heat_fade_distance 13, 20, 0, 0
+heat_vision_blurring 1, 1, 1.1, 1.1
+heat_vision_steps -0.2, 0.2, 0.5, 1
+particle_update_mod 0.3
 r2_allow_r1_lights off
 r2_disable_hom off
 r2_exp_donttest_shad off
-r2_gi off
-r2_gi_clip 0.001
-r2_gi_depth 1
-r2_gi_photons 16
-r2_gi_refl 0.9
-r2_sun_lumscale 1.5
-r2_sun_lumscale_amb 1.0
-r2_sun_lumscale_hemi 1.5
+r2_gloss_factor 4.
+r2_ls_bloom_fast off
 r2_ls_bloom_kernel_b 0.7
-r2_ls_bloom_kernel_g 3.0
+r2_ls_bloom_kernel_g 3.
 r2_ls_bloom_kernel_scale 0.7
-r2_ls_bloom_speed 100.0
+r2_ls_bloom_speed 100.
 r2_ls_bloom_threshold 0.00001
-r2_tonemap on
-r2_tonemap_adaptation 1.0
-r2_tonemap_amount 0.7
-r2_tonemap_lowlum 0.0001
-r2_tonemap_middlegray 1.0
 r2_ls_depth_bias -0.0003
 r2_ls_depth_scale 1.00001
 r2_ls_dsm_kernel 0.7
 r2_ls_psm_kernel 0.7
 r2_ls_squality 1.
 r2_ls_ssm_kernel 0.7
-r2_mblur 0.
-r2_parallax_h 0.02
+r2_mask on
+r2_mask_control off
+r2_mblur 0.02
+r2_mblur_enabled on
+r2_parallax_h 0.03
 r2_rain_drops on
-r2_rain_drops_control on
+r2_rain_drops_control off
+r2_rain_drops_factor 0.
 r2_rain_drops_intensity 0.0001
 r2_rain_drops_speed 1.8
-r2_visor_refl on
 r2_shadow_cascede_zcul off
 r2_slight_fade 2.
 r2_ssa_lod_a 64.
 r2_ssa_lod_b 48.
-r2_ssao st_opt_high
+r2_ssao st_opt_medium
 r2_steep_parallax on
 r2_sun on
 r2_sun_depth_far_bias -0.00002
 r2_sun_depth_far_scale 1.
 r2_sun_depth_near_bias 0.00001
 r2_sun_depth_near_scale 1.
+r2_sun_details off
 r2_sun_far 100.
 r2_sun_focus on
+r2_sun_lumscale 1.5
+r2_sun_lumscale_amb 1.
+r2_sun_lumscale_hemi 1.5
 r2_sun_near 20.
 r2_sun_near_border 0.75
-r2_sun_quality st_opt_low
+r2_sun_quality st_opt_medium
+r2_tonemap on
+r2_tonemap_adaptation 1.
+r2_tonemap_amount 0.7
+r2_tonemap_lowlum 0.0001
+r2_tonemap_middlegray 1.
+r2_visor_refl on
+r2_visor_refl_control off
+r2_visor_refl_intensity 0.
+r2_visor_refl_radius 0.3
 r2_volumetric_lights on
 r2_wait_sleep 0
-r2_zfill off
-r2_zfill_depth 0.25
 r2em 0.
 r3_dynamic_wet_surfaces on
+r3_dynamic_wet_surfaces_far 100.
+r3_dynamic_wet_surfaces_near 5.
 r3_dynamic_wet_surfaces_sm_res 1024
 r3_volumetric_smoke on
 r4_enable_tessellation on
 r4_wireframe off
+r_SunShafts_Blend 0.01
+r_SunShafts_Radius 2.
+r__actor_shadow off
 r__detail_density 0.63
 r__detail_radius 165
 r__detail_scale 1.13
 r__dtex_range 50.
 r__geometry_lod 1.2
 r__no_scale_on_fade 0
-r__smap_size 4096x4096
+r__smap_size 2048x2048
 r__tf_aniso 16
 r__tf_mipbias -0.5
 r__wallmark_ttl 60.
-r_aa_mode st_opt_smaa
-r_fps_lock fpslock120
+r_aa_cas 0.3
+r_aa_mode st_opt_dlss
+r_ao_mode st_gtao
+r_fps_lock nofpslock
+r_lens_flare 1
+r_mt_details on
+r_mt_rain on
+r_mt_sun on
+r_mt_texload on
 r_ss_sunshafts_length 0.9
 r_ss_sunshafts_radius 2.
 r_sslr_enable on
 r_sunshafts_mode ss_manowar
-rs_v_sync off
+reflections_only_on_puddles on
+reflections_only_on_terrain on
 
-r_SunShafts_Radius 2.
-r_SunShafts_Blend 0.01
-
-
-r3_dynamic_wet_surfaces_far 100.
+snd_efx on
+snd_occ_scale 0.5
+snd_rolloff 0.75
+snd_targets 256
+snd_volume_eff 0.5
+snd_volume_music 0.5
+ssfx_blood_decals 0.600000, 0.600000, 0.000000, 0.000000
+ssfx_color_grading 0.52, 0.515, 0.5
+ssfx_exposure 1.
+ssfx_florafixes_1 0.100000, 0.300000, 0.100000, 0.300000
+ssfx_florafixes_2 1.000000, 1.000000, 0.000000, 0.000000
+ssfx_gamma 1.
+ssfx_gloss_method 1
+ssfx_gloss_minmax 0.7, 0.8, 0.15
+ssfx_grass_interactive 1.000000, 16.000000, 2000.000000, 1.000000
+ssfx_grass_shadows 1.000000, 0.250000, 20.000000, 0.000000
+ssfx_height_fog on
+ssfx_hud_drops_1 3.000000, 1.000000, 1.000000, 50.000000
+ssfx_hud_drops_2 50.000000, 50.000000, 0.750000, 2.000000
+ssfx_indirect_light off
+ssfx_int_grass_params_1 2.000000, 1.000000, 1.000000, 25.000000
+ssfx_int_grass_params_2 1.000000, 5.000000, 1.000000, 1.000000
+ssfx_inter_grass on
+ssfx_is_underground 0
+ssfx_lightsetup_1 0.950000, 0.500000, 1.000000, 1.000000
+ssfx_lut 0.100000, 1.000000, 0.000000, 0.000000
+ssfx_rain_1 10.000000, 0.015000, 5.000000, 2.000000
+ssfx_rain_2 0.400000, 0.500000, 5.000000, 1.000000
+ssfx_rain_3 0.950000, 0.500000, 0.000000, 0.000000
+ssfx_saturation 1.3
+ssfx_shadow_bias 0.4, 0.03, 0
+ssfx_shadow_cascades 20, 40, 160
+ssfx_shadows 256, 1536, 0
+ssfx_sky_debanding off
+ssfx_ssr_1 1.010000, 0.000000, 0.600000, 0.300000
+ssfx_ssr_2 0.800000, 1.000000, 0.300000, 0.010000
+ssfx_terrain_offset 0.050000, 0.110000, 0.060000, 0.060000
+ssfx_use_new_volumetric_method 1
+ssfx_volumetric_limits 100.0, 0.15, 5.0
+ssfx_water_parallax 2, 0.5, 0.5
 ssfx_wetsurfaces_1 1.700000, 1.400000, 0.700000, 2.000000
 ssfx_wetsurfaces_2 1.100000, 1.500000, 0.200000, 0.700000
-ssfx_gloss_method 1
-ssfx_gloss_minmax 0.6, 0.8, 0.15
-ssfx_lightsetup_1 0.65, 1.0, 1.0, 0.5
-ssfx_florafixes_1 0.1, 0.3, 0.1, 0.3
-ssfx_florafixes_2 1.0, 1.0, 0.0, 0.0
-
-ssfx_rain_1 10.0, 0.015, 5.0, 2.0
-ssfx_rain_2 0.4, 0.5, 5.0, 1.0
-ssfx_rain_3 0.95, 0.5, 0.0, 0.0
-
-ssfx_volumetric_limits 100.0, 0.05, 5.0
-
-ssfx_exposure 1
-ssfx_gamma 1
-ssfx_saturation 1.3
-ssfx_color_grading 0.520000, 0.515000, 0.500000
+ssfx_wind_bugged_trees_enable 1
+ssfx_wind_grass 9.500000, 1.400000, 1.500000, 0.400000
+ssfx_wind_trees 11.000000, 0.150000, 0.500000, 0.100000
+ssfx_wpn_dof_2 0.5
 
 watch_color_params 0.1, 0.78, 0.2
+wpn_aim_toggle off

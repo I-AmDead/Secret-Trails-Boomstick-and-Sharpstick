@@ -23,3 +23,16 @@ function on_before_keyboard(dik, type)
     end
     return false
 end
+
+function gameobject_on_spawn(id, obj)
+    local sm = ogsr_signals.get_mgr()
+    sm:call("gameobject_on_spawn", id, obj)
+    sm:call("gameobject_on_spawn_" .. id, obj)
+end
+
+function gameobject_on_destroy(id, obj)
+    local sm = ogsr_signals.get_mgr()
+    sm:call("gameobject_on_destroy", id, obj)
+    sm:call("gameobject_on_destroy_" .. id, obj)
+end
+

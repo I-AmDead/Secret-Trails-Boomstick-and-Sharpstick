@@ -17,13 +17,10 @@ end
 -- Zapis stanu gry (save)
 --
 function savegame(save_name)
-    if save_name == nil then
-        return false
-    end
+    if not save_name then return end
 
-    if isGameOn() then
-        local save_param = save_name
-        cmd("save " .. save_param)
+    if isGameOn() and string.len(save_name) > 40 then
+        cmd("save " .. save_name)
     end
 end
 

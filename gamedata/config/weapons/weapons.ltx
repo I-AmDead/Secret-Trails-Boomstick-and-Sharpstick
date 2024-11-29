@@ -849,48 +849,10 @@ buck_shot		= 32 ;16
 tracer			= off
 wm_size         = 0.05
 tracer_color_ID		= 1
-fake_grenade_name = wpn_fake_drob
 
 shell3d_sect = shell_12x70_r
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ammo_12x70_kart]:ammo_base
-GroupControlSection	= spawn_group
-$spawn			= "weapons\ammo\ammo_12x70_kart" ; option for Level Editor
-class			= AMMO
-cform                   = skeleton
-visual                  = dynamics\weapons\ammo\ammo_16x70_kart.ogf
-description		= enc_weapons1_ammo-12x70-kart
-$prefetch 		= 64
-
-cost			= 970 ;300
-
-box_size		= 10
-
-inv_name		= ammo-12x70-kart
-inv_name_short		= ammo-12x70-kart_s
-inv_weight		= .50
-
-inv_grid_width		= 2
-inv_grid_height		= 1
-inv_grid_x		= 2 ;46
-inv_grid_y		= 9 ;49
-
-icon_name = 12x70kart
-
-k_dist			= 1.5
-k_disp			= 8 ;3 ;6.5
-k_hit			= 1.8 ;1.2
-k_impulse		= 1 ;0.7
-k_pierce		= 1 ;1.29
-impair			= 1 ;2 ;1.2
-buck_shot		= 8 ;12
-tracer			= off
-wm_size			= 0.06
-explosive		= off
-fake_grenade_name = wpn_fake_drob
-
-shell3d_sect = shell_12x70_r
+[ammo_12x70_kart]:ammo_12x70_buck
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_7.62x39_fmj]:ammo_base

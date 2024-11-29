@@ -3,9 +3,10 @@
 Texture2D s_noise;
 Texture2D s_mask_flare_1;
 Texture2D s_mask_flare_2;
+Texture2D s_mask_flare_3;
 
 #define uGhostCount 6
-#define uGhostSpacing 0.4
+#define uGhostSpacing 0.35
 #define uGhostThreshold 0.7
 #define uHaloRadius 0.3
 #define uHaloThickness 0.165
@@ -27,60 +28,59 @@ float Window_Cubic(float x, float center, float radius)
 float4 get_sun_uv()
 {
     // Dist to the sun
-    float sun_dist = FARPLANE / (sqrt(1.0f - L_sun_dir_w.y * L_sun_dir_w.y));
+    float sun_dist = 100 / (sqrt(1.0f - L_sun_dir_w.y * L_sun_dir_w.y));
 
     // Sun pos
     float3 sun_pos_world = sun_dist * L_sun_dir_w + eye_position;
     float4 sun_pos_projected = mul(m_VP, float4(sun_pos_world, 1.0f));
     float4 sun_pos_screen = proj_to_screen(sun_pos_projected) / sun_pos_projected.w;
 
-    return sun_pos_screen;
+    return sun_pos_projected.w <= 0.0f ? sun_pos_screen : float4(-1.0f, -1.0f, -1.0f, -1.0f);
 }
 
 float4 mainImageA(float2 uv)
 {
-
     uv -= 0.5;
     uv *= float2(screen_res.x * screen_res.w, 1.0);
 
     float2 circle_pos = get_sun_uv().xy;
     circle_pos -= 0.5;
     circle_pos *= float2(screen_res.x * screen_res.w, 1.0);
- 
-    float circle = smoothstep(0.025, 0.0, length(uv+circle_pos));
+
+    float circle = smoothstep(0.025, 0.0, length(uv + circle_pos));
     return float4(1.0, 0.656, 0.3, 1.0) * circle;
 }
 
 float generate_starburst(float2 uv)
 {
-    uv *= float2(screen_res.x /screen_res.y, 1.0).xy;
+    uv *= float2(screen_res.x / screen_res.y, 1.0).xy;
     float angle = atan(uv.y / uv.x);
     float2 sb_uv = float2(cos(angle), sin(angle)) / 3.14;
     float sb_tex = s_noise.Sample(smp_linear, sb_uv * 64.).x;
-    return smoothstep(0.0, sb_tex, length(uv / 4.)) * length(uv / 2.); //soften it a little bit
+    return smoothstep(0.0, sb_tex, length(uv / 4.)) * length(uv / 2.); // soften it a little bit
 }
 
-//generate ghosts n shit
+// generate ghosts n shit
 float3 generate_ghosts(float2 uv)
 {
-    //Draw multiple 'ghosts'
+    // Draw multiple 'ghosts'
     float3 accumulated_ghosts = float3(0.0, 0.0, 0.0);
     {
         uv = 1.0 - uv;
         float2 ghostVec = (0.5 - uv) * uGhostSpacing;
 
-        for (int i = 0; i < uGhostCount; ++i) 
+        for (int i = 0; i < uGhostCount; ++i)
         {
             float2 suv = frac(uv + ghostVec * float2(i, i));
             float ghost_intensity = float(i) / float(uGhostCount);
-            ghost_intensity = pow(ghost_intensity, 2.0); //so each subsequent ghost has different intensity
+            ghost_intensity = pow(ghost_intensity, 2.0); // so each subsequent ghost has different intensity
             float d = distance(suv, 0.5);
             float weight = 1.0 - smoothstep(0.0, 0.75, d);
             accumulated_ghosts += mainImageA(suv).xyz * weight;
         }
     }
-    
-    //Create simple halo
+
+    // Create simple halo
     float3 accumulated_halo = float3(0.0, 0.0, 0.0);
     {
         float2 haloVec = 0.5 - uv;
@@ -92,20 +92,19 @@ float3 generate_ghosts(float2 uv)
         float haloWeight = Window_Cubic(d, uHaloRadius, uHaloThickness); // cubic window function
         haloVec *= uHaloRadius;
         accumulated_halo += mainImageA(uv + haloVec).xyz * haloWeight;
-        
-        //add starburst
+
+        // add starburst
         accumulated_halo *= generate_starburst(uv);
     }
 
-
-    //Add all shit together
+    // Add all shit together
     return (accumulated_ghosts + accumulated_halo);
 }
 
 float4 mainImageB(float2 uv)
 {
     float3 col = generate_ghosts(uv);
-    return float4(col,1.0);
+    return float4(col, 1.0);
 }
 
 float4 mainImageC(float2 uv)
@@ -115,35 +114,32 @@ float4 mainImageC(float2 uv)
     col.x = mainImageB(uv + ca_offset).x;
     col.y = mainImageB(uv).y;
     col.z = mainImageB(uv - ca_offset).z;
- 
-    return float4(col,1.0);
+
+    return float4(col, 1.0);
 }
+
+float4 sun_shafts_intensity;
 
 float4 generate_flare(float2 uv)
 {
     float3 col = mainImageA(uv).xyz * 25.0;
- 
-    float3 lf_col = mainImageC(uv).xyz ;
+
+    float3 lf_col = mainImageC(uv).xyz;
     col += lf_col;
-   
+
     col /= 1.0 + col;
     col = pow(col, float3(0.5, 0.5, 0.5));
 
-
-
     float4 dep = s_mask_flare_1.Load(int3(get_sun_uv() * screen_res.xy, 0), 0);
     dep += s_mask_flare_2.Load(int3(get_sun_uv() * screen_res.xy, 0), 0);
+    dep += s_mask_flare_3.Load(int3(get_sun_uv() * screen_res.xy, 0), 0) * 4.0;
 
+    float4 final = float4(col * L_sun_color, 1.0);
 
-    float4 final = float4(col * L_sun_color, (1.0 - dep.a) * L_sun_color.r);
-    //float4 final = saturate((pre_final) / (pre_final + 1.0));
-
-    //final *= 0.9 - (dep.a * 1.7);
-    //final.rgb *= (dep.r - dep.a * 0.5);
-    final.a *= dep.a * 0.5;
-    final *= dep * 0.5;
-
-    final *= 0.5;
+    float fadeFactor = saturate(max(max(dep.x, dep.y), max(dep.z, dep.w)));
+    final = lerp(float4(0.f, 0.f, 0.f, 0.f), final, fadeFactor);
+    final *= sun_shafts_intensity * 3.0;
+    final = blendSoftLight(final, float4(col * L_sun_color, 1.0));
 
     return final;
 }

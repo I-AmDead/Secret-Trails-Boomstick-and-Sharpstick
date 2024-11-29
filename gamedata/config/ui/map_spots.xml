@@ -248,7 +248,6 @@
 
 
     <anomaly_zone_location hint="anomaly_zone">
-        <level_map spot="anomaly_zone_mini_spot"/>
         <mini_map spot="anomaly_zone_mini_spot"/>
     </anomaly_zone_location>
     <anomaly_zone_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
@@ -264,7 +263,6 @@
 
     <anomaly_bald_location hint="anomaly_zone">
         <mini_map spot="anomaly_bald_mini_spot"/>
-        <!-- "Tramplin" -->
     </anomaly_bald_location>
     <anomaly_bald_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="0" y="0" width="30" height="30" r="255" g="100" b="100">ui\ui_zone_spots</texture>
@@ -272,7 +270,6 @@
 
     <anomaly_minc_location hint="anomaly_zone">
         <mini_map spot="anomaly_minc_mini_spot"/>
-        <!-- "Karusel'" -->
     </anomaly_minc_location>
     <anomaly_minc_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="30" y="0" width="30" height="30" r="255" g="100" b="100">ui\ui_zone_spots</texture>
@@ -280,7 +277,6 @@
 
     <anomaly_grav_location hint="anomaly_zone">
         <mini_map spot="anomaly_grav_mini_spot"/>
-        <!-- "Voronka" -->
     </anomaly_grav_location>
     <anomaly_grav_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="60" y="0" width="30" height="30" r="255" g="100" b="100">ui\ui_zone_spots</texture>
@@ -288,7 +284,6 @@
 
     <anomaly_rad_location hint="anomaly_zone">
         <mini_map spot="anomaly_rad_mini_spot"/>
-        <!-- "Radiaciya" -->
     </anomaly_rad_location>
     <anomaly_rad_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="90" y="0" width="30" height="30" r="255" g="100" b="100">ui\ui_zone_spots</texture>
@@ -296,7 +291,6 @@
 
     <anomaly_elec_location hint="anomaly_zone">
         <mini_map spot="anomaly_elec_mini_spot"/>
-        <!-- "Elektra" -->
     </anomaly_elec_location>
     <anomaly_elec_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="120" y="0" width="30" height="30" r="255" g="255" b="255">ui\ui_zone_spots</texture>
@@ -304,7 +298,6 @@
 
     <anomaly_mine_location hint="anomaly_zone">
         <mini_map spot="anomaly_mine_mini_spot"/>
-        <!-- "Mina" -->
     </anomaly_mine_location>
     <anomaly_mine_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="150" y="0" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
@@ -312,7 +305,6 @@
 
     <anomaly_burn_location hint="anomaly_zone">
         <mini_map spot="anomaly_burn_mini_spot"/>
-        <!-- "Jarka" -->
     </anomaly_burn_location>
     <anomaly_burn_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="180" y="0" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
@@ -327,7 +319,6 @@
 
     <anomaly_hvat_location hint="anomaly_zone">
         <mini_map spot="anomaly_hvat_mini_spot"/>
-        <!-- "Hvatalka" -->
     </anomaly_hvat_location>
     <anomaly_hvat_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="210" y="0" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
@@ -335,7 +326,6 @@
 
     <anomaly_buzz_location hint="anomaly_zone">
         <mini_map spot="anomaly_buzz_mini_spot"/>
-        <!-- "studen" -->
     </anomaly_buzz_location>
     <anomaly_buzz_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="0" y="30" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
@@ -343,7 +333,6 @@
 
     <anomaly_liana_location hint="anomaly_zone">
         <mini_map spot="anomaly_liana_mini_spot"/>
-        <!-- "Liana" -->
     </anomaly_liana_location>
     <anomaly_liana_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="30" y="30" width="30" height="30" r="200" g="100" b="100">ui\ui_zone_spots</texture>
@@ -351,7 +340,6 @@
 
     <anomaly_ameba_location hint="anomaly_zone">
         <mini_map spot="anomaly_ameba_mini_spot"/>
-        <!-- "Ameba" -->
     </anomaly_ameba_location>
     <anomaly_ameba_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="120" y="30" width="30" height="30" r="255" g="255" b="255">ui\ui_zone_spots</texture>
@@ -359,10 +347,30 @@
 
     <anomaly_burning_fuzz_location hint="anomaly_zone">
         <mini_map spot="anomaly_burning_fuzz_mini_spot"/>
-        <!-- "Rjavie volosi" -->
     </anomaly_burning_fuzz_location>
     <anomaly_burning_fuzz_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
         <texture x="60" y="30" width="30" height="30" r="255" g="255" b="255">ui\ui_zone_spots</texture>
     </anomaly_burning_fuzz_mini_spot>
+
+    <anomaly_thermal_location hint="anomaly_zone">
+        <mini_map spot="anomaly_thermal_mini_spot"/>
+    </anomaly_thermal_location>
+    <anomaly_thermal_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
+        <texture x="180" y="0" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
+    </anomaly_thermal_mini_spot>
+
+    <anomaly_acidic_location hint="anomaly_zone">
+        <mini_map spot="anomaly_acidic_mini_spot"/>
+    </anomaly_acidic_location>
+    <anomaly_acidic_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
+        <texture x="0" y="30" width="30" height="30" r="200" g="200" b="200">ui\ui_zone_spots</texture>
+    </anomaly_acidic_mini_spot>
+
+    <anomaly_psy_location hint="anomaly_zone">
+        <mini_map spot="anomaly_psy_mini_spot"/>
+    </anomaly_psy_location>
+    <anomaly_psy_mini_spot x="0" y="0" width="16" height="16" alignment="c" stretch="1">
+        <texture x="120" y="30" width="30" height="30" r="255" g="100" b="100">ui\ui_zone_spots</texture>
+    </anomaly_psy_mini_spot>
 
 </map_spots>

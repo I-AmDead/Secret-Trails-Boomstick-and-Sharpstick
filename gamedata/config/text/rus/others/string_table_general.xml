@@ -271,17 +271,17 @@
 <string id="atp_for_test22">
     <text>АТП</text>
 </string>
-<string id="dead_city">
+<string id="l09_deadcity">
     <text>Мёртвый Город</text>
 </string>
-<string id="aver">
-    <text>Лес</text>
-</string>
 <string id="swamp">
-    <text>Болота</text>
+    <text>Топи</text>
 </string>
-<string id="predbannik">
-    <text>Миротворческий Корпус</text>
+<string id="l13_deep">
+    <text>Станция Глубокое</text>
+</string>
+<string id="l10_red_forest">
+    <text>Рыжий лес</text>
 </string>
 <string id="wanderer">
     <text>Скиталец</text>

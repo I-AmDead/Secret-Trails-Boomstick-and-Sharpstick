@@ -1,33 +1,38 @@
 <window>
-    <task_root_item x="0" y="0" width="320" height="40">
-        <image x="8" y="16" width="83" height="47"/>
+    <task_root_item x="0" y="0" width="345" height="40">
+        <auto_static x="15" y="15" width="320" height="1" stretch="1">
+            <texture a="180">amk_pda_line</texture>
+        </auto_static>
 
-        <caption x="93" y="16" width="180" height="18" complex_mode="1">
-            <text align="l" x="0" y="0" font="letterica18"/>
+        <image x="10" y="33" width="25" height="25"/>
+
+        <caption x="50" y="36" width="220" height="18" heading="1" complex_mode="1">
+            <text align="l" vert_align="c" x="0" y="0" font="letterica25"/>
         </caption>
 
-        <caption_time x="93" y="86" width="210" height="18">
-            <text align="l" x="0" y="0" font="letterica16" r="150" g="150" b="180" a="255"/>
+        <caption_time x="999" y="999" width="10" height="10">
+            <text align="l" x="999" y="999" font="letterica16" r="150" g="150" b="180" a="255"/>
         </caption_time>
-        <rem_time x="93" y="50" width="210" height="18" _light_anim="ui_too_slow_blinking" la_cyclic="1" la_texture="0" la_text="1" la_alpha="1">
-            <text align="l" x="0" y="0" font="letterica16" r="150" g="150" b="180" a="255"/>
+
+        <rem_time x="93" y="60" width="210" height="18" _light_anim="ui_too_slow_blinking" la_cyclic="1" la_texture="0" la_text="1" la_alpha="1">
+            <text align="l" vert_align="c" x="0" y="0" font="letterica16" r="150" g="150" b="180" a="255"/>
         </rem_time>
 
-        <switch_description_btn x="272" y="16" width="20" height="25" stretch="1" check_mode="1" hint="pda_switch_description_btn_hint">
+        <switch_description_btn x="308" y="32" width="25" height="25" stretch="1" check_mode="1" hint="pda_switch_description_btn_hint">
             <texture>pda_info</texture>
         </switch_description_btn>
 
-        <location_btn x="272" y="40" width="20" height="20" check_mode="1" hint="pda_show_location_btn_hint">
+        <location_btn x="272" y="50" width="20" height="20" check_mode="1" hint="pda_show_location_btn_hint">
             <texture>ui_icons_newPDA_showMarkonmap</texture>
         </location_btn>
 
     </task_root_item>
 
     <task_sub_item x="0" y="0" width="320" height="38">
-        <state_image x="6" y="6" width="20" height="20" stretch="1"/>
+        <state_image x="10" y="6" width="25" height="25" heading="1" stretch="1"/>
 
-        <description x="28" y="8" width="220" height="16" complex_mode="1">
-            <text align="l" x="0" y="0" font="letterica16" r="255" g="255" b="255" a="255"/>
+        <description x="52" y="12" width="220" height="16" complex_mode="1">
+            <text align="l" vert_align="c" x="0" y="0" font="letterica16" r="255" g="255" b="255" a="255"/>
             <text_colors>
                 <accomplished r="150" g="150" b="180" a="255"/>
                 <failed r="150" g="150" b="180" a="255"/>
@@ -35,8 +40,8 @@
             </text_colors>
         </description>
 
-        <active_objecttive_image x="249" y="4" width="19" height="19" stretch="1">
-            <texture>ui\pda\target</texture>
+        <active_objecttive_image x="310" y="4" width="19" height="19" stretch="1">
+            <texture>ui\pda\target2</texture>
         </active_objecttive_image>
 
         <show_pointer_btn x="249" y="4" width="18" height="18" stretch="1" check_mode="1" hint="pda_show_pointer_btn_hint">
@@ -51,6 +56,10 @@
 
 
     <notused_task_user_item x="0" y="0" width="320" height="32">
+        <auto_static x="5" y="8" width="320" height="1" stretch="1">
+            <texture a="180">ui_pda_task_line</texture>
+        </auto_static>
+
         <image x="8" y="4" width="32" height="32"/>
 
         <caption x="50" y="5" width="140" height="16">

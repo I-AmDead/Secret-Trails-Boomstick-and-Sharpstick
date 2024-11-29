@@ -10,4 +10,5 @@ function normal   (shader, t_base, t_second, t_detail)
 	shader:dx10texture	("s_hud_rain",	"fx\\hud_rain")
 	shader:dx10texture	("s_glass_distortion",	"watch\\watch_glass_distortion")
 	shader:dx10sampler	("smp_base")
+	shader:dx10sampler	("smp_nofilter")
 end

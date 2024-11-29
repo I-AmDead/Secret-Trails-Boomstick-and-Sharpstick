@@ -1,0 +1,42 @@
+[_group]
+version                          = 3
+flags                            = 0
+effects_count                    = 4
+timelimit                        = 0.980000
+ 
+[effect_0000]
+effect_name                      = anomaly2\group_items\heat_center00_blaze
+on_play_child                    =
+on_birth_child                   =
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 5
+ 
+[effect_0001]
+effect_name                      = anomaly2\group_items\heat_glow00_orange
+on_play_child                    =
+on_birth_child                   =
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 5
+ 
+[effect_0002]
+effect_name                      = anomaly2\group_items\heat_glow00_orange_00
+on_play_child                    =
+on_birth_child                   =
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 5
+ 
+[effect_0003]
+effect_name                      = anomaly2\group_items\heat_center00_blaze_00
+on_play_child                    =
+on_birth_child                   =
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 5
+ 

@@ -1,8 +1,9 @@
 --[[------------------------------------------------------------------------------------------------------------------
 Схема "Охотник за вертолётами"
 Чугай Александр
---------------------------------------------------------------------------------------------------------------------]] local 
-    def_attack_dist = 1000 -- расстояние, на котором вертолёт может быть атакован
+--------------------------------------------------------------------------------------------------------------------]] 
+
+local def_attack_dist = 1000 -- расстояние, на котором вертолёт может быть атакован
 local def_actor_dist = 20 -- расстояние, на котором игрок может быть атакован
 
 function get_nearest_heli(npc_position, attack_dist_sqr)
@@ -104,11 +105,7 @@ end
 function action_shoot:execute()
     action_base.execute(self)
 
-    state_mgr.set_state(self.object, "threat_fire", nil, nil, {
-        look_object = self.a.heli
-    }, nil, nil, {
-        yaw_delta = 10
-    })
+    state_mgr.set_state(script_name(), self.object, "threat_fire", nil, nil, {look_object = self.a.heli}, nil, nil, {yaw_delta = 10})
 end
 
 function action_shoot:finalize()

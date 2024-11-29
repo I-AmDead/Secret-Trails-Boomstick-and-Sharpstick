@@ -1,15 +1,24 @@
 [_group]
 version                          = 3
 flags                            = 0
-effects_count                    = 1
+effects_count                    = 2
 timelimit                        = 0.000000
  
 [effect_0000]
-effect_name                      = zones\effects\zone_acidic_idle_trail_04
+effect_name                      = zones\effects\zone_acidic_idle_point_emiter
 on_play_child                    =
+on_birth_child                   = zones\effects\zone_acidic_idle_trail
+on_death_child                   =
+time0                            = 0.000000
+time1                            = 0.000000
+flags                            = 36
+ 
+[effect_0001]
+effect_name                      = zones\effects\zone_acidic_idle_point_emiter_fontan
+on_play_child                    = zones\effects\zone_acidic_idle_fontan
 on_birth_child                   =
 on_death_child                   =
 time0                            = 0.000000
 time1                            = 0.000000
-flags                            = 4
+flags                            = 6
  

@@ -291,29 +291,13 @@ struct v_static_color
 
 ////////////////////////////////////////////////////////////////
 //	defer
-#ifndef GBUFFER_OPTIMIZATION
-struct f_deffer
-{
-    float4 position : SV_Target0; // px,py,pz, m-id
-    float4 Ne : SV_Target1; // nx,ny,nz, hemi
-    float4 C : SV_Target2; // r, g, b,  gloss
-    float4 H : SV_Target2;
-
-#ifdef EXTEND_F_DEFFER
-    uint mask : SV_COVERAGE;
-#endif
-};
-#else
 struct f_deffer
 {
     float4 position : SV_Target0; // xy=encoded normal, z = pz, w = encoded(m-id,hemi)
     float4 C : SV_Target1; // r, g, b,  gloss
-    float4 H : SV_Target2;
-#ifdef EXTEND_F_DEFFER
-    uint mask : SV_COVERAGE;
-#endif
+    float2 Velocity : SV_Target2; // XY - motion vectors
+    float4 H : SV_Target3;
 };
-#endif
 
 struct gbuffer_data
 {
@@ -348,6 +332,8 @@ struct v2p_bumped
 #ifdef USE_LM_HEMI
     float2 lmh : TEXCOORD6; // lm-hemi
 #endif
+    float4 hpos_curr : TEXCOORD8;
+    float4 hpos_old : TEXCOORD9;
     float4 hpos : SV_Position;
 };
 
@@ -369,6 +355,8 @@ struct p_bumped
 #ifdef USE_LM_HEMI
     float2 lmh : TEXCOORD6; // lm-hemi
 #endif
+    float4 hpos_curr : TEXCOORD8;
+    float4 hpos_old : TEXCOORD9;
 };
 ////////////////////////////////////////////////////////////////
 //	Defer flat
@@ -388,6 +376,8 @@ struct v2p_flat
 #ifdef USE_LM_HEMI
     float2 lmh : TEXCOORD4; // lm-hemi
 #endif
+    float4 hpos_curr : TEXCOORD8;
+    float4 hpos_old : TEXCOORD9;
     float4 hpos : SV_Position;
 };
 
@@ -407,6 +397,8 @@ struct p_flat
 #ifdef USE_LM_HEMI
     float2 lmh : TEXCOORD4; // lm-hemi
 #endif
+    float4 hpos_curr : TEXCOORD8;
+    float4 hpos_old : TEXCOORD9;
 };
 
 ////////////////////////////////////////////////////////////////
@@ -447,6 +439,9 @@ struct v_model
     float3 T : TANGENT; // (nx,ny,nz)
     float3 B : BINORMAL; // (nx,ny,nz)
     float2 tc : TEXCOORD0; // (u,v)
+#ifndef SKIN_NONE
+    float4 P_old : TEXCOORD1; // Previous frame pos
+#endif
 };
 
 ////////////////////////////////////////////////////////////////
@@ -477,11 +472,7 @@ struct p_screen
 struct v2p_screen
 {
     float2 tc0 : TEXCOORD0;
-#ifdef SM_2_0
-    float4 HPos : POSITION; // Clip-space position 	(for rasterization)
-#else
     float4 HPos : POSITIONT; // Clip-space position 	(for rasterization)
-#endif
 };
 ////////////////////////////////////////////////////////////////
 

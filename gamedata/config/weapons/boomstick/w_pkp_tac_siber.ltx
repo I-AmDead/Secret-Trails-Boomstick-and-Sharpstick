@@ -34,7 +34,7 @@ inv_grid_y         = 36
         
         kind                        = w_rifle
         inv_weight                  = 7.0
-        cost                        = 16500
+        cost                        = 55000
         repair_type                 = rifle_7
         weapon_class                = assault_rifle
         
@@ -83,7 +83,7 @@ inv_grid_y         = 36
 	misfire_and_reload	    = true
 
         scope_bone_none 	    = true
-        scope_names                 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, e0t2, pn23, gauss_sight, rmr, deltapoint, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
+        scope_names                 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, pn23, rmr, deltapoint, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
         scope_status                = 2
 
         scope_respawn                         = wpn_pkp_tac_siber
@@ -98,9 +98,7 @@ inv_grid_y         = 36
         scope_respawn_aimpoint                = wpn_pkp_tac_siber_aimpoint
         scope_respawn_aim_low                = wpn_pkp_tac_siber_aim_low
         scope_respawn_point_aimpro            = wpn_pkp_tac_siber_point_aimpro
-        scope_respawn_e0t2                    = wpn_pkp_tac_siber_e0t2
         scope_respawn_pn23                    = wpn_pkp_tac_siber_pn23
-        scope_respawn_gauss_sight             = wpn_pkp_tac_siber_gauss_sight
         scope_respawn_rmr                     = wpn_pkp_tac_siber_rmr
         scope_respawn_deltapoint              = wpn_pkp_tac_siber_deltapoint
         scope_respawn_compm4s                 = wpn_pkp_tac_siber_compm4s
@@ -695,30 +693,6 @@ aim_hud_offset_rot_16x9				= 0.060500,0.007000,0.000000
 hands_position_16x9				= 0.009300,-0.026940,0.038450
 hands_orientation_16x9			= 0.440000,0.250000,0.000000
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_pkp_tac_siber_e0t2]:wpn_pkp_tac_siber
-
-visual					= dynamics\weapons\wpn_pkp_tac_siber\wpn_pkp_tac_siber_world.ogf
-
-hud						= wpn_pkp_tac_siber_e0t2_hud
-
-inv_weight                                         = 7.330
-
-scope			    = e0t2
-scope_x			= 74
-scope_y			= -14
-
-scope_name                 = e0t2
-
-[wpn_pkp_tac_siber_e0t2_hud]:wpn_pkp_tac_siber_hud
-
-item_visual				= dynamics\weapons\wpn_pkp_tac_siber\wpn_pkp_tac_siber_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9				= 0.000009,-0.019500,0.039403
-aim_hud_offset_rot_16x9				= -0.007000,0.007000,0.000000
-
-hands_position_16x9				= 0.009000,-0.024440,0.036450
-hands_orientation_16x9			= 0.400000,0.190000,0.000000
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_pkp_tac_siber_pn23]:wpn_pkp_tac_siber
 
 visual					= dynamics\weapons\wpn_pkp_tac_siber\wpn_pkp_tac_siber_world.ogf
@@ -742,30 +716,6 @@ aim_hud_offset_rot_16x9				= -0.005500,0.007000,0.000000
 
 hands_position_16x9				= 0.020800,-0.054540,0.054350
 hands_orientation_16x9			= 0.530000,0.450000,0.000000
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_pkp_tac_siber_gauss_sight]:wpn_pkp_tac_siber
-
-visual					= dynamics\weapons\wpn_pkp_tac_siber\wpn_pkp_tac_siber_world.ogf
-
-hud					= wpn_pkp_tac_siber_gauss_sight_hud
-
-scope                              = gauss_sight
-scope_x                            = 56
-scope_y                            = -6
-
-inv_weight                                         = 8.400
-
-scope_name                 = gauss_sight
-
-[wpn_pkp_tac_siber_gauss_sight_hud]:wpn_pkp_tac_siber_hud
-
-item_visual				= dynamics\weapons\wpn_pkp_tac_siber\wpn_pkp_tac_siber_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9				= 0.000709,-0.006400,0.034703
-aim_hud_offset_rot_16x9				= -0.005500,0.007000,0.000000
-
-hands_position_16x9				= 0.007700,-0.025940,0.038550
-hands_orientation_16x9			= 0.420000,0.190000,0.000000
 ;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_pkp_tac_siber_deltapoint]:wpn_pkp_tac_siber
 

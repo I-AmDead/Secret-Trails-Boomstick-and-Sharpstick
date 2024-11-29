@@ -77,7 +77,7 @@ ammo_elapsed = 45
 ammo_mag_size        = 45
 startup_ammo = 90
 
-scope_names 	 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, e0t2, pn23, gauss_sight, rmr, deltapoint, susat, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
+scope_names 	 = acog, eot, specter, c-more, 0kp2, ac10632, d0cter, leupold, aimpoint, aim_low, point_aimpro, pn23, rmr, deltapoint, susat, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
 scope_status = 2
 
 scope_respawn                         = wpn_ak12_custom
@@ -92,9 +92,7 @@ scope_respawn_leupold                 = wpn_ak12_custom_leupold
 scope_respawn_aimpoint                = wpn_ak12_custom_aimpoint
 scope_respawn_aim_low                = wpn_ak12_custom_aim_low
 scope_respawn_point_aimpro            = wpn_ak12_custom_point_aimpro
-scope_respawn_e0t2                    = wpn_ak12_custom_e0t2
 scope_respawn_pn23                    = wpn_ak12_custom_pn23
-scope_respawn_gauss_sight             = wpn_ak12_custom_gauss_sight
 scope_respawn_rmr                     = wpn_ak12_custom_rmr
 scope_respawn_deltapoint              = wpn_ak12_custom_deltapoint
 scope_respawn_susat                   = wpn_ak12_custom_susat
@@ -664,29 +662,6 @@ aim_hud_offset_rot_16x9  = 0.015937,-0.003275,-0.030000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_ak12_custom_e0t2]:wpn_ak12_custom
-
-$spawn	 = "weapons\ak12_custom_e0t2"
-
-visual	 = dynamics\weapons\wpn_ak12_custom\wpn_ak12_custom_world.ogf
-
-hud  = wpn_ak12_custom_e0t2_hud
-
-inv_weight  = 3.327
-
-scope_name 	     = e0t2
-scope_x	 = 90
-scope_y	 = -14
-
-[wpn_ak12_custom_e0t2_hud]:wpn_ak12_custom_hud
-
-item_visual  = dynamics\weapons\wpn_ak12_custom\wpn_ak12_custom_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.061820,0.006900,-0.052625
-aim_hud_offset_rot_16x9  = 0.015937,-0.003275,-0.030000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_ak12_custom_pn23]:wpn_ak12_custom
 
 $spawn	 = "weapons\ak12_custom_pn23"
@@ -713,29 +688,6 @@ aim_hud_offset_rot_16x9  = 0.015937,-0.003275,-0.030000
 
 hands_position_16x9  = 0.002600,-0.022900,0.032300
 hands_orientation_16x9	 = -0.100000,1.909999,3.479997
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_ak12_custom_gauss_sight]:wpn_ak12_custom
-
-$spawn	 = "weapons\ak12_custom_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_ak12_custom\wpn_ak12_custom_world.ogf
-
-hud	 = wpn_ak12_custom_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = -4
-
-inv_weight  = 4.500
-
-[wpn_ak12_custom_gauss_sight_hud]:wpn_ak12_custom_hud
-
-item_visual  = dynamics\weapons\wpn_ak12_custom\wpn_ak12_custom_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.062220,0.020600,-0.038325
-aim_hud_offset_rot_16x9  = 0.015937,-0.003275,-0.030000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------

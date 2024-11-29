@@ -4,7 +4,7 @@ script_binding      = ogse_dbg_anomaly_binder.init
 GroupControlSection	= spawn_group_zone
 $def_sphere = 15
 ;$prefetch 		= 16
-class			= Z_RADIO
+class			= ZS_PSY
 hit_impulse_scale	= .01
 effective_radius	= 1.00 ;размер радиуса в процентах от оригинального, где действует зона
 postprocess		= postprocess_psi
@@ -13,7 +13,8 @@ ef_anomaly_type			= 3
 ef_weapon_type			= 15
 
 ;----------- Anomaly settings -----------------------
-max_start_power		= 0
+min_start_power		= 0.01
+max_start_power		= 0.1
 attenuation			= 0.5
 ;idle_particles		= zones\zone_electra_idle
 ;blowout_particles	=
@@ -47,7 +48,7 @@ awaking_time		= 100
 blowout_time		= 800
 accamulate_time		= 100
 
-visible_by_detector = off
+visible_by_detector = on
 
 blowout_wind		= off
 
@@ -68,7 +69,7 @@ max_start_power		= 0.2
 $spawn 			= "zones\field_psychic_average"
 
 ;----------- Anomaly settings -----------------------
-max_start_power		= 0.55
+max_start_power		= 0.35
 
 
 
@@ -76,4 +77,4 @@ max_start_power		= 0.55
 $spawn 			= "zones\field_psychic_strong"
 
 ;----------- Anomaly settings -----------------------
-max_start_power		= 0.9
+max_start_power		= 0.55

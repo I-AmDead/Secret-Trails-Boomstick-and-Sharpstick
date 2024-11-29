@@ -47,7 +47,7 @@ function teleport_mg()
 end
 
 function teleport_babki()
-    teleportation(vector():set(141.031, -4.590, -291.396)) -- ГГ в Лесу Бабка отбрасывает
+    teleportation(vector():set(-113.808, -0.368, -247.567)) -- ГГ в Лесу Бабка отбрасывает
 end
 
 function teleport_kristall()
@@ -55,15 +55,7 @@ function teleport_kristall()
 end
 
 function teleport_maroder()
-    teleportation(vector():set(2.004, 10.026, 42.733)) -- от входа в подвал перебрасывает
-end
-
-function teleport_antirostok()
-    teleportation(vector():set(51.384, 1.055, 141.935)) -- от перехода на Росток отбрасывает
-end
-
-function teleport_antiagro()
-    teleportation(vector():set(-123.167, -4.000, -141.878)) -- от перехода на Агропром отбрасывает
+    teleportation(vector():set(90.66, 1.67, 545.49)) -- от входа в подвал перебрасывает
 end
 
 function teleport_iuda()

@@ -78,7 +78,7 @@ ammo_elapsed      = 10
 ammo_mag_size     = 10
 startup_ammo      = 10
 
-scope_names       = acog, specter, leupold, pn23, gauss_sight, marchf
+scope_names       = acog, specter, leupold, pn23, marchf
 scope_status      = 2
 
 scope_respawn                         = wpn_svds_pmc
@@ -86,7 +86,6 @@ scope_respawn_acog                    = wpn_svds_pmc_acog
 scope_respawn_specter                 = wpn_svds_pmc_specter
 scope_respawn_leupold                 = wpn_svds_pmc_leupold
 scope_respawn_pn23                    = wpn_svds_pmc_pn23
-scope_respawn_gauss_sight             = wpn_svds_pmc_gauss_sight
 scope_respawn_marchf                  = wpn_svds_pmc_marchf
 
 dots_number = 4
@@ -421,33 +420,6 @@ use_alt_aim_hud    = true
 item_visual  = dynamics\weapons\wpn_svds_pmc\wpn_svds_pmc_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.056250,0.003900,-0.051126
-aim_hud_offset_rot_16x9  = 0.048687,0.043875,-0.012500
-
-aim_hud_offset_alt_pos_16x9  = -0.073475,-0.051425,0.009325
-aim_hud_offset_alt_rot_16x9  = 0.033288,0.053657,0.788824
-
-
--------------------------------------------------------------------------------------------------------------------------------
-[wpn_svds_pmc_gauss_sight]:wpn_svds_pmc
-$spawn	 = "weapons\wpn_svds_pmc_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_svds_pmc\wpn_svds_pmc_world.ogf
-
-hud	 = wpn_svds_pmc_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = 2
-
-inv_weight  = 6.200
-
-use_alt_aim_hud    = true
-
-[wpn_svds_pmc_gauss_sight_hud]:wpn_svds_pmc_hud
-
-item_visual  = dynamics\weapons\wpn_svds_pmc\wpn_svds_pmc_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.055750,0.016500,-0.059126
 aim_hud_offset_rot_16x9  = 0.048687,0.043875,-0.012500
 
 aim_hud_offset_alt_pos_16x9  = -0.073475,-0.051425,0.009325

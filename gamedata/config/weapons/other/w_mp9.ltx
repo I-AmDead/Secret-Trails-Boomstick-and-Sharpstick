@@ -1,0 +1,456 @@
+;------------------------------------------------------------------------------------------------
+[wpn_mp9]:identity_immunities,base_wpn_zoom,wpn_mp7_sounds,hud_wpn_fx.mp5
+GroupControlSection                      = spawn_group
+$npc                                     = on
+$prefetch                                = 8
+$spawn                                   = "weapons\mp5"
+scheduled                                = off
+cform                                    = skeleton
+parent_section                           = wpn_mp9
+
+class                                    = WP_LR300
+slot                                     = 2
+animation_slot                           = 8
+ef_main_weapon_type                      = 2
+ef_weapon_type                           = 6
+hand_dependence                          = 1
+single_handed                            = 0
+
+default_to_ruck                          = false
+sprint_allowed                           = true
+inv_grid_width				 = 4
+inv_grid_height				 = 2
+inv_grid_x				 = 0
+inv_grid_y				 = 71
+inv_name                                 = st_wpn_mp9
+inv_name_short                           = st_wpn_mp9
+description                              = st_wpn_mp9_descr
+
+kind                                     = w_smg ;w_pistol
+inv_weight                               = 2.1
+cost                                     = 4000
+repair_type                              = pistol
+weapon_class                             = assault_rifle
+
+hud                                      = wpn_mp9_hud
+visual                                   = dynamics\weapons\wpn_mp9\wpn_mp9.ogf
+position                                 = -0.026, -0.125, -0.03
+orientation                              = 0, -10, 0
+fire_point                               = 0.0, 0.188, 0.392
+fire_point2                              = 0.0, 0.188, 0.392
+strap_bone0                              = bip01_spine2
+strap_bone1                              = bip01_spine1
+strap_position                           = -0.16, -0.36, 0.15
+strap_orientation                        = -10, -5, 10
+ph_mass                                  = 3
+
+flame_particles                          = weapons\generic_weapon05
+smoke_particles                          = weapons\generic_shoot_00
+
+shell_point                              = 0.0, 0.188, 0.082
+shell_dir                                = 0.0, 1.0, 0.0
+;shell_particles                         = weapons\9x19
+
+light_disabled                           = false
+light_color                              = 0.6, 0.5, 0.3
+light_range                              = 5
+light_time                               = 0.2
+light_var_color                          = 0.05
+light_var_range                          = 0.5
+
+fire_modes                               = 1, -1
+ammo_class                               = ammo_9x19_fmj, ammo_9x19_pbp 
+ammo_elapsed                             = 30
+ammo_mag_size                            = 30
+startup_ammo                             = 90
+
+scope_bone_none				 = true
+scope_status				 = 2
+scope_names                              = compm4s, eot, ac10632, aim_low, kemper, c-more, ekp8_18, 0kp2
+
+scope_respawn                            = wpn_mp9
+scope_respawn_compm4s                    = wpn_mp9_compm4s
+scope_respawn_eot                        = wpn_mp9_eot
+scope_respawn_ac10632                    = wpn_mp9_ac10632
+scope_respawn_aim_low                    = wpn_mp9_aim_low
+scope_respawn_kemper                     = wpn_mp9_kemper
+scope_respawn_c-more                     = wpn_mp9_c-more
+scope_respawn_ekp8_18			 = wpn_mp9_ekp8_18
+scope_respawn_0kp2			 = wpn_mp9_0kp2
+
+silencer_name                            = wpn_sil_9mm
+silencer_status                          = 2
+silencer_x                               = 191
+silencer_y                               = -9
+silencer_light_color                     = 0.6, 0.5, 0.3
+silencer_light_range                     = 0.01
+silencer_light_time                      = 0.2
+silencer_light_var_color                 = 0.05
+silencer_light_var_range                 = 0.5
+silencer_smoke_particles                 = weapons\generic_shoot_00
+
+hit_impulse                              = 50
+hit_power                                = 0.97, 0.97, 0.97, 0.97
+hit_type                                 = fire_wound
+fire_distance                            = 400
+bullet_speed                             = 400
+rpm                                      = 950
+rpm_empty_click                          = 200
+
+use_aim_bullet                           = false
+time_to_aim                              = 0.0 ;  3.0
+zoom_dof                                 = 0.5, 1.0, 180
+zoom_enabled                             = true
+zoom_rotate_time                         = 0.25
+reload_dof                               = 0.0, 0.5, 5, 2
+control_inertion_factor = 1.0f
+crosshair_inertion                       = 4.35
+fire_dispersion_base                     = 0.24
+fire_dispersion_condition_factor         = 0.001
+inertion_origin_aim_offset               = -0.03
+inertion_origin_offset                   = -0.05
+inertion_tendto_aim_speed                = 8
+inertion_tendto_speed                    = 5
+
+misfire_probability                      = 0.005
+misfire_start_condition                  = 0.7 ;  0.8
+misfire_start_prob                       = 0.005
+misfire_end_condition                    = 0.1
+misfire_end_prob                         = 0.09
+
+condition_queue_shot_dec                 = 0.00014
+condition_shot_dec                       = 0.00012
+
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 0.8
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.0475
+cam_max_angle                            = 50.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 1.5
+zoom_cam_relax_speed                     = 10
+zoom_cam_dispersion                      = 0.55
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.0375
+zoom_cam_max_angle                       = 50.0
+zoom_cam_max_angle_horz                  = 50.0
+zoom_cam_step_angle_horz                 = 1.5
+
+PDM_disp_accel_factor                    = 1.5
+PDM_disp_base                            = 0.5
+PDM_disp_crouch                          = 1.0
+PDM_disp_crouch_no_acc                   = 1.0
+PDM_disp_vel_factor                      = 1.5
+
+cam_relax_speed_ai                       = 120.75
+zoom_cam_relax_speed_ai                  = 120.75
+holder_fov_modifier                      = 1.0
+holder_range_modifier                    = 1.0
+min_radius                               = 0
+max_radius                               = 500
+hit_probability_gd_novice                = 1.00
+hit_probability_gd_stalker               = 1.00
+hit_probability_gd_veteran               = 1.00
+hit_probability_gd_master                = 1.00
+
+kill_msg_x                               = 72
+kill_msg_y                               = 82
+kill_msg_width                           = 56
+kill_msg_height                          = 23
+
+snd_bore                                 = weapons\draw_silent
+snd_draw                                 = weapons\assault_draw
+snd_empty                                = weapons\mp9\mp9_empty, 0.5
+snd_holster                              = weapons\assault_holster
+snd_reload                               = weapons\mp9\mp9_reload
+snd_reload_empty                         = weapons\mp9\mp9_reload_empty
+snd_reload_jammed                        = weapons\mp9\mp9_misfire
+snd_reload_jammed_last                   = weapons\mp9\mp9_misfire
+snd_shoot				 = wpn_mp9_snd_shoot
+snd_shoot_actor				 = wpn_mp9_snd_shoot_actor
+snd_silncer_shot			 = wpn_mp9_snd_silenced
+snd_silncer_shot_actor			 = wpn_mp9_snd_silenced_actor
+
+hud_fov					 = 0.75
+
+[wpn_mp9_hud]:hud_base
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_hud.ogf
+attach_place_idx                         = 0
+zoom_hide_crosshair                      = true   
+
+item_position                            = 0, 0, 0
+item_orientation                         = 0, 0, 0
+
+hands_position				 = -0.072000,-0.172000,-0.289233
+hands_position_16x9			 = -0.072000,-0.172000,-0.289233
+hands_orientation                        = 0.550000,2.390000,0.149999
+hands_orientation_16x9                   = 0.550000,2.390000,0.149999
+
+aim_hud_offset_pos			 = -0.042395, 0.028599, -0.091732
+aim_hud_offset_pos_16x9			 = -0.042395, 0.028599, -0.091732
+aim_hud_offset_rot			 = 0.030624, 0.009408, -0.000778
+aim_hud_offset_rot_16x9			 = 0.030624, 0.009408, -0.000778
+
+lowered_hud_offset_pos			 = 0.244255,-0.036426,0.036905
+lowered_hud_offset_pos_16x9		 = 0.244255,-0.036426,0.036905
+lowered_hud_offset_rot			 = 0.000000,-0.955017,0.113000
+lowered_hud_offset_rot_16x9		 = 0.000000,-0.955017,0.113000
+
+lean_hud_offset_pos                      = 0, 0, 0
+lean_hud_offset_rot                      = 0, 0, 0
+
+;Доставание///////////////////////////////////////////////////
+anm_show                   = mp9_draw
+anm_show_empty             = mp9_draw
+anm_show_jammed            = mp9_draw
+
+;Убирание/////////////////////////////////////////////////////
+anm_hide                   = mp9_holster
+anm_hide_empty             = mp9_holster
+anm_hide_jammed            = mp9_holster
+
+;Бездействие//////////////////////////////////////////////////
+anm_idle                            = mp9_idle
+anm_idle_empty                      = mp9_idle, idle_empty
+anm_idle_jammed                     = mp9_idle
+anm_idle_slow                       = mp9_idle
+anm_idle_slow_empty                 = mp9_idle, idle_empty
+anm_idle_slow_jammed                = mp9_idle
+anm_idle_crouch                     = mp9_idle
+anm_idle_crouch_empty               = mp9_idle, idle_empty
+anm_idle_crouch_jammed              = mp9_idle
+anm_idle_crouch_slow                = mp9_idle
+anm_idle_crouch_slow_empty          = mp9_idle, idle_empty
+anm_idle_crouch_slow_jammed         = mp9_idle
+
+;Бездействие в прицеливании///////////////////////////////////
+anm_idle_aim                   = mp9_idle_aim
+anm_idle_aim_empty             = mp9_idle_aim, idle_empty
+anm_idle_aim_jammed            = mp9_idle_aim
+anm_idle_aim_scope             = mp9_idle_aim
+anm_idle_aim_scope_empty       = mp9_idle_aim, idle_empty
+anm_idle_aim_scope_jammed      = mp9_idle_aim
+
+
+;Ходьба ВПЕРЕД//////////////////////////////////////////////////////////////////////////
+anm_idle_moving 					= mp9_moving
+anm_idle_moving_jammed 					= mp9_moving
+anm_idle_moving_empty					= mp9_moving, idle_empty
+
+;Ходьба медленная (SHIFT) ВПЕРЕД//////////////////////////////////////////////////////////////////////////
+anm_idle_moving_slow 					= mp9_moving
+anm_idle_moving_slow_jammed 				= mp9_moving
+anm_idle_moving_slow_empty				= mp9_moving, idle_empty
+
+;Ходьба в полуприсяди (CTRL) ВПЕРЕД//////////////////////////////////////////////////////////////////////////
+anm_idle_moving_crouch 					= mp9_moving
+anm_idle_moving_crouch_jammed 				= mp9_moving
+anm_idle_moving_crouch_empty				= mp9_moving, idle_empty
+
+;Ходьба в присяде (CTRL+SHIFT) ВПЕРЕД/////////////////////////////////////////////////////////////////////////
+anm_idle_moving_crouch_slow 				= mp9_moving
+anm_idle_moving_crouch_slow_jammed 			= mp9_moving
+anm_idle_moving_crouch_slow_empty			= mp9_moving, idle_empty
+
+
+;Бег//////////////////////////////////////////////////////////////////
+anm_idle_sprint_start             = mp9_sprint_start
+anm_idle_sprint_start_empty       = mp9_sprint_start, idle_empty
+anm_idle_sprint_start_jammed      = mp9_sprint_start
+
+anm_idle_sprint                   = mp9_sprint
+anm_idle_sprint_empty             = mp9_sprint, idle_empty
+anm_idle_sprint_jammed            = mp9_sprint
+
+anm_idle_sprint_end              = mp9_sprint_end
+anm_idle_sprint_end_empty        = mp9_sprint_end, idle_empty
+anm_idle_sprint_end_jammed       = mp9_sprint_end
+
+;Скука////////////////////////////////////////////////////////////////////
+anm_bore                   = mp9_idle_aim
+anm_bore_empty             = mp9_idle_aim, idle_empty
+anm_bore_jammed            = mp9_idle_aim
+
+;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
+anm_shots		   = mp9_shoot, shoot
+anm_shots_l		   = mp9_shoot, idle_empty
+anm_shots_aim              = mp9_shoot_aim, shoot
+anm_shots_aim_last	   = mp9_shoot_aim, idle_empty
+
+;Перезарядка/////////////////////////////////////////////////////////////////////
+anm_reload                           = mp9_reload, reload
+anm_reload_empty                     = mp9_reload_empty, reload_empty
+anm_reload_jammed                    = mp9_misfire, misfire
+anm_reload_jammed_last               = mp9_misfire, misfire
+
+anm_idle_moving_slow_speed_k         	    = 0.8
+anm_idle_moving_slow_empty_speed_k   	    = 0.8
+anm_idle_moving_slow_jammed_speed_k  	    = 0.8
+anm_idle_moving_crouch_speed_k       	    = 0.6
+anm_idle_moving_crouch_empty_speed_k        = 0.6
+anm_idle_moving_crouch_jammed_speed_k       = 0.6
+anm_idle_moving_crouch_slow_speed_k         = 0.4
+anm_idle_moving_crouch_slow_empty_speed_k   = 0.4
+anm_idle_moving_crouch_slow_jammed_speed_k  = 0.4
+
+
+shell_bone                               = wpn_body
+shell_dir                                = 0.0, 1.0, 0.0
+shell_point                              = 0.019000,0.043800,-0.003200
+
+fire_bone                                = wpn_body
+fire_bone2                               = wpn_body
+fire_point                               = 0, 0.037504, 0.269238
+fire_point2                              = 0.0, -0.029, 0.525
+
+freelook_z_offset_mul			 = 0.3
+
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_ac10632]:wpn_mp9
+
+scope_name                              = ac10632
+scope_x					= 115
+scope_y					= -32
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_ac10632_hud
+
+
+[wpn_mp9_ac10632_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_ac10632_hud.ogf
+aim_hud_offset_pos			 = -0.042932,0.004163,-0.107022
+aim_hud_offset_rot			 = 0.040624,0.009408,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042932,0.004163,-0.107022
+aim_hud_offset_rot_16x9			 = 0.040624,0.009408,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_aim_low]:wpn_mp9
+
+scope_name                              = aim_low
+scope_x					= 116
+scope_y					= -22
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_aim_low_hud
+
+
+[wpn_mp9_aim_low_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_aim_low_hud.ogf
+aim_hud_offset_pos			 = -0.040865,0.017176,-0.107022
+aim_hud_offset_rot			 = 0.039060,0.004865,-0.000778
+aim_hud_offset_pos_16x9			 = -0.040865,0.017176,-0.107022
+aim_hud_offset_rot_16x9			 = 0.039060,0.004865,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_compm4s]:wpn_mp9
+
+scope_name                              = compm4s
+scope_x					= 115
+scope_y					= -32
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_compm4s_hud
+
+
+[wpn_mp9_compm4s_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_compm4s_hud.ogf
+aim_hud_offset_pos			 = -0.042556,0.005448,-0.107022
+aim_hud_offset_rot			 = 0.044060,0.007865,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042556,0.005448,-0.107022
+aim_hud_offset_rot_16x9			 = 0.044060,0.007865,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_eot]:wpn_mp9
+
+scope_name                              = eot
+scope_x					= 115
+scope_y					= -30
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_eot_hud
+
+
+[wpn_mp9_eot_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_eot_hud.ogf
+aim_hud_offset_pos			 = -0.042712,0.000693,-0.107022
+aim_hud_offset_rot			 = 0.039060,0.009865,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042712,0.000693,-0.107022
+aim_hud_offset_rot_16x9			 = 0.039060,0.009865,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_kemper]:wpn_mp9
+
+scope_name                              = kemper
+scope_x					= 115
+scope_y					= -32
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_kemper_hud
+
+
+[wpn_mp9_kemper_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_kemper_hud.ogf
+
+aim_hud_offset_pos			 = -0.042027,0.005124,-0.091732
+aim_hud_offset_rot			 = 0.038624,0.009408,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042027,0.005124,-0.091732
+aim_hud_offset_rot_16x9			 = 0.038624,0.009408,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_0kp2]:wpn_mp9
+
+scope_name                              = 0kp2
+scope_x					= 115
+scope_y					= -23
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_0kp2_hud
+
+
+[wpn_mp9_0kp2_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_0kp2_hud.ogf
+
+aim_hud_offset_pos			 = -0.039027,0.012775,-0.091732
+aim_hud_offset_rot			 = 0.044624,0.008408,-0.000778
+aim_hud_offset_pos_16x9			 = -0.039027,0.012775,-0.091732
+aim_hud_offset_rot_16x9			 = 0.044624,0.008408,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_c-more]:wpn_mp9
+
+scope_name                              = c-more
+scope_x					= 115
+scope_y					= -25
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_c-more_hud
+
+
+[wpn_mp9_c-more_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_c-more_hud.ogf
+
+aim_hud_offset_pos			 = -0.042288,0.012650,-0.091732
+aim_hud_offset_rot			 = 0.040624,0.009408,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042288,0.012650,-0.091732
+aim_hud_offset_rot_16x9			 = 0.040624,0.009408,-0.000778
+;------------------------------------------------------------------------------------------------
+[wpn_mp9_ekp8_18]:wpn_mp9
+
+scope_name                              = ekp8_18
+scope_x					= 115
+scope_y					= -20
+
+inv_weight                               = 2.215
+
+hud                                      = wpn_mp9_ekp8_18_hud
+
+
+[wpn_mp9_ekp8_18_hud]:wpn_mp9_hud
+item_visual                              = dynamics\weapons\wpn_mp9\wpn_mp9_ekp8_18_hud.ogf
+
+aim_hud_offset_pos			 = -0.042395,0.002056,-0.091732
+aim_hud_offset_rot			 = 0.039624,0.009408,-0.000778
+aim_hud_offset_pos_16x9			 = -0.042395,0.002056,-0.091732
+aim_hud_offset_rot_16x9			 = 0.039624,0.009408,-0.000778

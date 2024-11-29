@@ -1,15 +1,15 @@
 <game_task id="les_dobratsya">
-    <title>Добраться с Лесником до его дома в Лесу</title>
+    <title>Дом в Лесу</title>
     <objective>
-        <text>Добраться с Лесником до его дома в Лесу</text>
-        <icon>ui_npc_u_stalker_lesnik</icon>
+        <text>Пойти с Лесником до его дома в Рыжем Лесу</text>
+        <icon>target_icon</icon>
         <infoportion_complete>les_dobralis</infoportion_complete>
         <infoportion_fail>enemy_lesnik</infoportion_fail>
         <article>les_dobratsya_cabin</article>
     </objective>
     <objective>
         <text>Добраться с Лесником до его дома в Лесу</text>
-        <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
+        <icon height="128" width="128" x="0" y="0">ui\pda\target</icon>
         <infoportion_complete>les_dobralis</infoportion_complete>
     </objective>
 </game_task>
@@ -18,13 +18,13 @@
 <game_task id="brat_nayti">
     <title>Найти Брата</title>
     <objective>
-        <text>Найти Брата</text>
-        <icon>ui_iconsTotal_locations</icon>
+        <text>Узнать, что случилось с Братом</text>
+        <icon>target_icon</icon>
         <infoportion_complete>brat_nayden</infoportion_complete>
         <article>brat_nayti_find_brother</article>
     </objective>
     <objective>
-        <text>Найти Брата или узнать, что с ним произошло</text>
+        <text>Разузнать, что случилось с Братом</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>brat_nayden</infoportion_complete>
     </objective>
@@ -32,15 +32,15 @@
 
 
 <game_task id="vas1_dialog">
-    <title>Найти доцента Васильева</title>
+    <title>Поиски доцента</title>
     <objective>
-        <text>Найти доцента Васильева</text>
-        <icon>ui_iconsTotal_yan_find_scientist_semenov</icon>
+        <text>Заняться поисками Васильева</text>
+        <icon>target_icon</icon>
         <infoportion_complete>vas_nayden</infoportion_complete>
         <article>vasiliev_nayti</article>
     </objective>
     <objective>
-        <text>Найти доцента Васильева</text>
+        <text>Найти Васильева</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Васильев">blue_location</map_location_type>
         <object_story_id>aver_ecolog</object_story_id>
@@ -51,15 +51,15 @@
 
 
 <game_task id="vas_dovesti">
-    <title>Сопроводить Васильева в лагерь учёных на Янтаре</title>
+    <title>Сопроводить Васильева</title>
     <objective>
-        <text>Сопроводить Васильева а лагерь учёных на Янтаре</text>
-        <icon>ui_iconsTotal_yan_find_scientist_semenov</icon>
+        <text>Помочь Васильеву добраться в бункер учёных</text>
+        <icon>target_icon</icon>
         <infoportion_complete>vasil_dovel</infoportion_complete>
         <article>vas_dovesti_camp</article>
     </objective>
     <objective>
-        <text>Сопроводить Васильева в лагерь учёных на Янтаре</text>
+        <text>Добраться с Васильевым до бункера учёных</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Васильев">blue_location</map_location_type>
         <object_story_id>aver_ecolog</object_story_id>
@@ -69,15 +69,15 @@
 
 
 <game_task id="vas_zombi">
-    <title>Помочь Васильеву отбиться от зомби</title>
+    <title>Отбиться от зомби</title>
     <objective>
         <text>Помочь Васильеву отбиться от зомби</text>
-        <icon>ui_iconsTotal_yan_find_scientist_semenov</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>pomog_zombi</infoportion_complete>
         <article>vas_dovesti_yantar</article>
     </objective>
     <objective>
-        <text>Помочь Васильеву отбиться от зомби</text>
+        <text>Продолжить путь до бункера учёных</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Васильев">blue_location</map_location_type>
         <object_story_id>vasil2</object_story_id>
@@ -88,15 +88,15 @@
 
 
 <game_task id="lekarstvo_lesniku">
-    <title>Отнести лекарство Леснику</title>
+    <title>Лекарство для Лесника</title>
     <objective>
         <text>Отнести лекарство Леснику</text>
-        <icon>ui_npc_u_stalker_lesnik</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>lekarstvo_est</infoportion_complete>
         <article>lekarstvo_lesniku_medicine</article>
     </objective>
     <objective>
-        <text>Отнести лекарство Леснику</text>
+        <text>Принести лекарство Леснику</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Лесник">blue_location</map_location_type>
         <object_story_id>lesnik2</object_story_id>
@@ -106,21 +106,21 @@
 
 
 <game_task id="eda_dialog">
-    <title>Забрать ящик с провизией</title>
+    <title>Забрать ящик Лесника</title>
     <objective>
-        <text>Забрать ящик с провизией</text>
-        <icon>ui_iconsTotal_esc_blockpost_case_to_trader</icon>
+        <text>Найти ящик с провизией в Мёртвом городе</text>
+        <icon>target_icon</icon>
         <infoportion_complete>eda_dialog_done</infoportion_complete>
         <article>eda_lesnik</article>
     </objective>
     <objective>
-        <text>Забрать ящик с провизией в схроне Лесника, в Мёртвом Городе</text>
+        <text>Забрать ящик с провизией из Мёртвого города</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.proviziya_have</function_complete>
         <infoportion_set_complete>eda_dialog_have</infoportion_set_complete>
     </objective>
     <objective>
-        <text>Принести ящик с провизией Леснику</text>
+        <text>Принести ящик Леснику</text>
         <map_location_type hint="Лесник">blue_location</map_location_type>
         <object_story_id>lesnik2</object_story_id>
         <infoportion_complete>eda_dialog_done</infoportion_complete>
@@ -129,10 +129,10 @@
 
 
 <game_task id="leila_vstrecha">
-    <title>Поговорить с Лэйлой</title>
+    <title>Знакомство со Скитальцами</title>
     <objective>
-        <text>Поговорить с Лэйлой</text>
-        <icon>ui_npc_u_woman_leila</icon>
+        <text>Познакомиться с Лейлой</text>
+        <icon>target_icon</icon>
         <infoportion_complete>leila_pogovoril</infoportion_complete>
         <infoportion_fail>enemy_skit</infoportion_fail>
         <article>leila_vstrecha_leila</article>
@@ -148,15 +148,15 @@
 
 
 <game_task id="demon_vstrecha">
-    <title>Найти Демона</title>
+    <title>Встреча с Демоном</title>
     <objective>
         <text>Найти Демона</text>
-        <icon>ui_npc_u_skit_leader</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>demon_pogovoril</infoportion_complete>
         <article>demon_vstrecha_talk</article>
     </objective>
     <objective>
-        <text>Найти Демона</text>
+        <text>Поговорить с Демоном</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Демон">blue_location</map_location_type>
         <object_story_id>demon</object_story_id>
@@ -165,10 +165,10 @@
 </game_task>
 
 <game_task id="demon_dialog">
-    <title>Зачистить пятиэтажку от зомби</title>
+    <title>Гнилой город</title>
     <objective>
-        <text>Зачистить пятиэтажку от зомби</text>
-        <icon>ui_npc_monster_zomb2</icon>
+        <text>Найти пятиэтажку с зомби</text>
+        <icon>target_icon</icon>
         <infoportion_complete>demon_start_dialog_done</infoportion_complete>
         <article>zombi_dom</article>
     </objective>
@@ -188,15 +188,15 @@
 
 
 <game_task id="mandra2_dialog">
-    <title>Найти 3 корня Мандрагоры</title>
+    <title>Найти корни</title>
     <objective>
-        <text>Найти 3 корня Мандрагоры</text>
-        <icon>ui_iconsTotal_artefact</icon>
+        <text>Поискать 3 корня Мандрагоры в шахте</text>
+        <icon>target_icon</icon>
         <infoportion_complete>lesnik_poisk_dialog_done</infoportion_complete>
         <article>mandra2_art</article>
     </objective>
     <objective>
-        <text>Найти 3 корня Мандрагоры в пещере</text>
+        <text>Достать 3 корня Мандрагоры в шахте</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.mandra2_have</function_complete>
         <infoportion_set_complete>lesnik_poisk_dialog_have</infoportion_set_complete>
@@ -211,10 +211,10 @@
 
 
 <game_task id="hvosty_dialog">
-    <title>Собрать 10 собачьих хвостов</title>
+    <title>Хвосты для Грига</title>
     <objective>
-        <text>Собрать 10 собачьих хвостов</text>
-        <icon>ui_npc_monster_dog_red</icon>
+        <text>Найти 10 собачьих хвостов в Мёртвом городе</text>
+        <icon>target_icon</icon>
         <infoportion_complete>grig_start_dialog_done</infoportion_complete>
         <article>hvosty_art</article>
     </objective>
@@ -234,15 +234,15 @@
 
 
 <game_task id="grig_vstrecha">
-    <title>Найти Грига</title>
+    <title>Знакомство с Григом</title>
     <objective>
         <text>Найти Грига</text>
-        <icon>ui_npc_u_skit_nano</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>grig_pogovoril</infoportion_complete>
         <article>grig_vstrecha_talk</article>
     </objective>
     <objective>
-        <text>Найти Грига</text>
+        <text>Поговорить с Григом</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Григ">blue_location</map_location_type>
         <object_story_id>grig</object_story_id>
@@ -253,16 +253,16 @@
 
 
 <game_task id="dolg_attak">
-    <title>Помочь Долгу выбить братков из Бара</title>
+    <title>Облава на блатных</title>
     <objective>
         <text>Помочь Долгу выбить братков из Бара</text>
-        <icon>ui_iconsTotal_bar_crazy_veterans_quest</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>dolg_attak_dialog_done</infoportion_complete>
         <infoportion_fail>plichko_dead</infoportion_fail>
         <article>dolg_attak_bar</article>
     </objective>
     <objective>
-        <text>Помочь Долгу выбить братков из Бара и занять всю территорию Бара</text>
+        <text>Занять всю территорию Бара</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.dolg_attak_dialog_have</function_complete>
         <infoportion_set_complete>dolg_attak_dialog_have</infoportion_set_complete>
@@ -277,15 +277,15 @@
 
 
 <game_task id="voronin_vstrecha">
-    <title>Встретиться с генералом Ворониным</title>
+    <title>Встреча с генералом</title>
     <objective>
         <text>Встретиться с генералом Ворониным</text>
-        <icon>ui_npc_u_stalker_do_komandir</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_pogovoril</infoportion_complete>
         <article>voronin_vstrecha_meet</article>
     </objective>
     <objective>
-        <text>Встретиться с генералом Ворониным</text>
+        <text>Поговорить с генералом Ворониным</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Воронин">blue_location</map_location_type>
         <object_story_id>voronin</object_story_id>
@@ -295,16 +295,16 @@
 
 
 <game_task id="voronin_bar_dialog">
-    <title>Сопроводить генерала Воронина на территорию Бара</title>
+    <title>Сопроводить генерала</title>
     <objective>
-        <text>Сопроводить генерала Воронина на территорию Бара</text>
-        <icon>ui_npc_u_stalker_do_komandir</icon>
+        <text>Защитить генерала Воронина по пути к Бару</text>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_bar_dialog_done</infoportion_complete>
         <infoportion_fail>voronin_dead</infoportion_fail>
         <article>voronin_vstrecha_bar</article>
     </objective>
     <objective>
-        <text>Сопроводить генерала Воронина на территорию Бара</text>
+        <text>Провести генерала Воронина на территорию Бара</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.voronin_bar_dialog_have</function_complete>
         <infoportion_set_complete>voronin_bar_dialog_have</infoportion_set_complete>
@@ -319,16 +319,16 @@
 
 
 <game_task id="doctor_vstrecha">
-    <title>Встретиться с Болотным Доктором</title>
+    <title>Встреча с Доком</title>
     <objective>
         <text>Встретиться с Болотным Доктором</text>
-        <icon>ui_npc_u_doktor</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>doctor_vstrecha_start</infoportion_complete>
         <infoportion_fail>doctor_enemy</infoportion_fail>
         <article>doctor_kostolom_meet</article>
     </objective>
     <objective>
-        <text>Встретиться с Болотным Доктором</text>
+        <text>Поговорить с Болотным Доктором</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Болотный Доктор">blue_location</map_location_type>
         <object_story_id>swamp_doctor</object_story_id>
@@ -338,15 +338,15 @@
 
 
 <game_task id="doctor_kostolom">
-    <title>Найти и уничтожить Болотную Тварь</title>
+    <title>Легендарная Тварь</title>
     <objective>
-        <text>Найти и уничтожить Болотную Тварь</text>
-        <icon>ui_npc_monster_biblio</icon>
+        <text>Найти Болотную Тварь</text>
+        <icon>target_icon</icon>
         <infoportion_complete>doctor_kostolom_done</infoportion_complete>
         <article>doctor_kostolom</article>
     </objective>
     <objective>
-        <text>Найти и уничтожить Болотную Тварь</text>
+        <text>Уничтожить Болотную Тварь</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.doctor_kostolom_have</function_complete>
         <infoportion_set_complete>doctor_kostolom_have</infoportion_set_complete>
@@ -361,10 +361,10 @@
 
 
 <game_task id="swamp_grig">
-    <title>Поговорить с Григом</title>
+    <title>Разговор с Григом</title>
     <objective>
-        <text>Поговорить с Григом</text>
-        <icon>ui_npc_u_skit_nano</icon>
+        <text>Найти Грига</text>
+        <icon>target_icon</icon>
         <infoportion_complete>grig_swamp_dialog_start</infoportion_complete>
         <article>swamp_grig_meet</article>
     </objective>
@@ -379,16 +379,16 @@
 
 
 <game_task id="grig_zamery">
-    <title>Сопроводить Кента к месту замеров и обратно</title>
+    <title>Сделать замеры</title>
     <objective>
-        <text>Сопроводить Кента к месту замеров и обратно</text>
-        <icon>ui_iconsTotal_yan_find_scientist</icon>
+        <text>Найти Кента</text>
+        <icon>target_icon</icon>
         <infoportion_complete>grig_swamp_dialog_done</infoportion_complete>
         <infoportion_fail>kent_dead</infoportion_fail>
         <article>grig_zamery</article>
     </objective>
     <objective>
-        <text>Встретиться с Кентом</text>
+        <text>Поговорить с Кентом</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>zamery_dialog_start</infoportion_complete>
     </objective>
@@ -414,26 +414,18 @@
 
 
 <game_task id="lesnik_cats">
-    <title>Помочь Леснику отбиться от монстров</title>
+    <title>Разговор с Лесником</title>
     <objective>
-        <text>Помочь Леснику отбиться от монстров</text>
-        <icon>ui_npc_monster_cat</icon>
+        <text>Поговорить с Лесником</text>
+        <icon>target_icon</icon>
         <infoportion_complete>lesnik_cats_done</infoportion_complete>
         <infoportion_fail>lesnik_dead</infoportion_fail>
         <article>lesnik_cats_forester</article>
     </objective>
     <objective>
-        <text>Помочь Леснику отбиться от монстров</text>
-        <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
-        <map_location_type hint="Лесник">blue_location</map_location_type>
-        <object_story_id>lesnik3</object_story_id>
-        <function_complete>antreg.lesnik_cats_have</function_complete>
-        <infoportion_set_complete>lesnik_cats_have</infoportion_set_complete>
-    </objective>
-    <objective>
         <text>Поговорить с Лесником</text>
         <map_location_type hint="Лесник">blue_location</map_location_type>
-        <object_story_id>lesnik3</object_story_id>
+        <object_story_id>lesnik2</object_story_id>
         <infoportion_complete>lesnik_cats_done</infoportion_complete>
     </objective>
 </game_task>
@@ -441,10 +433,10 @@
 
 
 <game_task id="lesnik_hunters">
-    <title>Поговорить с Сутулым</title>
+    <title>Разговор с Сутулым</title>
     <objective>
-        <text>Поговорить с Сутулым</text>
-        <icon>ui_npc_u_hunter_maska</icon>
+        <text>Найти Сутулого</text>
+        <icon>target_icon</icon>
         <infoportion_complete>sutuly_nashel</infoportion_complete>
         <article>lesnik_hunters_talk</article>
     </objective>
@@ -460,10 +452,10 @@
 
 
 <game_task id="sutuly_grek">
-    <title>Поговорить с Греком</title>
+    <title>Разговор с Греком</title>
     <objective>
-        <text>Поговорить с Греком</text>
-        <icon>ui_npc_u_hunter_grek</icon>
+        <text>Найти Грека</text>
+        <icon>target_icon</icon>
         <infoportion_complete>grek_nashel</infoportion_complete>
         <article>sutuly_grek_talk</article>
     </objective>
@@ -478,16 +470,16 @@
 
 
 <game_task id="grek_ohota">
-    <title>Помочь Охотникам отстрелять кабанов</title>
+    <title>Сезон охоты</title>
     <objective>
-        <text>Помочь Охотникам отстрелять кабанов</text>
-        <icon>ui_iconsTotal_gar_kill_boars</icon>
+        <text>Отстрелять кабанов в Рыжем Лесу</text>
+        <icon>target_icon</icon>
         <infoportion_complete>grek_ohota_dialog_done</infoportion_complete>
         <infoportion_fail>grek_dead</infoportion_fail>
         <article>grek_ohota_hunters</article>
     </objective>
     <objective>
-        <text>Помочь Охотникам отстрелять кабанов у болота в Лесу</text>
+        <text>Помочь Охотникам отстрелять кабанов</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.ohota_boars_have</function_complete>
         <infoportion_set_complete>ohota_boars_have</infoportion_set_complete>
@@ -501,15 +493,15 @@
 </game_task>
 
 <game_task id="kapitan_vstrecha">
-    <title>Встретиться с "Капитаном"</title>
+    <title>Долгожданная встреча</title>
     <objective>
         <text>Встретиться с "Капитаном"</text>
-        <icon>ui_npc_u_stalker_sobolev</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>kapitan_nashel</infoportion_complete>
         <article>kapitan_vstrecha_captain</article>
     </objective>
     <objective>
-        <text>Встретиться с "Капитаном"</text>
+        <text>Поговорить с "Капитаном"</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Капитан">blue_location</map_location_type>
         <object_story_id>dolg_sobolev</object_story_id>
@@ -518,10 +510,10 @@
 </game_task>
 
 <game_task id="voronin_talk">
-    <title>Поговорить с генералом Ворониным</title>
+    <title>Разговор с Ворониным</title>
     <objective>
-        <text>Поговорить с генералом Ворониным</text>
-        <icon>ui_iconsNpc_stalker_do_komandir</icon>
+        <text>Встретиться с генералом Ворониным</text>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_vstrecha</infoportion_complete>
         <article>voronin_talk_talk</article>
     </objective>
@@ -535,21 +527,21 @@
 </game_task>
 
 <game_task id="tankist_stvol">
-    <title>Найти "Грозу" Танкиста</title>
+    <title>"Гроза" Танкиста</title>
     <objective>
-        <text>Найти "Грозу" Танкиста</text>
-        <icon>ui_npc_u_stalker_tankist</icon>
+        <text>Найти "Грозу" Танкиста в лаборатории Х-18</text>
+        <icon>target_icon</icon>
         <infoportion_complete>tankist_start_dialog_done</infoportion_complete>
         <article>groza_tankista</article>
     </objective>
     <objective>
-        <text>Найти "Грозу" Танкиста в лаборатории Х-18</text>
+        <text>Забрать "Грозу" Танкиста из лаборатории</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.tankist_stvol_have</function_complete>
         <infoportion_set_complete>tankist_start_dialog_have</infoportion_set_complete>
     </objective>
     <objective>
-        <text>Вернуть ствол Танкисту</text>
+        <text>Вернуть "Грозу" Танкисту</text>
         <map_location_type hint="Танкист">blue_location</map_location_type>
         <object_story_id>tankist</object_story_id>
         <infoportion_complete>tankist_start_dialog_done</infoportion_complete>
@@ -557,10 +549,10 @@
 </game_task>
 
 <game_task id="sidr_mayor">
-    <title>Поговорить с Барменом</title>
+    <title>Разговор с Барменом</title>
     <objective>
-        <text>Поговорить с Барменом</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <text>Встретиться с Барменом</text>
+        <icon>target_icon</icon>
         <infoportion_complete>mayor_yarofeev_start</infoportion_complete>
         <article>sidr_mayor_talk</article>
     </objective>
@@ -574,15 +566,15 @@
 </game_task>
 
 <game_task id="barman_pismo">
-    <title>Отнести письмо Сидоровичу</title>
+    <title>Подработка почтальоном</title>
     <objective>
-        <text>Отнести письмо Сидоровичу</text>
-        <icon>ui_iconsTotal_esc_trader_job</icon>
+        <text>Доставить письмо Сидоровичу</text>
+        <icon>target_icon</icon>
         <infoportion_complete>barman_pismo_done</infoportion_complete>
         <article>barman_pismo_letter</article>
     </objective>
     <objective>
-        <text>Отнести письмо Сидоровичу</text>
+        <text>Отдать письмо Сидоровичу</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Сидорович">blue_location</map_location_type>
         <object_story_id>sidor</object_story_id>
@@ -591,15 +583,15 @@
 </game_task>
 
 <game_task id="sidor_cognak">
-    <title>Отнести виски генералу Смиту</title>
+    <title>Виски для генерала</title>
     <objective>
-        <text>Отнести виски генералу Смиту</text>
-        <icon>ui_iconsTotal_found_thing</icon>
+        <text>Отнести бутылки с виски генералу Смиту</text>
+        <icon>target_icon</icon>
         <infoportion_complete>smith_start_dialog_start</infoportion_complete>
         <article>sidor_cognak_five</article>
     </objective>
     <objective>
-        <text>Отнести пять бутылок виски генералу Смиту</text>
+        <text>Принести бутылки с виски генералу Смиту</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Генерал Смит">blue_location</map_location_type>
         <object_story_id>smith</object_story_id>
@@ -608,15 +600,15 @@
 </game_task>
 
 <game_task id="smith_brown">
-    <title>Найти полковника Брауна</title>
+    <title>Разговор с Брауном</title>
     <objective>
         <text>Найти полковника Брауна</text>
-        <icon>ui_iconsNpc_soldier_beret_1</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>brown_pogovoril</infoportion_complete>
         <article>smith_brown_find</article>
     </objective>
     <objective>
-        <text>Найти полковника Брауна</text>
+        <text>Поговорить с полковником Брауном</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Полковник Браун">blue_location</map_location_type>
         <object_story_id>brown</object_story_id>
@@ -626,21 +618,21 @@
 
 
 <game_task id="foster_poisk">
-    <title>Спасти капрала Фостера</title>
+    <title>Спасение капрала</title>
     <objective>
-        <text>Спасти капрала Фостера</text>
-        <icon>ui_iconsTotal_locations</icon>
+        <text>Найти капрала Фостера</text>
+        <icon>target_icon</icon>
         <infoportion_complete>kapral_poisk_dialog_done</infoportion_complete>
         <infoportion_fail>foster_dead</infoportion_fail>
         <article>foster_poisk_save</article>
     </objective>
     <objective>
-        <text>Найти капрала Фостера</text>
+        <text>Спасти капрала Фостера</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>foster_plen_dialog_done</infoportion_complete>
     </objective>
     <objective>
-        <text>Сопроводить капрала Фостера на базу Миротворцев</text>
+        <text>Сопроводить капрала Фостера на базу</text>
         <map_location_type hint="Капрал Фостер">blue_location</map_location_type>
         <object_story_id>foster</object_story_id>
         <infoportion_complete>kapral_mesto</infoportion_complete>
@@ -655,16 +647,16 @@
 
 
 <game_task id="baza_mir">
-    <title>Помочь Миротворцам вернуть под свой контроль базу</title>
+    <title>Помощь Миротворцам</title>
     <objective>
-        <text>Помочь Миротворцам вернуть под свой контроль базу</text>
-        <icon>ui_iconsTotal_eliminate_lager</icon>
+        <text>Помочь вернуть контроль над базой</text>
+        <icon>target_icon</icon>
         <infoportion_complete>brown_baza_dialog_done</infoportion_complete>
         <infoportion_fail>brown_dead</infoportion_fail>
         <article>baza_mir_peacekeepers</article>
     </objective>
     <objective>
-        <text>Добраться с полковником Брауном до места встречи с группой захвата</text>
+        <text>Добраться с полковником до группы захвата</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>brown_mesto1</infoportion_complete>
     </objective>
@@ -685,15 +677,15 @@
 </game_task>
 
 <game_task id="fabrika_mir">
-    <title>Провести разведку на старой фабрике</title>
+    <title>Разведка у старой антенны.</title>
     <objective>
-        <text>Провести разведку на старой фабрике</text>
-        <icon>ui_iconsTotal_eliminate_lager</icon>
+        <text>Провести разведку</text>
+        <icon>target_icon</icon>
         <infoportion_complete>brown_fabrika_dialog_done</infoportion_complete>
         <article>fabrika_mir_oldmill</article>
     </objective>
     <objective>
-        <text>Найти "след" пропавшей группы разведчиков-миротворцев</text>
+        <text>Найти след пропавшей группы</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.brown_fabrika_have</function_complete>
         <infoportion_set_complete>brown_fabrika_dialog_have</infoportion_set_complete>
@@ -707,10 +699,10 @@
 </game_task>
 
 <game_task id="sidor_vernutsya">
-    <title>Поговорить с Сидоровичем</title>
+    <title>Разговор с Сидоровичем</title>
     <objective>
-        <text>Поговорить с Сидоровичем</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <text>Добраться до Сидоровича</text>
+        <icon>target_icon</icon>
         <infoportion_complete>sidor_vernulsya</infoportion_complete>
         <article>sidor_vernutsya_talk</article>
     </objective>
@@ -724,15 +716,15 @@
 </game_task>
 
 <game_task id="sidor_pismo">
-    <title>Отнести письмо Бармену</title>
+    <title>Опытный почтальон</title>
     <objective>
-        <text>Отнести письмо Бармену</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <text>Доставить письмо Бармену</text>
+        <icon>target_icon</icon>
         <infoportion_complete>sidor_two_dialog_done</infoportion_complete>
         <article>sidor_pismo_letter</article>
     </objective>
     <objective>
-        <text>Отнести письмо Бармену</text>
+        <text>Принасти письмо Бармену</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Бармен">blue_location</map_location_type>
         <object_story_id>Escape_Trader</object_story_id>
@@ -744,15 +736,15 @@
 
 
 <game_task id="magomet_nayti">
-    <title>Добраться до места, где у Магомета назначена встреча</title>
+    <title>Встреча с Магометом</title>
     <objective>
-        <text>Добраться до места, где у Магомета назначена встреча</text>
-        <icon>ui_iconsTotal_eliminate_lager</icon>
+        <text>Найти место встречи Магомета</text>
+        <icon>target_icon</icon>
         <infoportion_complete>about_magomet_dialog_done</infoportion_complete>
         <article>pro_magometa</article>
     </objective>
     <objective>
-        <text>Добраться до места, где у Магомета назначена встреча</text>
+        <text>Добраться до места встречи Магомета</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>about_magomet_dialog_done</infoportion_complete>
     </objective>
@@ -763,15 +755,15 @@
 
 
 <game_task id="graf_poisk">
-    <title>Поговорить со Свибловым</title>
+    <title>Любовный треугольник</title>
     <objective>
-        <text>Поговорить со Свибловым</text>
-        <icon>ui_npc_u_stalker_nebo_leader</icon>
+        <text>Встретиться со Свибловым</text>
+        <icon>target_icon</icon>
         <infoportion_complete>graf_poisk_dialog_done</infoportion_complete>
         <article>graf_poisk_talk</article>
     </objective>
     <objective>
-        <text>Поговорить со Свибловым</text>
+        <text>Узнать о переходе в Мёртвый город</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Свиблов">blue_location</map_location_type>
         <object_story_id>clear_scy_leader</object_story_id>
@@ -781,15 +773,15 @@
 
 
 <game_task id="karina_poisk">
-    <title>Поговорить с Лэйлой</title>
+    <title>Поиски сестры</title>
     <objective>
-        <text>Поговорить с Лэйлой</text>
-        <icon>ui_npc_u_woman_leila</icon>
+        <text>Встретиться с Лэйлой</text>
+        <icon>target_icon</icon>
         <infoportion_complete>karina_poisk_dialog_done</infoportion_complete>
         <article>karina_poisk_talk</article>
     </objective>
     <objective>
-        <text>Поговорить с Лэйлой</text>
+        <text>Узнать больше о пропаже Карины</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Лэйла">blue_location</map_location_type>
         <object_story_id>leila</object_story_id>
@@ -799,15 +791,15 @@
 
 
 <game_task id="karina_nayti">
-    <title>Поговорить с Лесником</title>
+    <title>Узнать о Карине от Лесника</title>
     <objective>
-        <text>Поговорить с Лесником</text>
-        <icon>ui_npc_u_stalker_lesnik</icon>
+        <text>Встретиться с Лесником</text>
+        <icon>target_icon</icon>
         <infoportion_complete>leila_karina_dialog_done</infoportion_complete>
         <article>karina_nayti_talk</article>
     </objective>
     <objective>
-        <text>Поговорить с Лесником</text>
+        <text>Получить наводку от Лесника</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Лесник">blue_location</map_location_type>
         <object_story_id>lesnik4</object_story_id>
@@ -817,15 +809,15 @@
 
 
 <game_task id="ohotniki_karina">
-    <title>Поговорить с охотниками</title>
+    <title>Разговор с охотниками</title>
     <objective>
-        <text>Поговорить с охотниками</text>
-        <icon>ui_npc_u_hunter_maska</icon>
+        <text>Встретиться с охотниками</text>
+        <icon>target_icon</icon>
         <infoportion_complete>lesnik_karina_dialog_done</infoportion_complete>
         <article>ohotniki_karina_talk</article>
     </objective>
     <objective>
-        <text>Поговорить с охотниками</text>
+        <text>Узнать у охотников про Карину</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Сутулый">blue_location</map_location_type>
         <object_story_id>sutuly</object_story_id>
@@ -835,10 +827,10 @@
 
 
 <game_task id="karina_pomosch">
-    <title>Найти Карину</title>
+    <title>Потеряшка</title>
     <objective>
-        <text>Найти Карину</text>
-        <icon>ui_npc_u_woman_karina</icon>
+        <text>Заняться поисками Карины</text>
+        <icon>target_icon</icon>
         <infoportion_complete>pomosch_karina_dialog_done</infoportion_complete>
         <article>karina_pomosch_find</article>
     </objective>
@@ -858,10 +850,10 @@
 
 
 <game_task id="karina_poshli">
-    <title>Найти труп проводника Карины</title>
+    <title>Найти труп</title>
     <objective>
-        <text>Найти труп проводника Карины</text>
-        <icon>ui_npc_u_woman_karina</icon>
+        <text>Узнать, как выбраться из Рыжего Леса</text>
+        <icon>target_icon</icon>
         <infoportion_complete>karina_help_dialog_done</infoportion_complete>
         <article>karina_poshli_corpse</article>
     </objective>
@@ -891,10 +883,10 @@
 
 
 <game_task id="karina_perehod">
-    <title>Добраться с Кариной до перехода на Болота</title>
+    <title>Переход на Болота</title>
     <objective>
-        <text>Добраться с Кариной до перехода на Болота</text>
-        <icon>ui_npc_u_woman_karina</icon>
+        <text>Сопроводить Карину до перехода на Болота</text>
+        <icon>target_icon</icon>
         <infoportion_complete>karina_prishli</infoportion_complete>
         <article>karina_perehod_meet</article>
     </objective>
@@ -909,10 +901,10 @@
 
 
 <game_task id="karina_doc">
-    <title>Поговорить с Кариной</title>
+    <title>Разговор Кариной</title>
     <objective>
-        <text>Поговорить с Кариной</text>
-        <icon>ui_npc_u_woman_karina</icon>
+        <text>Встретиться с Кариной</text>
+        <icon>target_icon</icon>
         <infoportion_complete>karina_bolota_dialog_start</infoportion_complete>
         <article>karina_doc_discuss</article>
     </objective>
@@ -926,10 +918,10 @@
 </game_task>
 
 <game_task id="doc_karina">
-    <title>Поговорить с Доктором</title>
+    <title>Разговор с Доктором</title>
     <objective>
-        <text>Поговорить с Доктором</text>
-        <icon>ui_npc_u_doktor</icon>
+        <text>Встретиться с Доктором</text>
+        <icon>target_icon</icon>
         <infoportion_complete>doctor_karina_dialog_start</infoportion_complete>
         <article>doc_karina_talk</article>
     </objective>
@@ -943,15 +935,15 @@
 </game_task>
 
 <game_task id="zapiska_voronin">
-    <title>Отнести письмо Воронину</title>
+    <title>Сталкер-почтальон</title>
     <objective>
-        <text>Отнести письмо Воронину</text>
-        <icon>ui_iconsTotal_bar_dolg_base_rules</icon>
+        <text>Доставить письмо Воронину</text>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_zapiska_dialog_done</infoportion_complete>
         <article>zapiska_voronin_letter</article>
     </objective>
     <objective>
-        <text>Отнести письмо Воронину</text>
+        <text>Принести письмо Воронину</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Воронин">blue_location</map_location_type>
         <object_story_id>dolg_leader</object_story_id>
@@ -960,15 +952,15 @@
 </game_task>
 
 <game_task id="zapiska_voronin2">
-    <title>Отнести ещё одно письмо Воронину</title>
+    <title>Ветеран-почтальон</title>
     <objective>
-        <text>Отнести ещё одно письмо Воронину</text>
-        <icon>ui_iconsTotal_bar_dolg_base_rules</icon>
+        <text>Доставить ещё одно письмо Воронину</text>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_zapiska2_dialog_done</infoportion_complete>
         <article>zapiska_voronin2_letter</article>
     </objective>
     <objective>
-        <text>Отнести ещё одно письмо Воронину</text>
+        <text>Принести ещё одно письмо Воронину</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Воронин">blue_location</map_location_type>
         <object_story_id>dolg_leader</object_story_id>
@@ -977,15 +969,15 @@
 </game_task>
 
 <game_task id="barman_strelka">
-    <title>Встретиться с Барменом</title>
+    <title>Встреча с Барменом</title>
     <objective>
         <text>Встретиться с Барменом</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>barman_strelka_pogovoril</infoportion_complete>
         <article>barman_strelka_meet</article>
     </objective>
     <objective>
-        <text>Встретиться с Барменом</text>
+        <text>Поговорить с Барменом</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Бармен">blue_location</map_location_type>
         <object_story_id>barman_stalker</object_story_id>
@@ -994,10 +986,10 @@
 </game_task>
 
 <game_task id="barman_govorit">
-    <title>Поговорить с Барменом</title>
+    <title>Разговор с Барменом</title>
     <objective>
-        <text>Поговорить с Барменом</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <text>Встретиться с Барменом</text>
+        <icon>target_icon</icon>
         <infoportion_complete>barman_posle_dialog_start</infoportion_complete>
         <article>barman_govorit_talk</article>
     </objective>
@@ -1011,15 +1003,15 @@
 </game_task>
 
 <game_task id="zapiska_voronin3">
-    <title>Отнести письмо Сидоровичу</title>
+    <title>Мастер-почтальон</title>
     <objective>
-        <text>Отнести письмо Сидоровичу</text>
-        <icon>ui_iconsTotal_esc_trader_job</icon>
+        <text>Доставить письмо Сидоровичу на Кордон</text>
+        <icon>target_icon</icon>
         <infoportion_complete>voronin_zapiska3_dialog_done</infoportion_complete>
         <article>zapiska_voronin3_letter</article>
     </objective>
     <objective>
-        <text>Отнести письмо Сидоровичу на Кордон</text>
+        <text>Принести письмо Сидоровичу на Кордон</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Сидорович">blue_location</map_location_type>
         <object_story_id>sidor_old</object_story_id>
@@ -1028,10 +1020,10 @@
 </game_task>
 
 <game_task id="karta_bar">
-    <title>Раздобыть карту Бара</title>
+    <title>Карта Бара</title>
     <objective>
-        <text>Раздобыть карту Бара</text>
-        <icon>ui_iconsTotal_defend_lager</icon>
+        <text>Узнать больше про карту Бара</text>
+        <icon>target_icon</icon>
         <infoportion_complete>karta_bar_otdal</infoportion_complete>
         <article>karta_bar_map</article>
     </objective>
@@ -1042,7 +1034,7 @@
         <infoportion_set_complete>karta_bar_have</infoportion_set_complete>
     </objective>
     <objective>
-        <text>Передать карту Бара командиру штурмового отряда Долга</text>
+        <text>Передать карту Бара командиру штурмового отряда</text>
         <map_location_type hint="Сержант_Пличко">blue_location</map_location_type>
         <object_story_id>plichko</object_story_id>
         <infoportion_complete>karta_bar_otdal</infoportion_complete>
@@ -1050,25 +1042,25 @@
 </game_task>
 
 <game_task id="semeckiy_poisk">
-    <title>Найти Юрия Семецкого</title>
+    <title>Встреча с Легендой</title>
     <objective>
         <text>Найти Юрия Семецкого</text>
-        <icon>ui_iconsTotal_sar_warlab</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>magomet_start_dialog_done</infoportion_complete>
         <article>semeckiy_nayti</article>
     </objective>
     <objective>
-        <text>Найти Юрия Семецкого</text>
+        <text>Поговорить с Юрием Семецкого</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>magomet_start_dialog_done</infoportion_complete>
     </objective>
 </game_task>
 
 <game_task id="barman_new">
-    <title>Поговорить с Барменом</title>
+    <title>Разговор с Барменом</title>
     <objective>
-        <text>Поговорить с Барменом</text>
-        <icon>ui_iconsTotal_bar_barman_job</icon>
+        <text>Встретиться с Барменом</text>
+        <icon>target_icon</icon>
         <infoportion_complete>barman_new_talk</infoportion_complete>
         <article>barman_new_talk_again</article>
     </objective>
@@ -1083,15 +1075,15 @@
 
 
 <game_task id="sverhprovodnik">
-    <title>Найти артефакт "Сверхпроводник"</title>
+    <title>"Сверхпроводник" для проводника</title>
     <objective>
-        <text>Найти артефакт "Сверхпроводник"</text>
-        <icon>ui_iconsTotal_artefact</icon>
+        <text>Найти артефакт "Сверхпроводник" на складах</text>
+        <icon>target_icon</icon>
         <infoportion_complete>sverhprovodnik_dialog_done</infoportion_complete>
         <article>sverhprovodnik</article>
     </objective>
     <objective>
-        <text>Найти артефакт "Сверхпроводник" на Складах</text>
+        <text>Получить артефакт "Сверхпроводник"</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.sverhprovodnik_have</function_complete>
         <infoportion_set_complete>sverhprovodnik_dialog_have</infoportion_set_complete>
@@ -1103,15 +1095,15 @@
 </game_task>
 
 <game_task id="mg_voyna">
-    <title>Уничтожить зомби</title>
+    <title>Мясорубка</title>
     <objective>
-        <text>Уничтожить зомби</text>
-        <icon>ui_npc_monster_zomb2</icon>
+        <text>Помочь Скитальцам уничтожить зомби</text>
+        <icon>target_icon</icon>
         <infoportion_complete>mg_nechto_done</infoportion_complete>
         <article>mg_voyna_zombies</article>
     </objective>
     <objective>
-        <text>Помочь Скитальцам уничтожить зомби</text>
+        <text>Уничтожить зомби</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.mg_nechto_have</function_complete>
         <infoportion_set_complete>mg_nechto_have</infoportion_set_complete>
@@ -1127,10 +1119,10 @@
 
 
 <game_task id="monolit_pogovority">
-    <title>Поговорить с Кристаллом</title>
+    <title>Брат, это ты?</title>
     <objective>
-        <text>Поговорить с Кристаллом</text>
-        <icon>tt2_ui_monolit</icon>
+        <text>Встретиться с Кристаллом</text>
+        <icon>target_icon</icon>
         <infoportion_complete>monolit_pogovoril</infoportion_complete>
         <article>monolit_pogovority_crystal</article>
     </objective>
@@ -1143,15 +1135,15 @@
 
 
 <game_task id="sled2_pomosch">
-    <title>Прийти на помощь Следопыту</title>
+    <title>Следопыт в беде!</title>
     <objective>
-        <text>Прийти на помощь Следопыту</text>
-        <icon>ui_npc_u_stalker_prizrak</icon>
+        <text>Убить атакующих</text>
+        <icon>target_icon</icon>
         <infoportion_complete>sled2_help</infoportion_complete>
         <article>sled2_pomosch_help</article>
     </objective>
     <objective>
-        <text>Прийти на помощь Следопыту</text>
+        <text>Помочь Следопыту</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <map_location_type hint="Следопыт">blue_location</map_location_type>
         <object_story_id>sled2</object_story_id>
@@ -1162,10 +1154,10 @@
 
 
 <game_task id="actor_pobeg">
-    <title>Выбраться с Чаэс-2 по телепортам</title>
+    <title>Через порталы к свободе</title>
     <objective>
-        <text>Выбраться с Чаэс-2 по телепортам</text>
-        <icon>ui_iconsTotal_sar_warlab</icon>
+        <text>Найти выход с ЧАЭС-2</text>
+        <icon>target_icon</icon>
         <infoportion_complete>pobeg_finish</infoportion_complete>
         <infoportion_fail>pobeg_net</infoportion_fail>
         <article>pobeg_chaes</article>
@@ -1179,15 +1171,15 @@
 
 
 <game_task id="doc_vodyanoy">
-    <title>Найти передатчик Доктора</title>
+    <title>Болотная паранормальщина</title>
     <objective>
-        <text>Найти передатчик Доктора</text>
-        <icon>ui_iconsTotal_doctor_meet</icon>
+        <text>Отыскать передатчик Доктора в южной части Болот</text>
+        <icon>target_icon</icon>
         <infoportion_complete>doctor_karina_dialog_done</infoportion_complete>
         <article>doc_vodyanoy_find</article>
     </objective>
     <objective>
-        <text>Найти передатчик Доктора в южной части Болот</text>
+        <text>Найти передатчик Доктора</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.doctor_peredatchik_have</function_complete>
         <infoportion_set_complete>doctor_karina_dialog_have</infoportion_set_complete>
@@ -1202,15 +1194,15 @@
 
 
 <game_task id="zahar_voda">
-    <title>Найти контейнер Захара</title>
+    <title>Контейнер для Захара</title>
     <objective>
-        <text>Найти контейнер Захара</text>
-        <icon>ui_iconsTotal_esc_blockpost_case_to_trader</icon>
+        <text>Найти контейнер Захара в болотце</text>
+        <icon>target_icon</icon>
         <infoportion_complete>zahar_vodyanoy_done</infoportion_complete>
         <article>zahar_voda_find</article>
     </objective>
     <objective>
-        <text>Найти контейнер Захара в Болотце</text>
+        <text>Вытащить контейнер Захара из Болотца</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.zahar_vodyanoy_have</function_complete>
         <infoportion_set_complete>zahar_vodyanoy_have</infoportion_set_complete>
@@ -1224,10 +1216,10 @@
 </game_task>
 
 <game_task id="vano_dialog">
-    <title>Найти ящик с минами</title>
+    <title>Пьяный дебошир</title>
     <objective>
-        <text>Найти ящик с минами</text>
-        <icon>ui_iconsTotal_esc_blockpost_case_to_trader</icon>
+        <text>Отыскать ящик с минами в Болоте</text>
+        <icon>target_icon</icon>
         <infoportion_complete>vano_start_dialog_done</infoportion_complete>
         <article>vano_dialog_find</article>
     </objective>
@@ -1244,16 +1236,16 @@
 </game_task>
 
 <game_task id="maroder_dialog">
-    <title>Найти два бронежилета</title>
+    <title>Бандитский беспредел</title>
     <objective>
-        <text>Найти два бронежилета</text>
-        <icon>ui_iconsTotal_lost_money</icon>
+        <text>Отыскать два бронежилета СКАТ-11М на базе Миротворцев</text>
+        <icon>target_icon</icon>
         <infoportion_complete>maroder_start_dialog_done</infoportion_complete>
         <infoportion_fail>maroder_enemy</infoportion_fail>
         <article>maroder_outfit</article>
     </objective>
     <objective>
-        <text>Найти два бронежилета СКАТ-11М на базе Миротворцев</text>
+        <text>Найти два бронежилета</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <function_complete>antreg.nato_outfit_have</function_complete>
         <infoportion_set_complete>maroder_start_dialog_have</infoportion_set_complete>
@@ -1265,16 +1257,16 @@
 </game_task>
 
 <game_task id="maloy_dialog">
-    <title>Разобраться с мародёрами</title>
+    <title>Малолетний бандитизм</title>
     <objective>
         <text>Разобраться с мародёрами</text>
-        <icon>ui_iconsTotal_lost_money</icon>
+        <icon>target_icon</icon>
         <infoportion_complete>maloy_razobralsya</infoportion_complete>
         <infoportion_fail>maroder_vrag</infoportion_fail>
         <article>maloy_mg</article>
     </objective>
     <objective>
-        <text>Поговорить с мародёрами</text>
+        <text>Поговорить с Малым</text>
         <icon height="50" width="50" x="100" y="50">ui\ui_icons_task</icon>
         <infoportion_complete>maloy_dialog_start</infoportion_complete>
     </objective>

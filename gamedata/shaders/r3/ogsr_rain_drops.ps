@@ -190,14 +190,14 @@ float4 main(p_screen _in) : SV_Target
     float cy = Drops(uv + e.yx, t, staticDrops, layer1, layer2).x;
     float2 n = float2(cx - c.x, cy - c.x); // expensive normals
 
-    //this is just a scrolling texture. 0.18 is an offset to compensate for anim length etc
+    // this is just a scrolling texture. 0.18 is an offset to compensate for anim length etc
     float2 uv_restart = uv + float2(raindrop_restart.x == 0.0 ? 0.0 : -0.18, 0.0) + float2(1.0 - raindrop_restart.x, 0.0);
     float4 fetched_tex = s_mask_wipe.SampleLevel(smp_rtlinear, uv_restart, 0);
     fetched_tex.xy = fetched_tex.xy * 2.0 - 1.0;
     fetched_tex.xy *= rainAmount * fetched_tex.z * fetched_tex.w;
     fetched_tex *= 1.0 - smoothstep(0.0, 1.0, uv.x - 0.45);
-    n += fetched_tex.xy; //add smudges
-    n *= 1.0 - raindrop_restart.x; //falloff allat
+    n += fetched_tex.xy; // add smudges
+    n *= 1.0 - raindrop_restart.x; // falloff allat
 
     float3 col = s_image.Sample(smp_nofilter, uv + n);
 

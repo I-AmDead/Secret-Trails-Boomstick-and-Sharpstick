@@ -79,7 +79,7 @@ ammo_elapsed      = 30
 ammo_mag_size     = 30
 startup_ammo      = 90
 
-scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, marchf, kemper, mepro, ekp8_18
+scope_names 	  = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, pn23, compm4s, marchf, kemper, mepro, ekp8_18
 scope_status      = 2
 
 scope_respawn                         = wpn_m4a1_siber
@@ -91,9 +91,7 @@ scope_respawn_c-more                  = wpn_m4a1_siber_c-more
 scope_respawn_point_aimpro            = wpn_m4a1_siber_point_aimpro
 scope_respawn_leupold                 = wpn_m4a1_siber_leupold
 scope_respawn_aimpoint                = wpn_m4a1_siber_aimpoint
-scope_respawn_e0t2                    = wpn_m4a1_siber_e0t2
 scope_respawn_pn23                    = wpn_m4a1_siber_pn23
-scope_respawn_gauss_sight             = wpn_m4a1_siber_gauss_sight
 scope_respawn_compm4s                 = wpn_m4a1_siber_compm4s
 scope_respawn_marchf                  = wpn_m4a1_siber_marchf
 scope_respawn_kemper                  = wpn_m4a1_siber_kemper
@@ -698,27 +696,6 @@ aim_hud_offset_rot_16x9  = -0.002000,0.025100,0.000000
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4a1_siber_e0t2]:wpn_m4a1_siber
-
-visual	 = dynamics\weapons\wpn_m4a1_siber\wpn_m4a1_siber_world.ogf
-
-hud  = wpn_m4a1_siber_e0t2_hud
-
-inv_weight  = 2.827
-
-scope_name 	     = e0t2
-scope_x	 = 88
-scope_y	 = -10
-
-[wpn_m4a1_siber_e0t2_hud]:wpn_m4a1_siber_hud
-
-item_visual  = dynamics\weapons\wpn_m4a1_siber\wpn_m4a1_siber_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.049219,0.013000,-0.032085
-aim_hud_offset_rot_16x9  = 0.050000,0.025300,0.000000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_m4a1_siber_pn23]:wpn_m4a1_siber
 
 visual	 = dynamics\weapons\wpn_m4a1_siber\wpn_m4a1_siber_world.ogf
@@ -743,27 +720,6 @@ hands_orientation_16x9	 = 1.400999,0.370000,0.000000
 
 gl_hud_offset_pos_16x9  = -0.091600,-0.055800,-0.070000
 gl_hud_offset_rot_16x9  = -0.018651,0.058551,0.250000
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_m4a1_siber_gauss_sight]:wpn_m4a1_siber
-
-visual	 = dynamics\weapons\wpn_m4a1_siber\wpn_m4a1_siber_world.ogf
-
-hud	     = wpn_m4a1_siber_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 60
-scope_y     = -4
-
-inv_weight  = 4.00
-
-[wpn_m4a1_siber_gauss_sight_hud]:wpn_m4a1_siber_hud
-
-item_visual  = dynamics\weapons\wpn_m4a1_siber\wpn_m4a1_siber_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.049419,0.016490,-0.041485
-aim_hud_offset_rot_16x9  = -0.002000,0.025300,0.000000
 
 
 ;------------------------------------------------------------------------------------------------------------------------------

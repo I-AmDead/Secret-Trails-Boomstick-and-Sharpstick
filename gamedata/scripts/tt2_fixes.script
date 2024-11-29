@@ -1,19 +1,3 @@
-local function fix_recept()
-    if (not db.actor:has_info("info_amk_recipt_drop_souls")) and db.actor:has_info("info_amk_recipt_souls") then
-        db.actor:give_info_portion("info_amk_recipt_soul_drops")
-        db.actor:give_info_portion("info_amk_recipt_soul_fire")
-        db.actor:give_info_portion("info_amk_recipt_soul_cristal")
-        db.actor:give_info_portion("info_amk_recipt_soul_bengal")
-    end
-
-    if (not db.actor:has_info("info_amk_recipt_drop_dummy")) and db.actor:has_info("info_amk_recipt_dummy") then
-        db.actor:give_info_portion("info_amk_recipt_dummy_fire")
-        db.actor:give_info_portion("info_amk_recipt_dummy_bright")
-        db.actor:give_info_portion("info_amk_recipt_dummy_moon")
-        db.actor:give_info_portion("info_amk_recipt_dummy_puding")
-    end
-end
-
 local function del_phobj()
     --delete_obj("light_uglovaya_1_glass_0006") -- мб перестала баговать уже?
     delete_obj("sar_physic_destroyable_object_0085")
@@ -38,35 +22,17 @@ local function del_phobj()
     delete_obj("door_trader_box_0009")
     delete_obj("door_trader_box_0010")
     delete_obj("door_trader_box_0011")
+    delete_obj("level_prefix_physic_destroyable_object_0003")
+    delete_obj("level_prefix_physic_destroyable_object_0004")
     delete_obj("level_prefix_physic_destroyable_object_0005")
     delete_obj("level_prefix_physic_destroyable_object_0006")
-    delete_obj("predbannik_physic_destroyable_object_0000")
+    delete_obj("level_prefix_inventory_box_0034")
 end
 
 function delete_obj(name)
     local obj = alife():object(name)
     if obj then
         alife():release(obj, true)
-    end
-end
-
-local function spawn_sverhprovodnik()
-    if db.actor:has_info("sverhprovodnik_dialog_done") or db.actor:dont_has_info("sverhprovodnik_dialog_start") or db.actor:object("sverhprovodnik") then return end
-
-    local time = level.get_time_hours()
-
-    if time >= 1 and time < 2 and db.actor:dont_has_info("sverhprovodnik_spawn") then
-        local obj = alife():create("sverhprovodnik", vector():set(-268.297, -18.055, -25.109), 69438, 1683)
-        alife():assign_story_id(obj.id, story_ids.sverhprovodnik)
-        db.actor:give_info_portion("sverhprovodnik_spawn")
-    end
-
-    if db.actor:has_info("sverhprovodnik_spawn") and time >= 2 then
-        local obj = alife():story_object(story_ids.sverhprovodnik)
-        if obj then
-            alife():release(obj, true)
-            db.actor:disable_info_portion("sverhprovodnik_spawn")
-        end
     end
 end
 
@@ -84,16 +50,153 @@ function quest_fail()
     end
 end
 
-local function fix_first()
-    fix_recept()
-    del_phobj()
-    swamp_secret()
-    ded_luck()
-    ded_secret()
-    fix_leila_mafon()
-    fix_fucking_stadium_lair()
-    fix_exit_to_agr_underground()
-    fix_garbage_levsha()
+local lamp_list = ogse.load_var("lamp_list", {})
+local function lamp_lists()
+    if not ogse.var_exists("lamp_list") then
+        for a = 1, 65534 do
+            local obj = level.object_by_id(a)
+            if obj then
+                local pk = get_netpk(obj, 1)
+                local data = pk:get()
+                if string.find(obj:name(), "light_gas_r2") then
+                    lamp_list[a] = {type = "gas"}
+                elseif string.find(obj:name(), "light_uglovaya_1") then
+                    lamp_list[a] = {type = "uglovaya"}
+                elseif data.main_color and data.main_color == -7243 then
+                    lamp_list[a] = {type = "white"}
+                elseif data.main_brightness and data.main_brightness > 0.9 then
+                    lamp_list[a] = {type = "brightness"}
+                end
+            end
+        end
+
+        ogse.save_var("lamp_list", lamp_list)
+    end
+end
+
+local function lamp_settings()
+    for i, v in pairs(lamp_list) do
+        local obj = level.object_by_id(i)
+        if obj then
+            if v.type == "gas" then
+                obj:get_hanging_lamp():set_flare(false)
+            elseif v.type == "uglovaya" or v.type == "white" or v.type == "brightness" then
+                local pk = get_netpk(obj, 1)
+                ASSERT(pk and pk:isOk(), "can't read netpacket of %s", obj:name())
+                local data = pk:get()
+                local props = {}
+                if v.type == "uglovaya" then
+                    props =
+                    {
+                        [ "main_color"          ] = tonumber("0xffffffff", 16),
+                        [ "main_brightness"     ] = 0.3,
+                        [ "light_flags"         ] = tonumber("0x2a", 16)
+                    }
+                elseif v.type == "brightness" then
+                    props = {["main_brightness"] = 0.6}
+                else
+                    props =
+                    {
+                        [ "main_brightness"     ] = 0.3,
+                        [ "main_range"          ] = 7,
+                        [ "light_flags"         ] = tonumber("0x2a", 16)
+                    }
+                end
+                log3("obj %s props %s", obj:name(), props)
+                for k, v in pairs(props) do
+                    data[k] = v
+                end
+                pk:set(data)
+            end
+        end
+    end
+end
+
+local function fix_lc_pripyat_aes()
+    if ogse.var_exists("fix_lc_pripyat_aes") then
+        return
+    end
+
+    local obj = alife():story_object(832)
+    if obj then
+        local lc = obj:get_level_changer()
+        lc.dest_game_vertex_id = 2399
+        lc.dest_level_vertex_id = 414957
+        lc.dest_position = vector():set(918.561, -0.102, -393.141)
+        ogse.save_var("fix_lc_pripyat_aes", true)
+    end
+end
+
+local function fix_lc_radar_millitary()
+    if ogse.var_exists("fix_lc_radar_millitary") then
+        return
+    end
+
+    local obj = alife():story_object(1008)
+    if obj then
+        local lc = obj:get_level_changer()
+        lc.dest_game_vertex_id = 1808
+        lc.dest_level_vertex_id = 357153
+        lc.dest_position = vector():set(81.863, -12.047, 405.985)
+        ogse.save_var("fix_lc_radar_millitary", true)
+    end
+end
+
+local function fix_lc_garbage_escape()
+    if ogse.var_exists("fix_lc_garbage_escape") then
+        return
+    end
+
+    local obj = alife():story_object(193)
+    if obj then
+        local lc = obj:get_level_changer()
+        lc.dest_game_vertex_id = 208
+        lc.dest_level_vertex_id = 322877
+        lc.dest_position = vector():set(15.150, 16.441, 684.726)
+        ogse.save_var("fix_lc_garbage_escape", true)
+    end
+end
+
+local function fix_lc_escape_garbage()
+    if ogse.var_exists("fix_lc_escape_garbage") then
+        return
+    end
+
+    local obj = alife():story_object(91)
+    if obj then
+        local lc = obj:get_level_changer()
+        lc.dest_game_vertex_id = 252
+        lc.dest_level_vertex_id = 195803
+        lc.dest_position = vector():set(36.650, 2.137, -303.579)
+        ogse.save_var("fix_lc_escape_garbage", true)
+    end
+end
+
+local function fix_agr_und_agr()
+    if ogse.var_exists("fix_agr_und_agr1") then
+        return
+    end
+
+    local obj = alife():object("exit_to_agroprom_06")
+    if obj then
+        local lc = obj:get_level_changer()
+        lc.dest_game_vertex_id = 469
+        lc.dest_level_vertex_id = 180544
+        lc.dest_position = vector():set(-20.730, -0.203, 34.239)
+        ogse.save_var("fix_agr_und_agr1", true)
+    end
+end
+
+-- Фикс Радара - Склады, чтобы dest_position была не в геометрии
+local function fix_bar_ac()
+    if ogse.var_exists("fix_exit_to_military_01") then
+        return
+    end
+    local obj = alife():object("exit_to_military_01")
+    if obj then
+        alife():release(obj)
+        ogse.save_var("fix_exit_to_military_01", true)
+    end
 end
 
 local function on_drag_drop(obj)
@@ -123,213 +226,73 @@ local function on_drag_drop(obj)
     end
 end
 
-function fix_stancia_level_changer_to_pripyat()
-    if ogse.var_exists("fix_stancia_level_changer_to_pripyat") then
-        return
-    end
-    local sobj = alife():object("exit_to_pripyat_from_st1")
-    if not sobj then return end
-    local lc = sobj:get_level_changer()
-    lc.dest_game_vertex_id = 2270
-    lc.dest_level_vertex_id = 142097
-    lc.dest_position = vector():set(31.301964, 1.033930, 411.079102)
-    lc.dest_direction = vector():set(-0.0000249865606747335, 3.14000010490417, -0.0000128936753753806)
-    log3("~~[%s]: fix %s (%s) (%s %s %s)", script_name(), sobj:name(), sobj.level_name, lc.dest_direction.x, lc.dest_direction.y, lc.dest_direction.z)
-    ogse.save_var("fix_stancia_level_changer_to_pripyat", true)
-end
+local function spawn_sverhprovodnik()
+    if db.actor:has_info("sverhprovodnik_dialog_done") or db.actor:dont_has_info("sverhprovodnik_dialog_start") or db.actor:object("sverhprovodnik") then return end
 
--- Фикс Радара - Склады, чтобы dest_position была не в геометрии
-function fix_radar_level_changer_to_ac()
-    if ogse.var_exists("fix_exit_to_military_01") then
-        return
-    end
-    local sobj = alife():object("exit_to_military_01")
-    if sobj and sobj.level_name == "l05_bar" then
-        log3("~~[%s]: release %s (%s)", script_name(), sobj:name(), sobj.level_name)
-        alife():release(sobj)
-        return
-    end
-    if not sobj then
-        return
-    end
-    log3("~~[%s]: fix %s (%s)", script_name(), sobj:name(), sobj.level_name)
-    local lc = sobj:get_level_changer()
-    lc.dest_game_vertex_id = 1812
-    lc.dest_level_vertex_id = 411164
-    lc.dest_position = vector():set(129.848160, -8.843687, 432.651672)
-    lc.dest_direction = vector():set(-0.981792, -0.138918, -0.129563)
+    local time = level.get_time_hours()
 
-    ogse.save_var("fix_exit_to_military_01", true)
-end
-
-function fix_ac_level_changer_to_mg()
-    local sobj = alife():story_object(story_ids.ac_mg)
-    if sobj and not ogse.var_exists("fix_ac_level_changer_to_mg") then
-        ogse.save_var("fix_ac_level_changer_to_mg", true)
-        log3("~~[%s]: fix %s (%s)", script_name(), sobj:name(), sobj.level_name)
-        sobj.position = vector():set(-427.113692, -13.161615, 378.632111)
-        local lc = sobj:get_level_changer()
-        lc.dest_game_vertex_id = 3025
-        lc.dest_level_vertex_id = 81916
-        lc.dest_position = vector():set(-261.535095, 5.432425, -142.20872)
-        lc.dest_direction = vector():set(0.778361, -0.162817, 0.606337)
+    if time >= 1 and time < 2 and db.actor:dont_has_info("sverhprovodnik_spawn") then
+        local obj = alife_create("sverhprovodnik", "l07_military", vector():set(-268.297, -18.055, -25.109))
+        alife():assign_story_id(obj.id, story_ids.sverhprovodnik)
+        db.actor:give_info_portion("sverhprovodnik_spawn")
     end
 
-    local sobj = alife():story_object(story_ids.mg_ac)
-    if sobj and not ogse.var_exists("fix_mg_level_changer_to_ac") then
-        ogse.save_var("fix_mg_level_changer_to_ac", true)
-        log3("~~[%s]: fix %s (%s)", script_name(), sobj:name(), sobj.level_name)
-        sobj.position = vector():set(-261.535095, 5.432425, -142.20872)
-        local lc = sobj:get_level_changer()
-        lc.dest_game_vertex_id = 1657
-        lc.dest_level_vertex_id = 124966
-        lc.dest_position = vector():set(-427.113692, -13.161615, 378.632111)
-        lc.dest_direction = vector():set(0.778361, -0.162817, 0.606337)
-    end
-end
-
-function fix_exit_to_agr_underground()
-  if ogse.var_exists("fix_exit_to_agr_underground") then return end
-
-  local sobj = alife():object("exit_to_agr_underground_05")
-  if not sobj then return end
-
-  ogse.save_var("fix_exit_to_agr_underground", true)
-  log3("fix %s (%s)", sobj:name(), sobj.level_name)
-  sobj.position = vector():set(-38.883705, -3.402327, 40.002663)
-  --sobj.angle = vector():set(0, 0, 0)
-
-  local sobj = alife():object("exit_to_agroprom_06")
-  if not sobj then return end
-  local lc = sobj:get_level_changer()
-  lc.dest_game_vertex_id = 700
-  lc.dest_level_vertex_id = 203745
-  lc.dest_position = vector():set(-37.213341, -0.030679, 39.963734)
-  lc.dest_direction = vector():set(0.990331, -0.03567, -0.135313)
-end
-
-function fix_leila_mafon()
-    if ogse.var_exists("fix_leila_mafon") then return end
-    for id, sobj in alife():objects() do
-        if string.find(sobj:name(), "leila_mafon") then
-            alife():release(sobj)
-            local obj = alife():create("leila_mafon", vector():set(-59.155083, 7.177866, -35.712193), 288342, 3051)
-            ogse.save_var("fix_leila_mafon", true)
-            break
-        end
-    end
-end
-
-function fix_fucking_stadium_lair()
-    local number = 0
-    for a = 1, 65534 do
-        local obj = alife():object(a)
-        if obj and string.find(obj:name(), "pri_stadium_lair_") then
+    if db.actor:has_info("sverhprovodnik_spawn") and time >= 2 then
+        local obj = alife():story_object(story_ids.sverhprovodnik)
+        if obj then
             alife():release(obj, true)
-            number = number + 1
-            if number == 4 then
-                break
-            end
+            db.actor:disable_info_portion("sverhprovodnik_spawn")
         end
     end
 end
 
-function fix_garbage_levsha() --Телепорт торгаша бандитов на место.
-    if ogse.var_exists("garbage_levsha") then return end
-    local obj = alife():story_object(story_ids.garbage_levsha)
-    --if obj then
-        local patrol = patrol("agr_levsha_larger_agr_levsha_walk")
-        alife():teleport_object(obj.id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        log3("levsha teleported to pos = {%s,%s,%s}, lvid = %s, gvid = %s", patrol:point(0).x, patrol:point(0).y,             patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        ogse.save_var("garbage_levsha", true)
-    --end
-end
-
-function on_spawn()
-    fix_stancia_level_changer_to_pripyat() 
-    fix_radar_level_changer_to_ac()
-    fix_ac_level_changer_to_mg()
-    fix_freedom_position()
-end
-
-function swamp_secret()
+local function swamp_secret()
 	if ogse.var_exists("SWAMP_SECRET") then return end
 	local sobj = alife():create("swamp_secret", vector():set(-252.122940, -5.423657, 53.645744), 646368, 2999)
 	ogse.save_var("SWAMP_SECRET", true)
 end
 
-function ded_luck()
+local function ded_luck()
 	if ogse.var_exists("DED_LUCK") then return end
-	local sobj = alife():create("ded_luck_pick", vector():set(-208.8692169189, 1.197435021400, 69.33975982666), 128618, 3031)
-	local sobj = alife():create("ded_luck_pick", vector():set(-117.8301162719, 1.408857345581, 5.6683926582336), 222398, 3046)
+	local sobj = alife_create("ded_luck_pick", "l09_deadcity", vector():set(-136.46, 1.08, -68.83))
+	sobj.angle = vector():set(0, 0.610865, 0)
 
-	local sobj = alife():create("ded_luck", vector():set(-154.3839416504, 1.250340104103, 46.85243988037), 181543, 3043)
-	local sobj = alife():create("ded_luck", vector():set(-138.7481308594, 1.410310745239, 29.26561977954), 199578, 3043)
-	local sobj = alife():create("ded_luck", vector():set(-140.0436096191, 1.410310745239, 30.68853378296), 197253, 3036)
-	local sobj = alife():create("ded_luck", vector():set(-119.5228500366, 1.408857345581, 7.2163138389587), 219971, 3046)
-	local sobj = alife():create("ded_luck", vector():set(-101.0390853881, 1.250410437584, -13.279550552368), 241574, 3046)
-	local sobj = alife():create("ded_luck", vector():set(-89.43048095703, 1.250410437584, -26.984758377075), 254635, 3051)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(15.05, 1.25, -100.90))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-2.75, 1.25, -100.90))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-30.35, 1.41, -100.90))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-28.25, 1.43, -101.00))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-59.55, 1.42, -100.90))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-61.65, 1.43, -100.90))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-136.06, 1.28, -103.39))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-136.16, 1.28, -105.59))
+	sobj.angle = vector():set(0, 0.610865, 0)
+	local sobj = alife_create("ded_luck", "l09_deadcity", vector():set(-136.16, 1.27, -126.98))
+	sobj.angle = vector():set(0, 0.610865, 0)
 	ogse.save_var("DED_LUCK", true)
 end
 
-function ded_secret()
+local function ded_secret()
 	if ogse.var_exists("DED_SECRET") then return end
 
 	-- Тайник
-	local sobj = alife():create("dead_city_secret", vector():set(-89.298523, -1.823633, -27.287430), 255352, 3051)
-	sobj.angle = vector():set(0, 0.7, 0)
+	alife_create("dead_city_secret", "l09_deadcity", vector():set(-75.54, -1.32, -99.06))
 
 	-- Скелеты
-	local sobj = alife():create("skelet_5", vector():set(-90.252159, -1.823633, -26.019957), 314645, 3061)
-	sobj.angle = vector():set(0, 0.7, 0)
+	local sobj = alife_create("skelet_5", "l09_deadcity", vector():set(-75.72, -1.82, -101.18))
+	sobj.angle = vector():set(0, 3.14, 0)
 
-	local sobj = alife():create("skelet_1", vector():set(-93.505, -1.323411, -19.753941), 314645, 3061)
-	sobj.angle = vector():set(0, -0.7, 0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-93.505, -1.323411, -19.753941), 314645, 3061, 1.0)
-
-	local sobj = alife():create("skelet_0", vector():set(-106.505, -1.323411, -4.424208), 313819, 3061)
-	sobj.angle = vector():set(0, -0.7, 0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-106.505, -1.323411, -4.424208), 313819, 3061, 1.0)
-
-	local sobj = alife():create("skelet_rope", vector():set(-141.421997, -0.523633, 32.24088), 219201, 3046)
-	sobj.angle = vector():set(1.5, 0.3, 0)
-
-	-- Аномалии
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-92.634651, -1.824595, -23.353546), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-116.623169, -1.514915, 6.370557), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-103.755363, -1.514915, -9.284086), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-108.123314, -1.823633, -5.081423), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-121.480637, -1.823633, 9.515192), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-136.006031, -1.823633, 26.394994), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_weak", vector():set(-145.876637, -1.823633, 37.055275), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-114.367844, -1.514915, -0.033861), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-111.619530, -1.514915, -0.246189), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-97.539742, -1.514915, -19.223225), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-97.960754, -1.514915, -15.822370), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-106.761826, -1.823633, -7.650134), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-128.466037, -1.823633, 17.747132), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_average", vector():set(-138.417031, -1.823633, 28.883394), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-90.252159, -1.823633, -26.019957), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-119.059601, -1.514915, 4.860776), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-115.948196, -1.823633, 3.164897), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-109.915565, -1.514915, -5.109484), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-100.915565, -1.514915, -13.907102), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-103.915565, -1.514915, -12.584105), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-123.518637, -1.823633, 12.245192), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-126.480637, -1.823633, 14.822192), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_buzz_strong", vector():set(-143.151637, -1.823633, 34.195275), 314645, 3061, 1.0)
-
-	ogsr_cop_zone.spawn_anomaly("zone_field_acidic_average", vector():set(-90.252159, -1.823633, -26.019957), 314645, 3061, 2.0)
-
-	ogsr_cop_zone.spawn_anomaly("zone_zharka_static_strong", vector():set(-110.725563, -1.823633, -2.787476), 314645, 3061, 1.0)
-	ogsr_cop_zone.spawn_anomaly("zone_zharka_static_strong", vector():set(-140.472015, -1.823633, 30.999221), 314645, 3061, 1.0)
-
-	ogsr_cop_zone.spawn_anomaly("zone_witches_galantine_average", vector():set(-131.258031, -1.823633, 20.809994), 314645, 3061, 2.0)
 
 	ogse.save_var("DED_SECRET", true)
 end
 
-function spawn_ostrov_zone()
+local function spawn_ostrov_zone()
     ogsr_cop_zone.spawn_anomaly('zone_ostrov', vector():set(-25.971, 0.061, 724.767), 178968, 2618, 1, 1)
     ogsr_cop_zone.spawn_anomaly('zone_monolit', vector():set(-25.913, 0.005, 693.582), 178968, 2618, 1, 1)
     ogsr_cop_zone.spawn_anomaly('zone_zharka_new', vector():set(-30.974, 0.002, 693.734), 178968, 2618, 1, 1)
@@ -342,63 +305,15 @@ function spawn_ostrov_zone()
 end
 
 function spawn_zharts()
-    alife():create("af_caterpillar", vector():set(-21.454, 0.000, 691.907), 178968, 2618)
-    alife():create("af_caterpillar", vector():set(-21.387, 0.000, 695.361), 178968, 2618)
-    alife():create("af_caterpillar", vector():set(-23.613, 0.000, 697.631), 178968, 2618)
-    alife():create("af_caterpillar", vector():set(-28.252, 0.000, 697.471), 178968, 2618)
-    alife():create("af_caterpillar", vector():set(-30.788, 0.000, 694.339), 178968, 2618)
-    alife():create("af_caterpillar", vector():set(-30.405, 0.000, 692.153), 178968, 2618)
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-21.454, 0.000, 691.907), "l12_stancia_2")
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-21.387, 0.000, 695.361), "l12_stancia_2")
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-23.613, 0.000, 697.631), "l12_stancia_2")
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-28.252, 0.000, 697.471), "l12_stancia_2")
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-30.788, 0.000, 694.339), "l12_stancia_2")
+    braad_test.spawn_ai_location("af_caterpillar", vector():set(-30.405, 0.000, 692.153), "l12_stancia_2")
 end
 
-function fix_freedom_position()
-    if ogse.var_exists("fix_freedom_position") then return end
-
-    for id, sobj in alife():objects() do
-        if sobj:name() == "mil_lucash" then
-            local patrol = patrol("mil_freedom_wait_leader_walk")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-
-        if sobj:name() == "mil_master_max" 
-        or sobj:name() == "mil_blockpost_leader" 
-        or sobj:name() == "mil_master_ugrumiy" 
-        or sobj:name() == "mil_cook" then
-            local patrol = patrol("mil_freedom_wait_wait_centr_alt")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-
-        if sobj:name() == "mil_boec1" then
-            local patrol = patrol("mil_freedom_wait_boec1_walk")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-
-        if sobj:name() == "mil_boec2" then
-            local patrol = patrol("mil_freedom_wait_boec2_walk")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-
-        if sobj:name() == "mil_boec3" then
-            local patrol = patrol("mil_freedom_wait_boec3_walk")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-
-        if sobj:name() == "mil_boec4" then
-            local patrol = patrol("mil_freedom_wait_boec4_walk")
-            alife():teleport_object(id, patrol:point(0), patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-            log3("--I am dead: %s teleported to pos = {%s, %s, %s}, lvid = %s, gvid = %s", sobj:name(), patrol:point(0).x, patrol:point(0).y, patrol:point(0).z, patrol:level_vertex_id(0), patrol:game_vertex_id(0))
-        end
-    end
-
-    ogse.save_var("fix_freedom_position", true)
-end
-
-
-function death_npc_item(npc)
+local function death_npc_item(npc)
     if npc:name() == "esc_shilo_band" then
         ogse.spawn_item_in_inv("part6", npc)
         ogse.spawn_item_in_inv("money_gg", npc)
@@ -421,39 +336,6 @@ function death_npc_item(npc)
     end
     if string.find(npc:name(), "mil_blockpost_leader") then
         db.actor:give_info_portion("mil_blockpost_leader_dead")
-    end
-    if string.find(npc:name(), "mil_soldat_one") then
-        db.actor:give_info_portion("mil_voen_one")
-    end
-    if string.find(npc:name(), "mil_soldat_two") then
-        db.actor:give_info_portion("mil_voen_two")
-    end
-    if string.find(npc:name(), "mil_soldat_tri") then
-        db.actor:give_info_portion("mil_voen_tri")
-    end
-    if string.find(npc:name(), "mil_soldat_four") then
-        db.actor:give_info_portion("mil_voen_four")
-    end
-    if string.find(npc:name(), "mil_soldat_five") then
-        db.actor:give_info_portion("mil_voen_five")
-    end
-    if string.find(npc:name(), "dark_komandir_belchuk") then
-        db.actor:give_info_portion("mil_voen_six")
-    end
-    if string.find(npc:name(), "mil_barier_one") then
-        db.actor:give_info_portion("mil_barier_one")
-    end
-    if string.find(npc:name(), "mil_barier_two") then
-        db.actor:give_info_portion("mil_barier_two")
-    end
-    if string.find(npc:name(), "mil_barier_tri") then
-        db.actor:give_info_portion("mil_barier_tri")
-    end
-    if string.find(npc:name(), "mil_barier_four") then
-        db.actor:give_info_portion("mil_barier_four")
-    end
-    if string.find(npc:name(), "mil_komandir_sidorchuk") then
-        db.actor:give_info_portion("mil_barier_five")
     end
     if string.find(npc:name(), "mil_stukach") then
         db.actor:give_info_portion("mil_stukach_dead")
@@ -487,10 +369,39 @@ function death_npc_item(npc)
     end
 end
 
+local function fix_new_first()
+    del_phobj()
+    ded_luck()
+    ded_secret()
+    fix_lc_pripyat_aes()
+    fix_lc_radar_millitary()
+    fix_lc_garbage_escape()
+    fix_lc_escape_garbage()
+    fix_agr_und_agr()
+    fix_bar_ac()
+    lamp_lists()
+    lamp_settings()
+end
+
+local show_engine_legs
+function show_legs()
+    if show_engine_legs then
+        cmd("g_first_person_body on")
+        show_engine_legs = nil
+    end
+end
+
+function hide_legs()
+    if get_con_bool("g_first_person_body") then
+        cmd("g_first_person_body off")
+        show_engine_legs = true
+    end
+end
+
 function attach(sm)
-    sm:subscribe({signal = "on_spawn",          fun = on_spawn})
-    sm:subscribe({signal = "on_first_update",   fun = fix_first})
+    --sm:subscribe({signal = "on_spawn",          fun = on_spawn})
+    sm:subscribe({signal = "on_first_update",   fun = fix_new_first})
     sm:subscribe({signal = "on_update",         fun = spawn_sverhprovodnik})
     sm:subscribe({signal = "on_fake_drag_drop", fun = on_drag_drop})
-    sm:subscribe({signal = "on_npc_death",	fun = this.death_npc_item})
+    sm:subscribe({signal = "on_npc_death",      fun = death_npc_item})
 end

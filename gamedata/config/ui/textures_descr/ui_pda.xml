@@ -53,6 +53,8 @@
         <texture id="amk_zoom_in_h" x="148" y="830" width="17" height="14" />
         <texture id="amk_zoom_in_e" x="148" y="798" width="17" height="14" />
         <texture id="amk_zoom_in_t" x="148" y="814" width="17" height="14" />
+
+        <texture id="amk_pda_line" x="70" y="817" width="5" height="1" />
     </file>
 
     <file name="ui\amk_blank">

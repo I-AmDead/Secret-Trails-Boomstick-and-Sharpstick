@@ -88,16 +88,24 @@ function settings_mark(update, max_value, value_name, scope_name, wpn)
     end
 end
 
-local rad_effect
+local cur_rad_level = 0
+
 local function update_rad_effect()
-    local rads = ogse_dbg_anomaly_binder.get_max_radlevel()
-    local distance = ogse_dbg_anomaly_binder.get_ditance_to_radzone()
-    local rad_level = arc_radiation.get_radiation_dose() or 0000
-    if rads > 0 then
-        shader_set_custom_param("radiation_effect", rads * 0.1, distance, rad_level, 0)
+    local rad_level = arc_radiation.get_rad_level() * 50
+    local v = shader_get_custom_param_vector("radiation_effect")
+    if rad_level > cur_rad_level then
+        cur_rad_level = cur_rad_level + (rad_level * 0.1)
+        v.z = cur_rad_level
     else
-        shader_set_custom_param("radiation_effect", 0, 0, rad_level, 0)
+        cur_rad_level = cur_rad_level - (rad_level * 0.1)
+        v.z = cur_rad_level
     end
+    if rad_level == 0 then
+        cur_rad_level = cur_rad_level > 0 and cur_rad_level - (cur_rad_level * 0.1) or 0
+        v.z = cur_rad_level
+    end
+    ogsr_signals.get_mgr():reschedule(60)
+    shader_set_custom_param_vector("radiation_effect", v)
 end
 
 local function on_actor_update()

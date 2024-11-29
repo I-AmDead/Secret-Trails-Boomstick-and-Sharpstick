@@ -79,7 +79,7 @@ ammo_limit        = 210
 ammo_mag_size     = 30
 startup_ammo      = 90
 
-scope_names 	     = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, e0t2, pn23, gauss_sight, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
+scope_names 	     = acog, eot, specter, c-more, 0kp2, ac10632, leupold, aimpoint, point_aimpro, pn23, compm4s, rakurs, marchf, kemper, mepro, ekp8_18
 
 scope_status      = 2
 
@@ -93,9 +93,7 @@ scope_respawn_ac10632                 = wpn_aug_a3_bas_ac10632
 scope_respawn_leupold                 = wpn_aug_a3_bas_leupold
 scope_respawn_aimpoint                = wpn_aug_a3_bas_aimpoint
 scope_respawn_point_aimpro            = wpn_aug_a3_bas_point_aimpro
-scope_respawn_e0t2                    = wpn_aug_a3_bas_e0t2
 scope_respawn_pn23                    = wpn_aug_a3_bas_pn23
-scope_respawn_gauss_sight             = wpn_aug_a3_bas_gauss_sight
 scope_respawn_compm4s                 = wpn_aug_a3_bas_compm4s
 scope_respawn_rakurs                  = wpn_aug_a3_bas_rakurs
 scope_respawn_marchf                  = wpn_aug_a3_bas_marchf
@@ -589,29 +587,6 @@ aim_hud_offset_rot_16x9  = 0.026000,0.013700,-0.002500
 
 
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_aug_a3_bas_e0t2]:wpn_aug_a3_bas
-
-$spawn	 = "weapons\aug_a3_bas_e0t2"
-
-visual	 = dynamics\weapons\wpn_aug_a3_bas\wpn_aug_a3_world.ogf
-
-hud  = wpn_aug_a3_bas_e0t2_hud
-
-inv_weight  = 3.427
-
-scope_name 	     = e0t2
-scope_x	 = 120
-scope_y	 = -8
-
-[wpn_aug_a3_bas_e0t2_hud]:wpn_aug_a3_bas_hud
-
-item_visual  = dynamics\weapons\wpn_aug_a3_bas\wpn_aug_a3_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.070100,0.018100,-0.075401
-aim_hud_offset_rot_16x9  = 0.026000,0.013700,-0.002500
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_aug_a3_bas_pn23]:wpn_aug_a3_bas
 
 $spawn	 = "weapons\aug_a3_bas_pn23"
@@ -631,29 +606,6 @@ inv_weight  = 3.850
 item_visual  = dynamics\weapons\wpn_aug_a3_bas\wpn_aug_a3_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9  = -0.069300,0.006400,-0.043800
-aim_hud_offset_rot_16x9  = 0.026000,0.013700,-0.002500
-
-
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_aug_a3_bas_gauss_sight]:wpn_aug_a3_bas
-
-$spawn	 = "weapons\aug_a3_bas_gauss_sight"
-
-visual	 = dynamics\weapons\wpn_aug_a3_bas\wpn_aug_a3_world.ogf
-
-hud	 = wpn_aug_a3_bas_gauss_sight_hud
-
-scope_name       = gauss_sight
-scope_x     = 64
-scope_y     = -2
-
-inv_weight  = 4.600
-
-[wpn_aug_a3_bas_gauss_sight_hud]:wpn_aug_a3_bas_hud
-
-item_visual  = dynamics\weapons\wpn_aug_a3_bas\wpn_aug_a3_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9  = -0.070200,0.027500,-0.089401
 aim_hud_offset_rot_16x9  = 0.026000,0.013700,-0.002500
 
 

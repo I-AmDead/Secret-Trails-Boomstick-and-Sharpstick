@@ -68,7 +68,7 @@ ammo_elapsed                             = 30
 ammo_mag_size                            = 30
 startup_ammo                             = 90
 
-scope_names 			         = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, e0t2, pn23, gauss_sight, compm4s, kemper, mepro, ekp8_18, 0kp2
+scope_names 			         = acog, eot, ac10632, specter ,c-more ,point_aimpro, leupold, aimpoint, pn23, compm4s, kemper, mepro, ekp8_18, 0kp2
 scope_status      = 2
 
 scope_respawn                         = wpn_scar_l_tac
@@ -80,9 +80,7 @@ scope_respawn_c-more                  = wpn_scar_l_tac_c-more
 scope_respawn_point_aimpro            = wpn_scar_l_tac_point_aimpro
 scope_respawn_leupold                 = wpn_scar_l_tac_leupold
 scope_respawn_aimpoint                = wpn_scar_l_tac_aimpoint
-scope_respawn_e0t2                    = wpn_scar_l_tac_e0t2
 scope_respawn_pn23                    = wpn_scar_l_tac_pn23
-scope_respawn_gauss_sight             = wpn_scar_l_tac_gauss_sight
 scope_respawn_compm4s                 = wpn_scar_l_tac_compm4s
 scope_respawn_kemper                  = wpn_scar_l_tac_kemper
 scope_respawn_mepro                   = wpn_scar_l_tac_mepro
@@ -310,7 +308,9 @@ anm_bore_jammed            = scar_hand_boring_grip
 
 ;Выстрелы обычными патронами/////////////////////////////////////////////////////////////////////
 anm_shots		       = scar_hand_shoot, scar_shoot
-anm_shots_empty                = scar_hand_shoot, scar_shoot_empty
+anm_shots_l                    = scar_hand_shoot, scar_idle_empty
+anm_shots_aim		       = scar_hand_shoot, scar_shoot
+anm_shots_aim_last             = scar_hand_shoot, scar_idle_empty
 
 ;Перезарядка/////////////////////////////////////////////////////////////////////
 anm_reload                           = scar_hand_reload, scar_reload
@@ -536,25 +536,6 @@ item_visual				= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_ekp8_18_hud.ogf
 aim_hud_offset_pos_16x9				= -0.053310,0.011670,-0.062072
 aim_hud_offset_rot_16x9				= 0.010200,0.008700,-0.090500
 ;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_scar_l_tac_e0t2]:wpn_scar_l_tac
-
-visual					= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_world.ogf
-
-hud						= wpn_scar_l_tac_e0t2_hud
-
-inv_weight                                         = 3.525
-
-scope_name		= e0t2
-scope_x			= 110
-scope_y			= -16
-
-[wpn_scar_l_tac_e0t2_hud]:wpn_scar_l_tac_hud
-
-item_visual				= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_e0t2_hud.ogf
-
-aim_hud_offset_pos_16x9				= -0.053310,0.015570,-0.064272
-aim_hud_offset_rot_16x9				= 0.005700,0.008700,-0.090500
-;-------------------------------------------------------------------------------------------------------------------------------
 [wpn_scar_l_tac_pn23]:wpn_scar_l_tac
 
 visual					= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_world.ogf
@@ -572,25 +553,6 @@ inv_weight                                         = 3.900
 item_visual				= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_pn23_hud.ogf
 
 aim_hud_offset_pos_16x9				= -0.053510,0.005970,-0.070572
-aim_hud_offset_rot_16x9				= 0.011700,0.009700,-0.090500
-;-------------------------------------------------------------------------------------------------------------------------------
-[wpn_scar_l_tac_gauss_sight]:wpn_scar_l_tac
-
-visual					= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_world.ogf
-
-hud					    = wpn_scar_l_tac_gauss_sight_hud
-
-scope_name		           = gauss_sight
-scope_x                            = 70
-scope_y                            = -10
-
-inv_weight                                         = 4.700
-
-[wpn_scar_l_tac_gauss_sight_hud]:wpn_scar_l_tac_hud
-
-item_visual				= dynamics\weapons\wpn_scar_l_tac\wpn_scar_l_tac_gauss_hud.ogf
-
-aim_hud_offset_pos_16x9				= -0.053310,0.024970,-0.061572
 aim_hud_offset_rot_16x9				= 0.011700,0.009700,-0.090500
 ;------------------------------------------------------------------------------------------------------------------------------
 [wpn_scar_l_tac_compm4s]:wpn_scar_l_tac

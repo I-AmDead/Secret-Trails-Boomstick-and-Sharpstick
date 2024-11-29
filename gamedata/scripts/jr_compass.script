@@ -1,0 +1,450 @@
+local compass_objects = {}
+
+local compass_y = 32
+local compass_w = 512
+local compass_h = 32
+local dir_w = 70
+local dir_h = 64
+
+local enemy_color = GetARGB(255, 255, 60, 60)
+local quest_color = GetARGB(255, 255, 180, 70)
+local friend_color = GetARGB(255, 59, 255, 124)
+local neutral_color = GetARGB(255, 250, 252, 86)
+local def_color = GetARGB(255, 255, 255, 255)
+
+local spot_settings = {
+    ["treasure"] = {"treasure", "bar_secret_0005_name", GetARGB(255, 255, 180, 70)},
+    ["red_location"] = {"red_location", nil, GetARGB(255, 255, 60, 60)},
+    ["blue_location"] = {"blue_location", nil, GetARGB(255, 59, 255, 124)},
+    ["level_changer"] = {"level_changer", nil, GetARGB(255, 70, 180, 255)},
+    ["crlc_big"] = {"crlc_big", nil, GetARGB(255, 255, 180, 70)},
+    ["crlc_small"] = {"crlc_small", nil, GetARGB(255, 255, 180, 70)},
+
+    [clsid.zone_bfuzz_s] = {"zone_bfuzz", "Fuzz", GetARGB(255, 70, 180, 255)},                  -- Жгучий пух
+    [clsid.zone_buzz_s] = {"zone_buzz", "Ameba", GetARGB(255, 59, 255, 124)},                   -- Холодец
+    [clsid.zone_mbald_s] = {"zone_mbald", "Bald", GetARGB(255, 255, 60, 60)},                   -- Трамлин
+    [clsid.zone_galant_s] = {"zone_galantine", "Gravi", GetARGB(255, 255, 60, 60)},             -- Воронка
+    [clsid.zone_mincer_s] = {"zone_mincer", "Meat", GetARGB(255, 255, 60, 60)},                 -- Карусель
+    [clsid.zone_zharka_s] = {"zone_zharka", "Zharka", GetARGB(255, 255, 60, 60)},               -- Жарка
+    [clsid.zone_electra_s] = {"zone_electra", "Electra", GetARGB(255, 70, 180, 255)},           -- Электра
+    [clsid.zone_ice_s] = {"zone_ice", "Ice", GetARGB(255, 70, 180, 255)},                       -- Морозилка
+    [clsid.zone_radiation_s] = {"zone_radiation", "Radioactive", GetARGB(255, 255, 180, 70)},   -- Радиация
+    [clsid.zone_thermal_s] = {"zone_thermal", "ThermalField", GetARGB(255, 255, 60, 60)},       -- Термический очаг
+    [clsid.zone_acidic_s] = {"zone_acidic", "AcidicField", GetARGB(255, 59, 255, 124)},         -- Химический очаг
+    [clsid.zone_psy_s] = {"zone_psy", "PsyField", GetARGB(255, 70, 180, 255)}                   -- Пси зона
+}
+
+local dev = device()
+
+UI_BASE_WIDTH = 1024.0
+UI_BASE_HEIGHT = 768.0
+
+local bio_showing = ogse.load_var("biomap_show", true)
+
+function get_current_kx()
+    return (dev.height / dev.width) / (UI_BASE_HEIGHT / UI_BASE_WIDTH)
+end
+
+class "ui_compass" (CUIScriptWnd)
+function ui_compass:__init()
+    super()
+
+    self.points = {}
+
+    self:SetWndPos(0, 0)
+    self:SetWndSize(1024, 256)
+
+    local pl = CUIStatic()
+    pl:SetWndPos(0, 0)
+    pl:SetWndSize(1024, 256)
+    self:AttachChild(pl)
+
+    self.panel = pl
+
+    local st = CUIStatic()
+
+    st:SetAutoDelete(true)
+    st:InitTexture("ui\\compas\\compas")
+    st:SetStretchTexture(true)
+    st:SetColorA(75)
+    st:SetWndPos(512 - compass_w / 2, compass_y)
+    st:SetWndSize(compass_w, compass_h)
+
+    self.panel:AttachChild(st)
+
+    self.dir = CUIStatic()
+    self.dir:SetAutoDelete(true)
+    self.dir:SetWndPos(512 - dir_w / 2, compass_y - 3)
+    self.dir:SetWndSize(dir_w, dir_h)
+    self.dir:SetTextAlign(CGameFont.alCenter)
+    self.dir:SetVTextAlign(CGameFont.valCenter)
+    self.dir:SetTextY(st:GetTextY() - 30)
+    self.dir:SetFont(GetFontCustom("ui_font_roboto14"))
+    self.dir:InitTexture("ui\\compas\\dir_line")
+    self.dir:SetStretchTexture(true)
+
+    self.panel:AttachChild(self.dir)
+end
+
+function ui_compass:__finalize()
+end
+
+function ui_compass:reset()
+    self.highest_pr = -100
+    self.highest_st = nil
+    -- чистить метки смысла нету, сменим локу или save\load - все очистится
+    for i, v in pairs(self.points) do
+        v:Show(false)
+    end
+end
+
+function ui_compass:direction(vis_h)
+    self.dir:SetText(string.format("%d", vis_h))
+end
+
+function ui_compass:show_point(id, x, title, color, delta_y, show_always, spot_type, font_name)
+    if not self.points[id] then
+        local st = CUIStatic()
+        st:SetAutoDelete(true)
+        st:SetStretchTexture(true)
+        st:SetWndSize(18 * get_current_kx(), 16)
+
+        st:SetFont(GetFontCustom(font_name and font_name or "ui_font_roboto16"))
+        st:AdjustWidthToText()
+        st:SetTextAlign(CGameFont.alCenter)
+        st:SetVTextAlign(CGameFont.valCenter)
+        st:SetTextY(st:GetWndPos().y)
+        st:SetText(id)
+
+        self.panel:AttachChild(st)
+        self.points[id] = st
+    end
+
+    local st = self.points[id]
+
+    if title and st:GetText() ~= title then
+        st:SetText(title)
+    end
+
+    if spot_type then
+        st:InitTexture("ui\\compas\\" .. spot_type)
+    end
+
+    st:SetVTextAlign(CGameFont.valCenter)
+    st:SetTextColorEx(color or def_color)
+    st:SetColor(color or def_color)
+
+    st:SetWndPos(512 - compass_w / 2 + compass_w * math.clamp(x, 0, 1) - st:GetWidth() / 2, compass_y + (delta_y or 0))
+    st:Show(show_always or (x >= 0 and x <= 1))
+
+    if spot_type then
+        local pos_x, pos_y = 512 - compass_w / 2 + compass_w * math.clamp(x, 0, 1) - st:GetWidth() / 2, compass_y + (delta_y or 0)
+        if x <= 0.5 then
+            local scale = math.clamp(x * (x > 0.48 and 15 or 10), 0, 15)
+            st:SetWndPos(pos_x - scale * 0.5, pos_y - scale * 0.5)
+            st:SetWndSize((18 + scale) * get_current_kx(), 16 + scale)
+        else
+            local scale = math.clamp((1.0 - x) * (x < 0.52 and 15 or 10), 0, 15)
+            st:SetWndPos(pos_x - scale * 0.5, pos_y - scale * 0.5)
+            st:SetWndSize((18 + scale) * get_current_kx(), 16 + scale)
+        end
+    end
+
+    if (x < 0.35 or x > 0.65) and not show_always then
+        local fade = x < 0.35 and 255 * (1 / 0.35 * x) or 255 * (1 - (x - 0.65) / 0.35)
+        st:SetColorA(fade)
+        st:SetTextColorA(fade)
+    end
+
+    return st
+end
+
+function ui_compass:Update()
+    CUIScriptWnd.Update(self)
+
+    self:reset()
+
+    if not level.game_indicators_shown()
+        or level.main_input_receiver()
+        or not db.actor
+        or db.actor:is_talking()
+        or db.actor:zoom_mode()
+        or device():is_paused()
+    then
+        self.panel:Show(false)
+        return
+    end
+
+    self.panel:Show(true)
+
+    local dev_pos = dev.cam_pos
+
+    local pi = math.pi
+    local ep = 0.05
+
+    local h = dev.cam_dir:getH()
+
+    local cam_h = h - pi / 2
+    local vis_h = h * (180 / math.pi)
+
+    self:direction(vis_h >= 0 and vis_h or (360 + vis_h))
+
+    local function get_x_static(dir_h)
+        local cam_h_real = cam_h
+        local two_pi = 2 * pi
+        local half_pi = pi / 2
+
+        -- Проверяем, пересекаются ли диапазоны значений dir_h и cam_h_real
+        if (dir_h - half_pi) * (cam_h - half_pi) <= 0 then
+            -- Обновляем cam_h_real, используя fmod для корректного перехода через границу значений
+            cam_h_real = cam_h_real + two_pi * math.floor((dir_h - cam_h_real) / two_pi + 0.5)
+        end
+
+        return 0.5 + (cam_h_real - dir_h) / (pi * 1/2)   -- от 0 до 1
+    end
+
+    local function get_x(pos)
+        local dir_h = vector():sub(pos, dev.cam_pos):normalize():getH() - pi / 2
+        return get_x_static(dir_h)
+    end
+
+    self:show_point("N", get_x_static(- pi / 2), nil, def_color, 13):SetPriority(100)
+    self:show_point("S", get_x_static(pi / 2), nil, def_color, 13):SetPriority(100)
+    self:show_point("W", get_x_static(0), nil, def_color, 13):SetPriority(100)
+    self:show_point("E", get_x_static(-pi), nil, def_color, 13):SetPriority(100)
+
+    self:show_point("NE", get_x_static(-3 * pi / 4), nil, def_color, 13):SetPriority(100)
+    self:show_point("SE", get_x_static(3 * pi / 4), nil, def_color, 13):SetPriority(100)
+    self:show_point("NW", get_x_static(- pi / 4), nil, def_color, 13):SetPriority(100)
+    self:show_point("SW", get_x_static(pi / 4), nil, def_color, 13):SetPriority(100)
+
+    local d = (2 * pi) / 24
+    local s = -pi / 2
+    for i = 1, 24 do
+        s = s + d
+        local dir = i * 15
+        if i ~= 3 and i ~= 6 and i ~= 9 and i ~= 12 and i ~= 15 and i ~= 18 and i ~= 21 and i ~= 24 then
+            self:show_point("compass_mark_"..i, get_x_static(s), string.format("%d", dir), def_color, 13, nil, nil, "ui_font_roboto12"):SetPriority(-120)
+        end
+        self:show_point("compass_dot_"..i, get_x_static(s), ".", def_color, 16, nil, nil, "ui_font_roboto16"):SetPriority(-120)
+    end
+
+    for i, v in pairs(compass_objects) do
+        local pos = v.obj and v.obj:position() or v.position
+        local x = get_x(pos)
+
+        local st = self:show_point(i, x, "", v.color, 13, v.show_always, v.spot)
+
+        st.position = pos
+        st.x = x
+        st.text = v.text
+        st.color = v.color
+
+        local pr = ((1 - (math.abs(x - 0.5) * 2)) * 1000)
+        st:SetPriority(v.priority or pr)
+
+        local priority = (v.priority and v.priority > pr) and v.priority or pr
+
+        if priority > self.highest_pr and (x >= 0 and x <= 1)then
+            self.highest_pr = priority
+            self.highest_st = st
+        end
+    end
+
+    if self.highest_st and self.highest_st.position then
+        local dist = self.highest_st.position:distance_to(dev_pos)
+
+        local st = self:show_point("compass_dist", self.highest_st.x, string.format("%dм", dist), def_color, 32)
+        st:SetPriority(100)
+        st:SetTextY(40)
+
+        if self.highest_st.text then
+            local st = self:show_point("compass_name", self.highest_st.x, self.highest_st.text, self.highest_st.color, 32)
+            st:SetPriority(200)
+            st:SetTextY(10)
+        else
+            st:SetTextY(10)
+        end
+
+        local hidden_a = 50
+        local h_x1 = self.highest_st:GetPosLeft()
+        local h_x2 = h_x1 + self.highest_st:GetWidth()
+
+        -- проверим те точки что перекрываются центральной и сделаем их прозрачными
+        for _, v in pairs(self.points) do
+            if v ~= self.highest_st and v.position then
+               local x1 = v:GetPosLeft()
+               local x2 = x1 + v:GetWidth()
+
+               local overlap = ((h_x1 <= x2) and (h_x2 >= x1))
+               if overlap then
+                    v:SetColorA(hidden_a)
+                    v:SetTextColorA(hidden_a)
+               end
+            end
+        end
+    end
+
+    self.panel:SortByPriority()
+end
+
+local wnd = nil
+
+local function actor_on_first_update()
+    if not wnd then
+        wnd = ui_compass()
+        get_hud():AddDialogToRender(wnd)
+    end
+end
+
+local function actor_on_net_destroy()
+    if wnd then
+        get_hud():RemoveDialogToRender(wnd)
+        wnd = nil
+    end
+end
+
+local last_target_gv_id
+local last_target_lc_id
+local active_target_id
+
+local function map_spot_limit(obj)
+    return not (IsStalker(obj) or obj:clsid() == clsid.script_trader)
+end
+
+local function actor_on_update()
+    compass_objects = {}
+
+    if not wnd then return end
+
+    local bio_radar = db.actor:item_in_slot(12) and bio_showing
+
+    -- дин точки
+    local f = 50 * 50
+    local m = 20 * 20
+    local act_pos = db.actor:position()
+    local dev_pos = dev.cam_pos
+
+    for id, obj in pairs(db.creatures) do
+        if (IsStalker(obj) or obj:clsid() == clsid.script_trader) and obj:id() ~= db.actor:id() and obj:id() ~= active_target_id then
+            local pos = obj:center()
+            local enemy = obj:alive() and obj:relation(db.actor) == game_object.enemy
+            local neutral = obj:alive() and obj:relation(db.actor) == game_object.neutral
+            local friend = obj:alive() and obj:relation(db.actor) == game_object.friend
+            local quest = ogse.is_quest_npc(obj)
+            local distance = quest and f or (bio_radar and m * 2 or (enemy and db.actor:see(obj) and m or m))
+            if pos:distance_to_sqr(dev_pos) < distance then
+                compass_objects[obj:id()] =
+                {
+                    obj = obj,
+                    text = quest and obj:character_name() or nil,
+                    color = (quest and quest_color) or (friend and friend_color) or (neutral and neutral_color) or (enemy and enemy_color) or nil,
+                    show_always = bio_radar,
+                    spot = (act_pos.y + 3 < pos.y and "upper_dot") or (act_pos.y - 3 > pos.y and "lower_dot") or (obj:alive() and "alive_dot") or "corpse_dot"
+                }
+            end
+        elseif bio_radar and IsMonster(obj) and obj:id() ~= db.actor:id() and obj:id() ~= active_target_id then
+            local pos = obj:center()
+            if pos:distance_to_sqr(dev_pos) < m * 2 then
+                compass_objects[obj:id()] =
+                {
+                    obj = obj,
+                    text = nil,
+                    color = obj:alive() and enemy_color or nil,
+                    show_always = true,
+                    spot = (act_pos.y + 3 < pos.y and "upper_dot") or (act_pos.y - 3 > pos.y and "lower_dot") or (obj:alive() and "alive_dot") or "corpse_dot"
+                }
+            end
+        end
+    end
+
+    level.iterate_map_spots(function(spot)
+        local obj = level.object_by_id(spot.object_id)
+        if obj and map_spot_limit(obj) and obj:id() ~= db.actor:id() and obj:id() ~= active_target_id then
+            local pos = obj:center()
+            local distance = IsAnomaly(obj) and m * 2 or f
+            if pos:distance_to_sqr(dev_pos) < distance then
+                local spot_type = IsAnomaly(obj) and get_clsid(obj) or spot.type
+                compass_objects[obj:id()] =
+                {
+                    obj = obj,
+                    text = game.translate_string(spot_settings[spot_type][2] or spot.hint) or nil,
+                    color = spot_settings[spot_type][3] or def_color,
+                    spot = spot_settings[spot_type][1]
+                }
+            end
+        end
+    end)
+
+    local target_obj
+
+    local objection = gametask.active_objection()
+    if objection then
+        local target_id = objection:get_object_id()
+        target_obj = target_id and alife():object(target_id)
+    end
+
+    if target_obj then
+        local compass_obj =
+        {
+            text = objection and game.translate_string(objection:get_description()) or "",
+            color = quest_color,
+            spot = "target",
+            show_always = true,
+            priority = 2000
+        }
+
+        local id = nil
+
+        if target_obj.level_id == alife():level_id() then
+            -- on current level
+            local target = level.object_by_id(target_obj.id)
+            if target then
+                id = target:id()
+                compass_obj.obj = target
+            else
+                id = target_obj.id
+                compass_obj.position = target_obj.position
+            end
+
+            compass_objects[id] = compass_obj
+        else
+            -- find nearest LC
+            if target_obj.m_game_vertex_id ~= last_target_gv_id then
+                last_target_lc_id = level.find_level_changer(target_obj.m_game_vertex_id)
+                last_target_gv_id = target_obj.m_game_vertex_id
+            end
+            local lc = level.object_by_id(last_target_lc_id)
+            if lc then
+                id = lc:id()
+                compass_obj.obj = lc
+                compass_objects[id] = compass_obj
+            end
+        end
+
+        active_target_id = compass_obj.id
+    else
+        active_target_id = nil
+    end
+
+    ogsr_signals.get_mgr():reschedule(200)
+end
+
+local function gameobject_on_destroy(id)
+    compass_objects[id] = nil
+end
+
+local function actor_on_key_down(key, bind)
+    if bind == key_bindings.kBIOMAP_SWITCH and db.actor:item_in_slot(12) then
+        bio_showing = not bio_showing
+        ogse.save_var("biomap_show", bio_showing)
+    end
+end
+
+function attach(sm)
+    sm:subscribe({ signal = "on_first_update", fun = actor_on_first_update })
+    sm:subscribe({ signal = "on_update", fun = actor_on_update })
+    sm:subscribe({ signal = "on_destroy", fun = actor_on_net_destroy })
+    sm:subscribe({ signal = "on_key_down", fun = actor_on_key_down })
+    sm:subscribe({ signal = "gameobject_on_destroy", fun = gameobject_on_destroy })
+end

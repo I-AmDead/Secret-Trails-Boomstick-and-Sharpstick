@@ -11,13 +11,11 @@ function attach(sm)
 	sm:subscribe({signal = "on_drop",		    fun = this.chek_drop_pnv})
 	sm:subscribe({signal = "on_item_to_ruck",	fun = this.chek_drop_pnv})
 	sm:subscribe({signal = "on_save",		    fun = this.on_save})
-	sm:subscribe({signal = "on_info",		    fun = this.on_info})
 end
 
 -- ==========================================================Настройки=================================================================
 -- Флаги
-local night_vision_fx_on = false -- флаг работающего ПНВ
-local night_vision_surge_block = false -- флаг запрета работы ПНВ во время выброса
+local night_vision_fx_on = ogse.load_var("pnv", false) -- флаг работающего ПНВ
 
 -- Звуки
 local snd_nv_start = xr_sound.get_safe_sound_object("weapons\\nv_start") -- звук включения ПНВ
@@ -38,18 +36,11 @@ local function lcalls(count, radius, sub)
     nvg_distortion_timer = true
     lcall = level.add_call(
         function()
-            log3("condition")
             cnt = cnt - 5
             add = sub and cnt or add + 5
             cmd("r_pnv_radius", radius * (add / count))
             cmd("r_pnv_position", add)
-            if add == 50 then
-            	cmd("r_pnv_alfa_vignete", 2)
-            end
-            if add == 90 then
-            	cmd("r_pnv_alfa_vignete", 0)
-            end
-            lcall:set_pause(1)
+            lcall:set_pause(20)
             return cnt == 0
         end,
         function()
@@ -67,33 +58,14 @@ function is_nv_working() -- Проверка, включен ли ПНВ.
     return night_vision_fx_on
 end
 
-function turn_pnv_off() -- Выключение пнв по квестам. Вызывается из ogse_quests.script, не удалять!
-    if night_vision_fx_on then -- если включен обычный ПНВ, выключим его
-        turn_off_nv_fx()
-    end
-end
-
 function on_save() -- Сохраняем состояние работы пнв
     ogse.save_var("pnv", is_nv_working())
 end
 
-function on_info(npc, info_id) -- Выключение ПНВ в выброс
-    if info_id == "no_net_signal" then
-        night_vision_surge_block = true
-        turn_pnv_off()
-    elseif info_id == "net_signal" then
-        night_vision_surge_block = false
-    end
-end
-
-function try_to_restart_nv_fx() -- Попытаемся восстановить работу ПНВ после загрузки сейва
+function try_to_restart_nv_fx() -- Восстанавливаем работу ПНВ после загрузки сейва
     cmd("r_pnv_mode", 0)
-    --------------------Выключение ПНВ в выброс-------------------------
-    if db.actor:has_info("no_net_signal") then
-        night_vision_surge_block = true
-    end
-    --------------------------------------------------------------------
-    if ogse.load_var("pnv", false) and not night_vision_surge_block then
+
+    if ogse.load_var("pnv", false) then
         nv_fx_on() -- включаем обычный ПНВ
     end
 end
@@ -106,13 +78,11 @@ function call_pnv()
     end
 end
 
--- ******************************************************************Девайс ПНВ*************************************************************************
 function chek_drop_pnv(obj) -- Проверка выкладывания работающего ПНВ
     local pnv_slot = db.actor:item_in_slot(11) -- предмет в слоте ПНВ
 
     if not pnv_slot and night_vision_fx_on then -- если выбросили/переместили в рюкзак действительно ПНВ, то отключаем пнв:
         ogsr_actor_animation.torch_and_nvg_switch(true)
-        --turn_off_nv_fx()
     end
 end
 
@@ -167,10 +137,7 @@ function turn_off_nv_fx() -- Остановка ПНВ
         return
     end
     local nightvision_section = get_nightvision_section_for_nv_fx()
-    local nightvision_radius = 0.5
-    if nightvision_section then
-        nightvision_radius = get_float(nightvision_section, "r_pnv_radius")
-    end
+    local nightvision_radius = get_float(nightvision_section, "r_pnv_radius", 0.5)
     lcalls(100, nightvision_radius, true)
     night_vision_fx_on = false
     snd_fx_stop() -- звук выключения.

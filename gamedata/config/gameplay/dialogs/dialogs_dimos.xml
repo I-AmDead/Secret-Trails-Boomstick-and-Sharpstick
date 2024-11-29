@@ -100,7 +100,6 @@
             <give_info>vas1_dialog_start</give_info>
             <action>antreg.vasil_dal_colt</action>
             <action>braad_test.create_vasil_restr</action>
-            <action>braad_test.create_vasil_restr1</action>
         </phrase>
     </phrase_list>
 </dialog>
@@ -121,27 +120,6 @@
         <phrase id="2">
             <text>perehod_dialog1_2</text>
             <give_info>perehod_dialog1_start</give_info>
-            <action>braad_test.create_vasil_restr2</action>
-        </phrase>
-    </phrase_list>
-</dialog>
-
-
-<dialog id="perehod_dialog2">
-    <has_info>vasil_mesto2</has_info>
-    <dont_has_info>perehod_dialog2_start</dont_has_info>
-    <phrase_list>
-        <phrase id="0">
-            <text>perehod_dialog2_0</text>
-            <next>1</next>
-        </phrase>
-        <phrase id="1">
-            <text>perehod_dialog2_1</text>
-            <next>2</next>
-        </phrase>
-        <phrase id="2">
-            <text>perehod_dialog2_2</text>
-            <give_info>perehod_dialog2_start</give_info>
             <action>y_level.create_aver_yantar</action>
         </phrase>
     </phrase_list>
